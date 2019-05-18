@@ -7,38 +7,47 @@ import javax.persistence.Id;
 
 @Entity
 public class User {
-    @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 
-    private Integer id;
-    private String firstName;
-    private String lastName;
-    private String email;
+	private Integer id;
+	private String rut;
+	private String firstName;
+	private String lastName;
+	private String email;
 
 	public Integer getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
-		this.id = id;
+	public String getRut() {
+		return rut;
+	}
+
+	public void setRut(String rut) {
+		this.rut = rut;
 	}
 
 	public String getFirstName() {
 		return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-    
-    public String getLastName() {
-		return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
 	}
 
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+  
 	public String getEmail() {
 		return email;
 	}
