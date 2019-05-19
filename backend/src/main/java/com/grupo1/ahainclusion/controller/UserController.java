@@ -17,6 +17,7 @@ public class UserController {
     @Autowired
     private UserRepository userRepository;
 
+    // Agregar Usuario
     @GetMapping(path="/add")
     public @ResponseBody String addNewUser (@RequestParam String rut,
                                             @RequestParam String firstName,
@@ -30,8 +31,14 @@ public class UserController {
     n.setEmail(email);
 
     userRepository.save(n);
-    
+
     return "Usuario Guardado";
+    }
+
+    // Obtener Usuarios
+    @GetMapping(path="/all")
+    public @ResponseBody Iterable<User> getAllUsers() {
+        return userRepository.findAll();
     }
 
 
