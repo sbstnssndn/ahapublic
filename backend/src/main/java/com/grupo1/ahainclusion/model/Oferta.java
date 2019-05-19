@@ -1,12 +1,10 @@
 package com.grupo1.ahainclusion.model;
 
-import java.util.Collection;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Oferta {
@@ -14,18 +12,25 @@ public class Oferta {
 	@GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
 
-    @OneToMany
-    private Collection<User> users;
+    @OneToOne
+    private User user;
+
+    @OneToOne
+    private PerfilAccesibilidad perfilAccesibilidad;
 
     private String name;
     private String description;
 
-    public Collection<User> getUsers() {
-        return users;
-    }
-
     public String getDescription() {
         return description;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public void setDescription(String description) {
@@ -38,10 +43,6 @@ public class Oferta {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public void setUsers(Collection<User> users) {
-        this.users = users;
     }
     
 }
