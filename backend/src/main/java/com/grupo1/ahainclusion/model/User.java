@@ -13,7 +13,6 @@ import javax.persistence.ManyToMany;
 public class User {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-
 	private Long id;
 	private String rut;
 	private String firstName;
