@@ -1,18 +1,10 @@
 package com.grupo1.ahainclusion.loaders;
 
-import java.io.BufferedReader;
-import java.io.DataOutputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.transaction.Transactional;
 
@@ -112,11 +104,7 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
   private List<User> getRandomUsers(Role role, Integer n) throws JSONException, UnirestException, IOException {
       
     List<User> users = new ArrayList<>();
-
-    System.out.println("HOLAAAAAAAA");
-    System.out.println("HOLAAAAAAAA");
-    System.out.println("HOLAAAAAAAA");
-
+    
     String url = "https://randomuser.me/api/?inc=gender,id,name,email&results="+n+"&nat=US";
     JSONArray results = Unirest.get(url).asJson().getBody().getObject().getJSONArray("results");
 
@@ -137,51 +125,11 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
       usr.setEnabled(true);
 
       users.add(usr);
-      System.out.println("name: " + firstName +" "+ lastName + " email: " + email);
 
     }
+
     Unirest.shutdown();
-
+    
     return users;
-    }
-
-  @Transactional
-  private User getRandomUser(Role role) throws JSONException, UnirestException, IOException {
-      User usr = new User();
-
-      System.out.println("HOLAAAAAAAA");
-      System.out.println("HOLAAAAAAAA");
-      System.out.println("HOLAAAAAAAA");
-
-      String url = "https://randomuser.me/api/?inc=gender,id,name,email&nat=US";
-      JSONArray results = Unirest.get(url).asJson().getBody().getObject().getJSONArray("results");
-      JSONObject result = results.getJSONObject(0);
-      JSONObject names = result.getJSONObject("name");
-      String email = result.get("email").toString();
-      String firstName = names.get("first").toString();
-      String lastName = names.get("last").toString();
-
-      usr.setFirstName(firstName);
-      usr.setLastName(lastName);
-      usr.setEmail(email);
-      usr.setRoles(Arrays.asList(role));
-      usr.setEnabled(true);
-
-      
-      
-      Unirest.shutdown();
-
-
-      System.out.println("HOLAAAAAAAA");
-      System.out.println(results);
-      System.out.println("HOLAAAAAAAA");
-      System.out.println(result);
-      System.out.println("HOLAAAAAAAA");
-      System.out.println(firstName);
-      System.out.println(lastName);
-      System.out.println(email);
-
-
-      return usr;
     }
 }

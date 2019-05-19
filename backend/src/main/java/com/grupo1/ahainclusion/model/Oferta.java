@@ -25,6 +25,14 @@ public class Oferta {
         return description;
     }
 
+    public PerfilAccesibilidad getPerfilAccesibilidad() {
+        return perfilAccesibilidad;
+    }
+
+    public void setPerfilAccesibilidad(PerfilAccesibilidad perfilAccesibilidad) {
+        this.perfilAccesibilidad = perfilAccesibilidad;
+    }
+
     public User getUser() {
         return user;
     }
