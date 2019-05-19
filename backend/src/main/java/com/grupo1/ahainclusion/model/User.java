@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 
 @Entity
 public class User {
@@ -24,8 +25,19 @@ public class User {
 	@JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
 	private Collection<Role> roles;
 
+	@OneToOne
+	private PerfilDiscapacidad perfilDiscapacidad;
+
 	public Long getId() {
 		return id;
+	}
+
+	public PerfilDiscapacidad getPerfilDiscapacidad() {
+		return perfilDiscapacidad;
+	}
+
+	public void setPerfilDiscapacidad(PerfilDiscapacidad perfilDiscapacidad) {
+		this.perfilDiscapacidad = perfilDiscapacidad;
 	}
 
 	public String getRut() {
