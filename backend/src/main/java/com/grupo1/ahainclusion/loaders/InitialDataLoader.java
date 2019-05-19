@@ -74,7 +74,7 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
     Role candidatoRole = roleRepository.findByName("ROLE_CANDIDATO");
 
     try {
-      List<User> users = getRandomUsers(candidatoRole);
+      List<User> users = getRandomUsers(candidatoRole, 20);
       userRepository.saveAll(users);
     } catch (JSONException | UnirestException | IOException e) {
       e.printStackTrace();
@@ -109,7 +109,7 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
   }
 
   @Transactional
-  private List<User> getRandomUsers(Role role) throws JSONException, UnirestException, IOException {
+  private List<User> getRandomUsers(Role role, Integer n) throws JSONException, UnirestException, IOException {
       
     List<User> users = new ArrayList<>();
 
@@ -117,7 +117,7 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
     System.out.println("HOLAAAAAAAA");
     System.out.println("HOLAAAAAAAA");
 
-    String url = "https://randomuser.me/api/?inc=gender,id,name,email&results=20&nat=US";
+    String url = "https://randomuser.me/api/?inc=gender,id,name,email&results="+n+"&nat=US";
     JSONArray results = Unirest.get(url).asJson().getBody().getObject().getJSONArray("results");
 
     for(int i=0;i<results.length();i++)
