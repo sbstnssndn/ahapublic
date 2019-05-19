@@ -14,7 +14,7 @@ public class User {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 
-	private Integer id;
+	private Long id;
 	private String rut;
 	private String firstName;
 	private String lastName;
@@ -25,7 +25,7 @@ public class User {
 	@JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
 	private Collection<Role> roles;
 
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
 
@@ -53,7 +53,7 @@ public class User {
 		this.lastName = lastName;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
   

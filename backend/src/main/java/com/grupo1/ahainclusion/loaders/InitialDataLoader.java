@@ -60,16 +60,16 @@ public class InitialDataLoader implements
 
         // Se crean los roles
         createRoleIfNotFound("ROLE_AHA", ahaPrivileges);
-        createRoleIfNotFound("ROLE_USER", Arrays.asList(privilege1));
-        createRoleIfNotFound("ROLE_EMPRESA", Arrays.asList(privilege2));
+        createRoleIfNotFound("ROLE_CANDIDATO", candidatoPrivileges);
+        createRoleIfNotFound("ROLE_EMPRESA", empresaPrivileges);
 
  
-        Role adminRole = roleRepository.findByName("ROLE_ADMIN");
+        Role candidatoRole = roleRepository.findByName("ROLE_CANDIDATO");
         User user = new User();
         user.setFirstName("John");
         user.setLastName("Jones");
         user.setEmail("John@test.com");
-        user.setRoles(Arrays.asList(adminRole));
+        user.setRoles(Arrays.asList(candidatoRole));
         user.setEnabled(true);
         userRepository.save(user);
  
