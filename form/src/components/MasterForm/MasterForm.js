@@ -2,15 +2,17 @@ import React, {Component} from 'react';
 import DatosPersonalesForm from './DatosPersonalesForm/DatosPersonalesForm';
 import DatosLoginForm from './DatosLoginForm/DatosLoginForm';
 import PerfilDiscapacidadForm from './PerfilDiscapacidadForm/PerfilDiscapacidadForm';
+import DireccionForm from './DireccionForm/DireccionForm';
 
 class MasterForm extends Component {
 
     state = {
       etapaActual: 1,
       email:  '',
-      nombre: '',
       password: '',
-      credencial: 'No'
+      primerNombre: '',
+      segundoNombre: '',
+      credencial: false
     }
 
     handleChangeDropdown = event => {
@@ -40,7 +42,7 @@ class MasterForm extends Component {
     siguiente = () => {
       let etapaActual = this.state.etapaActual;
 
-      etapaActual = etapaActual >= 2? 3: etapaActual + 1;
+      etapaActual = etapaActual >= 3? 4: etapaActual + 1;
       this.setState({
         etapaActual: etapaActual
       });
@@ -59,7 +61,7 @@ class MasterForm extends Component {
     */
     botonAnterior() {
       let etapaActual = this.state.etapaActual;
-      if(etapaActual !==1){
+      if(etapaActual !== 1){
         return (
           <button 
             className="btn btn-secondary" 
@@ -73,7 +75,7 @@ class MasterForm extends Component {
     
     botonSiguiente(){
       let etapaActual = this.state.etapaActual;
-      if(etapaActual < 3){
+      if(etapaActual < 4){
         return (
           <button 
             className="btn btn-primary float-right" 
@@ -88,9 +90,8 @@ class MasterForm extends Component {
     render() {    
       return (
         <React.Fragment>
-          <h1>Ingresa tus datos</h1>
-          <p>Etapa {this.state.etapaActual}</p> 
-    
+          <h1>Registro postulante</h1>
+          <hr />
           <form onSubmit={this.handleSubmit}>
             <DatosLoginForm 
               etapaActual={this.state.etapaActual} 
@@ -99,6 +100,11 @@ class MasterForm extends Component {
               password={this.state.password}
             />
             <DatosPersonalesForm 
+              etapaActual={this.state.etapaActual} 
+              handleChange={this.handleChange}
+              nombre={this.state.nombre}
+            />
+            <DireccionForm 
               etapaActual={this.state.etapaActual} 
               handleChange={this.handleChange}
               nombre={this.state.nombre}
