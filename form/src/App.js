@@ -1,10 +1,15 @@
 import React from 'react';
 import './App.css';
-import Wrapper from './components/Wrapper/Wrapper';
+import Layout from './components/Layout/Layout';
+import PostulanteMainForm from './containers/PostulanteMainForm/PostulanteMainForm';
+import Toolbar from './components/Navigation/Toolbar/Toolbar';
 
 function App() {
   return (
-    <Wrapper />
+    <Layout>
+      <Toolbar />
+      <PostulanteMainForm />
+    </Layout>
   );
 }
 
