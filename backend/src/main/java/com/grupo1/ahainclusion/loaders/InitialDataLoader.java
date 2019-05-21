@@ -8,10 +8,12 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
+import com.grupo1.ahainclusion.model.Oferta;
 import com.grupo1.ahainclusion.model.PerfilAccesibilidad;
 import com.grupo1.ahainclusion.model.Privilege;
 import com.grupo1.ahainclusion.model.Role;
 import com.grupo1.ahainclusion.model.User;
+import com.grupo1.ahainclusion.repository.OfertaRepository;
 import com.grupo1.ahainclusion.repository.PerfilAccesibilidadRepository;
 import com.grupo1.ahainclusion.repository.PerfilDiscapacidadRepository;
 import com.grupo1.ahainclusion.repository.PrivilegeRepository;
@@ -48,6 +50,9 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
   @Autowired
   private PerfilDiscapacidadRepository perfilDiscapacidadRepository;
 
+  @Autowired
+  private OfertaRepository ofertaRepository;
+
   @Override
   @Transactional
   public void onApplicationEvent(ContextRefreshedEvent event) {
@@ -75,6 +80,7 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
     Role candidatoRole = roleRepository.findByName("ROLE_CANDIDATO");
     Role empresaRole = roleRepository.findByName("ROLE_EMPRESA");
 
+    // SE AGREGAN USUARIOS CANDIDATOS RANDOM
     try {
       List<User> users = getRandomUsers(candidatoRole, 20);
       userRepository.saveAll(users);
@@ -82,7 +88,7 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
       e.printStackTrace();
     }
 
-    // Se agregan usuarios Empresa + perfiles de Accesibilidad
+    // SE AGREGAN USUARIOS EMPRESA + PERFILES DE ACCESIBILIDAD
     User empresa1 = new User();
 
     PerfilAccesibilidad perfilA1 = new PerfilAccesibilidad();
@@ -94,24 +100,51 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
     perfilA2.setName("Perfil Ripley Santiago Centro");
     perfilAccesibilidadRepository.save(perfilA2);
 
-
     empresa1.setFirstName("Líder");
     empresa1.setLastName("");
     empresa1.setEmail("contacto@lider.cl");
     empresa1.setRoles(Arrays.asList(empresaRole));
-    empresa1.setPerfilAccesibilidad(perfilAccesibilidadRepository.findById(1).get());
+    empresa1.setPerfilAccesibilidad(perfilA1);
     empresa1.setEnabled(true);
 
     empresa2.setFirstName("Ripley");
     empresa2.setLastName("");
     empresa2.setEmail("contacto@ripley.cl");
     empresa2.setRoles(Arrays.asList(empresaRole));
-    empresa2.setPerfilAccesibilidad(perfilAccesibilidadRepository.findById(2).get());
+    empresa2.setPerfilAccesibilidad(perfilA2);
     empresa2.setEnabled(true);
     
 
     userRepository.save(empresa1);
     userRepository.save(empresa2);
+
+    // SE AGREGAN OFERTAS
+
+    Oferta oferta1 = new Oferta();
+    Oferta oferta2 = new Oferta();
+    Oferta oferta3 = new Oferta();
+
+    oferta1.setName("Reponedor");
+    oferta1.setDescription("Reponedor de productos");
+    oferta1.setUser(empresa1);
+    oferta1.setPerfilAccesibilidad(empresa1.getPerfilAccesibilidad());
+
+    oferta2.setName("Guardia");
+    oferta2.setDescription("Guardia de seguridad");
+    oferta2.setUser(empresa1);
+    oferta2.setPerfilAccesibilidad(empresa1.getPerfilAccesibilidad());
+
+    oferta3.setName("Vendedor");
+    oferta3.setDescription("Vendedor departamento de tecnología");
+    oferta3.setUser(empresa2);
+    oferta3.setPerfilAccesibilidad(empresa2.getPerfilAccesibilidad());
+
+    ofertaRepository.save(oferta1);
+    ofertaRepository.save(oferta2);
+    ofertaRepository.save(oferta3);
+
+
+
 
 
     alreadySetup = true;
