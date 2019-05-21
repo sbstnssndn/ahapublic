@@ -89,17 +89,29 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
     perfilA1.setName("Perfil Líder Ñuñoa");
     perfilAccesibilidadRepository.save(perfilA1);
 
+    User empresa2 = new User();
+    PerfilAccesibilidad perfilA2 = new PerfilAccesibilidad();
+    perfilA2.setName("Perfil Ripley Santiago Centro");
+    perfilAccesibilidadRepository.save(perfilA2);
+
 
     empresa1.setFirstName("Líder");
     empresa1.setLastName("");
     empresa1.setEmail("contacto@lider.cl");
     empresa1.setRoles(Arrays.asList(empresaRole));
-    empresa1.setPerfilAccesibilidad(perfilA1);
+    empresa1.setPerfilAccesibilidad(perfilAccesibilidadRepository.findById(1).get());
     empresa1.setEnabled(true);
 
-
+    empresa2.setFirstName("Ripley");
+    empresa2.setLastName("");
+    empresa2.setEmail("contacto@ripley.cl");
+    empresa2.setRoles(Arrays.asList(empresaRole));
+    empresa2.setPerfilAccesibilidad(perfilAccesibilidadRepository.findById(2).get());
+    empresa2.setEnabled(true);
+    
 
     userRepository.save(empresa1);
+    userRepository.save(empresa2);
 
 
     alreadySetup = true;
