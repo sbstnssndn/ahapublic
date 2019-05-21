@@ -10,7 +10,7 @@ import javax.persistence.OneToOne;
 public class Oferta {
     @Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-    private Long id;
+    private Integer id;
 
     @OneToOne
     private User user;

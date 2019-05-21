@@ -14,7 +14,7 @@ import javax.persistence.OneToOne;
 public class User {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private Long id;
+	private Integer id;
 	private String rut;
 	private String firstName;
 	private String lastName;
@@ -28,7 +28,7 @@ public class User {
 	@OneToOne
 	private PerfilDiscapacidad perfilDiscapacidad;
 
-	public Long getId() {
+	public Integer getId() {
 		return id;
 	}
 
@@ -64,7 +64,7 @@ public class User {
 		this.lastName = lastName;
 	}
 
-	public void setId(Long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
   

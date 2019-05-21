@@ -1,9 +1,13 @@
 package com.grupo1.ahainclusion.controller;
 
+import java.util.Optional;
+
 import com.grupo1.ahainclusion.model.Oferta;
 import com.grupo1.ahainclusion.model.PerfilAccesibilidad;
 import com.grupo1.ahainclusion.model.User;
 import com.grupo1.ahainclusion.repository.OfertaRepository;
+import com.grupo1.ahainclusion.repository.PerfilAccesibilidadRepository;
+import com.grupo1.ahainclusion.repository.UserRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,19 +22,48 @@ public class OfertaController {
 
     @Autowired
     private OfertaRepository ofertaRepository;
+    @Autowired
+    private UserRepository userRepository;
+    @Autowired
+    private PerfilAccesibilidadRepository perfilAccesibilidadRepository;
 
     // Agregar Oferta
     @GetMapping(path="/add")
     public @ResponseBody String addNewOferta(@RequestParam String name,
                                              @RequestParam String description,
-                                             @RequestParam User user,
-                                             @RequestParam PerfilAccesibilidad perfilAccesibilidad) {
+                                             @RequestParam String idUser,
+                                             @RequestParam String idPerfilA) {
     
     Oferta n = new Oferta();
+    User usr = new User();
+    Optional<User> checkUser = userRepository.findById(Integer.parseInt(idUser));
+    PerfilAccesibilidad perfilA = new PerfilAccesibilidad();
+    Optional<PerfilAccesibilidad> CheckPerfilA = perfilAccesibilidadRepository.findById(Integer.parseInt(idPerfilA));
+
+    if (checkUser==null)
+    {
+        return "Usuario no encontrado";
+    }
+    else
+    {
+        usr = checkUser.get();
+    }
+
+    if (CheckPerfilA==null)
+    {
+        return "Perfil de Accesibilidad no encontrado";
+    }
+    else
+    {
+        perfilA = CheckPerfilA.get();
+    }
+
+    
+    
     n.setName(name);
     n.setDescription(description);
-    n.setUser(user);
-    n.setPerfilAccesibilidad(perfilAccesibilidad);
+    n.setUser(usr);
+    n.setPerfilAccesibilidad(perfilA);
 
     ofertaRepository.save(n);
 
