@@ -28,8 +28,19 @@ public class User {
 	@OneToOne
 	private PerfilDiscapacidad perfilDiscapacidad;
 
+	@OneToOne
+	private PerfilAccesibilidad perfilAccesibilidad;
+
 	public Integer getId() {
 		return id;
+	}
+
+	public PerfilAccesibilidad getPerfilAccesibilidad() {
+		return perfilAccesibilidad;
+	}
+
+	public void setPerfilAccesibilidad(PerfilAccesibilidad perfilAccesibilidad) {
+		this.perfilAccesibilidad = perfilAccesibilidad;
 	}
 
 	public PerfilDiscapacidad getPerfilDiscapacidad() {

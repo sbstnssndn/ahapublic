@@ -8,9 +8,12 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
+import com.grupo1.ahainclusion.model.PerfilAccesibilidad;
 import com.grupo1.ahainclusion.model.Privilege;
 import com.grupo1.ahainclusion.model.Role;
 import com.grupo1.ahainclusion.model.User;
+import com.grupo1.ahainclusion.repository.PerfilAccesibilidadRepository;
+import com.grupo1.ahainclusion.repository.PerfilDiscapacidadRepository;
 import com.grupo1.ahainclusion.repository.PrivilegeRepository;
 import com.grupo1.ahainclusion.repository.RoleRepository;
 import com.grupo1.ahainclusion.repository.UserRepository;
@@ -39,6 +42,12 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
   @Autowired
   private PrivilegeRepository privilegeRepository;
 
+  @Autowired
+  private PerfilAccesibilidadRepository perfilAccesibilidadRepository;
+
+  @Autowired
+  private PerfilDiscapacidadRepository perfilDiscapacidadRepository;
+
   @Override
   @Transactional
   public void onApplicationEvent(ContextRefreshedEvent event) {
@@ -64,6 +73,7 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
     createRoleIfNotFound("ROLE_EMPRESA", empresaPrivileges);
 
     Role candidatoRole = roleRepository.findByName("ROLE_CANDIDATO");
+    Role empresaRole = roleRepository.findByName("ROLE_EMPRESA");
 
     try {
       List<User> users = getRandomUsers(candidatoRole, 20);
@@ -71,6 +81,26 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
     } catch (JSONException | UnirestException | IOException e) {
       e.printStackTrace();
     }
+
+    // Se agregan usuarios Empresa + perfiles de Accesibilidad
+    User empresa1 = new User();
+
+    PerfilAccesibilidad perfilA1 = new PerfilAccesibilidad();
+    perfilA1.setName("Perfil Líder Ñuñoa");
+    perfilAccesibilidadRepository.save(perfilA1);
+
+
+    empresa1.setFirstName("Líder");
+    empresa1.setLastName("");
+    empresa1.setEmail("contacto@lider.cl");
+    empresa1.setRoles(Arrays.asList(empresaRole));
+    empresa1.setPerfilAccesibilidad(perfilA1);
+    empresa1.setEnabled(true);
+
+
+
+    userRepository.save(empresa1);
+
 
     alreadySetup = true;
   }

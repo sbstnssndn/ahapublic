@@ -31,14 +31,14 @@ public class OfertaController {
     @GetMapping(path="/add")
     public @ResponseBody String addNewOferta(@RequestParam String name,
                                              @RequestParam String description,
-                                             @RequestParam String idUser,
-                                             @RequestParam String idPerfilA) {
+                                             @RequestParam Integer idUser,
+                                             @RequestParam Integer idPerfilA) {
     
     Oferta n = new Oferta();
     User usr = new User();
-    Optional<User> checkUser = userRepository.findById(Integer.parseInt(idUser));
+    Optional<User> checkUser = userRepository.findById(idUser);
     PerfilAccesibilidad perfilA = new PerfilAccesibilidad();
-    Optional<PerfilAccesibilidad> CheckPerfilA = perfilAccesibilidadRepository.findById(Integer.parseInt(idPerfilA));
+    Optional<PerfilAccesibilidad> CheckPerfilA = perfilAccesibilidadRepository.findById(idPerfilA);
 
     if (checkUser==null)
     {
@@ -47,10 +47,12 @@ public class OfertaController {
     else
     {
         usr = checkUser.get();
+        System.out.println("Usuario encontrado: "+usr.getFirstName());
     }
 
     if (CheckPerfilA==null)
     {
+        System.out.println("PerfilA no encontrado");
         return "Perfil de Accesibilidad no encontrado";
     }
     else
