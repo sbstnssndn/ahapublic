@@ -13,7 +13,7 @@ import javax.persistence.OneToOne;
 @Entity
 public class User {
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	private String rut;
 	private String firstName;
