@@ -19,7 +19,14 @@ public class PerfilDiscapacidadController {
 
     // Agregar Perfil Discapacidad
     @GetMapping(path="/add")
-    public @ResponseBody String addNewPerfilDiscapacidad(@RequestParam String name) {
+    public @ResponseBody String addNewPerfilDiscapacidad(@RequestParam String name,
+                                                         @RequestParam Integer credencial,
+                                                         @RequestParam Integer sillaRuedas,
+                                                         @RequestParam Integer dAuditiva,
+                                                         @RequestParam Integer dFisica,
+                                                         @RequestParam Integer dIntelectual,
+                                                         @RequestParam Integer dPsiquica,
+                                                         @RequestParam Integer dVisual) {
     
     PerfilDiscapacidad n = new PerfilDiscapacidad();
     n.setName(name);
