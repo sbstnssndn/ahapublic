@@ -142,7 +142,15 @@ class MasterForm extends Component {
   handleSubmit = (event) => {
     event.preventDefault()
     //const { email, username, password } = this.state
-    alert("Formulario enviado");
+    //alert("Formulario enviado");
+    const FormData = [];
+    for (let stage in this.state.stages) {
+      // para cada etapa, extraer los ids y values de los campos
+      for (let formElementIdentifier in stage.inputs) {
+        console.log(stage.inputs[formElementIdentifier].value);
+        //FormData[formElementIdentifier] = stage.inputs[formElementIdentifier].value;
+      }
+    }
   }
 
   _next = () => {
@@ -208,9 +216,15 @@ class MasterForm extends Component {
           inputs={stage.inputs}
           handleChange={this.handleChange}
           currentStage={this.state.currentStage}
+          totalStages={this.state.totalStages}
         />
       ))
     )
+
+    let sendButton = null;
+    if (this.state.currentStage === this.state.totalStages - 1) {
+      sendButton = <button className="btn btn-success btn-block">Guardar datos</button>
+    }
 
     return (
       <React.Fragment>
@@ -221,6 +235,7 @@ class MasterForm extends Component {
           <h2>Barra de progreso</h2>
           { this.botonAnterior() }
           { this.botonSiguiente() }
+          { sendButton }
         </form>
       </React.Fragment>
     );
