@@ -1,14 +1,14 @@
 export default[
     {
-        title: 'Nuevo puesto',
+        title: 'Candidato',
         url: '/'
     },
     {
-        title: 'Accesibilidad',
-        url: '/accesibilidad'
+        title: 'Empresa',
+        url: '/empresa'
     },
     {
-        title: 'Match',
-        url: '/match'
+        title: 'Resultado',
+        url: '/resultado'
     }
 ];
