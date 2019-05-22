@@ -144,9 +144,6 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
     ofertaRepository.save(oferta3);
 
 
-
-
-
     alreadySetup = true;
   }
 
