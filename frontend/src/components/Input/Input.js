@@ -9,7 +9,7 @@ const Input = (props) => {
       inputElement = <input onChange={props.handleChange} {...props.inputConfig} value={props.value} />;
       break;
     case ('textarea'):
-      inputElement = <input onChange={props.handleChange} {...props.inputConfig} value={props.value} />;
+      inputElement = <textarea onChange={props.handleChange} {...props.inputConfig} value={props.value} />;
       break;
     case ('select'):
       inputElement = (
@@ -38,7 +38,6 @@ const Input = (props) => {
   return (
     <div>
       <label>{props.label}</label>
-
       {inputElement}
     </div>
   );

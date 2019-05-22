@@ -1,94 +1,58 @@
 import React, { Component } from 'react';
 import Stage from '../../components/Stage/Stage';
+import Axios from 'axios';
 
 class MasterForm extends Component {
   
   state = {
     currentStage: 0,
-    totalStages: 3,
+    totalStages: 1,
     stages: [
       {
         id: 0,
-        title: 'Datos Personales',
+        title: 'Datos de usuario',
         inputs: {
-          nombre: {
-            label: 'Nombre',
+          rut: {
+            label: 'RUT',
             inputStyle: 'input',
             inputConfig: {
               type: 'text',
               placeholder: 'Juan Pérez',
-              name: 'nombre',
-              id: 'nombre'
+              name: 'rut',
+              id: 'rut'
             },
             value: ''
           },
-          direccion: {
-            label: 'Dirección',
+          firstName: {
+            label: 'Primer nombre',
             inputStyle: 'input',
             inputConfig: {
               type: 'text',
-              placeholder: 'Pasaje Rauco 755',
-              name: 'direccion',
-              id: 'direccion'
-            },
-            value: ''
-          }
-        }
-      },
-      {
-        id: 1,
-        title: 'Perfil laboral',
-        inputs: {
-          credencial: {
-            label: '¿Tiene credencial de discapacidad?',
-            inputStyle: 'select',
-            inputConfig: {
-              name: 'credencial',
-              id: 'credencial',
-              options: [
-                { value: '', displayValue: 'Seleccione', disabled: true },
-                { value: 'si', displayValue: 'Si' },
-                { value: 'no', displayValue: 'No' }
-              ]
+              placeholder: 'Juan',
+              name: 'firstName',
+              id: 'firstName'
             },
             value: ''
           },
-          comentarios: {
-            label: 'Comentarios',
-            inputStyle: 'textarea',
-            inputConfig: {
-              type: 'text',
-              placeholder: 'Ingrese comentarios...',
-              name: 'comentarios',
-              id: 'comentarios'
-            },
-            value: ''
-          }
-        }
-      },
-      {
-        id: 2,
-        title: 'Datos Personales',
-        inputs: {
-          nombre: {
-            label: 'Nombre',
+          lastName: {
+            label: 'Segundo nombre',
             inputStyle: 'input',
             inputConfig: {
               type: 'text',
-              placeholder: 'Juan Pérez',
-              name: 'nombre',
-              id: 'nombre'
+              placeholder: 'Pérez',
+              name: 'lastName',
+              id: 'lastName'
             },
             value: ''
           },
-          direccion: {
-            label: 'Dirección',
+          email: {
+            label: 'Correo electrónico',
             inputStyle: 'input',
             inputConfig: {
-              type: 'text',
-              placeholder: 'Pasaje Rauco 755',
-              name: 'direccion',
-              id: 'direccion'
+              type: 'email',
+              placeholder: 'juan.perez@gmail.com',
+              name: 'email',
+              id: 'email'
             },
             value: ''
           }
@@ -150,12 +114,42 @@ class MasterForm extends Component {
       for (let formElementIdentifier in this.state.stages[index].inputs) {
         //console.log('chao: ' + stage.inputs[formElementIdentifier].value);
         formData[formElementIdentifier] = this.state.stages[index].inputs[formElementIdentifier].value;
-        console.log(formData[formElementIdentifier]);
+        
       }
     }
-
-    /* enviar formData */
+    console.log(formData);
     
+    let axiosConfig = {
+      headers: {
+        'Content-Type': 'application/json;charset=UTF-8',
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET, PUT, POST, DELETE, OPTIONS"
+      }
+    }
+    let datos = {
+      rut: 'asdf',
+      firstName: 'lol',
+      lastName: 'chao',
+      email: 'mail@gmail.com'
+    }
+    Axios.post('http://localhost:8080/api/user/add', datos, axiosConfig)
+    .then(function (response) {
+      console.log(response);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+  }
+
+  componentDidMount() {
+    Axios.get( 'http://localhost:8080/api/user/all' )
+      .then( response => {
+        console.log(response);
+        //this.props.history.push('/');
+      })
+      .catch( error => {
+        console.log(error);
+      })
   }
 
   _next = () => {
