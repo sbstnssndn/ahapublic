@@ -26,7 +26,7 @@ public class RecommendationController {
     private RecGenerator recgen = new RecGenerator();
 
     // Obtener Recomendaciones
-    @GetMapping(path="/getRecommendations")
+    @GetMapping(path="/get")
     public @ResponseBody Iterable<Recommendation> getRecommendations(@RequestParam Integer idOferta,
                                                                      @RequestParam Integer n) {
         List<Recommendation> recommendations = new ArrayList<>();
