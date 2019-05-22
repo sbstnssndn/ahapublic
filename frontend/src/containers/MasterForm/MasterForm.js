@@ -17,7 +17,8 @@ class MasterForm extends Component {
             inputConfig: {
               type: 'text',
               placeholder: 'Juan Pérez',
-              name: 'nombre'
+              name: 'nombre',
+              id: 'nombre'
             },
             value: ''
           },
@@ -27,7 +28,8 @@ class MasterForm extends Component {
             inputConfig: {
               type: 'text',
               placeholder: 'Pasaje Rauco 755',
-              name: 'direccion'
+              name: 'direccion',
+              id: 'direccion'
             },
             value: ''
           }
@@ -42,6 +44,7 @@ class MasterForm extends Component {
             inputStyle: 'select',
             inputConfig: {
               name: 'credencial',
+              id: 'credencial',
               options: [
                 { value: '', displayValue: 'Seleccione', disabled: true },
                 { value: 'si', displayValue: 'Si' },
@@ -56,7 +59,8 @@ class MasterForm extends Component {
             inputConfig: {
               type: 'text',
               placeholder: 'Ingrese comentarios...',
-              name: 'comentarios'
+              name: 'comentarios',
+              id: 'comentarios'
             },
             value: ''
           }
@@ -72,7 +76,8 @@ class MasterForm extends Component {
             inputConfig: {
               type: 'text',
               placeholder: 'Juan Pérez',
-              name: 'nombre'
+              name: 'nombre',
+              id: 'nombre'
             },
             value: ''
           },
@@ -82,7 +87,8 @@ class MasterForm extends Component {
             inputConfig: {
               type: 'text',
               placeholder: 'Pasaje Rauco 755',
-              name: 'direccion'
+              name: 'direccion',
+              id: 'direccion'
             },
             value: ''
           }
@@ -91,16 +97,45 @@ class MasterForm extends Component {
     ]
   }
 
-  handleChange = (event) => {
+  handleChange = (event, currentStage, inputIdentifier) => {
+    /* TO DO: Mejorar performance de esta función 
+    *  No es necesario convertir a obj y luego a array
+    *  Creo que tampoco es necesario hacer tanto spread
+    *  para elementos de 'stage' que no van a mutar
+    */
+
+    // copiar el estado actual de las etapas. NO MUTAR!
+    const updatedStages = {
+      ...this.state.stages
+    }
+    
+    const updatedCurrentStage = {
+      ...updatedStages[currentStage]
+    }
+
+    const updatedInputs = {
+      ...updatedCurrentStage.inputs
+    }
+
+    const updatedFormInput = {
+      ...updatedInputs[inputIdentifier]
+    }
+    
+    updatedFormInput.value = event.target.value;
+
+    updatedStages[currentStage].inputs[inputIdentifier] = updatedFormInput;
+
+    const updatedStagesArray = Object.values(updatedStages)
+  
     /* el objeto event tiene la propiedad target,
     * que a su vez, tiene las propiedades name y value
     * se extraen estas propiedades para manejar
     * cualquier tipo de evento en un form con
     * name = event.target.name
     */
-    const {name, value} = event.target;
+    //const {name, value} = event.target;
     this.setState({
-        [name]: value
+      stages: updatedStagesArray
     });
   }
 

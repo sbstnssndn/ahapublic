@@ -13,7 +13,12 @@ const Input = (props) => {
       break;
     case ('select'):
       inputElement = (
-        <select onChange={props.handleChange} name={props.inputConfig.name} value={props.value}>
+        <select 
+          onChange={props.handleChange}
+          name={props.inputConfig.name}
+          id={props.inputConfig.id}
+          value={props.value}
+        >
           {props.inputConfig.options.map(option => (
             <option
               key={option.value}
@@ -33,6 +38,7 @@ const Input = (props) => {
   return (
     <div>
       <label>{props.label}</label>
+
       {inputElement}
     </div>
   );

@@ -2,8 +2,6 @@ import React from 'react';
 import Input from './../Input/Input';
 
 const Stage = (props) => {
-  console.log(props.currentStage);
-  console.log(props.id);
   // Si el paso actual no es el id de esta etapa, no mostrar
   if (props.currentStage !== props.id) {
     return null;
@@ -22,7 +20,7 @@ const Stage = (props) => {
           config:{label:'' inputStyle: '', inputConfig: '', value: ''}
          }
       */
-      id: key,
+      id: key, // ej: nombre
       config: props.inputs[key]
     });
   }
@@ -35,7 +33,7 @@ const Stage = (props) => {
           inputStyle={field.config.inputStyle}
           inputConfig={field.config.inputConfig}
           value={field.config.value}
-          handleChange={props.handleChange}
+          handleChange={(event) => props.handleChange(event, props.currentStage, field.id)}
         />
       </React.Fragment>
     ))
