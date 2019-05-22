@@ -142,15 +142,20 @@ class MasterForm extends Component {
   handleSubmit = (event) => {
     event.preventDefault()
     //const { email, username, password } = this.state
-    //alert("Formulario enviado");
-    const FormData = [];
-    for (let stage in this.state.stages) {
+    
+    const formData = [];
+    for (let index in this.state.stages) {
       // para cada etapa, extraer los ids y values de los campos
-      for (let formElementIdentifier in stage.inputs) {
-        console.log(stage.inputs[formElementIdentifier].value);
-        //FormData[formElementIdentifier] = stage.inputs[formElementIdentifier].value;
+      //console.log('hola: ' + this.state.stages[index].inputs.nombre.value);
+      for (let formElementIdentifier in this.state.stages[index].inputs) {
+        //console.log('chao: ' + stage.inputs[formElementIdentifier].value);
+        formData[formElementIdentifier] = this.state.stages[index].inputs[formElementIdentifier].value;
+        console.log(formData[formElementIdentifier]);
       }
     }
+
+    /* enviar formData */
+    
   }
 
   _next = () => {
@@ -223,7 +228,7 @@ class MasterForm extends Component {
 
     let sendButton = null;
     if (this.state.currentStage === this.state.totalStages - 1) {
-      sendButton = <button className="btn btn-success btn-block">Guardar datos</button>
+      sendButton = <input type="submit" value="Guardar datos" className="btn btn-success btn-block" />;
     }
 
     return (
