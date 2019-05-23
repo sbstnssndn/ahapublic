@@ -88,8 +88,8 @@ function App() {
             id: 'credencial',
             options: [
               { value: '', displayValue: 'Seleccione...', disabled: true },
-              { value: 'si', displayValue: 'Si' },
-              { value: 'no', displayValue: 'No' }
+              { value: 'true', displayValue: 'Si' },
+              { value: 'false', displayValue: 'No' }
             ]
           },
           value: ''
@@ -102,8 +102,8 @@ function App() {
             id: 'sillaRuedas',
             options: [
               { value: '', displayValue: 'Seleccione...', disabled: true },
-              { value: 'si', displayValue: 'Si' },
-              { value: 'no', displayValue: 'No' }
+              { value: 'true', displayValue: 'Si' },
+              { value: 'false', displayValue: 'No' }
             ]
           },
           value: ''
@@ -314,8 +314,8 @@ function App() {
             id: 'sillaRuedas',
             options: [
               { value: '', displayValue: 'Seleccione...', disabled: true },
-              { value: 'si', displayValue: 'Si' },
-              { value: 'no', displayValue: 'No' }
+              { value: 'true', displayValue: 'Si' },
+              { value: 'false', displayValue: 'No' }
             ]
           },
           value: ''
@@ -496,10 +496,10 @@ function App() {
               <Route path="/" exact component={Home} />
               <Route path="/recomendaciones" exact component={Recomendaciones} />
               <Route path="/postulantes" exact component={() => (
-                <MasterForm stages={stagesPostulante} titulo={"Registro postulante"} />
+                <MasterForm stages={stagesPostulante} tipoFormulario='1' titulo={"Registro postulante"} />
               )}/>
               <Route path="/empresas" exact component={() => (
-                <MasterForm stages={stagesEmpresa} titulo={"Ingresar oferta"} />
+                <MasterForm stages={stagesEmpresa} tipoFormulario='2' titulo={"Ingresar oferta"} />
               )}/>
             </Switch>
           </div>

@@ -37,6 +37,6 @@ public class RecommendationController {
 
         return recommendations;
     }
-    
+
 
 }

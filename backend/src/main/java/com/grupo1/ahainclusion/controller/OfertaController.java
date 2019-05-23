@@ -36,42 +36,42 @@ public class OfertaController {
                                              @RequestParam Integer idUser,
                                              @RequestParam Integer idPerfilA) {
     
-    Oferta n = new Oferta();
-    User usr = new User();
-    Optional<User> checkUser = userRepository.findById(idUser);
-    PerfilAccesibilidad perfilA = new PerfilAccesibilidad();
-    Optional<PerfilAccesibilidad> CheckPerfilA = perfilAccesibilidadRepository.findById(idPerfilA);
+        Oferta n = new Oferta();
+        User usr = new User();
+        Optional<User> checkUser = userRepository.findById(idUser);
+        PerfilAccesibilidad perfilA = new PerfilAccesibilidad();
+        Optional<PerfilAccesibilidad> CheckPerfilA = perfilAccesibilidadRepository.findById(idPerfilA);
 
-    if (checkUser==null)
-    {
-        return "Usuario no encontrado";
-    }
-    else
-    {
-        usr = checkUser.get();
-        System.out.println("Usuario encontrado: "+usr.getFirstName());
-    }
+        if (checkUser==null)
+        {
+            return "Usuario no encontrado";
+        }
+        else
+        {
+            usr = checkUser.get();
+            System.out.println("Usuario encontrado: "+usr.getFirstName());
+        }
 
-    if (CheckPerfilA==null)
-    {
-        System.out.println("PerfilA no encontrado");
-        return "Perfil de Accesibilidad no encontrado";
-    }
-    else
-    {
-        perfilA = CheckPerfilA.get();
-    }
+        if (CheckPerfilA==null)
+        {
+            System.out.println("PerfilA no encontrado");
+            return "Perfil de Accesibilidad no encontrado";
+        }
+        else
+        {
+            perfilA = CheckPerfilA.get();
+        }
 
-    
-    
-    n.setName(name);
-    n.setDescription(description);
-    n.setUser(usr);
-    n.setPerfilAccesibilidad(perfilA);
 
-    ofertaRepository.save(n);
 
-    return "Oferta Guardada";
+        n.setName(name);
+        n.setDescription(description);
+        n.setUser(usr);
+        n.setPerfilAccesibilidad(perfilA);
+
+        ofertaRepository.save(n);
+
+        return "Oferta Guardada";
     }
 
     // Obtener Ofertas

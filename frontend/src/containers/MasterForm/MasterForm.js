@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Stage from '../../components/Stage/Stage';
 import ProgressBar from '../../components/ProgressBar/ProgressBar';
-//import axios from 'axios';
+import axios from 'axios';
 
 class MasterForm extends Component {
   
@@ -67,37 +67,46 @@ class MasterForm extends Component {
         
       }
     }
-    alert("Datos ingresados!");
-    
+
     console.log(formData);
-    /*
-    axios.post('http://localhost:8080/api/user/add', {
-      rut: 'asdf',
-      firstName: 'hola',
-      lastName: 'chao',
-      email: 'sadf@lol.com'
-    }).then(response => {
-      console.log(response);
-    }).catch(error => {
-      //console.log(error);
-    });
-    */
-    window.location.href = "http://localhost:3000/";
+
+    //alert("Datos ingresados!");
+    
+    //Según tipo de formulario, se requiere una api rest distinta para el guardado de datos
+
+    // 1 -> Formulario de Postulante
+    if(this.props.tipoFormulario == 1){
+
+      console.log("Guardando dato postulante");
+
+      axios.post('http://localhost:8080/api/perfilDiscapacidad/add?name=' + formData.firstName + " " + formData.lastName 
+      + '&credencial=' + formData.credencial
+      + '&sillaRuedas=' + formData.sillaRuedas
+      + '&dAuditiva=' + formData.dAuditiva 
+      + '&dFisica=' + formData.dFisica
+      + '&dIntelectual=' + formData.dIntelectual
+      + '&dPsiquica=' + formData.dPsiquica
+      + '&dVisual=' + formData.dVisual, {
+        
+      }).catch(error => {
+        console.log("Error al guardar");
+      });
+    }
+
+    // 2 -> Formulario de Oferta
+    else if(this.props.tipoFormulario == 2){
+      console.log("Guardando dato oferta");
+
+      
+    }
+
+    //window.location.href = "http://localhost:3000/";
   }
-  /* // PRUEBA GET: OK
-  componentDidMount() {
-    axios.get('http://localhost:8080/api/user/all')
-    .then(response => {
-      console.log(response);
-    }).catch(error => {
-      //console.log(error);
-    });
-  }
-  */
 
   componentDidMount() {
     this.setState({
-      stages: this.props.stages
+      stages: this.props.stages,
+      tipoFormulario: this.props.tipoFormulario
     })
   }
 
@@ -181,7 +190,7 @@ class MasterForm extends Component {
     return (
       <React.Fragment>
         <div className="col">
-          <h1>{this.props.titulo}</h1>
+          <h1>{this.props.titulo} - {this.props.tipoFormulario}</h1>
           <form onSubmit={this.handleSubmit}>
             {stages}
             <ProgressBar />

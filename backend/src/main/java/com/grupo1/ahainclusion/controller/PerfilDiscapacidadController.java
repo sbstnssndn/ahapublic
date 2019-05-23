@@ -22,8 +22,8 @@ public class PerfilDiscapacidadController {
     // Agregar Perfil Discapacidad
     @RequestMapping(path="/add", method = RequestMethod.POST)
     public @ResponseBody String addNewPerfilDiscapacidad(@RequestParam String name,
-                                                         @RequestParam Integer credencial,
-                                                         @RequestParam Integer sillaRuedas,
+                                                         @RequestParam boolean credencial,
+                                                         @RequestParam boolean sillaRuedas,
                                                          @RequestParam Integer dAuditiva,
                                                          @RequestParam Integer dFisica,
                                                          @RequestParam Integer dIntelectual,
@@ -31,7 +31,15 @@ public class PerfilDiscapacidadController {
                                                          @RequestParam Integer dVisual) {
     
     PerfilDiscapacidad n = new PerfilDiscapacidad();
+
     n.setName(name);
+    n.setCredencial(credencial);
+    n.setSillaDeRuedas(sillaRuedas);
+    n.setdAuditiva(dAuditiva);
+    n.setdFisica(dFisica);
+    n.setdIntelectual(dIntelectual);
+    n.setdPsiquica(dPsiquica);
+    n.setdVisual(dVisual);
 
     perfilDiscapacidadRepository.save(n);
 
