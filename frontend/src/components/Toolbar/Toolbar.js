@@ -1,5 +1,6 @@
 import React from 'react';
 import logo from './../../assets/img/aha-logo.png';
+import { Link } from 'react-router-dom';
 
 let navStyle = {
     WebkitBoxShadow: '0px 1px 4px -1px rgba(133,126,126,1)',
@@ -12,23 +13,26 @@ const Toolbar = (props) => (
         <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
         </button>
-        <a className="navbar-brand" href="/">
+        <Link to="/" className="navbar-brand">
             <img src={logo} width="60" height="45" alt="" />
-        </a>
+        </Link>
 
         <div className="collapse navbar-collapse" id="navbarTogglerDemo03">
             <ul className="navbar-nav mr-auto mt-2 mt-lg-0">
                 <li className="nav-item active">
-                    <a className="nav-link" href="/">Inicio<span className="sr-only">(actual)</span></a>
+                    <Link to="/" className="nav-link">Inicio</Link>
                 </li>
                 <li className="nav-item">
-                    <a className="nav-link" href="/">Postulantes</a>
+                    <Link to="/postulantes" className="nav-link">Postulantes</Link>
                 </li>
                 <li className="nav-item">
-                    <a className="nav-link" href="/">Empresas</a>
+                    <Link to="/ofertas" className="nav-link">Mis ofertas</Link>
                 </li>
                 <li className="nav-item">
-                    <a className="nav-link disabled" href="/" tabIndex="-1" aria-disabled="true">Panel</a>
+                    <Link to="/empresas" className="nav-link">Empresas</Link>
+                </li>
+                <li className="nav-item">
+                <Link to="/" className="nav-link disabled" tabIndex="-1" aria-disabled="true">Panel</Link>
                 </li>
             </ul>
         </div>

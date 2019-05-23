@@ -5,21 +5,285 @@ import Layout from './components/Layout/Layout';
 import Toolbar from './components/Toolbar/Toolbar';
 import Footer from './components/Footer/Footer';
 import SideMenu from './components/SideMenu/SideMenu';
+import  { BrowserRouter, Route } from 'react-router-dom';
+import Home from './containers/Home/Home';
+
+// import preguntasPostulante from './assets/js/preguntas-postulante.js
 
 function App() {
+
+  const stagesPostulante =
+  [
+    {
+      id: 0,
+      title: 'Datos de usuario',
+      inputs: {
+        rut: {
+          label: 'RUT',
+          inputStyle: 'input',
+          inputConfig: {
+            type: 'text',
+            placeholder: 'Juan Pérez',
+            name: 'rut',
+            id: 'rut'
+          },
+          value: ''
+        },
+        firstName: {
+          label: 'Primer nombre',
+          inputStyle: 'input',
+          inputConfig: {
+            type: 'text',
+            placeholder: 'Juan',
+            name: 'firstName',
+            id: 'firstName'
+          },
+          value: ''
+        },
+        lastName: {
+          label: 'Apellido',
+          inputStyle: 'input',
+          inputConfig: {
+            type: 'text',
+            placeholder: 'Pérez',
+            name: 'lastName',
+            id: 'lastName'
+          },
+          value: ''
+        },
+        location: {
+          label: 'Dirección',
+          inputStyle: 'input',
+          inputConfig: {
+            type: 'text',
+            placeholder: 'Av. Pajaritos 754, casa 64',
+            name: 'location',
+            id: 'location'
+          },
+          value: ''
+        },
+        email: {
+          label: 'Correo electrónico',
+          inputStyle: 'input',
+          inputConfig: {
+            type: 'email',
+            placeholder: 'juan.perez@gmail.com',
+            name: 'email',
+            id: 'email'
+          },
+          value: ''
+        }
+      }
+    },
+    {
+      id: 1,
+      title: 'Datos de discapacidad',
+      inputs: {
+        credencial: {
+          label: '¿Tiene credencial de discapacidad?',
+          inputStyle: 'select',
+          inputConfig: {
+            name: 'credencial',
+            id: 'credencial',
+            options: [
+              { value: '', displayValue: 'Seleccione...', disabled: true },
+              { value: 'si', displayValue: 'Si' },
+              { value: 'no', displayValue: 'No' }
+            ]
+          },
+          value: ''
+        },
+        sillaRuedas: {
+          label: '¿Utiliza silla de ruedas?',
+          inputStyle: 'select',
+          inputConfig: {
+            name: 'sillaRuedas',
+            id: 'sillaRuedas',
+            options: [
+              { value: '', displayValue: 'Seleccione...', disabled: true },
+              { value: 'si', displayValue: 'Si' },
+              { value: 'no', displayValue: 'No' }
+            ]
+          },
+          value: ''
+        },
+        dAuditiva: {
+          label: 'Grado de discapacidad auditiva',
+          inputStyle: 'select',
+          inputConfig: {
+            name: 'dAuditiva',
+            id: 'dAuditiva',
+            options: [
+              { value: '', displayValue: 'Seleccione...', disabled: true },
+              { value: '0', displayValue: '0%' },
+              { value: '25', displayValue: '25%' },
+              { value: '50', displayValue: '50%' },
+              { value: '75', displayValue: '75%' },
+              { value: '100', displayValue: '100%' },
+            ]
+          },
+          value: ''
+        },
+        dFisica: {
+          label: 'Grado de discapacidad física',
+          inputStyle: 'select',
+          inputConfig: {
+            name: 'dFisica',
+            id: 'dFisica',
+            options: [
+              { value: '', displayValue: 'Seleccione...', disabled: true },
+              { value: '0', displayValue: '0%' },
+              { value: '25', displayValue: '25%' },
+              { value: '50', displayValue: '50%' },
+              { value: '75', displayValue: '75%' },
+              { value: '100', displayValue: '100%' },
+            ]
+          },
+          value: ''
+        },
+        dIntelectual: {
+          label: 'Grado de discapacidad intelectual',
+          inputStyle: 'select',
+          inputConfig: {
+            name: 'dIntelectual',
+            id: 'dIntelectual',
+            options: [
+              { value: '', displayValue: 'Seleccione...', disabled: true },
+              { value: '0', displayValue: '0%' },
+              { value: '25', displayValue: '25%' },
+              { value: '50', displayValue: '50%' },
+              { value: '75', displayValue: '75%' },
+              { value: '100', displayValue: '100%' },
+            ]
+          },
+          value: ''
+        },
+        dPsiquica: {
+          label: 'Grado de discapacidad psíquica',
+          inputStyle: 'select',
+          inputConfig: {
+            name: 'dPsiquica',
+            id: 'dPsiquica',
+            options: [
+              { value: '', displayValue: 'Seleccione...', disabled: true },
+              { value: '0', displayValue: '0%' },
+              { value: '25', displayValue: '25%' },
+              { value: '50', displayValue: '50%' },
+              { value: '75', displayValue: '75%' },
+              { value: '100', displayValue: '100%' },
+            ]
+          },
+          value: ''
+        },
+        dVisual: {
+          label: 'Grado de discapacidad visual',
+          inputStyle: 'select',
+          inputConfig: {
+            name: 'dVisual',
+            id: 'dVisual',
+            options: [
+              { value: '', displayValue: 'Seleccione...', disabled: true },
+              { value: '0', displayValue: '0%' },
+              { value: '25', displayValue: '25%' },
+              { value: '50', displayValue: '50%' },
+              { value: '75', displayValue: '75%' },
+              { value: '100', displayValue: '100%' },
+            ]
+          },
+          value: ''
+        }
+      }
+    },
+    {
+      id: 2,
+      title: 'Experiencia laboral',
+      inputs: {
+        nivelEducacional: {
+          label: 'Nivel educacional',
+          inputStyle: 'select',
+          inputConfig: {
+            name: 'nivelEducacional',
+            id: 'nivelEducacional',
+            options: [
+              { value: '', displayValue: 'Seleccione...', disabled: true },
+              { value: 'basica incompleta', displayValue: 'Básica incompleta' },
+              { value: 'basica completa', displayValue: 'Básica completa' },
+              { value: 'media incompleta', displayValue: 'Media incompleta' },
+              { value: 'media completa', displayValue: 'Media completa' },
+              { value: 'técnica incompleta', displayValue: 'Técnica incompleta' },
+              { value: 'técnica completa', displayValue: 'Técnica completa' },
+              { value: 'superior incompleta', displayValue: 'Superior incompleta' },
+              { value: 'superior completa', displayValue: 'Superior completa' },
+            ]
+          },
+          value: ''
+        },
+        firstName: {
+          label: 'Primer nombre',
+          inputStyle: 'input',
+          inputConfig: {
+            type: 'text',
+            placeholder: 'Juan',
+            name: 'firstName',
+            id: 'firstName'
+          },
+          value: ''
+        },
+        lastName: {
+          label: 'Apellido',
+          inputStyle: 'input',
+          inputConfig: {
+            type: 'text',
+            placeholder: 'Pérez',
+            name: 'lastName',
+            id: 'lastName'
+          },
+          value: ''
+        },
+        location: {
+          label: 'Dirección',
+          inputStyle: 'input',
+          inputConfig: {
+            type: 'text',
+            placeholder: 'Av. Pajaritos 754, casa 64',
+            name: 'location',
+            id: 'location'
+          },
+          value: ''
+        },
+        email: {
+          label: 'Correo electrónico',
+          inputStyle: 'input',
+          inputConfig: {
+            type: 'email',
+            placeholder: 'juan.perez@gmail.com',
+            name: 'email',
+            id: 'email'
+          },
+          value: ''
+        }
+      }
+    }
+  ]
+
   return (
-    <React.Fragment>
+    <BrowserRouter>
+
       <Layout>
         <Toolbar />
         <div className="container pt-2">
           <div className="row">
             <SideMenu />
-            <MasterForm type={'postulante'} />
+            <Route path="/" exact component={Home} />
+            <Route path="/postulantes" exact component={() => (
+              <MasterForm stages={stagesPostulante} />
+            )}
+            />
           </div>
         </div>
        <Footer />
       </Layout>
-    </React.Fragment>
+    </BrowserRouter>
   );
 }
 
