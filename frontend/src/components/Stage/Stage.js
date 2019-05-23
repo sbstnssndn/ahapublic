@@ -28,13 +28,15 @@ const Stage = (props) => {
   let fields = (
     fieldsArray.map(field => (
       <React.Fragment key={field.id}>
-        <label>{field.config.label}</label>
-        <Input
-          inputStyle={field.config.inputStyle}
-          inputConfig={field.config.inputConfig}
-          value={field.config.value}
-          handleChange={(event) => props.handleChange(event, props.currentStage, field.id)}
-        />
+        <div className="form-group">
+          <label>{field.config.label}</label>
+          <Input
+            inputStyle={field.config.inputStyle}
+            inputConfig={field.config.inputConfig}
+            value={field.config.value}
+            handleChange={(event) => props.handleChange(event, props.currentStage, field.id)}
+          />
+        </div>
       </React.Fragment>
     ))
   )

@@ -5,6 +5,7 @@ import com.grupo1.ahainclusion.repository.PerfilDiscapacidadRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -19,7 +20,14 @@ public class PerfilDiscapacidadController {
 
     // Agregar Perfil Discapacidad
     @GetMapping(path="/add")
-    public @ResponseBody String addNewPerfilDiscapacidad(@RequestParam String name) {
+    public @ResponseBody String addNewPerfilDiscapacidad(@RequestParam String name,
+                                                         @RequestParam Integer credencial,
+                                                         @RequestParam Integer sillaRuedas,
+                                                         @RequestParam Integer dAuditiva,
+                                                         @RequestParam Integer dFisica,
+                                                         @RequestParam Integer dIntelectual,
+                                                         @RequestParam Integer dPsiquica,
+                                                         @RequestParam Integer dVisual) {
     
     PerfilDiscapacidad n = new PerfilDiscapacidad();
     n.setName(name);

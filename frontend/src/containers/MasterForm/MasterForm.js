@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import Stage from '../../components/Stage/Stage';
-import Axios from 'axios';
 
 class MasterForm extends Component {
   
   state = {
     currentStage: 0,
-    totalStages: 1,
+    totalStages: 3,
     stages: [
       {
         id: 0,
@@ -35,13 +34,24 @@ class MasterForm extends Component {
             value: ''
           },
           lastName: {
-            label: 'Segundo nombre',
+            label: 'Apellido',
             inputStyle: 'input',
             inputConfig: {
               type: 'text',
               placeholder: 'Pérez',
               name: 'lastName',
               id: 'lastName'
+            },
+            value: ''
+          },
+          location: {
+            label: 'Dirección',
+            inputStyle: 'input',
+            inputConfig: {
+              type: 'text',
+              placeholder: 'Av. Pajaritos 754, casa 64',
+              name: 'location',
+              id: 'location'
             },
             value: ''
           },
@@ -56,6 +66,74 @@ class MasterForm extends Component {
             },
             value: ''
           }
+        }
+      },
+      {
+        id: 1,
+        title: 'Datos de postulación',
+        inputs: {
+          credencial: {
+            label: '¿Tiene credencial de discapacidad?',
+            inputStyle: 'select',
+            inputConfig: {
+              name: 'credencial',
+              id: 'credencial',
+              options: [
+                { value: '', displayValue: 'Seleccione...', disabled: true },
+                { value: 'si', displayValue: 'Si' },
+                { value: 'no', displayValue: 'No' }
+              ]
+            },
+            value: ''
+          },
+          sillaRuedas: {
+            label: '¿Utiliza silla de ruedas?',
+            inputStyle: 'select',
+            inputConfig: {
+              name: 'sillaRuedas',
+              id: 'sillaRuedas',
+              options: [
+                { value: '', displayValue: 'Seleccione...', disabled: true },
+                { value: 'si', displayValue: 'Si' },
+                { value: 'no', displayValue: 'No' }
+              ]
+            },
+            value: ''
+          },
+          dAuditiva: {
+            label: 'Grado de discapacidad auditiva',
+            inputStyle: 'select',
+            inputConfig: {
+              name: 'dAuditiva',
+              id: 'dAuditiva',
+              options: [
+                { value: '', displayValue: 'Seleccione...', disabled: true },
+                { value: '0', displayValue: '0%' },
+                { value: '25', displayValue: '25%' },
+                { value: '50', displayValue: '50%' },
+                { value: '75', displayValue: '75%' },
+                { value: '100', displayValue: '100%' },
+              ]
+            },
+            value: ''
+          },
+          dFisica: {
+            label: 'Grado de discapacidad física',
+            inputStyle: 'select',
+            inputConfig: {
+              name: 'dFisica',
+              id: 'dFisica',
+              options: [
+                { value: '', displayValue: 'Seleccione...', disabled: true },
+                { value: '0', displayValue: '0%' },
+                { value: '25', displayValue: '25%' },
+                { value: '50', displayValue: '50%' },
+                { value: '75', displayValue: '75%' },
+                { value: '100', displayValue: '100%' },
+              ]
+            },
+            value: ''
+          },
         }
       }
     ]
@@ -119,37 +197,6 @@ class MasterForm extends Component {
     }
     console.log(formData);
     
-    let axiosConfig = {
-      headers: {
-        'Content-Type': 'application/json;charset=UTF-8',
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Methods": "GET, PUT, POST, DELETE, OPTIONS"
-      }
-    }
-    let datos = {
-      rut: 'asdf',
-      firstName: 'lol',
-      lastName: 'chao',
-      email: 'mail@gmail.com'
-    }
-    Axios.post('http://localhost:8080/api/user/add', datos, axiosConfig)
-    .then(function (response) {
-      console.log(response);
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
-  }
-
-  componentDidMount() {
-    Axios.get( 'http://localhost:8080/api/user/all' )
-      .then( response => {
-        console.log(response);
-        //this.props.history.push('/');
-      })
-      .catch( error => {
-        console.log(error);
-      })
   }
 
   _next = () => {
@@ -222,20 +269,22 @@ class MasterForm extends Component {
 
     let sendButton = null;
     if (this.state.currentStage === this.state.totalStages - 1) {
-      sendButton = <input type="submit" value="Guardar datos" className="btn btn-success btn-block" />;
+      sendButton = <input type="submit" value="Guardar datos" className="btn btn-success btn-lg" />;
     }
 
     return (
       <React.Fragment>
-        <h1>Formulario de registro</h1>
-        <h2>Stepper. Etapa actual: {this.state.currentStage+1}</h2>
-        <form onSubmit={this.handleSubmit}>
-          {stages}
-          <h2>Barra de progreso</h2>
-          { this.botonAnterior() }
-          { this.botonSiguiente() }
-          { sendButton }
-        </form>
+        <div className="col">
+          <h1>Formulario de registro</h1>
+          <h2>Stepper. Etapa actual: {this.state.currentStage+1}</h2>
+          <form onSubmit={this.handleSubmit}>
+            {stages}
+            <h2>Barra de progreso</h2>
+            { this.botonAnterior() }
+            { this.botonSiguiente() }
+            { sendButton }
+          </form>
+        </div>
       </React.Fragment>
     );
   }
