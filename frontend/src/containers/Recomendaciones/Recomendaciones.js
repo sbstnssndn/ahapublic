@@ -29,11 +29,23 @@ class Recomendaciones extends Component {
       <React.Fragment>
         <div className="container">
           <h1 className="tp-2">Recomendaciones</h1>
-          <ul>
+          {/*<li key={usuario.user.id}>
+                  <p className="text-uppercase">{usuario.user.firstName} {usuario.user.lastName}: {usuario.percentage}%</p>
+    </li>*/}
             {this.state.usuarios.map(usuario => {
-              return <li key={usuario.user.id}>{usuario.user.firstName} {usuario.user.lastName}: {usuario.percentage}%</li>;
+              return (
+                <div className="card" style={{width: "100%", marginBottom: "20px"}} key={usuario.user.id}>
+                  <div className="card-body">
+                    <h5 className="card-title text-uppercase">{usuario.user.firstName} {usuario.user.lastName}</h5>
+                    <h6 className="card-subtitle mb-2 text-muted">{usuario.user.email}</h6>
+                    <p className="card-text">Porcentaje de compatibilidad: {usuario.percentage}%</p>
+                    <a href="#" className="card-link">Perfil</a>
+                    <a href="#" className="card-link">Contacto</a>
+                  </div>
+                </div>
+              );
             })}
-          </ul>
+          
         </div>
         
       </React.Fragment>
