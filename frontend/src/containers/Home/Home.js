@@ -12,6 +12,7 @@ class Home extends Component {
   render () {
     return (
       <React.Fragment>
+        <div className="container">
         <div id="carouselExampleIndicators" className="carousel slide pt-3" data-ride="carousel">
         <ol className="carousel-indicators">
           <li data-target="#carouselExampleIndicators" data-slide-to="0" className="active"></li>
@@ -47,6 +48,7 @@ class Home extends Component {
         <p className="lead">
           <Link className="btn btn-primary btn-lg" to="postulantes" role="button">Registrarse</Link>
         </p>
+      </div>
       </div>
       </React.Fragment>
     
