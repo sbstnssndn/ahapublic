@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Stage from '../../components/Stage/Stage';
+import axios from 'axios';
 
 class MasterForm extends Component {
   
@@ -197,6 +198,16 @@ class MasterForm extends Component {
     }
     console.log(formData);
     
+    axios.post('http://localhost:8080/api/user/add', {
+      rut: 'asdf',
+      firstName: 'hola',
+      lastName: 'chao',
+      email: 'sadf@lol.com'
+    }).then(response => {
+      console.log(response);
+    }).catch(error => {
+      console.log(error);
+    });
   }
 
   _next = () => {
