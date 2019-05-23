@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -19,7 +20,7 @@ public class PerfilAccesibilidadController {
     private PerfilAccesibilidadRepository perfilAccesibilidadRepository;
 
     // Agregar Perfil Accesibilidad
-    @GetMapping(path="/add")
+    @RequestMapping(path="/add", method = RequestMethod.POST)
     public @ResponseBody String addNewPerfilAccesibilidad(@RequestParam String name) {
     
     PerfilAccesibilidad n = new PerfilAccesibilidad();
