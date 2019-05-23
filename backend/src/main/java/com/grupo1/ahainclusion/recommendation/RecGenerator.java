@@ -24,12 +24,13 @@ public class RecGenerator {
         Iterable<User> users = userRepository.findAll();
         List<Recommendation> recommendations = new ArrayList<>();
 
-        
+        Integer perc = 85;
         for(User u: users)
         {
             Recommendation rcm = new Recommendation();
             rcm.setUser(u);
-            rcm.setPercentage(90);
+            perc = perc - 3;
+            rcm.setPercentage(perc);
 
             recommendations.add(rcm);
 
@@ -37,7 +38,7 @@ public class RecGenerator {
         }
         System.out.println("----------------------------");
         
-        return recommendations;
+        return recommendations.subList(0, n);
     }
 
 
