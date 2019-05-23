@@ -203,7 +203,10 @@ class MasterForm extends Component {
       firstName: 'hola',
       lastName: 'chao',
       email: 'sadf@lol.com'
-    }).then(response => {
+    }/*,
+    {
+        'Content-Type': 'text/plain;charset=utf-8',
+    }*/).then(response => {
       console.log(response);
     }).catch(error => {
       console.log(error);
