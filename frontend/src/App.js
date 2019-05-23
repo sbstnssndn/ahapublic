@@ -23,7 +23,7 @@ function App() {
           inputStyle: 'input',
           inputConfig: {
             type: 'text',
-            placeholder: 'Juan Pérez',
+            placeholder: '12345678-0',
             name: 'rut',
             id: 'rut'
           },
@@ -270,85 +270,10 @@ function App() {
   [
     {
       id: 0,
-      title: 'Datos de usuario',
+      title: 'Datos de accesibilidad',
       inputs: {
-        rut: {
-          label: 'RUT',
-          inputStyle: 'input',
-          inputConfig: {
-            type: 'text',
-            placeholder: 'Juan Pérez',
-            name: 'rut',
-            id: 'rut'
-          },
-          value: ''
-        },
-        firstName: {
-          label: 'Primer nombre',
-          inputStyle: 'input',
-          inputConfig: {
-            type: 'text',
-            placeholder: 'Juan',
-            name: 'firstName',
-            id: 'firstName'
-          },
-          value: ''
-        },
-        lastName: {
-          label: 'Apellido',
-          inputStyle: 'input',
-          inputConfig: {
-            type: 'text',
-            placeholder: 'Pérez',
-            name: 'lastName',
-            id: 'lastName'
-          },
-          value: ''
-        },
-        location: {
-          label: 'Dirección',
-          inputStyle: 'input',
-          inputConfig: {
-            type: 'text',
-            placeholder: 'Av. Pajaritos 754, casa 64',
-            name: 'location',
-            id: 'location'
-          },
-          value: ''
-        },
-        email: {
-          label: 'Correo electrónico',
-          inputStyle: 'input',
-          inputConfig: {
-            type: 'email',
-            placeholder: 'juan.perez@gmail.com',
-            name: 'email',
-            id: 'email'
-          },
-          value: ''
-        }
-      }
-    },
-    {
-      id: 1,
-      title: 'Datos de discapacidad',
-      inputs: {
-        credencial: {
-          label: '¿Tiene credencial de discapacidad?',
-          inputStyle: 'select',
-          inputConfig: {
-            name: 'credencial',
-            id: 'credencial',
-            options: [
-              { value: '', displayValue: 'Seleccione...', disabled: true },
-              { value: 'si', displayValue: 'Si' },
-              { value: 'no', displayValue: 'No' }
-            ]
-          },
-          value: ''
-        },
         sillaRuedas: {
-          label: '¿Utiliza silla de ruedas?',
+          label: '¿Tiene acceso para silla de ruedas?',
           inputStyle: 'select',
           inputConfig: {
             name: 'sillaRuedas',
@@ -362,7 +287,7 @@ function App() {
           value: ''
         },
         dAuditiva: {
-          label: 'Grado de discapacidad auditiva',
+          label: 'Capacidad auditiva requerida',
           inputStyle: 'select',
           inputConfig: {
             name: 'dAuditiva',
@@ -379,7 +304,7 @@ function App() {
           value: ''
         },
         dFisica: {
-          label: 'Grado de discapacidad física',
+          label: 'Capacidad física requerida',
           inputStyle: 'select',
           inputConfig: {
             name: 'dFisica',
@@ -396,7 +321,7 @@ function App() {
           value: ''
         },
         dIntelectual: {
-          label: 'Grado de discapacidad intelectual',
+          label: 'Capacidad intelectual requerida',
           inputStyle: 'select',
           inputConfig: {
             name: 'dIntelectual',
@@ -413,7 +338,7 @@ function App() {
           value: ''
         },
         dPsiquica: {
-          label: 'Grado de discapacidad psíquica',
+          label: 'Capacidad psíquica requerida',
           inputStyle: 'select',
           inputConfig: {
             name: 'dPsiquica',
@@ -430,7 +355,7 @@ function App() {
           value: ''
         },
         dVisual: {
-          label: 'Grado de discapacidad visual',
+          label: 'Capacidad visual requerida',
           inputStyle: 'select',
           inputConfig: {
             name: 'dVisual',
@@ -449,9 +374,20 @@ function App() {
       }
     },
     {
-      id: 2,
+      id: 1,
       title: 'Experiencia laboral',
       inputs: {
+        location: {
+          label: 'Lugar de trabajo',
+          inputStyle: 'input',
+          inputConfig: {
+            type: 'text',
+            placeholder: 'Av. Tobalaba 417, piso 2',
+            name: 'location',
+            id: 'location'
+          },
+          value: ''
+        },
         nivelEducacional: {
           label: 'Nivel educacional',
           inputStyle: 'select',
@@ -472,36 +408,52 @@ function App() {
           },
           value: ''
         },
-        firstName: {
-          label: 'Primer nombre',
-          inputStyle: 'input',
+        profesion: {
+          label: 'Profesión',
+          inputStyle: 'select',
           inputConfig: {
-            type: 'text',
-            placeholder: 'Juan',
-            name: 'firstName',
-            id: 'firstName'
+            name: 'profesion',
+            id: 'profesion',
+            options: [
+              { value: '', displayValue: 'Seleccione...', disabled: true },
+              { value: 'arquitecto', displayValue: 'Arquitecto' },
+              { value: 'ingeniero comercial', displayValue: 'Ingeniero Comercial' },
+              { value: 'ingeniero en informática', displayValue: 'Ingeniero en Informática' },
+              { value: 'abogado', displayValue: 'Abogado' },
+              { value: 'profesor', displayValue: 'Profesor' }
+            ]
           },
           value: ''
         },
-        lastName: {
-          label: 'Apellido',
-          inputStyle: 'input',
+        tiempoExperiencia: {
+          label: 'Experiencia laboral',
+          inputStyle: 'select',
           inputConfig: {
-            type: 'text',
-            placeholder: 'Pérez',
-            name: 'lastName',
-            id: 'lastName'
+            name: 'tiempoExperiencia',
+            id: 'tiempoExperiencia',
+            options: [
+              { value: '', displayValue: 'Seleccione...', disabled: true },
+              { value: '0', displayValue: 'Menos de un año' },
+              { value: '1', displayValue: 'Entre 1 y 2 años' },
+              { value: '3', displayValue: 'Más de 2 años' }
+            ]
           },
           value: ''
         },
-        location: {
-          label: 'Dirección',
-          inputStyle: 'input',
+        areaExperiencia: {
+          label: 'Experiencia laboral',
+          inputStyle: 'select',
           inputConfig: {
-            type: 'text',
-            placeholder: 'Av. Pajaritos 754, casa 64',
-            name: 'location',
-            id: 'location'
+            name: 'areaExperiencia',
+            id: 'areaExperiencia',
+            options: [
+              { value: '', displayValue: 'Seleccione...', disabled: true },
+              { value: 'finanzas', displayValue: 'Finanzas' },
+              { value: 'informatica', displayValue: 'Informática' },
+              { value: 'publicidad', displayValue: 'Publicidad' },
+              { value: 'contabilidad', displayValue: 'Contabilidad' },
+              { value: 'salud', displayValue: 'Salud' },
+            ]
           },
           value: ''
         },
