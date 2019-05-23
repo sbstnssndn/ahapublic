@@ -43,7 +43,7 @@ const Stage = (props) => {
 
   return (
     <React.Fragment>
-      <h2>Etapa actual {props.currentStage+1}/{props.totalStages}: {props.title}</h2>
+      <h2>{props.title}</h2>
       {fields}
     </React.Fragment>
   );

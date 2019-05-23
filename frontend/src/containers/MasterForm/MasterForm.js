@@ -177,7 +177,7 @@ class MasterForm extends Component {
     return (
       <React.Fragment>
         <div className="col">
-          <h1>Formulario de registro</h1>
+          <h1>Registro {this.props.type}</h1>
           <form onSubmit={this.handleSubmit}>
             {stages}
             <h2>Barra de progreso</h2>
