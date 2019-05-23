@@ -31,22 +31,22 @@ function App() {
           value: ''
         },
         firstName: {
-          label: 'Primer nombre',
+          label: 'Nombres',
           inputStyle: 'input',
           inputConfig: {
             type: 'text',
-            placeholder: 'Juan',
+            placeholder: 'Juan Alberto',
             name: 'firstName',
             id: 'firstName'
           },
           value: ''
         },
         lastName: {
-          label: 'Apellido',
+          label: 'Apellidos',
           inputStyle: 'input',
           inputConfig: {
             type: 'text',
-            placeholder: 'Pérez',
+            placeholder: 'Pérez Soto',
             name: 'lastName',
             id: 'lastName'
           },

@@ -26,10 +26,10 @@ const Toolbar = (props) => (
                     <Link to="/postulantes" className="nav-link">Postulantes</Link>
                 </li>
                 <li className="nav-item">
-                    <Link to="/empresas" className="nav-link">Empresas</Link>
+                    <Link to="/empresas" className="nav-link">Ingresar Oferta</Link>
                 </li>
                 <li className="nav-item">
-                    <Link to="/recomendaciones" className="nav-link">Ofertas publicadas</Link>
+                    <Link to="/recomendaciones" className="nav-link">Recomendaciones</Link>
                 </li>
                 <li className="nav-item">
                 <Link to="/" className="nav-link disabled" tabIndex="-1" aria-disabled="true">Panel</Link>
