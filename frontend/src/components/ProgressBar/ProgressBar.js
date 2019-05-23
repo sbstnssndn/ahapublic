@@ -2,7 +2,7 @@ import React from 'react';
 
 const ProgressBar = (props) => {
   return (
-    <p>progreso</p>
+    <React.Fragment></React.Fragment>
   );
 }
 

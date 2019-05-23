@@ -270,6 +270,34 @@ function App() {
   [
     {
       id: 0,
+      title: 'Datos empresa',
+      inputs: {
+        location: {
+          label: 'Ubicación',
+          inputStyle: 'input',
+          inputConfig: {
+            type: 'text',
+            placeholder: 'Av. Tobalaba 417, piso 2',
+            name: 'location',
+            id: 'location'
+          },
+          value: ''
+        },
+        cargo: {
+          label: 'Cargo',
+          inputStyle: 'input',
+          inputConfig: {
+            type: 'text',
+            placeholder: 'Desarrollador PHP Jr.',
+            name: 'cargo',
+            id: 'cargo'
+          },
+          value: ''
+        },
+      }
+    },
+    {
+      id: 1,
       title: 'Datos de accesibilidad',
       inputs: {
         sillaRuedas: {
@@ -374,20 +402,9 @@ function App() {
       }
     },
     {
-      id: 1,
+      id: 2,
       title: 'Experiencia laboral',
       inputs: {
-        location: {
-          label: 'Lugar de trabajo',
-          inputStyle: 'input',
-          inputConfig: {
-            type: 'text',
-            placeholder: 'Av. Tobalaba 417, piso 2',
-            name: 'location',
-            id: 'location'
-          },
-          value: ''
-        },
         nivelEducacional: {
           label: 'Nivel educacional',
           inputStyle: 'select',
@@ -441,7 +458,7 @@ function App() {
           value: ''
         },
         areaExperiencia: {
-          label: 'Experiencia laboral',
+          label: 'Área de experiencia',
           inputStyle: 'select',
           inputConfig: {
             name: 'areaExperiencia',
@@ -454,17 +471,6 @@ function App() {
               { value: 'contabilidad', displayValue: 'Contabilidad' },
               { value: 'salud', displayValue: 'Salud' },
             ]
-          },
-          value: ''
-        },
-        email: {
-          label: 'Correo electrónico',
-          inputStyle: 'input',
-          inputConfig: {
-            type: 'email',
-            placeholder: 'juan.perez@gmail.com',
-            name: 'email',
-            id: 'email'
           },
           value: ''
         }
@@ -483,10 +489,10 @@ function App() {
             <Switch>
               <Route path="/" exact component={Home} />
               <Route path="/postulantes" exact component={() => (
-                <MasterForm stages={stagesPostulante} type={"postulante"} />
+                <MasterForm stages={stagesPostulante} titulo={"Registro postulante"} />
               )}/>
               <Route path="/empresas" exact component={() => (
-                <MasterForm stages={stagesEmpresa} type={"empresa"} />
+                <MasterForm stages={stagesEmpresa} titulo={"Ingresar oferta"} />
               )}/>
             </Switch>
           </div>

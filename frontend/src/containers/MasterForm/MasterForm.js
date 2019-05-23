@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Stage from '../../components/Stage/Stage';
+import ProgressBar from '../../components/ProgressBar/ProgressBar';
 //import axios from 'axios';
 
 class MasterForm extends Component {
@@ -177,10 +178,10 @@ class MasterForm extends Component {
     return (
       <React.Fragment>
         <div className="col">
-          <h1>Registro {this.props.type}</h1>
+          <h1>{this.props.titulo}</h1>
           <form onSubmit={this.handleSubmit}>
             {stages}
-            <h2>Barra de progreso</h2>
+            <ProgressBar />
             { sendButton }
             { this.botonAnterior() }
             { this.botonSiguiente() }
