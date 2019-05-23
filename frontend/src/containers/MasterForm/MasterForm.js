@@ -82,6 +82,7 @@ class MasterForm extends Component {
       //console.log(error);
     });
     */
+    window.location.href = "http://localhost:3000/";
   }
   /* // PRUEBA GET: OK
   componentDidMount() {
