@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Stage from '../../components/Stage/Stage';
-import axios from 'axios';
+//import axios from 'axios';
 
 class MasterForm extends Component {
   
@@ -71,7 +71,7 @@ class MasterForm extends Component {
       },
       {
         id: 1,
-        title: 'Datos de postulación',
+        title: 'Datos de discapacidad',
         inputs: {
           credencial: {
             label: '¿Tiene credencial de discapacidad?',
@@ -135,6 +135,127 @@ class MasterForm extends Component {
             },
             value: ''
           },
+          dIntelectual: {
+            label: 'Grado de discapacidad intelectual',
+            inputStyle: 'select',
+            inputConfig: {
+              name: 'dIntelectual',
+              id: 'dIntelectual',
+              options: [
+                { value: '', displayValue: 'Seleccione...', disabled: true },
+                { value: '0', displayValue: '0%' },
+                { value: '25', displayValue: '25%' },
+                { value: '50', displayValue: '50%' },
+                { value: '75', displayValue: '75%' },
+                { value: '100', displayValue: '100%' },
+              ]
+            },
+            value: ''
+          },
+          dPsiquica: {
+            label: 'Grado de discapacidad psíquica',
+            inputStyle: 'select',
+            inputConfig: {
+              name: 'dPsiquica',
+              id: 'dPsiquica',
+              options: [
+                { value: '', displayValue: 'Seleccione...', disabled: true },
+                { value: '0', displayValue: '0%' },
+                { value: '25', displayValue: '25%' },
+                { value: '50', displayValue: '50%' },
+                { value: '75', displayValue: '75%' },
+                { value: '100', displayValue: '100%' },
+              ]
+            },
+            value: ''
+          },
+          dVisual: {
+            label: 'Grado de discapacidad visual',
+            inputStyle: 'select',
+            inputConfig: {
+              name: 'dVisual',
+              id: 'dVisual',
+              options: [
+                { value: '', displayValue: 'Seleccione...', disabled: true },
+                { value: '0', displayValue: '0%' },
+                { value: '25', displayValue: '25%' },
+                { value: '50', displayValue: '50%' },
+                { value: '75', displayValue: '75%' },
+                { value: '100', displayValue: '100%' },
+              ]
+            },
+            value: ''
+          }
+        }
+      },
+      {
+        id: 2,
+        title: 'Experiencia laboral',
+        inputs: {
+          nivelEducacional: {
+            label: 'Nivel educacional',
+            inputStyle: 'select',
+            inputConfig: {
+              name: 'nivelEducacional',
+              id: 'nivelEducacional',
+              options: [
+                { value: '', displayValue: 'Seleccione...', disabled: true },
+                { value: 'basica incompleta', displayValue: 'Básica incompleta' },
+                { value: 'basica completa', displayValue: 'Básica completa' },
+                { value: 'media incompleta', displayValue: 'Media incompleta' },
+                { value: 'media completa', displayValue: 'Media completa' },
+                { value: 'técnica incompleta', displayValue: 'Técnica incompleta' },
+                { value: 'técnica completa', displayValue: 'Técnica completa' },
+                { value: 'superior incompleta', displayValue: 'Superior incompleta' },
+                { value: 'superior completa', displayValue: 'Superior completa' },
+              ]
+            },
+            value: ''
+          },
+          firstName: {
+            label: 'Primer nombre',
+            inputStyle: 'input',
+            inputConfig: {
+              type: 'text',
+              placeholder: 'Juan',
+              name: 'firstName',
+              id: 'firstName'
+            },
+            value: ''
+          },
+          lastName: {
+            label: 'Apellido',
+            inputStyle: 'input',
+            inputConfig: {
+              type: 'text',
+              placeholder: 'Pérez',
+              name: 'lastName',
+              id: 'lastName'
+            },
+            value: ''
+          },
+          location: {
+            label: 'Dirección',
+            inputStyle: 'input',
+            inputConfig: {
+              type: 'text',
+              placeholder: 'Av. Pajaritos 754, casa 64',
+              name: 'location',
+              id: 'location'
+            },
+            value: ''
+          },
+          email: {
+            label: 'Correo electrónico',
+            inputStyle: 'input',
+            inputConfig: {
+              type: 'email',
+              placeholder: 'juan.perez@gmail.com',
+              name: 'email',
+              id: 'email'
+            },
+            value: ''
+          }
         }
       }
     ]
@@ -197,22 +318,29 @@ class MasterForm extends Component {
       }
     }
     console.log(formData);
-    
+    /*
     axios.post('http://localhost:8080/api/user/add', {
       rut: 'asdf',
       firstName: 'hola',
       lastName: 'chao',
       email: 'sadf@lol.com'
-    }/*,
-    {
-        'Content-Type': 'text/plain;charset=utf-8',
-    }*/).then(response => {
+    }).then(response => {
       console.log(response);
     }).catch(error => {
-      console.log(error);
+      //console.log(error);
+    });
+    */
+  }
+  /* // PRUEBA GET: OK
+  componentDidMount() {
+    axios.get('http://localhost:8080/api/user/all')
+    .then(response => {
+      console.log(response);
+    }).catch(error => {
+      //console.log(error);
     });
   }
-
+  */
   _next = () => {
     let currentStage = this.state.currentStage;
     let lastStage = this.state.totalStages - 1;
@@ -283,20 +411,23 @@ class MasterForm extends Component {
 
     let sendButton = null;
     if (this.state.currentStage === this.state.totalStages - 1) {
-      sendButton = <input type="submit" value="Guardar datos" className="btn btn-success btn-lg" />;
+      sendButton = (
+        <div className="pb-2">
+          <input type="submit" value="Guardar datos" className="btn btn-success btn-lg btn-block" />
+        </div>
+      )
     }
 
     return (
       <React.Fragment>
         <div className="col">
           <h1>Formulario de registro</h1>
-          <h2>Stepper. Etapa actual: {this.state.currentStage+1}</h2>
           <form onSubmit={this.handleSubmit}>
             {stages}
             <h2>Barra de progreso</h2>
+            { sendButton }
             { this.botonAnterior() }
             { this.botonSiguiente() }
-            { sendButton }
           </form>
         </div>
       </React.Fragment>
