@@ -67,6 +67,8 @@ class MasterForm extends Component {
         
       }
     }
+    alert("Datos ingresados!");
+    
     console.log(formData);
     /*
     axios.post('http://localhost:8080/api/user/add', {

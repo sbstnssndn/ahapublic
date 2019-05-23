@@ -7,6 +7,7 @@ import Footer from './components/Footer/Footer';
 import SideMenu from './components/SideMenu/SideMenu';
 import  { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Home from './containers/Home/Home';
+import Recomendaciones from './containers/Recomendaciones/Recomendaciones';
 
 // import preguntasPostulante from './assets/js/preguntas-postulante.js
 
@@ -218,47 +219,52 @@ function App() {
           },
           value: ''
         },
-        firstName: {
-          label: 'Primer nombre',
-          inputStyle: 'input',
+        profesion: {
+          label: 'Profesión',
+          inputStyle: 'select',
           inputConfig: {
-            type: 'text',
-            placeholder: 'Juan',
-            name: 'firstName',
-            id: 'firstName'
+            name: 'profesion',
+            id: 'profesion',
+            options: [
+              { value: '', displayValue: 'Seleccione...', disabled: true },
+              { value: 'arquitecto', displayValue: 'Arquitecto' },
+              { value: 'ingeniero comercial', displayValue: 'Ingeniero Comercial' },
+              { value: 'ingeniero en informática', displayValue: 'Ingeniero en Informática' },
+              { value: 'abogado', displayValue: 'Abogado' },
+              { value: 'profesor', displayValue: 'Profesor' }
+            ]
           },
           value: ''
         },
-        lastName: {
-          label: 'Apellido',
-          inputStyle: 'input',
+        tiempoExperiencia: {
+          label: 'Experiencia laboral (tiempo)',
+          inputStyle: 'select',
           inputConfig: {
-            type: 'text',
-            placeholder: 'Pérez',
-            name: 'lastName',
-            id: 'lastName'
+            name: 'tiempoExperiencia',
+            id: 'tiempoExperiencia',
+            options: [
+              { value: '', displayValue: 'Seleccione...', disabled: true },
+              { value: '0', displayValue: 'Menos de un año' },
+              { value: '1', displayValue: 'Entre 1 y 2 años' },
+              { value: '3', displayValue: 'Más de 2 años' }
+            ]
           },
           value: ''
         },
-        location: {
-          label: 'Dirección',
-          inputStyle: 'input',
+        areaExperiencia: {
+          label: 'Área de experiencia',
+          inputStyle: 'select',
           inputConfig: {
-            type: 'text',
-            placeholder: 'Av. Pajaritos 754, casa 64',
-            name: 'location',
-            id: 'location'
-          },
-          value: ''
-        },
-        email: {
-          label: 'Correo electrónico',
-          inputStyle: 'input',
-          inputConfig: {
-            type: 'email',
-            placeholder: 'juan.perez@gmail.com',
-            name: 'email',
-            id: 'email'
+            name: 'areaExperiencia',
+            id: 'areaExperiencia',
+            options: [
+              { value: '', displayValue: 'Seleccione...', disabled: true },
+              { value: 'finanzas', displayValue: 'Finanzas' },
+              { value: 'informatica', displayValue: 'Informática' },
+              { value: 'publicidad', displayValue: 'Publicidad' },
+              { value: 'contabilidad', displayValue: 'Contabilidad' },
+              { value: 'salud', displayValue: 'Salud' },
+            ]
           },
           value: ''
         }
@@ -443,7 +449,7 @@ function App() {
           value: ''
         },
         tiempoExperiencia: {
-          label: 'Experiencia laboral',
+          label: 'Experiencia laboral (tiempo)',
           inputStyle: 'select',
           inputConfig: {
             name: 'tiempoExperiencia',
@@ -488,6 +494,7 @@ function App() {
             <SideMenu />
             <Switch>
               <Route path="/" exact component={Home} />
+              <Route path="/recomendaciones" exact component={Recomendaciones} />
               <Route path="/postulantes" exact component={() => (
                 <MasterForm stages={stagesPostulante} titulo={"Registro postulante"} />
               )}/>
