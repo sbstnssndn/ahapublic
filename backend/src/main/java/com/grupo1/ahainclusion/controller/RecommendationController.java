@@ -10,8 +10,8 @@ import com.grupo1.ahainclusion.repository.OfertaRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -28,12 +28,10 @@ public class RecommendationController {
 
     // Obtener Recomendaciones
     @GetMapping(path="/get")
-    public @ResponseBody Iterable<Recommendation> getRecommendations(@RequestParam Integer idOferta,
-                                                                     @RequestParam Integer n) {
+    public @ResponseBody Iterable<Recommendation> getRecommendations(@RequestBody Oferta oferta) {
         List<Recommendation> recommendations = new ArrayList<>();
-        Oferta oferta = ofertaRepository.findById(idOferta).get();
 
-        recommendations = recgen.generate(oferta, n);
+        recommendations = recgen.generate(oferta, 5);
 
         return recommendations;
     }
