@@ -7,10 +7,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+
 
 @Controller
 @RequestMapping(path="/user")
@@ -21,18 +24,9 @@ public class UserController {
 
     // Agregar Usuario
     @RequestMapping(path="/add", method = RequestMethod.POST)
-    public @ResponseBody String addNewUser (@RequestParam String rut,
-                                            @RequestParam String firstName,
-                                            @RequestParam String lastName,
-                                            @RequestParam String email) {
-    
-    User n = new User();
-    n.setRut(rut);
-    n.setFirstName(firstName);
-    n.setLastName(lastName);
-    n.setEmail(email);
+    public @ResponseBody String addNewUser (@RequestBody User usr) {
 
-    userRepository.save(n);
+    userRepository.save(usr);
 
     return "Usuario Guardado";
     }
