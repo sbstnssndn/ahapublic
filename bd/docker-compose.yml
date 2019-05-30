@@ -11,11 +11,11 @@ services:
       MYSQL_ROOT_PASSWORD: 'root'
     ports:
       # <Port exposed> : < MySQL Port running inside container>
-      - '3306:3306'
+      - '4406:3306'
     expose:
-      # Opens port 3306 on the container
+      # Opens port 3356 on the container
       - '3306'
     volumes:
-      - ahainclusion-db:/var/lib/mysql
+      - ahainclusion-db:/var/lib/mysql3
 volumes:
   ahainclusion-db:
