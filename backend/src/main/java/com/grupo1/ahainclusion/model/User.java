@@ -15,15 +15,21 @@ public class User {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
-	private String rut;
-	private String firstName;
-	private String lastName;
 	private String email;
 	private boolean enabled;
 
 	@ManyToMany
 	@JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
 	private Collection<Role> roles;
+
+	@OneToOne
+	private PerfilCandidato perfilCandidato;
+
+	@OneToOne
+	private PerfilAHA perfilAHA;
+
+	@OneToOne
+	private PerfilEmpresa perfilEmpresa;
 
 	@OneToOne
 	private PerfilDiscapacidad perfilDiscapacidad;
@@ -33,6 +39,30 @@ public class User {
 
 	public Integer getId() {
 		return id;
+	}
+
+	public PerfilEmpresa getPerfilEmpresa() {
+		return perfilEmpresa;
+	}
+
+	public void setPerfilEmpresa(PerfilEmpresa perfilEmpresa) {
+		this.perfilEmpresa = perfilEmpresa;
+	}
+
+	public PerfilAHA getPerfilAHA() {
+		return perfilAHA;
+	}
+
+	public void setPerfilAHA(PerfilAHA perfilAHA) {
+		this.perfilAHA = perfilAHA;
+	}
+
+	public PerfilCandidato getPerfilCandidato() {
+		return perfilCandidato;
+	}
+
+	public void setPerfilCandidato(PerfilCandidato perfilCandidato) {
+		this.perfilCandidato = perfilCandidato;
 	}
 
 	public PerfilAccesibilidad getPerfilAccesibilidad() {
@@ -49,30 +79,6 @@ public class User {
 
 	public void setPerfilDiscapacidad(PerfilDiscapacidad perfilDiscapacidad) {
 		this.perfilDiscapacidad = perfilDiscapacidad;
-	}
-
-	public String getRut() {
-		return rut;
-	}
-
-	public void setRut(String rut) {
-		this.rut = rut;
-	}
-
-	public String getFirstName() {
-		return firstName;
-	}
-
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-
-	public String getLastName() {
-		return lastName;
-	}
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
 	}
 
 	public void setId(Integer id) {
