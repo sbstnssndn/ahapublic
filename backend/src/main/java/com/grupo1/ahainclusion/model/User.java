@@ -1,6 +1,8 @@
 package com.grupo1.ahainclusion.model;
 
 import java.util.Collection;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -22,19 +24,19 @@ public class User {
 	@JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
 	private Collection<Role> roles;
 
-	@OneToOne
+	@OneToOne(cascade = {CascadeType.ALL})
 	private PerfilCandidato perfilCandidato;
 
-	@OneToOne
+	@OneToOne(cascade = {CascadeType.ALL})
 	private PerfilAHA perfilAHA;
 
-	@OneToOne
+	@OneToOne(cascade = {CascadeType.ALL})
 	private PerfilEmpresa perfilEmpresa;
 
-	@OneToOne
+	@OneToOne(cascade = {CascadeType.ALL})
 	private PerfilDiscapacidad perfilDiscapacidad;
 
-	@OneToOne
+	@OneToOne(cascade = {CascadeType.ALL})
 	private PerfilAccesibilidad perfilAccesibilidad;
 
 	public Integer getId() {

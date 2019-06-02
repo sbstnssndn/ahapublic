@@ -10,12 +10,12 @@ import javax.transaction.Transactional;
 
 import com.grupo1.ahainclusion.model.Oferta;
 import com.grupo1.ahainclusion.model.PerfilAccesibilidad;
+import com.grupo1.ahainclusion.model.PerfilCandidato;
+import com.grupo1.ahainclusion.model.PerfilEmpresa;
 import com.grupo1.ahainclusion.model.Privilege;
 import com.grupo1.ahainclusion.model.Role;
 import com.grupo1.ahainclusion.model.User;
 import com.grupo1.ahainclusion.repository.OfertaRepository;
-import com.grupo1.ahainclusion.repository.PerfilAccesibilidadRepository;
-import com.grupo1.ahainclusion.repository.PerfilDiscapacidadRepository;
 import com.grupo1.ahainclusion.repository.PrivilegeRepository;
 import com.grupo1.ahainclusion.repository.RoleRepository;
 import com.grupo1.ahainclusion.repository.UserRepository;
@@ -43,12 +43,6 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
 
   @Autowired
   private PrivilegeRepository privilegeRepository;
-
-  @Autowired
-  private PerfilAccesibilidadRepository perfilAccesibilidadRepository;
-
-  @Autowired
-  private PerfilDiscapacidadRepository perfilDiscapacidadRepository;
 
   @Autowired
   private OfertaRepository ofertaRepository;
@@ -93,22 +87,27 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
 
     PerfilAccesibilidad perfilA1 = new PerfilAccesibilidad();
     perfilA1.setName("Perfil Líder Ñuñoa");
-    perfilAccesibilidadRepository.save(perfilA1);
 
     User empresa2 = new User();
     PerfilAccesibilidad perfilA2 = new PerfilAccesibilidad();
     perfilA2.setName("Perfil Ripley Santiago Centro");
-    perfilAccesibilidadRepository.save(perfilA2);
 
-    empresa1.setFirstName("Líder");
-    empresa1.setLastName("");
+    
+    PerfilEmpresa pEmpresa1 = new PerfilEmpresa();
+    pEmpresa1.setNameEmpresa("Líder");
+    //pEmpresa1.setRutEmpresa("");
+
+    empresa1.setPerfilEmpresa(pEmpresa1);
     empresa1.setEmail("contacto@lider.cl");
     empresa1.setRoles(Arrays.asList(empresaRole));
     empresa1.setPerfilAccesibilidad(perfilA1);
     empresa1.setEnabled(true);
 
-    empresa2.setFirstName("Ripley");
-    empresa2.setLastName("");
+    PerfilEmpresa pEmpresa2 = new PerfilEmpresa();
+    pEmpresa2.setNameEmpresa("Ripley");
+    //pEmpresa2.setRutEmpresa("");
+
+    empresa2.setPerfilEmpresa(pEmpresa2);
     empresa2.setEmail("contacto@ripley.cl");
     empresa2.setRoles(Arrays.asList(empresaRole));
     empresa2.setPerfilAccesibilidad(perfilA2);
@@ -190,9 +189,15 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
 
       User usr = new User();
 
-      usr.setFirstName(firstName);
-      usr.setLastName(lastName);
+      PerfilCandidato pCandidato = new PerfilCandidato();
+      pCandidato.setFirstName(firstName);
+      pCandidato.setLastName(lastName);
+      //pCandidato.setRut("");
+
+
       usr.setEmail(email);
+      //usr.setPassword("");
+      usr.setPerfilCandidato(pCandidato);
       usr.setRoles(Arrays.asList(role));
       usr.setEnabled(true);
 
