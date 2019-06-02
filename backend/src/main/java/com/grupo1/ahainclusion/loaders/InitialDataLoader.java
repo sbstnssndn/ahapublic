@@ -88,10 +88,22 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
 
     PerfilAccesibilidad perfilA1 = new PerfilAccesibilidad();
     perfilA1.setName("Perfil Líder Ñuñoa");
+    perfilA1.setAccesoSilla(true);
+    perfilA1.setcAuditiva(90);
+    perfilA1.setcFisica(80);
+    perfilA1.setcIntelectual(80);
+    perfilA1.setcPsiquica(70);
+    perfilA1.setcVisual(60);
 
     User empresa2 = new User();
     PerfilAccesibilidad perfilA2 = new PerfilAccesibilidad();
     perfilA2.setName("Perfil Ripley Santiago Centro");
+    perfilA2.setAccesoSilla(false);
+    perfilA2.setcAuditiva(75);
+    perfilA2.setcFisica(100);
+    perfilA2.setcIntelectual(75);
+    perfilA2.setcPsiquica(75);
+    perfilA2.setcVisual(75);
 
     
     PerfilEmpresa pEmpresa1 = new PerfilEmpresa();
