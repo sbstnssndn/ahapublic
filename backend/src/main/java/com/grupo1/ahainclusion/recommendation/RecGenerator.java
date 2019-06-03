@@ -34,7 +34,7 @@ public class RecGenerator {
 
             recommendations.add(rcm);
 
-            System.out.println("Usuario: " +rcm.getUser().getFirstName() +" "+"Porcentaje: "+rcm.getPercentage());
+            System.out.println("Usuario: " +rcm.getUser().getPerfilCandidato().getFirstName() +" "+"Porcentaje: "+rcm.getPercentage());
         }
         System.out.println("----------------------------");
         

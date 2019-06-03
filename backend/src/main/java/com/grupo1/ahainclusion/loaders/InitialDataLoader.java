@@ -4,18 +4,21 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 import javax.transaction.Transactional;
 
 import com.grupo1.ahainclusion.model.Oferta;
 import com.grupo1.ahainclusion.model.PerfilAccesibilidad;
+import com.grupo1.ahainclusion.model.PerfilCandidato;
+import com.grupo1.ahainclusion.model.PerfilDiscapacidad;
+import com.grupo1.ahainclusion.model.PerfilEmpresa;
 import com.grupo1.ahainclusion.model.Privilege;
 import com.grupo1.ahainclusion.model.Role;
 import com.grupo1.ahainclusion.model.User;
 import com.grupo1.ahainclusion.repository.OfertaRepository;
 import com.grupo1.ahainclusion.repository.PerfilAccesibilidadRepository;
-import com.grupo1.ahainclusion.repository.PerfilDiscapacidadRepository;
 import com.grupo1.ahainclusion.repository.PrivilegeRepository;
 import com.grupo1.ahainclusion.repository.RoleRepository;
 import com.grupo1.ahainclusion.repository.UserRepository;
@@ -45,13 +48,10 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
   private PrivilegeRepository privilegeRepository;
 
   @Autowired
-  private PerfilAccesibilidadRepository perfilAccesibilidadRepository;
-
-  @Autowired
-  private PerfilDiscapacidadRepository perfilDiscapacidadRepository;
-
-  @Autowired
   private OfertaRepository ofertaRepository;
+
+  @Autowired
+  private PerfilAccesibilidadRepository perfilAccesibilidadRepository;
 
   @Override
   @Transactional
@@ -93,25 +93,42 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
 
     PerfilAccesibilidad perfilA1 = new PerfilAccesibilidad();
     perfilA1.setName("Perfil Líder Ñuñoa");
-    perfilAccesibilidadRepository.save(perfilA1);
+    perfilA1.setAccesoSilla(true);
+    perfilA1.setcAuditiva(90);
+    perfilA1.setcFisica(80);
+    perfilA1.setcIntelectual(80);
+    perfilA1.setcPsiquica(70);
+    perfilA1.setcVisual(60);
 
     User empresa2 = new User();
     PerfilAccesibilidad perfilA2 = new PerfilAccesibilidad();
     perfilA2.setName("Perfil Ripley Santiago Centro");
-    perfilAccesibilidadRepository.save(perfilA2);
+    perfilA2.setAccesoSilla(false);
+    perfilA2.setcAuditiva(75);
+    perfilA2.setcFisica(100);
+    perfilA2.setcIntelectual(75);
+    perfilA2.setcPsiquica(75);
+    perfilA2.setcVisual(75);
 
-    empresa1.setFirstName("Líder");
-    empresa1.setLastName("");
+    
+    PerfilEmpresa pEmpresa1 = new PerfilEmpresa();
+    pEmpresa1.setNameEmpresa("Líder");
+    //pEmpresa1.setRutEmpresa("");
+
+    empresa1.setPerfilEmpresa(pEmpresa1);
     empresa1.setEmail("contacto@lider.cl");
     empresa1.setRoles(Arrays.asList(empresaRole));
-    empresa1.setPerfilAccesibilidad(perfilA1);
+    empresa1.setPerfilesAccesibilidad(Arrays.asList(perfilA1));
     empresa1.setEnabled(true);
 
-    empresa2.setFirstName("Ripley");
-    empresa2.setLastName("");
+    PerfilEmpresa pEmpresa2 = new PerfilEmpresa();
+    pEmpresa2.setNameEmpresa("Ripley");
+    //pEmpresa2.setRutEmpresa("");
+
+    empresa2.setPerfilEmpresa(pEmpresa2);
     empresa2.setEmail("contacto@ripley.cl");
     empresa2.setRoles(Arrays.asList(empresaRole));
-    empresa2.setPerfilAccesibilidad(perfilA2);
+    empresa2.setPerfilesAccesibilidad(Arrays.asList(perfilA2));
     empresa2.setEnabled(true);
     
 
@@ -127,17 +144,17 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
     oferta1.setName("Reponedor");
     oferta1.setDescription("Reponedor de productos");
     oferta1.setUser(empresa1);
-    oferta1.setPerfilAccesibilidad(empresa1.getPerfilAccesibilidad());
+    oferta1.setPerfilAccesibilidad(perfilA1);
 
     oferta2.setName("Guardia");
     oferta2.setDescription("Guardia de seguridad");
     oferta2.setUser(empresa1);
-    oferta2.setPerfilAccesibilidad(empresa1.getPerfilAccesibilidad());
+    oferta2.setPerfilAccesibilidad(perfilA1);
 
     oferta3.setName("Vendedor");
     oferta3.setDescription("Vendedor departamento de tecnología");
     oferta3.setUser(empresa2);
-    oferta3.setPerfilAccesibilidad(empresa2.getPerfilAccesibilidad());
+    oferta3.setPerfilAccesibilidad(perfilA2);
 
     ofertaRepository.save(oferta1);
     ofertaRepository.save(oferta2);
@@ -190,11 +207,28 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
 
       User usr = new User();
 
-      usr.setFirstName(firstName);
-      usr.setLastName(lastName);
+      PerfilCandidato pCandidato = new PerfilCandidato();
+      pCandidato.setFirstName(firstName);
+      pCandidato.setLastName(lastName);
+      //pCandidato.setRut("");
+
+
       usr.setEmail(email);
+      //usr.setPassword("");
+      usr.setPerfilCandidato(pCandidato);
       usr.setRoles(Arrays.asList(role));
       usr.setEnabled(true);
+
+      PerfilDiscapacidad pDiscapacidad = new PerfilDiscapacidad();
+      pDiscapacidad.setCredencial(false);
+      pDiscapacidad.setSillaDeRuedas(false);
+      pDiscapacidad.setdAuditiva(50);
+      pDiscapacidad.setdFisica(50);
+      pDiscapacidad.setdIntelectual(50);
+      pDiscapacidad.setdPsiquica(50);
+      pDiscapacidad.setdVisual(50);
+
+      usr.setPerfilDiscapacidad(pDiscapacidad);
 
       users.add(usr);
 

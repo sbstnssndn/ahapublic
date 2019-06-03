@@ -6,6 +6,7 @@ import com.grupo1.ahainclusion.repository.PerfilAccesibilidadRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,12 +21,9 @@ public class PerfilAccesibilidadController {
 
     // Agregar Perfil Accesibilidad
     @RequestMapping(path="/add", method = RequestMethod.POST)
-    public @ResponseBody String addNewPerfilAccesibilidad(@RequestParam String name) {
+    public @ResponseBody String addNewPerfilAccesibilidad(@RequestBody PerfilAccesibilidad perfilAccesibilidad) {
     
-    PerfilAccesibilidad n = new PerfilAccesibilidad();
-    n.setName(name);
-
-    perfilAccesibilidadRepository.save(n);
+    perfilAccesibilidadRepository.save(perfilAccesibilidad);
 
     return "Perfil Accesibilidad Guardado";
     }
