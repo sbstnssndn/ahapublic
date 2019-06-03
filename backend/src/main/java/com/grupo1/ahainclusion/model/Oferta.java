@@ -25,6 +25,14 @@ public class Oferta {
         return description;
     }
 
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
     public PerfilAccesibilidad getPerfilAccesibilidad() {
         return perfilAccesibilidad;
     }

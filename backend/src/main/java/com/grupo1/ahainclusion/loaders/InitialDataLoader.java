@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -17,6 +18,7 @@ import com.grupo1.ahainclusion.model.Privilege;
 import com.grupo1.ahainclusion.model.Role;
 import com.grupo1.ahainclusion.model.User;
 import com.grupo1.ahainclusion.repository.OfertaRepository;
+import com.grupo1.ahainclusion.repository.PerfilAccesibilidadRepository;
 import com.grupo1.ahainclusion.repository.PrivilegeRepository;
 import com.grupo1.ahainclusion.repository.RoleRepository;
 import com.grupo1.ahainclusion.repository.UserRepository;
@@ -47,6 +49,9 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
 
   @Autowired
   private OfertaRepository ofertaRepository;
+
+  @Autowired
+  private PerfilAccesibilidadRepository perfilAccesibilidadRepository;
 
   @Override
   @Transactional
@@ -113,7 +118,7 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
     empresa1.setPerfilEmpresa(pEmpresa1);
     empresa1.setEmail("contacto@lider.cl");
     empresa1.setRoles(Arrays.asList(empresaRole));
-    empresa1.setPerfilAccesibilidad(perfilA1);
+    empresa1.setPerfilesAccesibilidad(Arrays.asList(perfilA1));
     empresa1.setEnabled(true);
 
     PerfilEmpresa pEmpresa2 = new PerfilEmpresa();
@@ -123,7 +128,7 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
     empresa2.setPerfilEmpresa(pEmpresa2);
     empresa2.setEmail("contacto@ripley.cl");
     empresa2.setRoles(Arrays.asList(empresaRole));
-    empresa2.setPerfilAccesibilidad(perfilA2);
+    empresa2.setPerfilesAccesibilidad(Arrays.asList(perfilA2));
     empresa2.setEnabled(true);
     
 
@@ -139,17 +144,17 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
     oferta1.setName("Reponedor");
     oferta1.setDescription("Reponedor de productos");
     oferta1.setUser(empresa1);
-    oferta1.setPerfilAccesibilidad(empresa1.getPerfilAccesibilidad());
+    oferta1.setPerfilAccesibilidad(perfilA1);
 
     oferta2.setName("Guardia");
     oferta2.setDescription("Guardia de seguridad");
     oferta2.setUser(empresa1);
-    oferta2.setPerfilAccesibilidad(empresa1.getPerfilAccesibilidad());
+    oferta2.setPerfilAccesibilidad(perfilA1);
 
     oferta3.setName("Vendedor");
     oferta3.setDescription("Vendedor departamento de tecnología");
     oferta3.setUser(empresa2);
-    oferta3.setPerfilAccesibilidad(empresa2.getPerfilAccesibilidad());
+    oferta3.setPerfilAccesibilidad(perfilA2);
 
     ofertaRepository.save(oferta1);
     ofertaRepository.save(oferta2);

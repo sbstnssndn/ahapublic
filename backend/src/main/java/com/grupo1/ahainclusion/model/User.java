@@ -1,6 +1,8 @@
 package com.grupo1.ahainclusion.model;
 
 import java.util.Collection;
+import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -10,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 @Entity
@@ -36,11 +39,19 @@ public class User {
 	@OneToOne(cascade = {CascadeType.ALL})
 	private PerfilDiscapacidad perfilDiscapacidad;
 
-	@OneToOne(cascade = {CascadeType.ALL})
-	private PerfilAccesibilidad perfilAccesibilidad;
+	@OneToMany(cascade = {CascadeType.ALL})
+	private Collection<PerfilAccesibilidad> perfilesAccesibilidad;
 
 	public Integer getId() {
 		return id;
+	}
+
+	public Collection<PerfilAccesibilidad> getPerfilesAccesibilidad() {
+		return perfilesAccesibilidad;
+	}
+
+	public void setPerfilesAccesibilidad(Collection<PerfilAccesibilidad> perfilesAccesibilidad) {
+		this.perfilesAccesibilidad = perfilesAccesibilidad;
 	}
 
 	public PerfilEmpresa getPerfilEmpresa() {
@@ -65,14 +76,6 @@ public class User {
 
 	public void setPerfilCandidato(PerfilCandidato perfilCandidato) {
 		this.perfilCandidato = perfilCandidato;
-	}
-
-	public PerfilAccesibilidad getPerfilAccesibilidad() {
-		return perfilAccesibilidad;
-	}
-
-	public void setPerfilAccesibilidad(PerfilAccesibilidad perfilAccesibilidad) {
-		this.perfilAccesibilidad = perfilAccesibilidad;
 	}
 
 	public PerfilDiscapacidad getPerfilDiscapacidad() {
