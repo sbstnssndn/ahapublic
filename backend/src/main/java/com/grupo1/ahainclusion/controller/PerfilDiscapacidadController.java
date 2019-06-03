@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -21,27 +22,9 @@ public class PerfilDiscapacidadController {
 
     // Agregar Perfil Discapacidad
     @RequestMapping(path="/add", method = RequestMethod.POST)
-    public @ResponseBody String addNewPerfilDiscapacidad(@RequestParam String name,
-                                                         @RequestParam boolean credencial,
-                                                         @RequestParam boolean sillaRuedas,
-                                                         @RequestParam Integer dAuditiva,
-                                                         @RequestParam Integer dFisica,
-                                                         @RequestParam Integer dIntelectual,
-                                                         @RequestParam Integer dPsiquica,
-                                                         @RequestParam Integer dVisual) {
+    public @ResponseBody String addNewPerfilDiscapacidad(@RequestBody PerfilDiscapacidad perfilDiscapacidad) {
     
-    PerfilDiscapacidad n = new PerfilDiscapacidad();
-
-    n.setName(name);
-    n.setCredencial(credencial);
-    n.setSillaDeRuedas(sillaRuedas);
-    n.setdAuditiva(dAuditiva);
-    n.setdFisica(dFisica);
-    n.setdIntelectual(dIntelectual);
-    n.setdPsiquica(dPsiquica);
-    n.setdVisual(dVisual);
-
-    perfilDiscapacidadRepository.save(n);
+    perfilDiscapacidadRepository.save(perfilDiscapacidad);
 
     return "Perfil Discapacidad Guardado";
     }

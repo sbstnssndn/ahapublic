@@ -1,6 +1,10 @@
 package com.grupo1.ahainclusion.model;
 
 import java.util.Collection;
+import java.util.List;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -8,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 @Entity
@@ -15,9 +20,6 @@ public class User {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
-	private String rut;
-	private String firstName;
-	private String lastName;
 	private String email;
 	private boolean enabled;
 
@@ -25,22 +27,55 @@ public class User {
 	@JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
 	private Collection<Role> roles;
 
-	@OneToOne
+	@OneToOne(cascade = {CascadeType.ALL})
+	private PerfilCandidato perfilCandidato;
+
+	@OneToOne(cascade = {CascadeType.ALL})
+	private PerfilAHA perfilAHA;
+
+	@OneToOne(cascade = {CascadeType.ALL})
+	private PerfilEmpresa perfilEmpresa;
+
+	@OneToOne(cascade = {CascadeType.ALL})
 	private PerfilDiscapacidad perfilDiscapacidad;
 
-	@OneToOne
-	private PerfilAccesibilidad perfilAccesibilidad;
+	@OneToMany(cascade = {CascadeType.ALL})
+	private Collection<PerfilAccesibilidad> perfilesAccesibilidad;
 
 	public Integer getId() {
 		return id;
 	}
 
-	public PerfilAccesibilidad getPerfilAccesibilidad() {
-		return perfilAccesibilidad;
+	public Collection<PerfilAccesibilidad> getPerfilesAccesibilidad() {
+		return perfilesAccesibilidad;
 	}
 
-	public void setPerfilAccesibilidad(PerfilAccesibilidad perfilAccesibilidad) {
-		this.perfilAccesibilidad = perfilAccesibilidad;
+	public void setPerfilesAccesibilidad(Collection<PerfilAccesibilidad> perfilesAccesibilidad) {
+		this.perfilesAccesibilidad = perfilesAccesibilidad;
+	}
+
+	public PerfilEmpresa getPerfilEmpresa() {
+		return perfilEmpresa;
+	}
+
+	public void setPerfilEmpresa(PerfilEmpresa perfilEmpresa) {
+		this.perfilEmpresa = perfilEmpresa;
+	}
+
+	public PerfilAHA getPerfilAHA() {
+		return perfilAHA;
+	}
+
+	public void setPerfilAHA(PerfilAHA perfilAHA) {
+		this.perfilAHA = perfilAHA;
+	}
+
+	public PerfilCandidato getPerfilCandidato() {
+		return perfilCandidato;
+	}
+
+	public void setPerfilCandidato(PerfilCandidato perfilCandidato) {
+		this.perfilCandidato = perfilCandidato;
 	}
 
 	public PerfilDiscapacidad getPerfilDiscapacidad() {
@@ -49,30 +84,6 @@ public class User {
 
 	public void setPerfilDiscapacidad(PerfilDiscapacidad perfilDiscapacidad) {
 		this.perfilDiscapacidad = perfilDiscapacidad;
-	}
-
-	public String getRut() {
-		return rut;
-	}
-
-	public void setRut(String rut) {
-		this.rut = rut;
-	}
-
-	public String getFirstName() {
-		return firstName;
-	}
-
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-
-	public String getLastName() {
-		return lastName;
-	}
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
 	}
 
 	public void setId(Integer id) {
