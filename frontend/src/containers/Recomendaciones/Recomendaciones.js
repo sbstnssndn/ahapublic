@@ -8,8 +8,11 @@ class Recomendaciones extends Component {
   }
 
   componentDidMount () {
-    axios.get('http://localhost:8080/api/recommendation/get?idOferta=2&n=5')
-      .then(response => {
+    
+    //Ahora se requiere un objeto del tipo oferta para generar las recomendaciones
+
+    /*axios.get('http://localhost:8080/api/recommendation/get')
+    .then(response => {
         console.log(response);
         this.setState({
           usuarios: response.data
@@ -17,6 +20,10 @@ class Recomendaciones extends Component {
       }).catch(error => {
         console.log(error);
       });
+    */
+
+    console.log("Por implementar.");
+
   }
 
   render () {

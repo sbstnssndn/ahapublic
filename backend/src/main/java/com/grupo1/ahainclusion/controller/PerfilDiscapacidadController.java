@@ -20,6 +20,15 @@ public class PerfilDiscapacidadController {
     @Autowired
     private PerfilDiscapacidadRepository perfilDiscapacidadRepository;
 
+    // Objeto "en blanco" para un nuevo perfil de discapacidad
+    @RequestMapping(path="/new", method = RequestMethod.GET)
+    public @ResponseBody PerfilDiscapacidad NewPerfilDiscapacidad(){
+
+        PerfilDiscapacidad p = new PerfilDiscapacidad();
+
+        return p;
+    }
+
     // Agregar Perfil Discapacidad
     @RequestMapping(path="/add", method = RequestMethod.POST)
     public @ResponseBody String addNewPerfilDiscapacidad(@RequestBody PerfilDiscapacidad perfilDiscapacidad) {

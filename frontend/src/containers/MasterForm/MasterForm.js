@@ -77,20 +77,36 @@ class MasterForm extends Component {
     // 1 -> Formulario de Postulante
     if(this.props.tipoFormulario == 1){
 
-      console.log("Guardando dato postulante");
-
-      axios.post('http://localhost:8080/api/perfilDiscapacidad/add?name=' + formData.firstName + " " + formData.lastName 
-      + '&credencial=' + formData.credencial
-      + '&sillaRuedas=' + formData.sillaRuedas
-      + '&dAuditiva=' + formData.dAuditiva 
-      + '&dFisica=' + formData.dFisica
-      + '&dIntelectual=' + formData.dIntelectual
-      + '&dPsiquica=' + formData.dPsiquica
-      + '&dVisual=' + formData.dVisual, {
+      /* Nuevo objeto de perfil de discapacidad */
+      axios.get('http://localhost:8080/api/perfilDiscapacidad/new')
+      .then(response => {
         
+        console.log(response.data);
+        
+        /* Asignamos los valores del formulario al nuevo objeto*/
+        response.data.name = formData.firstName + " " + formData.lastName;
+        response.data.credencial = formData.credencial;
+        response.data.dAuditiva = formData.dAuditiva;
+        response.data.dFisica = formData.dFisica;
+        response.data.dIntelectual = formData.dIntelectual;
+        response.data.dPsiquica = formData.dPsiquica;
+        response.data.dVisual = formData.dVisual;
+        response.data.sillaDeRuedas = formData.sillaRuedas;
+        
+        console.log(response.data);
+
+        /* Guardamos el objeto actualizado con los datos del formulario */
+        axios.post('http://localhost:8080/api/perfilDiscapacidad/add', response.data)
+        .then(response => {
+          console.log("Guardado exitoso");
+        }).catch(error => {
+          console.log(error);
+        })
+
       }).catch(error => {
-        console.log("Error al guardar");
+          console.log(error);
       });
+
     }
 
     // 2 -> Formulario de Oferta
