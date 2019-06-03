@@ -55,16 +55,12 @@ class MasterForm extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault()
-    //const { email, username, password } = this.state
     
     const formData = [];
     for (let index in this.state.stages) {
       // para cada etapa, extraer los ids y values de los campos
-      //console.log('hola: ' + this.state.stages[index].inputs.nombre.value);
       for (let formElementIdentifier in this.state.stages[index].inputs) {
-        //console.log('chao: ' + stage.inputs[formElementIdentifier].value);
         formData[formElementIdentifier] = this.state.stages[index].inputs[formElementIdentifier].value;
-        
       }
     }
 
@@ -83,7 +79,7 @@ class MasterForm extends Component {
         
         console.log(response.data);
         
-        /* Asignamos los valores del formulario al nuevo objeto*/
+        /* Se asigna los valores del formulario al nuevo objeto*/
         response.data.name = formData.firstName + " " + formData.lastName;
         response.data.credencial = formData.credencial;
         response.data.dAuditiva = formData.dAuditiva;
@@ -95,10 +91,12 @@ class MasterForm extends Component {
         
         console.log(response.data);
 
-        /* Guardamos el objeto actualizado con los datos del formulario */
+        /* Se guarda el objeto actualizado con los datos del formulario */
         axios.post('http://localhost:8080/api/perfilDiscapacidad/add', response.data)
         .then(response => {
           console.log("Guardado exitoso");
+          /* Por ultimo se guarda los datos del usuario de la primera etapa del formulario */
+          /* Por implementar */
         }).catch(error => {
           console.log(error);
         })
@@ -112,7 +110,35 @@ class MasterForm extends Component {
     // 2 -> Formulario de Oferta
     else if(this.props.tipoFormulario == 2){
       console.log("Guardando dato oferta");
+      
+      /* Nuevo objeto de perfil de accesibilidad */
+      axios.get('http://localhost:8080/api/perfilAccesibilidad/new')
+      .then(response => {
+        
+        console.log(response.data);
+        
+        /* Se asigna los valores del formulario al nuevo objeto*/
+        response.data.name = formData.cargo;
+        response.data.accesoSilla = formData.sillaRuedas;
+        response.data.cAuditiva = formData.dAuditiva;
+        response.data.cFisica = formData.dFisica;
+        response.data.cIntelectual = formData.dIntelectual;
+        response.data.cPsiquica = formData.dPsiquica;
+        response.data.cVisual = formData.dVisual;
+        
+        console.log(response.data);
 
+        /* Se guarda el objeto actualizado con los datos del formulario */
+        axios.post('http://localhost:8080/api/perfilAccesibilidad/add', response.data)
+        .then(response => {
+          console.log("Guardado exitoso");
+        }).catch(error => {
+          console.log(error);
+        })
+
+      }).catch(error => {
+          console.log(error);
+      });
       
     }
 

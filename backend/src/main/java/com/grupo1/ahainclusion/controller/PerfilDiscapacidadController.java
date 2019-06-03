@@ -33,9 +33,9 @@ public class PerfilDiscapacidadController {
     @RequestMapping(path="/add", method = RequestMethod.POST)
     public @ResponseBody String addNewPerfilDiscapacidad(@RequestBody PerfilDiscapacidad perfilDiscapacidad) {
     
-    perfilDiscapacidadRepository.save(perfilDiscapacidad);
+        perfilDiscapacidadRepository.save(perfilDiscapacidad);
 
-    return "Perfil Discapacidad Guardado";
+        return "Perfil Discapacidad Guardado";
     }
 
     // Obtener Perfiles Discapacidad

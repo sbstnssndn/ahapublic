@@ -19,13 +19,22 @@ public class PerfilAccesibilidadController {
     @Autowired
     private PerfilAccesibilidadRepository perfilAccesibilidadRepository;
 
+    // Objeto "en blanco" para un nuevo perfil de accesibilidad
+    @RequestMapping(path="/new", method = RequestMethod.GET)
+    public @ResponseBody PerfilAccesibilidad NewPerfilDiscapacidad(){
+
+        PerfilAccesibilidad p = new PerfilAccesibilidad();
+
+        return p;
+    }
+
     // Agregar Perfil Accesibilidad
     @RequestMapping(path="/add", method = RequestMethod.POST)
     public @ResponseBody String addNewPerfilAccesibilidad(@RequestBody PerfilAccesibilidad perfilAccesibilidad) {
     
-    perfilAccesibilidadRepository.save(perfilAccesibilidad);
+        perfilAccesibilidadRepository.save(perfilAccesibilidad);
 
-    return "Perfil Accesibilidad Guardado";
+        return "Perfil Accesibilidad Guardado";
     }
 
     // Obtener Perfiles Accesibilidad
