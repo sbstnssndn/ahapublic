@@ -1,5 +1,6 @@
 package com.grupo1.ahainclusion.model;
 
+import java.util.Collection;
 import java.util.Date;
 
 import javax.persistence.CascadeType;
@@ -7,12 +8,19 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.grupo1.ahainclusion.model.candidato.Curso;
 import com.grupo1.ahainclusion.model.candidato.Direccion;
+import com.grupo1.ahainclusion.model.candidato.Titulo;
 
 
 @Entity
+@Table(name="perfil_candidato")
 public class PerfilCandidato {
     @Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -41,6 +49,16 @@ public class PerfilCandidato {
     // EDUCACIÓN
     // -----------------
     private Integer nivelEducacional; // 0: Ed. Especial ..... 9:Postgrado
+
+    @OneToMany(cascade = CascadeType.ALL)
+	@JoinColumn(name = "perfil_candidato_id")
+	@JsonManagedReference
+    private Collection<Titulo> titulos;
+    
+    @OneToMany(cascade = CascadeType.ALL)
+	@JoinColumn(name = "perfil_candidato_id")
+	@JsonManagedReference
+	private Collection<Curso> cursos;
 
 
     public String getFirstName() {
