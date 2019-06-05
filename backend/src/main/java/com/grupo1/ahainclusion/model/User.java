@@ -15,6 +15,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 public class User {
 	@Id
@@ -28,19 +30,21 @@ public class User {
 	@JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
 	private Collection<Role> roles;
 
-	@OneToOne(cascade = { CascadeType.ALL })
+	@OneToOne(cascade =  CascadeType.ALL )
 	private PerfilCandidato perfilCandidato;
 
-	@OneToOne(cascade = { CascadeType.ALL })
+	@OneToOne(cascade = CascadeType.ALL )
 	private PerfilAHA perfilAHA;
 
-	@OneToOne(cascade = { CascadeType.ALL })
+	@OneToOne(cascade = CascadeType.ALL )
 	private PerfilEmpresa perfilEmpresa;
 
-	@OneToOne(cascade = { CascadeType.ALL })
+	@OneToOne(cascade = CascadeType.ALL )
 	private PerfilDiscapacidad perfilDiscapacidad;
 
-	@OneToMany(cascade = { CascadeType.ALL })
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinColumn(name = "user_id")
+	@JsonManagedReference
 	private Collection<PerfilAccesibilidad> perfilesAccesibilidad;
 
 	public Integer getId() {
