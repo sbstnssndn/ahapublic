@@ -11,22 +11,27 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.grupo1.ahainclusion.model.PerfilCandidato;
 
 @Entity
-public class Curso {
+public class Experiencia {
     @Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
     private Integer id;
-    // Name: nombre del curso realizado.
-    private String name;
-    // Institución: nombre de la institución donde se realizo el curso.
-    private String institucion;
-    // Fechas: de inicio y termino del curso.
+
+    // Tipo: Tipo de experiencia
+    private String tipo;
+    // Empresa: Nombre de la empresa
+    private String empresa;
+    // Fechas: fecha inicio y fin de la experiencia
     private Date fechaInicio;
     private Date fechaFin;
-    
+
     // Perfil Candidato padre
     @ManyToOne
     @JsonBackReference
     private PerfilCandidato perfilCandidato;
+
+    public String getTipo() {
+        return tipo;
+    }
 
     public Date getFechaFin() {
         return fechaFin;
@@ -44,19 +49,18 @@ public class Curso {
         this.fechaInicio = fechaInicio;
     }
 
-    public String getInstitucion() {
-        return institucion;
+    public String getEmpresa() {
+        return empresa;
     }
 
-    public void setInstitucion(String institucion) {
-        this.institucion = institucion;
+    public void setEmpresa(String empresa) {
+        this.empresa = empresa;
     }
 
-    public String getName() {
-        return name;
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+
+
 }

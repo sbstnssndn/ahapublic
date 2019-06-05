@@ -7,7 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.grupo1.ahainclusion.model.User;
+import com.grupo1.ahainclusion.model.PerfilCandidato;
 
 @Entity
 public class Titulo {
@@ -20,10 +20,10 @@ public class Titulo {
     // Institucion: nombre de institucion donde se cursó.
     private String institucion;
 
-    // Usuario
+    // Perfil Candidato padre
     @ManyToOne
     @JsonBackReference
-    private User user;
+    private PerfilCandidato perfilCandidato;
 
     public String getName() {
         return name;
