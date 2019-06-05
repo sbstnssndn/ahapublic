@@ -2,7 +2,8 @@ import React from 'react';
 import './App.css';
 import MasterForm from './containers/MasterForm/MasterForm';
 import Layout from './components/Layout/Layout';
-import Toolbar from './components/Toolbar/Toolbar';
+//import Toolbar from './components/Toolbar/Toolbar';
+import ToolbarRB from './components/Toolbar/ToolbarRB';
 import Footer from './components/Footer/Footer';
 import SideMenu from './components/SideMenu/SideMenu';
 import  { BrowserRouter, Route, Switch } from 'react-router-dom';
@@ -614,7 +615,7 @@ function App() {
     <BrowserRouter>
       
       <Layout>
-        <Toolbar />
+        <ToolbarRB />
         <div className="container pt-2">
           <div className="row">
             <SideMenu />
