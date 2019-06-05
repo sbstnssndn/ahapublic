@@ -4,6 +4,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 public class PerfilAccesibilidad {
@@ -13,6 +16,10 @@ public class PerfilAccesibilidad {
 	private Integer id;
 
     private String name;
+
+    @ManyToOne
+    @JsonBackReference
+    private User user;
 
     // Importantes
     // private boolean credencial; Credencial es obligatoria siempre
@@ -27,6 +34,14 @@ public class PerfilAccesibilidad {
 
     public String getName() {
         return name;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public Integer getId() {
