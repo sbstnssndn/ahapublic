@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Stage from '../../components/Stage/Stage';
 import ProgressBar from '../../components/ProgressBar/ProgressBar';
+import Button from 'react-bootstrap/Button'
 import axios from 'axios';
 
 class MasterForm extends Component {
@@ -178,11 +179,9 @@ class MasterForm extends Component {
 
     if (currentStage !== firstStage){
         return (
-        <button 
-            className="btn btn-secondary" 
-            type="button" onClick={this._prev}>
+          <Button variant="secondary" onClick={this._prev}>
           Volver
-        </button>
+          </Button>
         );
     }
     return null;
@@ -194,11 +193,9 @@ class MasterForm extends Component {
 
       if (currentStage < lastStage){
           return (
-          <button 
-              className="btn btn-primary float-right" 
-              type="button" onClick={this._next}>
+          <Button variant="primary" onClick={this._next}> 
           Siguiente
-          </button>        
+          </Button>        
           );
       }
       return null;
