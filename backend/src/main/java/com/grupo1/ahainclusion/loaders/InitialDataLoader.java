@@ -12,7 +12,7 @@ import javax.transaction.Transactional;
 import com.grupo1.ahainclusion.model.Oferta;
 import com.grupo1.ahainclusion.model.PerfilAccesibilidad;
 import com.grupo1.ahainclusion.model.PerfilCandidato;
-import com.grupo1.ahainclusion.model.PerfilDiscapacidad;
+import com.grupo1.ahainclusion.model.PerfilLaboral;
 import com.grupo1.ahainclusion.model.PerfilEmpresa;
 import com.grupo1.ahainclusion.model.Privilege;
 import com.grupo1.ahainclusion.model.Role;
@@ -215,20 +215,21 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
 
       usr.setEmail(email);
       //usr.setPassword("");
-      usr.setPerfilCandidato(pCandidato);
       usr.setRoles(Arrays.asList(role));
       usr.setEnabled(true);
 
-      PerfilDiscapacidad pDiscapacidad = new PerfilDiscapacidad();
-      pDiscapacidad.setCredencial(false);
-      pDiscapacidad.setSillaDeRuedas(false);
-      pDiscapacidad.setdAuditiva(50);
-      pDiscapacidad.setdFisica(50);
-      pDiscapacidad.setdIntelectual(50);
-      pDiscapacidad.setdPsiquica(50);
-      pDiscapacidad.setdVisual(50);
+      PerfilLaboral pLaboral = new PerfilLaboral();
+      pLaboral.setCredencial(false);
+      pLaboral.setSillaDeRuedas(false);
+      pLaboral.setdAuditiva(50);
+      pLaboral.setdFisica(50);
+      pLaboral.setdIntelectual(50);
+      pLaboral.setdPsiquica(50);
+      pLaboral.setdVisual(50);
+      
+      pCandidato.setPerfilLaboral(pLaboral);
 
-      usr.setPerfilDiscapacidad(pDiscapacidad);
+      usr.setPerfilCandidato(pCandidato);
 
       users.add(usr);
 

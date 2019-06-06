@@ -1,18 +1,32 @@
 package com.grupo1.ahainclusion.model;
 
+import java.util.Collection;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.grupo1.ahainclusion.model.candidato.Curso;
+import com.grupo1.ahainclusion.model.candidato.Experiencia;
+import com.grupo1.ahainclusion.model.candidato.Titulo;
 
 @Entity
-public class PerfilDiscapacidad {
+public class PerfilLaboral {
 
     @Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
     private Integer id;
 
     private String name;
+
+    // ---------------------
+    // DATOS DE INCLUSIVIDAD
+    // ---------------------
 
     // Importantes
         //Tienes credencial?
@@ -25,47 +39,163 @@ public class PerfilDiscapacidad {
         private String adecuaciones;
 
     // Porcentajes de discapacidad
-    private Integer dAuditiva;
-    private Integer dFisica;
-    private Integer dIntelectual;
-    private Integer dPsiquica;
-    private Integer dVisual;
+        private Integer dAuditiva;
+        private Integer dFisica;
+        private Integer dIntelectual;
+        private Integer dPsiquica;
+        private Integer dVisual;
 
     // Datos funcionales
-    // Puedes permanecer de pie?
-    private Integer permanecerPie;
-    // Puedes permanecer sentado?
-    private Integer permanecerSentado;
-    // Puedes desplazarte en trayectos, con o sin ayuda técnica?
-    private Integer desplazoTrayectos;
-    // Puedes realizar actividades en diferentes pisos?
-    private Integer diferentesPisos;
-    // Puedes alcanzar o coger objetos en diferentes alturas?
-    private Integer diferentesAlturas;
-    // Puedes usar herramientas u objetos pequeños?
-    private Integer objetosPequeños;
-    // Puedes realizar actividades que requieren agudeza visual corta y larga
-    // distancia?
-    private Integer actividadesVisual;
-    // Puedes realizar actividades que requieren agudeza auditiva?
-    private Integer actividadesAuditiva;
-    // Puedes comunicarte de manera oral y fluida?
-    private Integer comunicacionOral;
-    // Puedes leer y escribir?
-    private Integer leerEscribir;
-    // Te adaptas a situaciones de trabajo nuevas?
-    private Integer situacionesNuevas;
-    // Te adaptas a trabajo en equipo con varias personas?
-    private Integer trabajoEquipo;
-    // Te adaptas a situaciones tensiones y conflicto?
-    private Integer situacionesConflicto;
-    // Te adaptas para resolver problemas?
-    private Integer resolverProblemas;
-    // Te manejas para desarrollar tareas estresantes?
-    private Integer tareasEstresantes;
+        // Puedes permanecer de pie?
+        private Integer permanecerPie;
+        // Puedes permanecer sentado?
+        private Integer permanecerSentado;
+        // Puedes desplazarte en trayectos, con o sin ayuda técnica?
+        private Integer desplazoTrayectos;
+        // Puedes realizar actividades en diferentes pisos?
+        private Integer diferentesPisos;
+        // Puedes alcanzar o coger objetos en diferentes alturas?
+        private Integer diferentesAlturas;
+        // Puedes usar herramientas u objetos pequeños?
+        private Integer objetosPequeños;
+        // Puedes realizar actividades que requieren agudeza visual corta y larga
+        // distancia?
+        private Integer actividadesVisual;
+        // Puedes realizar actividades que requieren agudeza auditiva?
+        private Integer actividadesAuditiva;
+        // Puedes comunicarte de manera oral y fluida?
+        private Integer comunicacionOral;
+        // Puedes leer y escribir?
+        private Integer leerEscribir;
+        // Te adaptas a situaciones de trabajo nuevas?
+        private Integer situacionesNuevas;
+        // Te adaptas a trabajo en equipo con varias personas?
+        private Integer trabajoEquipo;
+        // Te adaptas a situaciones tensiones y conflicto?
+        private Integer situacionesConflicto;
+        // Te adaptas para resolver problemas?
+        private Integer resolverProblemas;
+        // Te manejas para desarrollar tareas estresantes?
+        private Integer tareasEstresantes;
+
+    //--------------------------
+    // DATOS LABORALES
+    //--------------------------
+
+    // LICENCIA DE CONDUCIR
+    // --------------------
+        private String licencia;
+
+    // AYUDA PARA LLENAR FORMULARIO
+    // ----------------------------
+    // 0: No 1: Si, parcial 2: Completamente
+        private Integer ayudaFormulario;
+
+    // EDUCACIÓN
+    // -----------------
+        private Integer nivelEducacional; // 0: Ed. Especial ..... 9:Postgrado
+
+    // Titulos/carreras terminadas
+        @OneToMany(cascade = CascadeType.ALL)
+        @JoinColumn(name = "perfil_laboral_id")
+        @JsonManagedReference
+        private Collection<Titulo> titulos;
+
+    // Cursos realizados
+        @OneToMany(cascade = CascadeType.ALL)
+        @JoinColumn(name = "perfil_laboral_id")
+        @JsonManagedReference
+        private Collection<Curso> cursos;
+
+    // Experiencias laborales
+        @OneToMany(cascade = CascadeType.ALL)
+        @JoinColumn(name = "perfil_laboral_id")
+        @JsonManagedReference
+        private Collection<Experiencia> experiencias;
+
+    // DISPONIBILIDAD
+    // --------------
+    // Disponibilidad: 0:Lunes a Viernes
+    // 1: Sábados, Domingos y festivos
+    // 2: Cualquier día
+        private Integer disponibilidad;
+
+    // EXPECTATIVAS DE SUELDO
+    // ExpectativaSueldo: 0: Hasta 301.000
+    // 1: 301.0001 a 400.000
+    // 2: 400.001 a 550.000
+    // 3: 550.001 a 650.000
+    // 4: 650.001 a 800.000
+    // 5: 800.001 a 1.000.000
+    // 6: 1.000.000 o más
+        private Integer expectativaSueldo;
 
     public String getName() {
         return name;
+    }
+
+    public Integer getExpectativaSueldo() {
+        return expectativaSueldo;
+    }
+
+    public void setExpectativaSueldo(Integer expectativaSueldo) {
+        this.expectativaSueldo = expectativaSueldo;
+    }
+
+    public Integer getDisponibilidad() {
+        return disponibilidad;
+    }
+
+    public void setDisponibilidad(Integer disponibilidad) {
+        this.disponibilidad = disponibilidad;
+    }
+
+    public Collection<Experiencia> getExperiencias() {
+        return experiencias;
+    }
+
+    public void setExperiencias(Collection<Experiencia> experiencias) {
+        this.experiencias = experiencias;
+    }
+
+    public Collection<Curso> getCursos() {
+        return cursos;
+    }
+
+    public void setCursos(Collection<Curso> cursos) {
+        this.cursos = cursos;
+    }
+
+    public Collection<Titulo> getTitulos() {
+        return titulos;
+    }
+
+    public void setTitulos(Collection<Titulo> titulos) {
+        this.titulos = titulos;
+    }
+
+    public Integer getNivelEducacional() {
+        return nivelEducacional;
+    }
+
+    public void setNivelEducacional(Integer nivelEducacional) {
+        this.nivelEducacional = nivelEducacional;
+    }
+
+    public Integer getAyudaFormulario() {
+        return ayudaFormulario;
+    }
+
+    public void setAyudaFormulario(Integer ayudaFormulario) {
+        this.ayudaFormulario = ayudaFormulario;
+    }
+
+    public String getLicencia() {
+        return licencia;
+    }
+
+    public void setLicencia(String licencia) {
+        this.licencia = licencia;
     }
 
     public String getAdecuaciones() {
