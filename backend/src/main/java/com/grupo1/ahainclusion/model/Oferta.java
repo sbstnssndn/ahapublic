@@ -4,7 +4,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 public class Oferta {
@@ -15,14 +18,34 @@ public class Oferta {
     private String name;
     private String description;
 
-    @OneToOne
-    private User user;
+    @ManyToOne
+    @JsonBackReference
+    private PerfilEmpresa perfilEmpresa;
 
     @OneToOne
     private PerfilAccesibilidad perfilAccesibilidad;
 
+    @OneToOne
+    private ExigenciaLaboral exigenciaLaboral;
+
     public String getDescription() {
         return description;
+    }
+
+    public PerfilEmpresa getPerfilEmpresa() {
+        return perfilEmpresa;
+    }
+
+    public void setPerfilEmpresa(PerfilEmpresa perfilEmpresa) {
+        this.perfilEmpresa = perfilEmpresa;
+    }
+
+    public ExigenciaLaboral getExigenciaLaboral() {
+        return exigenciaLaboral;
+    }
+
+    public void setExigenciaLaboral(ExigenciaLaboral exigenciaLaboral) {
+        this.exigenciaLaboral = exigenciaLaboral;
     }
 
     public Integer getId() {
@@ -39,14 +62,6 @@ public class Oferta {
 
     public void setPerfilAccesibilidad(PerfilAccesibilidad perfilAccesibilidad) {
         this.perfilAccesibilidad = perfilAccesibilidad;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
     }
 
     public void setDescription(String description) {

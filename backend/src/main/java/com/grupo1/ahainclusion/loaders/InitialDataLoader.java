@@ -113,22 +113,22 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
     
     PerfilEmpresa pEmpresa1 = new PerfilEmpresa();
     pEmpresa1.setNameEmpresa("Líder");
+    pEmpresa1.setPerfilesAccesibilidad(Arrays.asList(perfilA1));
     //pEmpresa1.setRutEmpresa("");
 
     empresa1.setPerfilEmpresa(pEmpresa1);
     empresa1.setEmail("contacto@lider.cl");
     empresa1.setRoles(Arrays.asList(empresaRole));
-    empresa1.setPerfilesAccesibilidad(Arrays.asList(perfilA1));
     empresa1.setEnabled(true);
 
     PerfilEmpresa pEmpresa2 = new PerfilEmpresa();
     pEmpresa2.setNameEmpresa("Ripley");
+    pEmpresa2.setPerfilesAccesibilidad(Arrays.asList(perfilA2));
     //pEmpresa2.setRutEmpresa("");
 
     empresa2.setPerfilEmpresa(pEmpresa2);
     empresa2.setEmail("contacto@ripley.cl");
     empresa2.setRoles(Arrays.asList(empresaRole));
-    empresa2.setPerfilesAccesibilidad(Arrays.asList(perfilA2));
     empresa2.setEnabled(true);
     
 
@@ -143,17 +143,17 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
 
     oferta1.setName("Reponedor");
     oferta1.setDescription("Reponedor de productos");
-    oferta1.setUser(empresa1);
+    oferta1.setPerfilEmpresa(empresa1.getPerfilEmpresa());
     oferta1.setPerfilAccesibilidad(perfilA1);
 
     oferta2.setName("Guardia");
     oferta2.setDescription("Guardia de seguridad");
-    oferta2.setUser(empresa1);
+    oferta2.setPerfilEmpresa(empresa1.getPerfilEmpresa());
     oferta2.setPerfilAccesibilidad(perfilA1);
 
     oferta3.setName("Vendedor");
     oferta3.setDescription("Vendedor departamento de tecnología");
-    oferta3.setUser(empresa2);
+    oferta3.setPerfilEmpresa(empresa2.getPerfilEmpresa());
     oferta3.setPerfilAccesibilidad(perfilA2);
 
     ofertaRepository.save(oferta1);

@@ -36,13 +36,6 @@ public class User {
 	@OneToOne(cascade = CascadeType.ALL )
 	private PerfilEmpresa perfilEmpresa;
 
-	
-
-	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name = "user_id")
-	@JsonManagedReference
-	private Collection<PerfilAccesibilidad> perfilesAccesibilidad;
-
 	public Integer getId() {
 		return id;
 	}
@@ -53,14 +46,6 @@ public class User {
 
 	public void setPassword(String password) {
 		this.password = password;
-	}
-
-	public Collection<PerfilAccesibilidad> getPerfilesAccesibilidad() {
-		return perfilesAccesibilidad;
-	}
-
-	public void setPerfilesAccesibilidad(Collection<PerfilAccesibilidad> perfilesAccesibilidad) {
-		this.perfilesAccesibilidad = perfilesAccesibilidad;
 	}
 
 	public PerfilEmpresa getPerfilEmpresa() {

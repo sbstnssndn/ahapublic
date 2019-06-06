@@ -19,11 +19,15 @@ public class PerfilAccesibilidad {
 
     @ManyToOne
     @JsonBackReference
-    private User user;
+    private PerfilEmpresa perfilEmpresa;
 
     // Importantes
-    // private boolean credencial; Credencial es obligatoria siempre
-    private boolean accesoSilla; // acceso silla de ruedas
+    // Tienes acceso de silla de ruedas
+    private boolean accesoSilla;
+    // Tienes baño adaptado
+    private boolean bañoAdaptado;
+    // Tienes interprete de señas
+    private boolean interprete;
 
     // Porcentajes de capacidad mínimos requeridos
     private Integer cAuditiva;
@@ -36,12 +40,28 @@ public class PerfilAccesibilidad {
         return name;
     }
 
-    public User getUser() {
-        return user;
+    public boolean isInterprete() {
+        return interprete;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setInterprete(boolean interprete) {
+        this.interprete = interprete;
+    }
+
+    public boolean isBañoAdaptado() {
+        return bañoAdaptado;
+    }
+
+    public void setBañoAdaptado(boolean bañoAdaptado) {
+        this.bañoAdaptado = bañoAdaptado;
+    }
+
+    public PerfilEmpresa getPerfilEmpresa() {
+        return perfilEmpresa;
+    }
+
+    public void setPerfilEmpresa(PerfilEmpresa perfilEmpresa) {
+        this.perfilEmpresa = perfilEmpresa;
     }
 
     public Integer getId() {
