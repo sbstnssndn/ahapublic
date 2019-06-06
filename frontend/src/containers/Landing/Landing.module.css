@@ -2,3 +2,26 @@ body {
 	background: #333;
 	color: #fff;
 }
+
+.HomeSection {
+	background: url(../../assets/img/back.jpg);
+	background-position: 0% 70%;
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-attachment: fixed;
+	min-height: 700px;
+}
+
+.DarkOverlay {
+	/* cover the entire parent, absolute from top left to bottom */
+	position: relative;
+	top: 0;
+	left: 0;
+	width: 100%;
+	min-height: 700px;
+	background-color: rgba(0, 0, 0, 0.6);
+}
+
+.HomeInner {
+	padding-top: 50px;
+}

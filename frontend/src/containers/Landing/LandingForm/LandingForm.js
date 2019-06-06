@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Card from 'react-bootstrap/Card';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
 
 class LandingForm extends Component {
 
@@ -12,22 +12,24 @@ class LandingForm extends Component {
 					<h3>Regístrate</h3>
 					<p>Llena el formulario</p>
 
-					<form>
-						<div className="form-group">
-							<input type="email" className="form-control form-control-lg" placeholder="Correo" />
-						</div>
-						<div className="form-group">
-							<input type="password" className="form-control form-control-lg" placeholder="Contraseña" />
-						</div>
-						<div className="form-group">
-							<input type="text" className="form-control form-control-lg" placeholder="Nombres" />
-						</div>
-						<div className="form-group">
-							<input type="text" className="form-control form-control-lg" placeholder="Apellidos" />
-						</div>
-						
-						<input type="submit" value="Enviar" className="btn btn-outline-light btn-block" />
-					</form>
+					<Form>
+						<Form.Group controlId="formEmail">
+    					<Form.Control type="email" placeholder="Correo electrónico" />
+						</Form.Group>
+						<Form.Group controlId="formPassword">
+    					<Form.Control type="password" placeholder="Contraseña" />
+						</Form.Group>
+						<Form.Group controlId="formNombres">
+    					<Form.Control type="text" placeholder="Nombres" />
+						</Form.Group>
+						<Form.Group controlId="formApellidos">
+    					<Form.Control type="text" placeholder="Apellidos" />
+						</Form.Group>
+						<Button variant="outline-light" type="submit" block>
+							Registrarse
+						</Button>
+					</Form>
+
 
 				</Card.Body>
 			</Card>

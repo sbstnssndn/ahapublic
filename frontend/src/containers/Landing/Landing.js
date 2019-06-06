@@ -4,7 +4,7 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
-import './Landing.module.css';
+import styles from './Landing.module.css';
 import LandingText from './LandingText/LandingText';
 import LandingForm from './LandingForm/LandingForm';
 
@@ -17,9 +17,9 @@ class Landing extends Component {
 			<React.Fragment>
 				<NavbarLanding />
 
-				<div id="home-section">
-					<div className="dark-overlay">
-						<Container className="home-inner">
+				<div className={styles.HomeSection}>
+					<div className={styles.DarkOverlay}>
+						<Container className={styles.HomeInner}>
 							<Row>
 								<Col lg={8} className="d-none d-lg-block">
 									<LandingText />

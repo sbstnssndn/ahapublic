@@ -3,7 +3,8 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
-
+import { Link } from 'react-router-dom';
+ 
 import logo from './../../assets/img/aha-logo.png';
 import styles from './NavbarLanding.module.css';
 
@@ -20,8 +21,18 @@ const NavbarLanding = (props) => {
 
 				<Navbar.Collapse id="responsive-navbar-nav">
 					<Nav className="mr-auto">
-						<Nav.Link href="#features">Inicio</Nav.Link>
-						<Nav.Link href="#pricing">Contacto</Nav.Link>
+						<Nav.Link>
+							<Link to="/" className="nav-link">Inicio</Link>
+						</Nav.Link>
+						<Nav.Link>
+							<Link to="/postulantes" className="nav-link">Postulantes</Link>
+						</Nav.Link>
+						<Nav.Link>
+							<Link to="/empresas" className="nav-link">Empresas</Link>
+						</Nav.Link>
+						<Nav.Link>
+							<Link to="/recomendaciones" className="nav-link">Recomendaciones</Link>
+						</Nav.Link>
 						{/*
 						<NavDropdown title="Dropdown" id="collasible-nav-dropdown">
 							<NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
