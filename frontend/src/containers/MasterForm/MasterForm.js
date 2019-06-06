@@ -220,9 +220,9 @@ class MasterForm extends Component {
     let sendButton = null;
     if (this.state.currentStage === this.state.totalStages - 1) {
       sendButton = (
-        <div className="pb-2">
-          <input type="submit" value="Guardar datos" className="btn btn-success btn-lg btn-block" />
-        </div>
+        <Button variant="success">
+          Guardar datos
+        </Button>
       )
     }
 
