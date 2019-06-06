@@ -4,7 +4,7 @@ import com.grupo1.ahainclusion.model.User;
 import com.grupo1.ahainclusion.model.candidato.Curso;
 import com.grupo1.ahainclusion.model.candidato.Titulo;
 import com.grupo1.ahainclusion.repository.CursoRepository;
-import com.grupo1.ahainclusion.repository.PerfilDiscapacidadRepository;
+import com.grupo1.ahainclusion.repository.PerfilLaboralRepository;
 import com.grupo1.ahainclusion.repository.TituloRepository;
 import com.grupo1.ahainclusion.repository.UserRepository;
 

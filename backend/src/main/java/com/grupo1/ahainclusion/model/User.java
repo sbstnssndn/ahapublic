@@ -1,9 +1,6 @@
 package com.grupo1.ahainclusion.model;
 
 import java.util.Collection;
-import java.util.List;
-import java.util.Set;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -39,8 +36,7 @@ public class User {
 	@OneToOne(cascade = CascadeType.ALL )
 	private PerfilEmpresa perfilEmpresa;
 
-	@OneToOne(cascade = CascadeType.ALL )
-	private PerfilDiscapacidad perfilDiscapacidad;
+	
 
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name = "user_id")
@@ -89,14 +85,6 @@ public class User {
 
 	public void setPerfilCandidato(PerfilCandidato perfilCandidato) {
 		this.perfilCandidato = perfilCandidato;
-	}
-
-	public PerfilDiscapacidad getPerfilDiscapacidad() {
-		return perfilDiscapacidad;
-	}
-
-	public void setPerfilDiscapacidad(PerfilDiscapacidad perfilDiscapacidad) {
-		this.perfilDiscapacidad = perfilDiscapacidad;
 	}
 
 	public void setId(Integer id) {

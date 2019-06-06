@@ -1,7 +1,7 @@
 package com.grupo1.ahainclusion.controller;
 
-import com.grupo1.ahainclusion.model.PerfilDiscapacidad;
-import com.grupo1.ahainclusion.repository.PerfilDiscapacidadRepository;
+import com.grupo1.ahainclusion.model.PerfilLaboral;
+import com.grupo1.ahainclusion.repository.PerfilLaboralRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,23 +15,23 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 @RequestMapping(path="/perfilDiscapacidad")
-public class PerfilDiscapacidadController {
+public class PerfilLaboralController {
 
     @Autowired
-    private PerfilDiscapacidadRepository perfilDiscapacidadRepository;
+    private PerfilLaboralRepository perfilDiscapacidadRepository;
 
     // Objeto "en blanco" para un nuevo perfil de discapacidad
     @RequestMapping(path="/new", method = RequestMethod.GET)
-    public @ResponseBody PerfilDiscapacidad NewPerfilDiscapacidad(){
+    public @ResponseBody PerfilLaboral NewPerfilDiscapacidad(){
 
-        PerfilDiscapacidad p = new PerfilDiscapacidad();
+        PerfilLaboral p = new PerfilLaboral();
 
         return p;
     }
 
     // Agregar Perfil Discapacidad
     @RequestMapping(path="/add", method = RequestMethod.POST)
-    public @ResponseBody String addNewPerfilDiscapacidad(@RequestBody PerfilDiscapacidad perfilDiscapacidad) {
+    public @ResponseBody String addNewPerfilDiscapacidad(@RequestBody PerfilLaboral perfilDiscapacidad) {
     
         perfilDiscapacidadRepository.save(perfilDiscapacidad);
 
@@ -40,7 +40,7 @@ public class PerfilDiscapacidadController {
 
     // Obtener Perfiles Discapacidad
     @GetMapping(path="/all")
-    public @ResponseBody Iterable<PerfilDiscapacidad> gettAllPerfilesDiscapacidad() {
+    public @ResponseBody Iterable<PerfilLaboral> gettAllPerfilesDiscapacidad() {
         return perfilDiscapacidadRepository.findAll();
     }
 }
