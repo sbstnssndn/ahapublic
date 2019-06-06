@@ -32,9 +32,9 @@ class Landing extends Component {
 							</Row>
 						</Container>
 					</div>
+					<Footer />
 				</div>
 
-				<Footer />
 			</React.Fragment>
 		);
 	}

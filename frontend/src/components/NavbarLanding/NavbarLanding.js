@@ -14,10 +14,10 @@ const NavbarLanding = (props) => {
 		<Navbar expand="md" variant="light" fixed="top" collapseOnSelect className={styles.Navbar}>
 			<Container>
 
-				<Navbar.Brand href="#home">
-				<Link to="/">
-					<img src={logo} width="60" height="45" alt="Logo AHA Inclusión" />
-				</Link>
+				<Navbar.Brand>
+					<Link to="/">
+						<img src={logo} width="60" height="45" alt="Logo AHA Inclusión" />
+					</Link>
 				</Navbar.Brand>
 
 				<Navbar.Toggle aria-controls="responsive-navbar-nav" />
