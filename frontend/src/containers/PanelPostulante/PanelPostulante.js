@@ -87,6 +87,18 @@ class PanelPostulante extends Component {
 					</Container>
 				</section>
 
+				<footer id="footer-panel" className="bg-dark text-white mt-5 pt-3">
+					<Container>
+						<Row>
+							<Col>
+								<p className="text-center mb-2">
+									AHA Inclusión &copy; 2019
+								</p>
+							</Col>
+						</Row>
+					</Container>
+				</footer>
+
 			</React.Fragment>
 		);
 	}
