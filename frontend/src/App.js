@@ -9,6 +9,8 @@ import  { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Home from './containers/Home/Home';
 import Recomendaciones from './containers/Recomendaciones/Recomendaciones';
 
+import Landing from './containers/Landing/Landing';
+
 // import preguntasPostulante from './assets/js/preguntas-postulante.js
 
 function App() {
@@ -612,14 +614,13 @@ function App() {
 
   return (
     <BrowserRouter>
-      
-      <Layout>
+      {/*<Layout>
         <Toolbar />
         <div className="container pt-2">
           <div className="row">
-            <SideMenu />
+			<SideMenu />*/}
             <Switch>
-              <Route path="/" exact component={Home} />
+              <Route path="/" exact component={Landing} />
               <Route path="/recomendaciones" exact component={Recomendaciones} />
               <Route path="/postulantes" exact component={() => (
                 <MasterForm stages={stagesPostulante} tipoFormulario='1' titulo={"Registro postulante"} />
@@ -628,10 +629,10 @@ function App() {
                 <MasterForm stages={stagesEmpresa} tipoFormulario='2' titulo={"Ingresar oferta"} />
               )}/>
             </Switch>
-          </div>
+          {/*</div>
         </div>
        <Footer />
-      </Layout>
+					</Layout>*/}
     </BrowserRouter>
   );
 }
