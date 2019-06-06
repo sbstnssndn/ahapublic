@@ -29,6 +29,14 @@ public class Titulo {
         return name;
     }
 
+    public PerfilCandidato getPerfilCandidato() {
+        return perfilCandidato;
+    }
+
+    public void setPerfilCandidato(PerfilCandidato perfilCandidato) {
+        this.perfilCandidato = perfilCandidato;
+    }
+
     public String getInstitucion() {
         return institucion;
     }

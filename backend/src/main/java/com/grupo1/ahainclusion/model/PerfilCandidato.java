@@ -28,68 +28,74 @@ public class PerfilCandidato {
     private Integer id;
 
     // INFORMACIÓN PERSONAL
-        // --------------------
-        private String firstName;
-        private String lastName;
-        private String rut;
-        private Integer genero;
-        private Date fechaNacimiento;
-        private String nacionalidad;
-        @OneToOne(cascade = CascadeType.ALL )
-        private Direccion direccion;
+    // --------------------
+    private String firstName;
+    private String lastName;
+    private String rut;
+    private Integer genero;
+    private Date fechaNacimiento;
+    private String nacionalidad;
+    @OneToOne(cascade = CascadeType.ALL)
+    private Direccion direccion;
 
     // LICENCIA DE CONDUCIR
-        // --------------------
-        private String licencia;
+    // --------------------
+    private String licencia;
 
     // AYUDA PARA LLENAR FORMULARIO
     // ----------------------------
-        // 0: No 1: Si, parcial 2: Completamente
-        private Integer ayudaFormulario;
+    // 0: No 1: Si, parcial 2: Completamente
+    private Integer ayudaFormulario;
 
     // EDUCACIÓN
     // -----------------
-        private Integer nivelEducacional; // 0: Ed. Especial ..... 9:Postgrado
-        
-        //Titulos/carreras terminadas
-        @OneToMany(cascade = CascadeType.ALL)
-        @JoinColumn(name = "perfil_candidato_id")
-        @JsonManagedReference
-        private Collection<Titulo> titulos;
+    private Integer nivelEducacional; // 0: Ed. Especial ..... 9:Postgrado
 
-        //Cursos realizados
-        @OneToMany(cascade = CascadeType.ALL)
-        @JoinColumn(name = "perfil_candidato_id")
-        @JsonManagedReference
-        private Collection<Curso> cursos;
+    // Titulos/carreras terminadas
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "perfil_candidato_id")
+    @JsonManagedReference
+    private Collection<Titulo> titulos;
 
-        //Experiencias laborales
-        @OneToMany(cascade = CascadeType.ALL)
-        @JoinColumn(name = "perfil_candidato_id")
-        @JsonManagedReference
-        private Collection<Experiencia> experiencias;
+    // Cursos realizados
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "perfil_candidato_id")
+    @JsonManagedReference
+    private Collection<Curso> cursos;
+
+    // Experiencias laborales
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "perfil_candidato_id")
+    @JsonManagedReference
+    private Collection<Experiencia> experiencias;
 
     // DISPONIBILIDAD
     // --------------
-        //Disponibilidad:   0:Lunes a Viernes
-        //                  1: Sábados, Domingos y festivos
-        //                  2: Cualquier día
-        private Integer disponibilidad;
+    // Disponibilidad: 0:Lunes a Viernes
+    // 1: Sábados, Domingos y festivos
+    // 2: Cualquier día
+    private Integer disponibilidad;
 
-    //EXPECTATIVAS DE SUELDO
-    //ExpectativaSueldo:    0: Hasta 301.000
-    //                      1: 301.0001 a 400.000
-    //                      2: 400.001 a 550.000
-    //                      3: 550.001 a 650.000
-    //                      4: 650.001 a 800.000
-    //                      5: 800.001 a 1.000.000
-    //                      6: 1.000.000 o más
-        private Integer expectativaSueldo;
-
-    
+    // EXPECTATIVAS DE SUELDO
+    // ExpectativaSueldo: 0: Hasta 301.000
+    // 1: 301.0001 a 400.000
+    // 2: 400.001 a 550.000
+    // 3: 550.001 a 650.000
+    // 4: 650.001 a 800.000
+    // 5: 800.001 a 1.000.000
+    // 6: 1.000.000 o más
+    private Integer expectativaSueldo;
 
     public String getFirstName() {
         return firstName;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public Integer getExpectativaSueldo() {

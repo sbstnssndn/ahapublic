@@ -33,6 +33,14 @@ public class Experiencia {
         return tipo;
     }
 
+    public PerfilCandidato getPerfilCandidato() {
+        return perfilCandidato;
+    }
+
+    public void setPerfilCandidato(PerfilCandidato perfilCandidato) {
+        this.perfilCandidato = perfilCandidato;
+    }
+
     public Date getFechaFin() {
         return fechaFin;
     }
