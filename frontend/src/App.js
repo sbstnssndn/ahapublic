@@ -1,17 +1,7 @@
 import React from 'react';
+import Routes from "./Routes";
+
 import './App.css';
-import MasterForm from './containers/MasterForm/MasterForm';
-import Layout from './components/Layout/Layout';
-import Toolbar from './components/Toolbar/Toolbar';
-import Footer from './components/Footer/Footer';
-import SideMenu from './components/SideMenu/SideMenu';
-import  { BrowserRouter, Route, Switch } from 'react-router-dom';
-import Home from './containers/Home/Home';
-import Recomendaciones from './containers/Recomendaciones/Recomendaciones';
-
-import Landing from './containers/Landing/Landing';
-
-// import preguntasPostulante from './assets/js/preguntas-postulante.js
 
 function App() {
 
@@ -485,7 +475,7 @@ function App() {
       }
     }
   ]
-
+	/*
   const regiones = [
     {
       region: "Región Metropolitana de Santiago",
@@ -611,29 +601,10 @@ function App() {
       ]
     }
   ];
-
+	*/
+	
   return (
-    <BrowserRouter>
-      {/*<Layout>
-        <Toolbar />
-        <div className="container pt-2">
-          <div className="row">
-			<SideMenu />*/}
-            <Switch>
-              <Route path="/" exact component={Landing} />
-              <Route path="/recomendaciones" exact component={Recomendaciones} />
-              <Route path="/postulantes" exact component={() => (
-                <MasterForm stages={stagesPostulante} tipoFormulario='1' titulo={"Registro postulante"} />
-              )}/>
-              <Route path="/empresas" exact component={() => (
-                <MasterForm stages={stagesEmpresa} tipoFormulario='2' titulo={"Ingresar oferta"} />
-              )}/>
-            </Switch>
-          {/*</div>
-        </div>
-       <Footer />
-					</Layout>*/}
-    </BrowserRouter>
+		<Routes stagesPostulante={stagesPostulante} stagesEmpresa={stagesEmpresa} />
   );
 }
 

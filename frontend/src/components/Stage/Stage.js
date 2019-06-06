@@ -1,5 +1,5 @@
 import React from 'react';
-import Input from './../Input/Input';
+//import Input from './../Input/Input';
 import Form from 'react-bootstrap/Form'
 
 const Stage = (props) => {
@@ -32,13 +32,14 @@ const Stage = (props) => {
         <Form>
           <Form.Group controlId={field.config.inputConfig.id}>
             <Form.Label>{field.config.label}</Form.Label>
-            <Form.Control as={field.config.inputStyle}
-            type={field.config.inputConfig.type}
-            placeholder={field.config.inputConfig.placeholder}
-            name={field.config.inputConfig.name}
-            id={field.config.inputConfig.id}
-            value={field.config.value}
-            onChange={props.handleChange.bind(props.currentStage, field.id)}
+            <Form.Control
+							as={field.config.inputStyle}
+							type={field.config.inputConfig.type}
+							placeholder={field.config.inputConfig.placeholder}
+							name={field.config.inputConfig.name}
+							id={field.config.inputConfig.id}
+							value={field.config.value}
+							onChange={props.handleChange.bind(props.currentStage, field.id)}
             />
           </Form.Group>
         </Form>

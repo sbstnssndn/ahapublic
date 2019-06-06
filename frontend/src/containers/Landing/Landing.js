@@ -7,6 +7,7 @@ import Col from 'react-bootstrap/Col';
 import styles from './Landing.module.css';
 import LandingText from './LandingText/LandingText';
 import LandingForm from './LandingForm/LandingForm';
+import Footer from '../../components/Footer/Footer';
 
 
 
@@ -32,6 +33,8 @@ class Landing extends Component {
 						</Container>
 					</div>
 				</div>
+
+				<Footer />
 			</React.Fragment>
 		);
 	}

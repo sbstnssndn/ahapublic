@@ -9,8 +9,8 @@ class LandingForm extends Component {
 		return (
 			<Card bg="primary" className="text-center card-form">
 				<Card.Body>
-					<h3>Regístrate</h3>
-					<p>Llena el formulario</p>
+					<h3>Postulantes</h3>
+					<p>¿Buscas trabajo? ¡Regístrate!</p>
 
 					<Form>
 						<Form.Group controlId="formEmail">

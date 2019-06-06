@@ -9,7 +9,7 @@ body {
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-attachment: fixed;
-	min-height: 700px;
+	min-height: 100vh;
 }
 
 .DarkOverlay {
@@ -18,10 +18,10 @@ body {
 	top: 0;
 	left: 0;
 	width: 100%;
-	min-height: 700px;
+	min-height: 100vh;
 	background-color: rgba(0, 0, 0, 0.6);
 }
 
 .HomeInner {
-	padding-top: 50px;
+	padding-top: 150px;
 }
