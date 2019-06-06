@@ -8,7 +8,14 @@ import PanelPostulante from './containers/PanelPostulante/PanelPostulante';
 const Routes = (props) => {
 	return (
 		<Switch>
-			<Route path="/postulantes/panel" exact component={PanelPostulante} />
+			<Route
+				path="/postulantes/panel"
+				exact
+				component={() => (
+					<PanelPostulante stages={props.stagesEmpresa} />
+				)}
+			/>
+
 			<Route path="/recomendaciones" exact component={Recomendaciones} />
 			<Route path="/postulantes" exact component={() => (
 				<MasterForm stages={props.stagesPostulante} tipoFormulario="postulante" titulo={"Registro postulante"} />

@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import NavbarPanel from '../../components/NavbarPanel/NavbarPanel';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import MasterForm from '../MasterForm/MasterForm';
 
 
 class PanelPostulante extends Component {
@@ -26,9 +28,9 @@ class PanelPostulante extends Component {
 					</div>
 				</header>
 
-				<section id="actions" className="py-4 mb-4 bg-light">
+				<section id="acciones" className="py-4 bg-light">
 					<Container>
-						<Row className="justify-content-md-center">
+						<Row>
 							<div className="col-md-3">
 								<a href="/" className="btn btn-primary btn-block" data-toggle="modal" data-target="#addPostModal">
 									<i className="fas fa-plus"></i> Add Post
@@ -47,6 +49,20 @@ class PanelPostulante extends Component {
 						</Row>
 					</Container>
 				</section>
+
+				<section id="formularios">
+					<Container>
+						<Row>
+							<Col md={9}>
+								<MasterForm stages={this.props.stages} tipoFormulario="postulante" titulo={"Registro postulante"} />
+							</Col>
+							<Col md={3}>
+								Secciones de perfil
+							</Col>
+						</Row>
+					</Container>
+				</section>
+
 			</React.Fragment>
 		);
 	}

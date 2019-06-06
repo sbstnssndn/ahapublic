@@ -185,17 +185,17 @@ class MasterForm extends Component {
   }
 
   botonSiguiente(){
-      let currentStage = this.state.currentStage;
-      let lastStage = this.state.totalStages - 1;
+		let currentStage = this.state.currentStage;
+		let lastStage = this.state.totalStages - 1;
 
-      if (currentStage < lastStage){
-          return (
-          <Button variant="primary" onClick={this._next}> 
-          Siguiente
-          </Button>        
-          );
-      }
-      return null;
+		if (currentStage < lastStage){
+				return (
+				<Button variant="primary" onClick={this._next}> 
+				Siguiente
+				</Button>        
+				);
+		}
+		return null;
   }
   
   render () {
@@ -226,7 +226,7 @@ class MasterForm extends Component {
     return (
       <React.Fragment>
         <div className="col">
-          <h1>{this.props.titulo} - {this.props.tipoFormulario}</h1>
+          {/*<h1>{this.props.titulo} - {this.props.tipoFormulario}</h1>*/}
           <form onSubmit={this.handleSubmit}>
             {stages}
             <ProgressBar />
