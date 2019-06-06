@@ -3,6 +3,7 @@ import Stage from '../../components/Stage/Stage';
 import ProgressBar from '../../components/ProgressBar/ProgressBar';
 import Button from 'react-bootstrap/Button'
 import axios from 'axios';
+import Container from 'react-bootstrap/Container';
 
 class MasterForm extends Component {
   
@@ -225,7 +226,7 @@ class MasterForm extends Component {
 
     return (
       <React.Fragment>
-        <div className="col">
+        <Container fluid>
           {/*<h1>{this.props.titulo} - {this.props.tipoFormulario}</h1>*/}
           <form onSubmit={this.handleSubmit}>
             {stages}
@@ -234,7 +235,7 @@ class MasterForm extends Component {
             { this.botonAnterior() }
             { this.botonSiguiente() }
           </form>
-        </div>
+				</Container>
       </React.Fragment>
     );
   }

@@ -4,6 +4,7 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import MasterForm from '../MasterForm/MasterForm';
+import Card from 'react-bootstrap/Card';
 
 
 class PanelPostulante extends Component {
@@ -53,11 +54,34 @@ class PanelPostulante extends Component {
 				<section id="formularios">
 					<Container>
 						<Row>
-							<Col md={9}>
+							<Col md={9} className="px-0">
 								<MasterForm stages={this.props.stages} tipoFormulario="postulante" titulo={"Registro postulante"} />
 							</Col>
 							<Col md={3}>
-								Secciones de perfil
+								<Card variant="primary" bg="primary" text="white" className="text-center mb-3">
+									<Card.Body>
+										<h2>
+											<i className="fas fa-user"></i>
+										</h2>
+										<h4>Cuenta usuario</h4>
+									</Card.Body>
+								</Card>
+								<Card variant="primary" bg="success" text="white" className="text-center mb-3">
+									<Card.Body>
+										<h2>
+											<i className="fas fa-address-card"></i>
+										</h2>
+										<h4>Datos personales</h4>
+									</Card.Body>
+								</Card>
+								<Card variant="primary" bg="warning" text="white" className="text-center mb-3">
+									<Card.Body>
+										<h2>
+											<i className="fas fa-briefcase"></i>
+										</h2>
+										<h4>Datos laborales</h4>
+									</Card.Body>
+								</Card>					
 							</Col>
 						</Row>
 					</Container>
