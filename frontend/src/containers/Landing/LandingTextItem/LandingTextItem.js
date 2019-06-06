@@ -8,7 +8,7 @@ const LandingTextItem = (props) => (
 			</span>
 		</div>
 		<div className="p-4 align-self-end">
-			{props.children}
+			{ props.children }
 		</div>
 	</div>
 );
