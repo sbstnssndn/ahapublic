@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+//import axios from 'axios';
 
 class Recomendaciones extends Component {
 
@@ -46,8 +46,8 @@ class Recomendaciones extends Component {
                     <h5 className="card-title text-uppercase">{usuario.user.firstName} {usuario.user.lastName}</h5>
                     <h6 className="card-subtitle mb-2 text-muted">{usuario.user.email}</h6>
                     <p className="card-text">Porcentaje de compatibilidad: {usuario.percentage}%</p>
-                    <a href="#" className="card-link">Perfil</a>
-                    <a href="#" className="card-link">Contacto</a>
+                    <a href="/" className="card-link">Perfil</a>
+                    <a href="/" className="card-link">Contacto</a>
                   </div>
                 </div>
               );

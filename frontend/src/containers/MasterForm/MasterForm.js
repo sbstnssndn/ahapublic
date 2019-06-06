@@ -72,7 +72,7 @@ class MasterForm extends Component {
     //Según tipo de formulario, se requiere una api rest distinta para el guardado de datos
 
     // 1 -> Formulario de Postulante
-    if(this.props.tipoFormulario == 1){
+    if(this.props.tipoFormulario === "postulante"){
 
       /* Nuevo objeto de perfil de discapacidad */
       axios.get('http://localhost:8080/api/perfilDiscapacidad/new')
@@ -106,10 +106,7 @@ class MasterForm extends Component {
           console.log(error);
       });
 
-    }
-
-    // 2 -> Formulario de Oferta
-    else if(this.props.tipoFormulario == 2){
+    } else if(this.props.tipoFormulario === "oferta") {
       console.log("Guardando dato oferta");
       
       /* Nuevo objeto de perfil de accesibilidad */
@@ -220,9 +217,9 @@ class MasterForm extends Component {
     let sendButton = null;
     if (this.state.currentStage === this.state.totalStages - 1) {
       sendButton = (
-        <div className="pb-2">
-          <input type="submit" value="Guardar datos" className="btn btn-success btn-lg btn-block" />
-        </div>
+        <Button variant="success">
+          Guardar datos
+        </Button>
       )
     }
 
