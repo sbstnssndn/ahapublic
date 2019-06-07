@@ -147,7 +147,7 @@ public class UserController {
     return "Curso Guardado en usuario: " + curso.getPerfilCandidato().getId();
     }
 
-    // Agregar un curso a usuario
+    // Agregar un titulo a usuario
     @RequestMapping(path="/addTitulo", method = RequestMethod.POST)
     public @ResponseBody String addTituloToUser (@RequestBody Titulo titulo) {
 
