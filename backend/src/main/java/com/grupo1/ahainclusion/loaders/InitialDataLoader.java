@@ -119,6 +119,8 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
 
     empresa1.setPerfilEmpresa(pEmpresa1);
     empresa1.setEmail("contacto@lider.cl");
+    empresa1.setPassword("lider1234");
+    empresa1.setPassword(passwordEncoder.encode(empresa1.getPassword()));
     empresa1.setRoles(Arrays.asList(empresaRole));
     empresa1.setEnabled(true);
 
@@ -129,6 +131,8 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
 
     empresa2.setPerfilEmpresa(pEmpresa2);
     empresa2.setEmail("contacto@ripley.cl");
+    empresa2.setPassword("ripley1234");
+    empresa2.setPassword(passwordEncoder.encode(empresa2.getPassword()));
     empresa2.setRoles(Arrays.asList(empresaRole));
     empresa2.setEnabled(true);
     

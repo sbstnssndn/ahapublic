@@ -15,9 +15,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 public class UserPrincipal implements UserDetails {
     private Integer id;
 
-    private String name;
+    private String firstName;
 
-    private String username;
+    private String lastName;
 
     @JsonIgnore
     private String email;
@@ -27,13 +27,30 @@ public class UserPrincipal implements UserDetails {
 
     private Collection<? extends GrantedAuthority> authorities;
 
-    public UserPrincipal(Integer id, String email, String password, Collection<? extends GrantedAuthority> authorities) {
+    public UserPrincipal(Integer id, String email, String password,
+            Collection<? extends GrantedAuthority> authorities) {
         this.id = id;
         // this.name = name;
         // this.username = username;
         this.email = email;
         this.password = password;
         this.authorities = authorities;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
     public static UserPrincipal create(User user) {
@@ -56,18 +73,15 @@ public class UserPrincipal implements UserDetails {
         return id;
     }
 
-    public String getName() {
-        return name;
+    @Override
+    public String getUsername() {
+        return email;
     }
 
     public String getEmail() {
         return email;
     }
 
-    @Override
-    public String getUsername() {
-        return username;
-    }
 
     @Override
     public String getPassword() {

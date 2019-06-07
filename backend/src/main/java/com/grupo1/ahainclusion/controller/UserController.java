@@ -6,8 +6,11 @@ import java.util.Optional;
 
 import javax.validation.Valid;
 
+import com.grupo1.ahainclusion.auth.CurrentUser;
+import com.grupo1.ahainclusion.auth.UserPrincipal;
 import com.grupo1.ahainclusion.aux.payload.ApiResponse;
 import com.grupo1.ahainclusion.aux.payload.SignUpRequest;
+import com.grupo1.ahainclusion.aux.payload.UserSummary;
 import com.grupo1.ahainclusion.model.PerfilAccesibilidad;
 import com.grupo1.ahainclusion.model.PerfilLaboral;
 import com.grupo1.ahainclusion.model.Role;
@@ -24,6 +27,7 @@ import com.grupo1.ahainclusion.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -57,6 +61,15 @@ public class UserController {
     
     @Autowired
     private PerfilLaboralRepository perfilLaboralRepository;
+
+
+    // Obtener usuario logeado
+    @RequestMapping(path = "/me", method = RequestMethod.GET)
+    @PreAuthorize("hasRole('ROLE_CANDIDATO') or hasRole('ROLE_EMPRESA') or hasRole('ROLE_AHA')")
+    public @ResponseBody UserSummary getCurrentUser(@CurrentUser UserPrincipal currentUser) {
+        UserSummary userSummary = new UserSummary(currentUser.getId(), currentUser.getEmail(), currentUser.getEmail());
+        return userSummary;
+    }
 
     // Agregar usuario (Registrar)
     @RequestMapping(path = "/add", method = RequestMethod.POST)
