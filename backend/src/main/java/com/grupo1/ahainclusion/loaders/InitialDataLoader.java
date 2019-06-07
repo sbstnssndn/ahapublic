@@ -195,7 +195,7 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
       
     List<User> users = new ArrayList<>();
     
-    String url = "https://randomuser.me/api/?inc=gender,id,name,email&results="+n+"&nat=US";
+    String url = "https://randomuser.me/api/?inc=gender,id,name,email&results="+n+"&nat=US&seed=foobar";
     JSONArray results = Unirest.get(url).asJson().getBody().getObject().getJSONArray("results");
 
     for(int i=0;i<results.length();i++)
@@ -215,7 +215,7 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
 
 
       usr.setEmail(email);
-      usr.setPassword("hola");
+      usr.setPassword("hola123");
       usr.setPassword(passwordEncoder.encode(usr.getPassword()));
       usr.setRoles(Arrays.asList(role));
       usr.setEnabled(true);
