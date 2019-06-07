@@ -33,8 +33,8 @@ public class AuthController {
     @Autowired
     RoleRepository roleRepository;
 
-   @Autowired
-   PasswordEncoder passwordEncoder;
+    @Autowired
+    PasswordEncoder passwordEncoder;
 
     @Autowired
     JwtTokenProvider tokenProvider;

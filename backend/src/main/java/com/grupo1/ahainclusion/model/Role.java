@@ -40,4 +40,8 @@ public class Role {
   public void setPrivileges(final Collection<Privilege> privileges) {
     this.privileges = privileges;
   }
+
+public Role orElseThrow(Object object) {
+	return null;
+}
 }  
