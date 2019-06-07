@@ -31,6 +31,7 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -51,7 +52,7 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
   private OfertaRepository ofertaRepository;
 
   @Autowired
-  private PerfilAccesibilidadRepository perfilAccesibilidadRepository;
+  PasswordEncoder passwordEncoder;
 
   @Override
   @Transactional
@@ -118,6 +119,8 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
 
     empresa1.setPerfilEmpresa(pEmpresa1);
     empresa1.setEmail("contacto@lider.cl");
+    empresa1.setPassword("lider1234");
+    empresa1.setPassword(passwordEncoder.encode(empresa1.getPassword()));
     empresa1.setRoles(Arrays.asList(empresaRole));
     empresa1.setEnabled(true);
 
@@ -128,6 +131,8 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
 
     empresa2.setPerfilEmpresa(pEmpresa2);
     empresa2.setEmail("contacto@ripley.cl");
+    empresa2.setPassword("ripley1234");
+    empresa2.setPassword(passwordEncoder.encode(empresa2.getPassword()));
     empresa2.setRoles(Arrays.asList(empresaRole));
     empresa2.setEnabled(true);
     
@@ -194,7 +199,7 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
       
     List<User> users = new ArrayList<>();
     
-    String url = "https://randomuser.me/api/?inc=gender,id,name,email&results="+n+"&nat=US";
+    String url = "https://randomuser.me/api/?inc=gender,id,name,email&results="+n+"&nat=US&seed=foobar";
     JSONArray results = Unirest.get(url).asJson().getBody().getObject().getJSONArray("results");
 
     for(int i=0;i<results.length();i++)
@@ -214,7 +219,8 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
 
 
       usr.setEmail(email);
-      //usr.setPassword("");
+      usr.setPassword("hola123");
+      usr.setPassword(passwordEncoder.encode(usr.getPassword()));
       usr.setRoles(Arrays.asList(role));
       usr.setEnabled(true);
 
