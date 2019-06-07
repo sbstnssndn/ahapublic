@@ -15,9 +15,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 public class UserPrincipal implements UserDetails {
     private Integer id;
 
-    private String firstName;
-
-    private String lastName;
+    private String name;
 
     @JsonIgnore
     private String email;
@@ -27,30 +25,21 @@ public class UserPrincipal implements UserDetails {
 
     private Collection<? extends GrantedAuthority> authorities;
 
-    public UserPrincipal(Integer id, String email, String password,
+    public UserPrincipal(Integer id, String name, String email, String password,
             Collection<? extends GrantedAuthority> authorities) {
         this.id = id;
-        // this.name = name;
-        // this.username = username;
+        this.setName(name);
         this.email = email;
         this.password = password;
         this.authorities = authorities;
     }
 
-    public String getLastName() {
-        return lastName;
+    public String getName() {
+        return name;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public static UserPrincipal create(User user) {
@@ -58,15 +47,53 @@ public class UserPrincipal implements UserDetails {
                 new SimpleGrantedAuthority(role.getName())
         ).collect(Collectors.toList());
 
-        
-        return new UserPrincipal(
+        boolean isCandidato = false;
+        boolean isEmpresa = false;
+        boolean isAHA = false;
+
+        for (GrantedAuthority grantedAuthority : authorities) {
+            if ("ROLE_CANDIDATO".equals(grantedAuthority.getAuthority())) {
+                isCandidato = true;
+            }
+            if ("ROLE_EMPRESA".equals(grantedAuthority.getAuthority())) {
+                isEmpresa = true;
+            }
+            if ("ROLE_AHA".equals(grantedAuthority.getAuthority())) {
+                isAHA = true;
+            }
+        }
+
+        if(isCandidato) {
+            return new UserPrincipal(
                 user.getId(),
-                // user.getName(),
-                // user.getUsername(),
+                user.getPerfilCandidato().getFirstName(),
                 user.getEmail(),
                 user.getPassword(),
                 authorities
-        );
+            );
+        }
+
+        if(isEmpresa) {
+            return new UserPrincipal(
+                user.getId(),
+                user.getPerfilEmpresa().getNameEmpresa(),
+                user.getEmail(),
+                user.getPassword(),
+                authorities
+            );
+        }
+
+        if(isAHA) {
+            return new UserPrincipal(
+                user.getId(),
+                user.getPerfilAHA().getFirstName(),
+                user.getEmail(),
+                user.getPassword(),
+                authorities
+            );
+        }
+        
+        return null;
     }
 
     public Integer getId() {
