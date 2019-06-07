@@ -214,7 +214,7 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
 
 
       usr.setEmail(email);
-      //usr.setPassword("");
+      usr.setPassword("hola");
       usr.setRoles(Arrays.asList(role));
       usr.setEnabled(true);
 
