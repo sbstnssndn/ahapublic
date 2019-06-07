@@ -31,6 +31,7 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -51,7 +52,7 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
   private OfertaRepository ofertaRepository;
 
   @Autowired
-  private PerfilAccesibilidadRepository perfilAccesibilidadRepository;
+  PasswordEncoder passwordEncoder;
 
   @Override
   @Transactional
@@ -215,6 +216,7 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
 
       usr.setEmail(email);
       usr.setPassword("hola");
+      usr.setPassword(passwordEncoder.encode(usr.getPassword()));
       usr.setRoles(Arrays.asList(role));
       usr.setEnabled(true);
 

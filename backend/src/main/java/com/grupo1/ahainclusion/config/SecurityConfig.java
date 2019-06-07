@@ -57,4 +57,42 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http
+                .cors()
+                    .and()
+                .csrf()
+                    .disable()
+                .exceptionHandling()
+                    .authenticationEntryPoint(unauthorizedHandler)
+                    .and()
+                .sessionManagement()
+                    .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                    .and()
+                .authorizeRequests()
+                    .antMatchers("/",
+                        "/favicon.ico",
+                        "/**/*.png",
+                        "/**/*.gif",
+                        "/**/*.svg",
+                        "/**/*.jpg",
+                        "/**/*.html",
+                        "/**/*.css",
+                        "/**/*.js")
+                        .permitAll()
+                    .antMatchers("/auth/**")
+                        .permitAll()
+                    // .antMatchers("/user/checkUsernameAvailability", "/user/checkEmailAvailability")
+                        // .permitAll()
+                    .antMatchers(HttpMethod.GET,  "/user/**")
+                        .permitAll()
+                    .anyRequest()
+                        .authenticated();
+
+        // Filtro JWT
+        http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
+
+    }
 }
