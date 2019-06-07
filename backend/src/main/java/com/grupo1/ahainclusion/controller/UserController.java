@@ -67,7 +67,7 @@ public class UserController {
     @RequestMapping(path = "/me", method = RequestMethod.GET)
     @PreAuthorize("hasRole('ROLE_CANDIDATO') or hasRole('ROLE_EMPRESA') or hasRole('ROLE_AHA')")
     public @ResponseBody UserSummary getCurrentUser(@CurrentUser UserPrincipal currentUser) {
-        UserSummary userSummary = new UserSummary(currentUser.getId(), currentUser.getEmail(), currentUser.getEmail());
+        UserSummary userSummary = new UserSummary(currentUser.getId(), currentUser.getName(), currentUser.getEmail());
         return userSummary;
     }
 
