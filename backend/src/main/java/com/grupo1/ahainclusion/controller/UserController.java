@@ -144,7 +144,7 @@ public class UserController {
 
     cursoRepository.save(curso);
 
-    return "Curso Guardado en usuario: " + curso.getPerfilCandidato().getId();
+    return "Curso Guardado en usuario: " + curso.getPerfilLaboral().getId();
     }
 
     // Agregar un titulo a usuario
@@ -153,7 +153,7 @@ public class UserController {
 
     tituloRepository.save(titulo);
 
-    return "Titulo Guardado en usuario: " + titulo.getPerfilCandidato().getId();
+    return "Titulo Guardado en usuario: " + titulo.getPerfilLaboral().getId();
     }
 
 
