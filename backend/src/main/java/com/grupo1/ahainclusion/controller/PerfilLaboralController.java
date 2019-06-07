@@ -20,24 +20,6 @@ public class PerfilLaboralController {
     @Autowired
     private PerfilLaboralRepository perfilDiscapacidadRepository;
 
-    // Objeto "en blanco" para un nuevo perfil de discapacidad
-    @RequestMapping(path="/new", method = RequestMethod.GET)
-    public @ResponseBody PerfilLaboral NewPerfilDiscapacidad(){
-
-        PerfilLaboral p = new PerfilLaboral();
-
-        return p;
-    }
-
-    // Agregar Perfil Discapacidad
-    @RequestMapping(path="/add", method = RequestMethod.POST)
-    public @ResponseBody String addNewPerfilDiscapacidad(@RequestBody PerfilLaboral perfilDiscapacidad) {
-    
-        perfilDiscapacidadRepository.save(perfilDiscapacidad);
-
-        return "Perfil Discapacidad Guardado";
-    }
-
     // Obtener Perfiles Discapacidad
     @GetMapping(path="/all")
     public @ResponseBody Iterable<PerfilLaboral> gettAllPerfilesDiscapacidad() {
