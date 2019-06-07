@@ -5,12 +5,30 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import MasterForm from '../MasterForm/MasterForm';
 import Card from 'react-bootstrap/Card';
+import Button from 'react-bootstrap/Button';
+import Pagination from 'react-bootstrap/Pagination'
 
 
 class PanelPostulante extends Component {
 
+  state = {
+    steps: ['Paso 1', 'Paso 2', 'Paso 3'],
+  }
+
 
 	render () {
+
+    let steps = [];
+
+    for (let number = 1; number <= 3; number++) {
+      steps.push(
+        <Col xs md="3">
+          <Pagination.Item key={number} active={number === 1}>
+            {this.state.steps[number-1]}
+          </Pagination.Item>
+        </Col>
+      );
+    }
 
 
 		return (
@@ -31,23 +49,9 @@ class PanelPostulante extends Component {
 
 				<section id="acciones" className="py-4 bg-light">
 					<Container>
-						<Row>
-							<div className="col-md-3">
-								<a href="/" className="btn btn-primary btn-block" data-toggle="modal" data-target="#addPostModal">
-									<i className="fas fa-plus"></i> Add Post
-								</a>
-							</div>
-							<div className="col-md-3">
-								<a href="/" className="btn btn-success btn-block" data-toggle="modal" data-target="#addCategoryModal">
-									<i className="fas fa-plus"></i> Add Category
-								</a>
-							</div>
-							<div className="col-md-3">
-								<a href="/" className="btn btn-warning btn-block" data-toggle="modal" data-target="#addUserModal">
-									<i className="fas fa-plus"></i> Add User
-								</a>
-							</div>
-						</Row>
+						<Row className="justify-content-md-center">
+              {steps}
+            </Row>
 					</Container>
 				</section>
 
