@@ -29,12 +29,12 @@ const NavbarLanding = (props) => {
 								<span className="nav-link">Inicio</span>
 							</Nav.Link>
 						</LinkContainer>
-						<LinkContainer to="/postulantes">
+						<LinkContainer to="/postulantes/panel">
 							<Nav.Link>
 								<span className="nav-link">Postulantes</span>
 							</Nav.Link>
 						</LinkContainer>
-						<LinkContainer to="/empresas">
+						<LinkContainer to="/empresas/panel">
 							<Nav.Link>
 								<span className="nav-link">Empresas</span>
 							</Nav.Link>

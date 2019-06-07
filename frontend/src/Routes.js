@@ -12,17 +12,32 @@ const Routes = (props) => {
 				path="/postulantes/panel"
 				exact
 				component={() => (
-					<PanelPostulante stages={props.stagesPostulante} />
+					<PanelPostulante
+						stages={props.stagesPostulante}
+						tipoFormulario="postulante"
+					/>
+				)}
+			/>
+			<Route
+				path="/empresas/panel"
+				exact
+				component={() => (
+					<PanelPostulante
+						stages={props.stagesEmpresa}
+						tipoFormulario="empresa"
+					/>
 				)}
 			/>
 
 			<Route path="/recomendaciones" exact component={Recomendaciones} />
+			{/*
 			<Route path="/postulantes" exact component={() => (
 				<MasterForm stages={props.stagesPostulante} tipoFormulario="postulante" titulo={"Registro postulante"} />
 			)}/>
 			<Route path="/empresas" exact component={() => (
 				<MasterForm stages={props.stagesEmpresa} tipoFormulario="empresa" titulo={"Ingresar oferta"} />
 			)}/>
+			*/}
 			<Route path="/" exact component={Landing} />
 		</Switch>
 	);

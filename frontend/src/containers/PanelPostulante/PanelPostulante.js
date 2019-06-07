@@ -10,25 +10,7 @@ import Pagination from 'react-bootstrap/Pagination'
 
 class PanelPostulante extends Component {
 
-  state = {
-    steps: ['Paso 1', 'Paso 2', 'Paso 3'],
-  }
-
-
 	render () {
-
-    let steps = [];
-
-    for (let number = 1; number <= 3; number++) {
-      steps.push(
-        <Col xs md="3">
-          <Pagination.Item key={number} active={number === 1}>
-            {this.state.steps[number-1]}
-          </Pagination.Item>
-        </Col>
-      );
-    }
-
 
 		return (
 			<React.Fragment>
@@ -46,10 +28,10 @@ class PanelPostulante extends Component {
 					</div>
 				</header>
 
-				<section id="acciones" className="py-4 bg-light">
+				<section id="acciones" className="py-2 bg-light">
 					<Container>
 						<Row>
-              {steps}
+              
             </Row>
 					</Container>
 				</section>

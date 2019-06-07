@@ -5,6 +5,8 @@ import Button from 'react-bootstrap/Button'
 import axios from 'axios';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Stepper from '../../components/Stepper/Stepper';
 
 class MasterForm extends Component {
   
@@ -57,7 +59,7 @@ class MasterForm extends Component {
   }
 
   handleSubmit = (event) => {
-    event.preventDefault()
+    event.preventDefault();
     
     const formData = [];
     for (let index in this.state.stages) {
@@ -66,82 +68,27 @@ class MasterForm extends Component {
         formData[formElementIdentifier] = this.state.stages[index].inputs[formElementIdentifier].value;
       }
     }
-
     console.log(formData);
 
-    //alert("Datos ingresados!");
-    
-    //Según tipo de formulario, se requiere una api rest distinta para el guardado de datos
+    if (this.props.tipoFormulario === "postulante"){
 
-    // 1 -> Formulario de Postulante
-    if(this.props.tipoFormulario === "postulante"){
+			axios.post('http://localhost:8080/api/perfilDiscapacidad/add', formData)
+			.then(response => {
+				console.log(response.data);
+			}).catch(error => {
+				console.log(error);
+			});
 
-      /* Nuevo objeto de perfil de discapacidad */
-      axios.get('http://localhost:8080/api/perfilDiscapacidad/new')
-      .then(response => {
-        
-        console.log(response.data);
-        
-        /* Se asigna los valores del formulario al nuevo objeto*/
-        response.data.name = formData.firstName + " " + formData.lastName;
-        response.data.credencial = formData.credencial;
-        response.data.dAuditiva = formData.dAuditiva;
-        response.data.dFisica = formData.dFisica;
-        response.data.dIntelectual = formData.dIntelectual;
-        response.data.dPsiquica = formData.dPsiquica;
-        response.data.dVisual = formData.dVisual;
-        response.data.sillaDeRuedas = formData.sillaRuedas;
-        
-        console.log(response.data);
+    } else if (this.props.tipoFormulario === "oferta") {
 
-        /* Se guarda el objeto actualizado con los datos del formulario */
-        axios.post('http://localhost:8080/api/perfilDiscapacidad/add', response.data)
-        .then(response => {
-          console.log("Guardado exitoso");
-          /* Por ultimo se guarda los datos del usuario de la primera etapa del formulario */
-          /* Por implementar */
-        }).catch(error => {
-          console.log(error);
-        })
-
-      }).catch(error => {
-          console.log(error);
-      });
-
-    } else if(this.props.tipoFormulario === "oferta") {
-      console.log("Guardando dato oferta");
-      
-      /* Nuevo objeto de perfil de accesibilidad */
-      axios.get('http://localhost:8080/api/perfilAccesibilidad/new')
-      .then(response => {
-        
-        console.log(response.data);
-        
-        /* Se asigna los valores del formulario al nuevo objeto*/
-        response.data.name = formData.cargo;
-        response.data.accesoSilla = formData.sillaRuedas;
-        response.data.cAuditiva = formData.dAuditiva;
-        response.data.cFisica = formData.dFisica;
-        response.data.cIntelectual = formData.dIntelectual;
-        response.data.cPsiquica = formData.dPsiquica;
-        response.data.cVisual = formData.dVisual;
-        
-        console.log(response.data);
-
-        /* Se guarda el objeto actualizado con los datos del formulario */
-        axios.post('http://localhost:8080/api/perfilAccesibilidad/add', response.data)
-        .then(response => {
-          console.log("Guardado exitoso");
-        }).catch(error => {
-          console.log(error);
-        })
-
-      }).catch(error => {
-          console.log(error);
-      });
+			axios.post('http://localhost:8080/api/perfilAccesibilidad/add', formData)
+			.then(response => {
+				console.log(response.data);
+			}).catch(error => {
+				console.log(error);
+			});
       
     }
-
     //window.location.href = "http://localhost:3000/";
   }
 
@@ -150,6 +97,12 @@ class MasterForm extends Component {
       stages: this.props.stages,
       tipoFormulario: this.props.tipoFormulario
     })
+	}
+	
+	_goto = (stage) => {
+    this.setState({
+      currentStage: stage
+    });
   }
 
   _next = () => {
@@ -178,7 +131,7 @@ class MasterForm extends Component {
 
     if (currentStage !== firstStage){
         return (
-          <Button variant="secondary" onClick={this._prev} className="mx-4 px-4">
+          <Button variant="secondary" onClick={this._prev}>
           Volver
           </Button>
         );
@@ -192,7 +145,7 @@ class MasterForm extends Component {
 
 		if (currentStage < lastStage){
 				return (
-				<Button variant="primary" onClick={this._next} className="mx-4"> 
+				<Button variant="primary" onClick={this._next}> 
 				Siguiente
 				</Button>        
 				);
@@ -201,6 +154,11 @@ class MasterForm extends Component {
   }
   
   render () {
+
+		let stageTitles = [];
+		this.state.stages.map(stage => (
+			stageTitles.push(stage.title)
+		))
 
     let stages = (
       this.state.stages.map(stage => (
@@ -219,7 +177,7 @@ class MasterForm extends Component {
     let sendButton = null;
     if (this.state.currentStage === this.state.totalStages - 1) {
       sendButton = (
-        <Button variant="success" className="mx-4">
+        <Button variant="success">
           Guardar datos
         </Button>
       )
@@ -228,15 +186,20 @@ class MasterForm extends Component {
     return (
       <React.Fragment>
         <Container fluid>
+					<Stepper currentStage={this.state.currentStage} totalStages={this.state.totalStages} goto={this._goto} stageTitles={stageTitles} />
           {/*<h1>{this.props.titulo} - {this.props.tipoFormulario}</h1>*/}
           <form onSubmit={this.handleSubmit}>
-            {stages}
+            { stages }
             <ProgressBar />
 						<Container>
-							<Row className="justify-content-md-center">
+							<Row>
+								<Col md={6} className="text-left">
 								{ this.botonAnterior() }
+								</Col>
+								<Col md={6} className="text-right">
 								{ sendButton }
 								{ this.botonSiguiente() }
+								</Col>
 							</Row>
 						</Container>
           </form>
