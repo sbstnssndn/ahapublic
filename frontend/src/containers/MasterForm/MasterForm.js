@@ -4,7 +4,6 @@ import ProgressBar from '../../components/ProgressBar/ProgressBar';
 import Button from 'react-bootstrap/Button'
 import axios from 'axios';
 import Container from 'react-bootstrap/Container';
-import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 
 class MasterForm extends Component {

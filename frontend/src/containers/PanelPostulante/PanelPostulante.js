@@ -5,7 +5,6 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import MasterForm from '../MasterForm/MasterForm';
 import Card from 'react-bootstrap/Card';
-import Button from 'react-bootstrap/Button';
 import Pagination from 'react-bootstrap/Pagination'
 
 
@@ -49,7 +48,7 @@ class PanelPostulante extends Component {
 
 				<section id="acciones" className="py-4 bg-light">
 					<Container>
-						<Row className="justify-content-md-center">
+						<Row>
               {steps}
             </Row>
 					</Container>
