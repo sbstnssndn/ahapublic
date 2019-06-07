@@ -4,6 +4,8 @@ import ProgressBar from '../../components/ProgressBar/ProgressBar';
 import Button from 'react-bootstrap/Button'
 import axios from 'axios';
 import Container from 'react-bootstrap/Container';
+import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
 
 class MasterForm extends Component {
   
@@ -177,7 +179,7 @@ class MasterForm extends Component {
 
     if (currentStage !== firstStage){
         return (
-          <Button variant="secondary" onClick={this._prev}>
+          <Button variant="secondary" onClick={this._prev} className="mx-4 px-4">
           Volver
           </Button>
         );
@@ -191,7 +193,7 @@ class MasterForm extends Component {
 
 		if (currentStage < lastStage){
 				return (
-				<Button variant="primary" onClick={this._next}> 
+				<Button variant="primary" onClick={this._next} className="mx-4"> 
 				Siguiente
 				</Button>        
 				);
@@ -218,7 +220,7 @@ class MasterForm extends Component {
     let sendButton = null;
     if (this.state.currentStage === this.state.totalStages - 1) {
       sendButton = (
-        <Button variant="success">
+        <Button variant="success" className="mx-4">
           Guardar datos
         </Button>
       )
@@ -231,9 +233,13 @@ class MasterForm extends Component {
           <form onSubmit={this.handleSubmit}>
             {stages}
             <ProgressBar />
-            { sendButton }
-            { this.botonAnterior() }
-            { this.botonSiguiente() }
+						<Container>
+							<Row className="justify-content-md-center">
+								{ this.botonAnterior() }
+								{ sendButton }
+								{ this.botonSiguiente() }
+							</Row>
+						</Container>
           </form>
 				</Container>
       </React.Fragment>

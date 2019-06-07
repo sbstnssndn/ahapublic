@@ -12,7 +12,7 @@ const Routes = (props) => {
 				path="/postulantes/panel"
 				exact
 				component={() => (
-					<PanelPostulante stages={props.stagesEmpresa} />
+					<PanelPostulante stages={props.stagesPostulante} />
 				)}
 			/>
 

@@ -30,7 +30,7 @@ class PanelPostulante extends Component {
 				</header>
 
 				<section id="acciones" className="py-4 bg-light">
-					<Container>
+					<Container className="px-0">
 						<Row>
 							<div className="col-md-3">
 								<a href="/" className="btn btn-primary btn-block" data-toggle="modal" data-target="#addPostModal">
@@ -55,7 +55,11 @@ class PanelPostulante extends Component {
 					<Container>
 						<Row>
 							<Col md={9} className="px-0">
-								<MasterForm stages={this.props.stages} tipoFormulario="postulante" titulo={"Registro postulante"} />
+								<Card>
+									<Card.Header className="p-2">
+										<MasterForm stages={this.props.stages} tipoFormulario="postulante" titulo={"Registro postulante"} />
+									</Card.Header>
+								</Card>
 							</Col>
 							<Col md={3}>
 								<Card variant="primary" bg="primary" text="white" className="text-center mb-3">
@@ -66,7 +70,7 @@ class PanelPostulante extends Component {
 										<h4>Cuenta usuario</h4>
 									</Card.Body>
 								</Card>
-								<Card variant="primary" bg="success" text="white" className="text-center mb-3">
+								<Card variant="primary" bg="primary" text="white" className="text-center mb-3">
 									<Card.Body>
 										<h2>
 											<i className="fas fa-address-card"></i>
@@ -74,7 +78,7 @@ class PanelPostulante extends Component {
 										<h4>Datos personales</h4>
 									</Card.Body>
 								</Card>
-								<Card variant="primary" bg="warning" text="white" className="text-center mb-3">
+								<Card variant="primary" bg="primary" text="white" className="text-center mb-3">
 									<Card.Body>
 										<h2>
 											<i className="fas fa-briefcase"></i>
