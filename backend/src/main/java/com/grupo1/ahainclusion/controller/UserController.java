@@ -30,7 +30,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -161,26 +160,53 @@ public class UserController {
         return usr.get().getPerfilCandidato().getPerfilLaboral();
     }
 
-    // Agregar un curso a usuario
-    @RequestMapping(path="/addCurso", method = RequestMethod.POST)
+    // Agregar un curso
+    @RequestMapping(path="/curso", method = RequestMethod.POST)
     //SOLO USUARIOS CANDIDATO O AHA
     //@PreAuthorize("hasRole('ROLE_CANDIDATO') or hasRole('ROLE_AHA')")
-    public @ResponseBody String addCursoToUser (@RequestBody Curso curso) {
+    public @ResponseBody String addCursoToUser (@CurrentUser UserPrincipal currentUser, 
+                                                @RequestBody Curso curso) {
 
-    cursoRepository.save(curso);
 
-    return "Curso Guardado en usuario: " + curso.getPerfilLaboral().getId();
+        User user = userRepository.findById(currentUser.getId()).get();
+        curso.setPerfilLaboral(user.getPerfilCandidato().getPerfilLaboral());
+        cursoRepository.save(curso);
+
+        return "Curso Guardado en usuario: " + user.getPerfilCandidato().getFirstName();
     }
 
-    // Agregar un titulo a usuario
-    @RequestMapping(path="/addTitulo", method = RequestMethod.POST)
+    // Obtener Cursos
+    @RequestMapping(path = "/curso", method = RequestMethod.GET)
     //SOLO USUARIOS CANDIDATO O AHA
     //@PreAuthorize("hasRole('ROLE_CANDIDATO') or hasRole('ROLE_AHA')")
-    public @ResponseBody String addTituloToUser (@RequestBody Titulo titulo) {
+    public @ResponseBody Iterable<Curso> getCursos(@CurrentUser UserPrincipal currentUser) {
 
-    tituloRepository.save(titulo);
+        Optional<User> usr = userRepository.findById(currentUser.getId());
+        return usr.get().getPerfilCandidato().getPerfilLaboral().getCursos();
+    }
 
-    return "Titulo Guardado en usuario: " + titulo.getPerfilLaboral().getId();
+    // Agregar un titulo
+    @RequestMapping(path="/titulo", method = RequestMethod.POST)
+    //SOLO USUARIOS CANDIDATO O AHA
+    //@PreAuthorize("hasRole('ROLE_CANDIDATO') or hasRole('ROLE_AHA')")
+    public @ResponseBody String addTituloToUser (@CurrentUser UserPrincipal currentUser,
+                                                 @RequestBody Titulo titulo) {
+
+        User user = userRepository.findById(currentUser.getId()).get();
+        titulo.setPerfilLaboral(user.getPerfilCandidato().getPerfilLaboral());
+        tituloRepository.save(titulo);
+
+        return "Titulo Guardado en usuario: " + user.getPerfilCandidato().getFirstName();
+    }
+
+    // Obtener Titulos
+    @RequestMapping(path = "/titulo", method = RequestMethod.GET)
+    //SOLO USUARIOS CANDIDATO O AHA
+    //@PreAuthorize("hasRole('ROLE_CANDIDATO') or hasRole('ROLE_AHA')")
+    public @ResponseBody Iterable<Titulo> getTitulos(@CurrentUser UserPrincipal currentUser) {
+
+        Optional<User> usr = userRepository.findById(currentUser.getId());
+        return usr.get().getPerfilCandidato().getPerfilLaboral().getTitulos();
     }
 
 
