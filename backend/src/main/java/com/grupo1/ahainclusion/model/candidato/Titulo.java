@@ -8,6 +8,7 @@ import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.grupo1.ahainclusion.model.PerfilCandidato;
+import com.grupo1.ahainclusion.model.PerfilLaboral;
 
 @Entity
 public class Titulo {
@@ -20,21 +21,21 @@ public class Titulo {
     // Institucion: nombre de institucion donde se cursó.
     private String institucion;
 
-    // Perfil Candidato padre
+    // Perfil Laboral padre
     @ManyToOne
     @JsonBackReference
-    private PerfilCandidato perfilCandidato;
+    private PerfilLaboral perfilLaboral;
 
     public String getName() {
         return name;
     }
 
-    public PerfilCandidato getPerfilCandidato() {
-        return perfilCandidato;
+    public PerfilLaboral getPerfilLaboral() {
+        return perfilLaboral;
     }
 
-    public void setPerfilCandidato(PerfilCandidato perfilCandidato) {
-        this.perfilCandidato = perfilCandidato;
+    public void setPerfilLaboral(PerfilLaboral perfilLaboral) {
+        this.perfilLaboral = perfilLaboral;
     }
 
     public String getInstitucion() {
