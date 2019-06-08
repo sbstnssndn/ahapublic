@@ -112,13 +112,17 @@ public class UserController {
     }
 
     // Obtener Usuarios
-    @GetMapping(path = "/all")
+    @RequestMapping(path = "/all", method = RequestMethod.GET)
+    //SOLO USUARIOS AHA DEBERIAN PODER VER A TODOS LOS USUARIOS DESPUES
+    //@PreAuthorize("hasRole('ROLE_AHA'")
     public @ResponseBody Iterable<User> getAllUsers() {
         return userRepository.findAll();
     }
 
     // Agregar Perfil Accesibilidad
     @RequestMapping(path = "/perfilAccesibilidad", method = RequestMethod.POST)
+    //SOLO USUARIOS EMPRESA O AHA
+    //@PreAuthorize("hasRole('ROLE_EMPRESA') or hasRole('ROLE_AHA')")
     public @ResponseBody String addNewPerfilAccesibilidad(@RequestBody PerfilAccesibilidad perfilAccesibilidad) {
 
         perfilAccesibilidadRepository.save(perfilAccesibilidad);
@@ -128,14 +132,18 @@ public class UserController {
 
     // Obtener Perfiles Accesibilidad
     @RequestMapping(path = "/perfilAccesibilidad", method = RequestMethod.GET)
-    public @ResponseBody Iterable<PerfilAccesibilidad> getPerfilAccesibilidadByUser(@RequestBody User user) {
+    //SOLO USUARIOS EMPRESA O AHA
+    //@PreAuthorize("hasRole('ROLE_EMPRESA') or hasRole('ROLE_AHA')")
+    public @ResponseBody Iterable<PerfilAccesibilidad> getPerfilAccesibilidadByUser(@CurrentUser UserPrincipal currentUser) {
 
-        Optional<User> usr = userRepository.findById(user.getId());
+        Optional<User> usr = userRepository.findById(currentUser.getId());
         return usr.get().getPerfilEmpresa().getPerfilesAccesibilidad();
     }
 
     // Agregar Perfil Laboral
     @RequestMapping(path = "/perfilLaboral", method = RequestMethod.POST)
+    //SOLO USUARIOS CANDIDATO O AHA
+    //@PreAuthorize("hasRole('ROLE_CANDIDATO') or hasRole('ROLE_AHA')")
     public @ResponseBody String addNewPerfilLaboral(@RequestBody PerfilLaboral perfilLaboral) {
 
         perfilLaboralRepository.save(perfilLaboral);
@@ -145,14 +153,18 @@ public class UserController {
 
     // Obtener Perfil Laboral
     @RequestMapping(path = "/perfilLaboral", method = RequestMethod.GET)
-    public @ResponseBody PerfilLaboral getPerfilLaboral(@RequestBody User user) {
+    //SOLO USUARIOS CANDIDATO O AHA
+    //@PreAuthorize("hasRole('ROLE_CANDIDATO') or hasRole('ROLE_AHA')")
+    public @ResponseBody PerfilLaboral getPerfilLaboral(@CurrentUser UserPrincipal currentUser) {
 
-        Optional<User> usr = userRepository.findById(user.getId());
+        Optional<User> usr = userRepository.findById(currentUser.getId());
         return usr.get().getPerfilCandidato().getPerfilLaboral();
     }
 
     // Agregar un curso a usuario
     @RequestMapping(path="/addCurso", method = RequestMethod.POST)
+    //SOLO USUARIOS CANDIDATO O AHA
+    //@PreAuthorize("hasRole('ROLE_CANDIDATO') or hasRole('ROLE_AHA')")
     public @ResponseBody String addCursoToUser (@RequestBody Curso curso) {
 
     cursoRepository.save(curso);
@@ -162,6 +174,8 @@ public class UserController {
 
     // Agregar un titulo a usuario
     @RequestMapping(path="/addTitulo", method = RequestMethod.POST)
+    //SOLO USUARIOS CANDIDATO O AHA
+    //@PreAuthorize("hasRole('ROLE_CANDIDATO') or hasRole('ROLE_AHA')")
     public @ResponseBody String addTituloToUser (@RequestBody Titulo titulo) {
 
     tituloRepository.save(titulo);
