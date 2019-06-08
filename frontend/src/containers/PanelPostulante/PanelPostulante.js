@@ -5,7 +5,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import MasterForm from '../MasterForm/MasterForm';
 import Card from 'react-bootstrap/Card';
-import Pagination from 'react-bootstrap/Pagination'
+//import Pagination from 'react-bootstrap/Pagination'
 
 
 class PanelPostulante extends Component {
@@ -32,7 +32,7 @@ class PanelPostulante extends Component {
 					<Container>
 						<Row>
               
-            </Row>
+            			</Row>
 					</Container>
 				</section>
 

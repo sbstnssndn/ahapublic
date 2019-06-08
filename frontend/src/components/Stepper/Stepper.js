@@ -4,7 +4,7 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Tooltip from 'react-bootstrap/Tooltip';
-import { LinkContainer } from 'react-router-bootstrap';
+//import { LinkContainer } from 'react-router-bootstrap';
 
 const Stepper = (props) => {
 

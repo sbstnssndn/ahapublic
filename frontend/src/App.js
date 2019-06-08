@@ -100,6 +100,21 @@ function App() {
           },
           value: ''
         },
+        bañoAdaptado: {
+          label: '¿Requiere baño adaptado?',
+          inputStyle: 'select',
+          inputConfig: {
+            name: 'bañoAdaptado',
+            id: 'bañoAdaptado',
+            options: [
+              { value: '', displayValue: 'Seleccione...', disabled: true },
+              { value: 'true', displayValue: 'Si' },
+              { value: 'false', displayValue: 'No' }
+            ]
+          },
+          value: ''
+        },
+        
         dAuditiva: {
           label: 'Grado de discapacidad auditiva',
           inputStyle: 'select',
@@ -182,6 +197,15 @@ function App() {
               { value: '75', displayValue: '75%' },
               { value: '100', displayValue: '100%' },
             ]
+          },
+          value: ''
+        },
+        adecuaciones: {
+          label: 'Indique si requiere de otras adecuaciones',
+          inputStyle: 'textarea',
+          inputConfig:{
+            name: 'adecuaciones',
+            id: 'adecuaciones'
           },
           value: ''
         }
@@ -403,6 +427,9 @@ function App() {
       id: 2,
       title: 'Experiencia laboral',
       inputs: {
+        licencia: {
+
+        },
         nivelEducacional: {
           label: 'Nivel educacional',
           inputStyle: 'select',
@@ -475,7 +502,334 @@ function App() {
       }
     }
   ]
-	/*
+
+  const stagesPreguntas =
+  [
+    {
+      id: 0,
+      title: "Preguntas (1/2)",
+      inputs: {
+        permanecerPie: {
+          label: '¿Puedes permanecer en pie?',
+          inputStyle: 'select',
+          inputConfig: {
+            name: 'permanecerPie',
+            id: 'permanecerPie',
+            options: [
+              { value: '', displayValue: 'Seleccione...', disabled: true },
+              { value: '0', displayValue: '0%' },
+              { value: '25', displayValue: '25%' },
+              { value: '50', displayValue: '50%' },
+              { value: '75', displayValue: '75%' },
+              { value: '100', displayValue: '100%' },
+            ]
+          },
+          value: ''
+        },
+        permanecerSentado: {
+          label: '¿Puedes permanecer sentado?',
+          inputStyle: 'select',
+          inputConfig: {
+            name: 'permanecerSentado',
+            id: 'permanecerSentado',
+            options: [
+              { value: '', displayValue: 'Seleccione...', disabled: true },
+              { value: '0', displayValue: '0%' },
+              { value: '25', displayValue: '25%' },
+              { value: '50', displayValue: '50%' },
+              { value: '75', displayValue: '75%' },
+              { value: '100', displayValue: '100%' },
+            ]
+          },
+          value: ''
+        },
+        desplazoTrayectos: {
+          label: '¿Puedes desplazarte en trayectos, con o sin ayuda técnica?',
+          inputStyle: 'select',
+          inputConfig: {
+            name: 'desplazoTrayectos',
+            id: 'desplazoTrayectos',
+            options: [
+              { value: '', displayValue: 'Seleccione...', disabled: true },
+              { value: '0', displayValue: '0%' },
+              { value: '25', displayValue: '25%' },
+              { value: '50', displayValue: '50%' },
+              { value: '75', displayValue: '75%' },
+              { value: '100', displayValue: '100%' },
+            ]
+          },
+          value: ''
+        },
+        diferentesPisos: {
+          label: '¿Puedes realizar actividades en diferentes pisos?',
+          inputStyle: 'select',
+          inputConfig: {
+            name: 'diferentesPisos',
+            id: 'diferentesPisos',
+            options: [
+              { value: '', displayValue: 'Seleccione...', disabled: true },
+              { value: '0', displayValue: '0%' },
+              { value: '25', displayValue: '25%' },
+              { value: '50', displayValue: '50%' },
+              { value: '75', displayValue: '75%' },
+              { value: '100', displayValue: '100%' },
+            ]
+          },
+          value: ''
+        },
+        diferentesAlturas: {
+          label: '¿Puedes alcanzar o coger objetos en diferentes alturas?',
+          inputStyle: 'select',
+          inputConfig: {
+            name: 'diferentesAlturas',
+            id: 'diferentesAlturas',
+            options: [
+              { value: '', displayValue: 'Seleccione...', disabled: true },
+              { value: '0', displayValue: '0%' },
+              { value: '25', displayValue: '25%' },
+              { value: '50', displayValue: '50%' },
+              { value: '75', displayValue: '75%' },
+              { value: '100', displayValue: '100%' },
+            ]
+          },
+          value: ''
+        },
+        objetosPequeños: {
+          label: '¿Puedes usar herramientas u objetos pequeños?',
+          inputStyle: 'select',
+          inputConfig: {
+            name: 'objetosPequeños',
+            id: 'objetosPequeños',
+            options: [
+              { value: '', displayValue: 'Seleccione...', disabled: true },
+              { value: '0', displayValue: '0%' },
+              { value: '25', displayValue: '25%' },
+              { value: '50', displayValue: '50%' },
+              { value: '75', displayValue: '75%' },
+              { value: '100', displayValue: '100%' },
+            ]
+          },
+          value: ''
+        },
+        actividadesVisual: {
+          label: '¿Puedes realizar actividades que requieren agudeza visual corta y larga distancia?',
+          inputStyle: 'select',
+          inputConfig: {
+            name: 'actividadesVisual',
+            id: 'actividadesVisual',
+            options: [
+              { value: '', displayValue: 'Seleccione...', disabled: true },
+              { value: '0', displayValue: '0%' },
+              { value: '25', displayValue: '25%' },
+              { value: '50', displayValue: '50%' },
+              { value: '75', displayValue: '75%' },
+              { value: '100', displayValue: '100%' },
+            ]
+          },
+          value: ''
+        },
+        actividadesAuditiva: {
+          label: '¿Puedes comunicarte de manera oral y fluida?',
+          inputStyle: 'select',
+          inputConfig: {
+            name: 'actividadesAuditiva',
+            id: 'actividadesAuditiva',
+            options: [
+              { value: '', displayValue: 'Seleccione...', disabled: true },
+              { value: '0', displayValue: '0%' },
+              { value: '25', displayValue: '25%' },
+              { value: '50', displayValue: '50%' },
+              { value: '75', displayValue: '75%' },
+              { value: '100', displayValue: '100%' },
+            ]
+          },
+          value: ''
+        }
+      }
+    },
+    {
+      id: 1,
+      title: "Preguntas (2/2)",
+      inputs: {
+        comunicacionOral: {
+          label: '¿Puedes comunicarte de manera oral y fluida?',
+          inputStyle: 'select',
+          inputConfig: {
+            name: 'comunicacionOral',
+            id: 'comunicacionOral',
+            options: [
+              { value: '', displayValue: 'Seleccione...', disabled: true },
+              { value: '0', displayValue: '0%' },
+              { value: '25', displayValue: '25%' },
+              { value: '50', displayValue: '50%' },
+              { value: '75', displayValue: '75%' },
+              { value: '100', displayValue: '100%' },
+            ]
+          },
+          value: ''
+        },
+        leerEscribir: {
+          label: '¿Puedes leer y escribir?',
+          inputStyle: 'select',
+          inputConfig: {
+            name: 'leerEscribir',
+            id: 'leerEscribir',
+            options: [
+              { value: '', displayValue: 'Seleccione...', disabled: true },
+              { value: '0', displayValue: '0%' },
+              { value: '25', displayValue: '25%' },
+              { value: '50', displayValue: '50%' },
+              { value: '75', displayValue: '75%' },
+              { value: '100', displayValue: '100%' },
+            ]
+          },
+          value: ''
+        },
+        situacionesNuevas: {
+          label: '¿Te adaptas a situaciones de trabajo nuevas?',
+          inputStyle: 'select',
+          inputConfig: {
+            name: 'situacionesNuevas',
+            id: 'situacionesNuevas',
+            options: [
+              { value: '', displayValue: 'Seleccione...', disabled: true },
+              { value: '0', displayValue: '0%' },
+              { value: '25', displayValue: '25%' },
+              { value: '50', displayValue: '50%' },
+              { value: '75', displayValue: '75%' },
+              { value: '100', displayValue: '100%' },
+            ]
+          },
+          value: ''
+        },
+        trabajoEquipo: {
+          label: '¿Te adaptas a trabajo en equipo con varias personas?',
+          inputStyle: 'select',
+          inputConfig: {
+            name: 'trabajoEquipo',
+            id: 'trabajoEquipo',
+            options: [
+              { value: '', displayValue: 'Seleccione...', disabled: true },
+              { value: '0', displayValue: '0%' },
+              { value: '25', displayValue: '25%' },
+              { value: '50', displayValue: '50%' },
+              { value: '75', displayValue: '75%' },
+              { value: '100', displayValue: '100%' },
+            ]
+          },
+          value: ''
+        },
+        situacionesConflicto: {
+          label: '¿Te adaptas a situaciones tensiones y conflicto?',
+          inputStyle: 'select',
+          inputConfig: {
+            name: 'situacionesConflicto',
+            id: 'situacionesConflicto',
+            options: [
+              { value: '', displayValue: 'Seleccione...', disabled: true },
+              { value: '0', displayValue: '0%' },
+              { value: '25', displayValue: '25%' },
+              { value: '50', displayValue: '50%' },
+              { value: '75', displayValue: '75%' },
+              { value: '100', displayValue: '100%' },
+            ]
+          },
+          value: ''
+        },
+        resolverProblemas: {
+          label: '¿Te adaptas para resolver problemas?',
+          inputStyle: 'select',
+          inputConfig: {
+            name: 'resolverProblemas',
+            id: 'resolverProblemas',
+            options: [
+              { value: '', displayValue: 'Seleccione...', disabled: true },
+              { value: '0', displayValue: '0%' },
+              { value: '25', displayValue: '25%' },
+              { value: '50', displayValue: '50%' },
+              { value: '75', displayValue: '75%' },
+              { value: '100', displayValue: '100%' },
+            ]
+          },
+          value: ''
+        },
+        tareasEstresantes: {
+          label: '¿Te manejas para desarrollar tareas estresantes?',
+          inputStyle: 'select',
+          inputConfig: {
+            name: 'tareasEstresantes',
+            id: 'tareasEstresantes',
+            options: [
+              { value: '', displayValue: 'Seleccione...', disabled: true },
+              { value: '0', displayValue: '0%' },
+              { value: '25', displayValue: '25%' },
+              { value: '50', displayValue: '50%' },
+              { value: '75', displayValue: '75%' },
+              { value: '100', displayValue: '100%' },
+            ]
+          },
+          value: ''
+        },
+      }
+    },
+    {
+      id: 2 ,
+      title: 'Disponibilidad',
+      inputs: {
+        disponibilidad: {
+          label: 'Indique disponibilidad',
+          inputStyle: 'select',
+          inputConfig: {
+            name: 'disponibilidad',
+            id: 'disponibilidad',
+            options: [
+              { value: '', displayValue: 'Seleccione...', disabled: true },
+              { value: '0', displayValue: 'Lunes a viernes' },
+              { value: '1', displayValue: 'Sábados, Domingos y festivos' },
+              { value: '2', displayValue: 'Cualquier día' },
+            ]
+          },
+          value: ''
+        },
+        expectativaSueldo: {
+          label: 'Indique expectativa de sueldo',
+          inputStyle: 'select',
+          inputConfig: {
+            name: 'expectativaSueldo',
+            id: 'expectativaSueldo',
+            options: [
+              { value: '', displayValue: 'Seleccione...', disabled: true },
+              { value: '0', displayValue: 'Hasta 301.000' },
+              { value: '1', displayValue: '301.0001 a 400.000' },
+              { value: '2', displayValue: '400.001 a 550.000' },
+              { value: '3', displayValue: '550.001 a 650.000' },
+              { value: '4', displayValue: '650.001 a 800.000' },
+              { value: '5', displayValue: '800.001 a 1.000.000' },
+              { value: '6', displayValue: '1.000.000 o más' }
+            ]
+          },
+          value: ''
+        },
+        ayudaFormulario: {
+          label: '¿Requirió de ayuda para completar el formulario?',
+          inputStyle: 'select',
+          inputConfig: {
+            name: 'ayudaFormulario',
+            id: 'ayudaFormulario',
+            options: [
+              { value: '', displayValue: 'Seleccione...', disabled: true },
+              { value: '0', displayValue: 'No' },
+              { value: '1', displayValue: 'Si, parcial' },
+              { value: '2', displayValue: 'Completamente'}
+            ]
+          },
+          value: ''
+        }
+      }
+    }
+  ]
+  
+  /*
   const regiones = [
     {
       region: "Región Metropolitana de Santiago",
@@ -604,7 +958,11 @@ function App() {
 	*/
 	
   return (
-		<Routes stagesPostulante={stagesPostulante} stagesEmpresa={stagesEmpresa} />
+    <Routes 
+      stagesPostulante={stagesPostulante} 
+      stagesEmpresa={stagesEmpresa} 
+      stagesPreguntas={stagesPreguntas}
+    />
   );
 }
 

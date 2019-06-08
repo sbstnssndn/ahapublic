@@ -24,26 +24,37 @@ const NavbarLanding = (props) => {
 
 				<Navbar.Collapse id="responsive-navbar-nav">
 					<Nav className="mr-auto">
+						
 						<LinkContainer to="/">
 							<Nav.Link>
 								<span className="nav-link">Inicio</span>
 							</Nav.Link>
 						</LinkContainer>
+						
 						<LinkContainer to="/postulantes/panel">
 							<Nav.Link>
 								<span className="nav-link">Postulantes</span>
 							</Nav.Link>
 						</LinkContainer>
+						
 						<LinkContainer to="/empresas/panel">
 							<Nav.Link>
 								<span className="nav-link">Empresas</span>
 							</Nav.Link>
 						</LinkContainer>
+						
+						<LinkContainer to="/postulantes/preguntas">
+							<Nav.Link>
+								<span className="nav-link">Preguntas</span>
+							</Nav.Link>
+						</LinkContainer>
+
 						<LinkContainer to="/recomendaciones">
 							<Nav.Link>
 								<span className="nav-link">Recomendaciones</span>
 							</Nav.Link>
 						</LinkContainer>
+
 						{/*
 						<NavDropdown title="Dropdown" id="collasible-nav-dropdown">
 							<NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>

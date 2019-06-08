@@ -2,7 +2,6 @@ import React from "react";
 import { Route, Switch } from "react-router-dom";
 import Landing from './containers/Landing/Landing';
 import Recomendaciones from './containers/Recomendaciones/Recomendaciones';
-import MasterForm from './containers/MasterForm/MasterForm';
 import PanelPostulante from './containers/PanelPostulante/PanelPostulante';
 
 const Routes = (props) => {
@@ -28,6 +27,15 @@ const Routes = (props) => {
 					/>
 				)}
 			/>
+			<Route
+				path="/postulantes/preguntas"
+				exact
+				component={() => (
+					<PanelPostulante
+						stages={props.stagesPreguntas}
+					/>
+				)}
+			/>
 
 			<Route path="/recomendaciones" exact component={Recomendaciones} />
 			{/*
@@ -38,6 +46,9 @@ const Routes = (props) => {
 				<MasterForm stages={props.stagesEmpresa} tipoFormulario="empresa" titulo={"Ingresar oferta"} />
 			)}/>
 			*/}
+
+			<Route path="/logout" exact component={Landing} />
+
 			<Route path="/" exact component={Landing} />
 		</Switch>
 	);

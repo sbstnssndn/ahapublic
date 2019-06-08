@@ -69,7 +69,7 @@ class MasterForm extends Component {
       }
     }
     console.log(formData);
-
+    /*
     if (this.props.tipoFormulario === "postulante"){
 
 			axios.post('http://localhost:8080/api/perfilDiscapacidad/add', formData)
@@ -88,7 +88,7 @@ class MasterForm extends Component {
 				console.log(error);
 			});
       
-    }
+    }*/
     //window.location.href = "http://localhost:3000/";
   }
 
@@ -177,7 +177,7 @@ class MasterForm extends Component {
     let sendButton = null;
     if (this.state.currentStage === this.state.totalStages - 1) {
       sendButton = (
-        <Button variant="success">
+        <Button variant="success" onClick={this.handleSubmit}>
           Guardar datos
         </Button>
       )
