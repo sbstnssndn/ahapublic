@@ -956,10 +956,137 @@ function App() {
     }
   ];
 	*/
+
+	const formPostulante =
+	{
+		title: "Información postulante",
+		belongsTo: "postulante",
+		endpoint: "http://localhost:8080/api/postulante/:id/datos-personales",
+		totalStages: 3,
+		stages: [
+			{
+				id: 0,
+				name: "Identificación",
+				fields: {
+					rut: {
+						label: 'RUT',
+						elementType: 'input',
+						elementConfig: {
+							type: 'text',
+							placeholder: '12345678-0',
+							name: 'rut',
+							id: 'rut'
+						},
+						value: ''
+					},
+					firstName: {
+						label: 'Nombres',
+						elementType: 'input',
+						elementConfig: {
+							type: 'text',
+							placeholder: 'Juan Alberto',
+							name: 'firstName',
+							id: 'firstName'
+						},
+						value: ''
+					},
+					lastName: {
+						label: 'Apellidos',
+						elementType: 'input',
+						elementConfig: {
+							type: 'text',
+							placeholder: 'Pérez Soto',
+							name: 'lastName',
+							id: 'lastName'
+						},
+						value: ''
+					}
+				}
+			},
+			{
+				id: 1,
+				name: "Contacto",
+				fields: {
+					email: {
+						label: 'Correo electrónico de contacto',
+						elementType: 'input',
+						elementConfig: {
+							type: 'email',
+							placeholder: 'juan.perez@gmail.com',
+							name: 'email',
+							id: 'email'
+						},
+						value: ''
+					},
+					telefono: {
+						label: 'Teléfono',
+						elementType: 'input',
+						elementConfig: {
+							type: 'text',
+							placeholder: '+56912345678',
+							name: 'telefono',
+							id: 'telefono'
+						},
+						value: ''
+					},
+					telefono2: {
+						label: 'Teléfono alternativo',
+						elementType: 'input',
+						elementConfig: {
+							type: 'text',
+							placeholder: '+56987654321',
+							name: 'telefono2',
+							id: 'telefono2'
+						},
+						value: ''
+					}
+				}
+			},
+			{
+				id: 2,
+				name: "Ubicación",
+				fields: {
+					calle: {
+						label: 'Calle y número',
+						elementType: 'input',
+						elementConfig: {
+							type: 'text',
+							placeholder: 'Av. Pajaritos 1234',
+							name: 'calle',
+							id: 'calle'
+						},
+						value: ''
+					},
+					region: {
+						label: 'Región',
+						elementType: 'input',
+						elementConfig: {
+							type: 'text',
+							placeholder: 'Región Metropolitana',
+							name: 'region',
+							id: 'region'
+						},
+						value: ''
+					},
+					comuna: {
+						label: 'Comuna',
+						elementType: 'input',
+						elementConfig: {
+							type: 'text',
+							placeholder: 'Maipú',
+							name: 'comuna',
+							id: 'comuna'
+						},
+						value: ''
+					},
+				}
+			}  
+		]
+	}
 	
   return (
     <Routes 
-      stagesPostulante={stagesPostulante} 
+      formPostulante={formPostulante} 
       stagesEmpresa={stagesEmpresa} 
       stagesPreguntas={stagesPreguntas}
     />

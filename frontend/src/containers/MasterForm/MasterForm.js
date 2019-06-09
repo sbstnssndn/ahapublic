@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import Stage from './Stage/Stage';
-
 import axios from 'axios';
-
 import Stepper from './Stepper/Stepper';
 import StageControls from './StageControls/StageControls';
 import Card from 'react-bootstrap/Card';
@@ -12,120 +10,13 @@ class MasterForm extends Component {
   
   state = {
 		currentStage: 0,
-		form: {
-			category: "Datos personales",
-			belongsTo: "postulante",
-			endpoint: "http://localhost:8080/api/postulante/:id/datos-personales",
-			totalStages: 2,
-			stages: [
-				{
-					id: 0,
-					name: "Identificación",
-					fields: {
-						rut: {
-							label: 'RUT',
-							elementType: 'input',
-							elementConfig: {
-								type: 'text',
-								placeholder: '12345678-0',
-								name: 'rut',
-								id: 'rut'
-							},
-							value: ''
-						},
-						firstName: {
-							label: 'Nombres',
-							elementType: 'input',
-							elementConfig: {
-								type: 'text',
-								placeholder: 'Juan Alberto',
-								name: 'firstName',
-								id: 'firstName'
-							},
-							value: ''
-						},
-						lastName: {
-							label: 'Apellidos',
-							elementType: 'input',
-							elementConfig: {
-								type: 'text',
-								placeholder: 'Pérez Soto',
-								name: 'lastName',
-								id: 'lastName'
-							},
-							value: ''
-						},
-						location: {
-							label: 'Dirección',
-							elementType: 'input',
-							elementConfig: {
-								type: 'text',
-								placeholder: 'Av. Pajaritos 754, casa 64',
-								name: 'location',
-								id: 'location'
-							},
-							value: ''
-						}
-					}
-				},
-				{
-					id: 1,
-					name: "Ubicación",
-					fields: {
-						rut: {
-							label: 'RUT',
-							elementType: 'input',
-							elementConfig: {
-								type: 'text',
-								placeholder: '12345678-0',
-								name: 'rut',
-								id: 'rut'
-							},
-							value: ''
-						},
-						firstName: {
-							label: 'Nombres',
-							elementType: 'input',
-							elementConfig: {
-								type: 'text',
-								placeholder: 'Juan Alberto',
-								name: 'firstName',
-								id: 'firstName'
-							},
-							value: ''
-						},
-						lastName: {
-							label: 'Apellidos',
-							elementType: 'input',
-							elementConfig: {
-								type: 'text',
-								placeholder: 'Pérez Soto',
-								name: 'lastName',
-								id: 'lastName'
-							},
-							value: ''
-						},
-						location: {
-							label: 'Dirección',
-							elementType: 'input',
-							elementConfig: {
-								type: 'text',
-								placeholder: 'Av. Pajaritos 754, casa 64',
-								name: 'location',
-								id: 'location'
-							},
-							value: ''
-						}
-					}
-				}  
-			]
-		}
+		formData: ''
 	}
 
 	// handleChange(event, firstName)
   handleChange = (event, inputIdentifier) => {
 	 	const updatedForm = {
-			...this.state.form
+			...this.props.formConfig
 		}
 		const updatedStages = {
 			...updatedForm.stages
@@ -161,21 +52,29 @@ class MasterForm extends Component {
       form: updatedForm
     });
 	}
-	
-	handleSubmitForm = (event) => {
-		event.preventDefault();
 
-		const formData = [];
-    for (let index in this.state.stages) {
-      // para cada etapa, extraer los ids y values de los campos
-      for (let formElementIdentifier in this.state.stages[index].inputs) {
-        formData[formElementIdentifier] = this.state.stages[index].inputs[formElementIdentifier].value;
+	componentDidMount() {
+		console.log(this.props)
+	}
+
+  handleSubmit = (event) => {
+    event.preventDefault();
+    
+		// extraer los datos de cada form, dentro de cada etapa
+		let payload = Object.create(null);
+    for (let index in this.props.formConfig.stages) {
+      for (let formElementIdentifier in this.props.formConfig.stages[index].fields) {
+				// poblar objeto con todos los datos del formulario
+				payload[formElementIdentifier] = this.props.formConfig.stages[index].fields[formElementIdentifier].value;
       }
-    }
+		}
+		console.log(payload)
+		//window.location.href = "http://localhost:3000/";
+		/*
 		let method = 'HOLA';
 		switch( method.toLowerCase() ) {
 			case 'get':
-				axios.get(this.state.stages.endpoint)
+				axios.get(this.props.formConfig.endpoint)
 					.then(response => {
 						console.log(response);
 						this.setState({postulante: response.data});
@@ -185,7 +84,7 @@ class MasterForm extends Component {
 					})
 				break;
 			case 'post':
-				axios.post(this.state.stages.endpoint, formData)
+				axios.post(this.props.formConfig.endpoint, payload)
 					.then(response => {
 						console.log(response);
 					})
@@ -193,26 +92,10 @@ class MasterForm extends Component {
 						console.log(error);
 					})
 				break;
-		}
-	}
-
-  handleSubmit = (event) => {
-    event.preventDefault();
-    
-    const formData = [];
-    for (let index in this.state.stages) {
-      // para cada etapa, extraer los ids y values de los campos
-      for (let formElementIdentifier in this.state.stages[index].inputs) {
-        formData[formElementIdentifier] = this.state.stages[index].inputs[formElementIdentifier].value;
-      }
-    }
-    console.log(formData);
-    //window.location.href = "http://localhost:3000/";
+			default:
+				break;
+		}*/
   }
-
-  componentDidMount() {
-
-	}
 	
 	_goto = (stage) => {
     this.setState({
@@ -222,7 +105,7 @@ class MasterForm extends Component {
 
   _next = () => {
     let currentStage = this.state.currentStage;
-    let lastStage = this.state.form.totalStages - 1;
+    let lastStage = this.props.formConfig.totalStages - 1;
 
     currentStage = currentStage >= lastStage - 1 ? lastStage : currentStage + 1;
     this.setState({
@@ -249,7 +132,7 @@ class MasterForm extends Component {
   render () {
 
 		let stages = (
-			this.state.form.stages.map(stage => (
+			this.props.formConfig.stages.map(stage => (
 				<Stage
 					key={stage.id}
 					title={stage.name}
@@ -257,31 +140,31 @@ class MasterForm extends Component {
 					// stageFields = { apellidos: {elementConfig: {}, elementType: '', ...}, nombres: {}, ... }
 					stageFields={stage.fields}
 					currentStage={this.state.currentStage}
-					totalStages={this.state.form.totalStages}
+					totalStages={this.props.formConfig.totalStages}
 					handleChange={this.handleChange}
 				/>
 			))
 		);
 
 		let stageTitlesArray = [];
-		for (let stage in this.state.form.stages) {
-			stageTitlesArray.push(this.state.form.stages[stage].name);
+		for (let stage in this.props.formConfig.stages) {
+			stageTitlesArray.push(this.props.formConfig.stages[stage].name);
 		}
 
     return (
 			<Card>
-				<Card.Header as="h5">{this.state.form.category}</Card.Header>
+				<Card.Header as="h5">{this.props.formConfig.category}</Card.Header>
 				<Card.Body>
 					<Stepper
 						currentStage={this.state.currentStage}
-						totalStages={this.state.form.totalStages}
+						totalStages={this.props.formConfig.totalStages}
 						stageTitles={stageTitlesArray}
 						goto={this._goto}
 					/>
 					<form onSubmit={this.handleSubmit}>
 						{ stages }
 						<StageControls
-							totalStages={this.state.form.totalStages}
+							totalStages={this.props.formConfig.totalStages}
 							currentStage={this.state.currentStage}
 							_prev={this._prev}
 							_next={this._next}

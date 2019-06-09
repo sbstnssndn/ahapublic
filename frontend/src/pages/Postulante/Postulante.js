@@ -3,7 +3,7 @@ import NavbarPanel from '../../components/NavbarPanel/NavbarPanel';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import MasterForm from '../containers/MasterForm/MasterForm';
+import MasterForm from '../../containers/MasterForm/MasterForm';
 import Card from 'react-bootstrap/Card';
 import Footer from '../../components/Footer/Footer';
 //import Pagination from 'react-bootstrap/Pagination'
@@ -43,29 +43,15 @@ class Postulante extends Component {
 							<Col md={9} className="px-0">
 								<Card>
 									<Card.Header className="p-2">
-
-
-
+										
 										<MasterForm
-											stages={this.props.stages}
-											tipoFormulario="postulante"
-											titulo={"Registro postulante"}
+											formConfig={this.props.formPostulante}
 										/>
 
-
-										
 									</Card.Header>
 								</Card>
 							</Col>
 							<Col md={3}>
-								<Card variant="primary" bg="primary" text="white" className="text-center mb-3">
-									<Card.Body>
-										<h2>
-											<i className="fas fa-user"></i>
-										</h2>
-										<h4>Cuenta usuario</h4>
-									</Card.Body>
-								</Card>
 								<Card variant="primary" bg="primary" text="white" className="text-center mb-3">
 									<Card.Body>
 										<h2>
@@ -81,7 +67,15 @@ class Postulante extends Component {
 										</h2>
 										<h4>Datos laborales</h4>
 									</Card.Body>
-								</Card>					
+								</Card>
+								<Card variant="primary" bg="primary" text="white" className="text-center mb-3">
+									<Card.Body>
+										<h2>
+											<i className="fas fa-user"></i>
+										</h2>
+										<h4>Cuenta usuario</h4>
+									</Card.Body>
+								</Card>
 							</Col>
 						</Row>
 					</Container>

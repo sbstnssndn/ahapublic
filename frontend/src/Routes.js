@@ -3,16 +3,29 @@ import { Route, Switch } from "react-router-dom";
 import Landing from './pages/Landing/Landing';
 import Recomendaciones from './containers/Recomendaciones/Recomendaciones';
 import PanelPostulante from './containers/PanelPostulante/PanelPostulante';
+import Postulante from "./pages/Postulante/Postulante";
 
 const Routes = (props) => {
+	/*
+		<Route
+			path="/postulantes/panel"
+			exact
+			component={() => (
+				<PanelPostulante
+					stages={props.stagesPostulante}
+					tipoFormulario="postulante"
+				/>
+			)}
+		/>
+	*/
 	return (
 		<Switch>
 			<Route
 				path="/postulantes/panel"
 				exact
 				component={() => (
-					<PanelPostulante
-						stages={props.stagesPostulante}
+					<Postulante
+						formPostulante={props.formPostulante}
 						tipoFormulario="postulante"
 					/>
 				)}
