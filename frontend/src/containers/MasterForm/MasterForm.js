@@ -57,6 +57,15 @@ class MasterForm extends Component {
       stages: updatedStagesArray
     });
   }
+  
+  addWork = (event) => {
+    event.preventDefault();
+    console.log(this.state);
+    console.log(this.props.tipoFormulario);
+    /////////////////////////////////////////////////////////////////////////////////////////////
+    /* Llenar de alguna forma en el JSON los nuevos campos para nuevas experiencias anteriores */
+    /////////////////////////////////////////////////////////////////////////////////////////////
+  }
 
   handleSubmit = (event) => {
     event.preventDefault();
@@ -174,12 +183,23 @@ class MasterForm extends Component {
       ))
     )
 
+    
+
     let sendButton = null;
     if (this.state.currentStage === this.state.totalStages - 1) {
-      sendButton = (
-        <Button variant="success" onClick={this.handleSubmit}>
-          Guardar datos
-        </Button>
+      if (this.props.tipoFormulario === "postulante") {
+        sendButton = (
+          <Button variant="success" onClick={this.handleSubmit}>
+            Guardar datos
+          </Button>
+        )
+      }
+    }
+
+    let newWork = null;
+    if (this.state.currentStage === this.state.totalStages - 1){
+      newWork = (
+        <Button onClick={ this.addWork }> + </Button>
       )
     }
 
@@ -189,6 +209,7 @@ class MasterForm extends Component {
 					<Stepper currentStage={this.state.currentStage} totalStages={this.state.totalStages} goto={this._goto} stageTitles={stageTitles} />
           {/*<h1>{this.props.titulo} - {this.props.tipoFormulario}</h1>*/}
           <form onSubmit={this.handleSubmit}>
+            { newWork }
             { stages }
             <ProgressBar />
 						<Container>

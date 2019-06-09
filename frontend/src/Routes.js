@@ -33,6 +33,7 @@ const Routes = (props) => {
 				component={() => (
 					<PanelPostulante
 						stages={props.stagesPreguntas}
+						tipoFormulario="Preguntas"
 					/>
 				)}
 			/>
