@@ -1,6 +1,6 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
-import Landing from './containers/Landing/Landing';
+import Landing from './pages/Landing/Landing';
 import Recomendaciones from './containers/Recomendaciones/Recomendaciones';
 import PanelPostulante from './containers/PanelPostulante/PanelPostulante';
 

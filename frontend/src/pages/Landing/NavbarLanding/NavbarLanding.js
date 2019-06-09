@@ -6,7 +6,7 @@ import Container from 'react-bootstrap/Container';
 import { Link } from 'react-router-dom';
 import { LinkContainer } from 'react-router-bootstrap'
  
-import logo from './../../assets/img/aha-logo.png';
+import logo from '../../../assets/img/aha-logo.png';
 import styles from './NavbarLanding.module.css';
 
 const NavbarLanding = (props) => {

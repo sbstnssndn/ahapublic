@@ -1,62 +1,200 @@
 import React, { Component } from 'react';
-import Stage from '../../components/Stage/Stage';
-import ProgressBar from '../../components/ProgressBar/ProgressBar';
-import Button from 'react-bootstrap/Button'
+import Stage from './Stage/Stage';
+
 import axios from 'axios';
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-import Stepper from '../../components/Stepper/Stepper';
+
+import Stepper from './Stepper/Stepper';
+import StageControls from './StageControls/StageControls';
+import Card from 'react-bootstrap/Card';
+
 
 class MasterForm extends Component {
   
   state = {
-    currentStage: 0,
-    totalStages: 3,
-    stages: []
-  }
+		currentStage: 0,
+		form: {
+			category: "Datos personales",
+			belongsTo: "postulante",
+			endpoint: "http://localhost:8080/api/postulante/:id/datos-personales",
+			totalStages: 2,
+			stages: [
+				{
+					id: 0,
+					name: "Identificación",
+					fields: {
+						rut: {
+							label: 'RUT',
+							elementType: 'input',
+							elementConfig: {
+								type: 'text',
+								placeholder: '12345678-0',
+								name: 'rut',
+								id: 'rut'
+							},
+							value: ''
+						},
+						firstName: {
+							label: 'Nombres',
+							elementType: 'input',
+							elementConfig: {
+								type: 'text',
+								placeholder: 'Juan Alberto',
+								name: 'firstName',
+								id: 'firstName'
+							},
+							value: ''
+						},
+						lastName: {
+							label: 'Apellidos',
+							elementType: 'input',
+							elementConfig: {
+								type: 'text',
+								placeholder: 'Pérez Soto',
+								name: 'lastName',
+								id: 'lastName'
+							},
+							value: ''
+						},
+						location: {
+							label: 'Dirección',
+							elementType: 'input',
+							elementConfig: {
+								type: 'text',
+								placeholder: 'Av. Pajaritos 754, casa 64',
+								name: 'location',
+								id: 'location'
+							},
+							value: ''
+						}
+					}
+				},
+				{
+					id: 1,
+					name: "Ubicación",
+					fields: {
+						rut: {
+							label: 'RUT',
+							elementType: 'input',
+							elementConfig: {
+								type: 'text',
+								placeholder: '12345678-0',
+								name: 'rut',
+								id: 'rut'
+							},
+							value: ''
+						},
+						firstName: {
+							label: 'Nombres',
+							elementType: 'input',
+							elementConfig: {
+								type: 'text',
+								placeholder: 'Juan Alberto',
+								name: 'firstName',
+								id: 'firstName'
+							},
+							value: ''
+						},
+						lastName: {
+							label: 'Apellidos',
+							elementType: 'input',
+							elementConfig: {
+								type: 'text',
+								placeholder: 'Pérez Soto',
+								name: 'lastName',
+								id: 'lastName'
+							},
+							value: ''
+						},
+						location: {
+							label: 'Dirección',
+							elementType: 'input',
+							elementConfig: {
+								type: 'text',
+								placeholder: 'Av. Pajaritos 754, casa 64',
+								name: 'location',
+								id: 'location'
+							},
+							value: ''
+						}
+					}
+				}  
+			]
+		}
+	}
 
-  handleChange = (event, currentStage, inputIdentifier) => {
-    /* TO DO: Mejorar performance de esta función 
-    *  No es necesario convertir a obj y luego a array
-    *  Creo que tampoco es necesario hacer tanto spread
-    *  para elementos de 'stage' que no van a mutar
-    */
-
-    // copiar el estado actual de las etapas. NO MUTAR!
-    const updatedStages = {
-      ...this.state.stages
-    }
-    
-    const updatedCurrentStage = {
-      ...updatedStages[currentStage]
-    }
-
-    const updatedInputs = {
-      ...updatedCurrentStage.inputs
-    }
-
-    const updatedFormInput = {
-      ...updatedInputs[inputIdentifier]
-    }
-    
-    updatedFormInput.value = event.target.value;
-
-    updatedStages[currentStage].inputs[inputIdentifier] = updatedFormInput;
-
-    const updatedStagesArray = Object.values(updatedStages)
-  
-    /* el objeto event tiene la propiedad target,
-    * que a su vez, tiene las propiedades name y value
-    * se extraen estas propiedades para manejar
-    * cualquier tipo de evento en un form con
-    * name = event.target.name
-    */
-    //const {name, value} = event.target;
+	// handleChange(event, firstName)
+  handleChange = (event, inputIdentifier) => {
+	 	const updatedForm = {
+			...this.state.form
+		}
+		const updatedStages = {
+			...updatedForm.stages
+		}
+		const updatedCurrentStage = {
+			...updatedStages[this.state.currentStage]
+		}
+		const updatedStageFields = {
+			...updatedCurrentStage.fields
+		}
+		const updatedFormElement = {
+			...updatedStageFields[inputIdentifier]
+		}
+		/* objeto clonado para no mutar el estado al cambiar "value"
+		updatedFormElement = {
+			"elementType": "input",
+			"elementConfig": {
+				"type": "text",
+				"placeholder": "Juan Alberto"
+			},
+			"value": "",
+			"rules": {
+				"required": true
+			},
+			"valid": false
+			}
+		*/
+		updatedFormElement.value = event.target.value;
+		// guardar en el clon del form original, el nuevo elemento del formulario
+		updatedForm.stages[this.state.currentStage].fields[inputIdentifier] = updatedFormElement;
+		
     this.setState({
-      stages: updatedStagesArray
+      form: updatedForm
     });
-  }
+	}
+	
+	handleSubmitForm = (event) => {
+		event.preventDefault();
+
+		const formData = [];
+    for (let index in this.state.stages) {
+      // para cada etapa, extraer los ids y values de los campos
+      for (let formElementIdentifier in this.state.stages[index].inputs) {
+        formData[formElementIdentifier] = this.state.stages[index].inputs[formElementIdentifier].value;
+      }
+    }
+		let method = 'HOLA';
+		switch( method.toLowerCase() ) {
+			case 'get':
+				axios.get(this.state.stages.endpoint)
+					.then(response => {
+						console.log(response);
+						this.setState({postulante: response.data});
+					})
+					.catch(function(error){
+						console.log(error);
+					})
+				break;
+			case 'post':
+				axios.post(this.state.stages.endpoint, formData)
+					.then(response => {
+						console.log(response);
+					})
+					.catch(function(error){
+						console.log(error);
+					})
+				break;
+		}
+	}
 
   handleSubmit = (event) => {
     event.preventDefault();
@@ -69,34 +207,11 @@ class MasterForm extends Component {
       }
     }
     console.log(formData);
-    /*
-    if (this.props.tipoFormulario === "postulante"){
-
-			axios.post('http://localhost:8080/api/perfilDiscapacidad/add', formData)
-			.then(response => {
-				console.log(response.data);
-			}).catch(error => {
-				console.log(error);
-			});
-
-    } else if (this.props.tipoFormulario === "oferta") {
-
-			axios.post('http://localhost:8080/api/perfilAccesibilidad/add', formData)
-			.then(response => {
-				console.log(response.data);
-			}).catch(error => {
-				console.log(error);
-			});
-      
-    }*/
     //window.location.href = "http://localhost:3000/";
   }
 
   componentDidMount() {
-    this.setState({
-      stages: this.props.stages,
-      tipoFormulario: this.props.tipoFormulario
-    })
+
 	}
 	
 	_goto = (stage) => {
@@ -107,7 +222,7 @@ class MasterForm extends Component {
 
   _next = () => {
     let currentStage = this.state.currentStage;
-    let lastStage = this.state.totalStages - 1;
+    let lastStage = this.state.form.totalStages - 1;
 
     currentStage = currentStage >= lastStage - 1 ? lastStage : currentStage + 1;
     this.setState({
@@ -124,90 +239,58 @@ class MasterForm extends Component {
         currentStage: currentStage
       });
   }
-
-  botonAnterior() {
-    let currentStage = this.state.currentStage;
-    let firstStage = 0;
-
-    if (currentStage !== firstStage){
-        return (
-          <Button variant="secondary" onClick={this._prev}>
-          Volver
-          </Button>
-        );
-    }
-    return null;
-  }
-
-  botonSiguiente(){
-		let currentStage = this.state.currentStage;
-		let lastStage = this.state.totalStages - 1;
-
-		if (currentStage < lastStage){
-				return (
-				<Button variant="primary" onClick={this._next}> 
-				Siguiente
-				</Button>        
-				);
-		}
-		return null;
-  }
+	
+	onChange = (event) => {
+		this.setState({
+			stages: 'onChange triggered'
+		})
+	}
   
   render () {
 
-		let stageTitles = [];
-		this.state.stages.map(stage => (
-			stageTitles.push(stage.title)
-		))
+		let stages = (
+			this.state.form.stages.map(stage => (
+				<Stage
+					key={stage.id}
+					title={stage.name}
+					id={stage.id}
+					// stageFields = { apellidos: {elementConfig: {}, elementType: '', ...}, nombres: {}, ... }
+					stageFields={stage.fields}
+					currentStage={this.state.currentStage}
+					totalStages={this.state.form.totalStages}
+					handleChange={this.handleChange}
+				/>
+			))
+		);
 
-    let stages = (
-      this.state.stages.map(stage => (
-        <Stage
-          key={stage.id}
-          id={stage.id}
-          title={stage.title}
-          inputs={stage.inputs}
-          handleChange={this.handleChange}
-          currentStage={this.state.currentStage}
-          totalStages={this.state.totalStages}
-        />
-      ))
-    )
-
-    let sendButton = null;
-    if (this.state.currentStage === this.state.totalStages - 1) {
-      sendButton = (
-        <Button variant="success" onClick={this.handleSubmit}>
-          Guardar datos
-        </Button>
-      )
-    }
+		let stageTitlesArray = [];
+		for (let stage in this.state.form.stages) {
+			stageTitlesArray.push(this.state.form.stages[stage].name);
+		}
 
     return (
-      <React.Fragment>
-        <Container fluid>
-					<Stepper currentStage={this.state.currentStage} totalStages={this.state.totalStages} goto={this._goto} stageTitles={stageTitles} />
-          {/*<h1>{this.props.titulo} - {this.props.tipoFormulario}</h1>*/}
-          <form onSubmit={this.handleSubmit}>
-            { stages }
-            <ProgressBar />
-						<Container>
-							<Row>
-								<Col md={6} className="text-left">
-								{ this.botonAnterior() }
-								</Col>
-								<Col md={6} className="text-right">
-								{ sendButton }
-								{ this.botonSiguiente() }
-								</Col>
-							</Row>
-						</Container>
-          </form>
-				</Container>
-      </React.Fragment>
+			<Card>
+				<Card.Header as="h5">{this.state.form.category}</Card.Header>
+				<Card.Body>
+					<Stepper
+						currentStage={this.state.currentStage}
+						totalStages={this.state.form.totalStages}
+						stageTitles={stageTitlesArray}
+						goto={this._goto}
+					/>
+					<form onSubmit={this.handleSubmit}>
+						{ stages }
+						<StageControls
+							totalStages={this.state.form.totalStages}
+							currentStage={this.state.currentStage}
+							_prev={this._prev}
+							_next={this._next}
+						/>
+					</form>
+				</Card.Body>
+			</Card>
     );
   }
-
 }
 
 export default MasterForm;

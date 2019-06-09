@@ -4,11 +4,11 @@ const Input = (props) => {
 
   let inputElement = null;
 
-  switch ( props.inputStyle ) {
+  switch ( props.elementType ) {
     case ('input'):
       inputElement = <input 
         onChange={props.handleChange}
-        {...props.inputConfig}
+        {...props.elementConfig}
         value={props.value}
         className="form-control"
       />;
@@ -16,7 +16,7 @@ const Input = (props) => {
     case ('textarea'):
       inputElement = <textarea
         onChange={props.handleChange}
-        {...props.inputConfig}
+        {...props.elementConfig}
         value={props.value}
         className="form-control"
       />;
@@ -25,12 +25,12 @@ const Input = (props) => {
       inputElement = (
         <select 
           onChange={props.handleChange}
-          name={props.inputConfig.name}
-          id={props.inputConfig.id}
+          name={props.elementConfig.name}
+          id={props.elementConfig.id}
           value={props.value}
           className="form-control"
         >
-          {props.inputConfig.options.map(option => (
+          {props.elementConfig.options.map(option => (
             <option
               key={option.value}
               value={option.value}
@@ -45,7 +45,7 @@ const Input = (props) => {
     default:
       inputElement = <input
         onChange={props.handleChange}
-        {...props.inputConfig}
+        {...props.elementConfig}
         value={props.value}
         className="form-control"
       />
