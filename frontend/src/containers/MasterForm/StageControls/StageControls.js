@@ -38,7 +38,7 @@ const StageControls = (props) => {
 	if (touched) {
 		sendButton = (
 			<Button variant="success" type="submit">
-				Guardar datos
+				Guardar
 			</Button>
 		)
 	}
@@ -46,13 +46,13 @@ const StageControls = (props) => {
   return (
 		<Container fluid>
 			<Row>
-				<Col md={4} className="text-left">
+				<Col xs={4} className="text-left px-0">
 				{ prevButton }
 				</Col>
-				<Col md={4} className="text-center">
+				<Col xs={4} className="text-center px-0">
 				{ sendButton }
 				</Col>
-				<Col md={4} className="text-right">
+				<Col xs={4} className="text-right px-0">
 				{ nextButton }
 				</Col>
 			</Row>

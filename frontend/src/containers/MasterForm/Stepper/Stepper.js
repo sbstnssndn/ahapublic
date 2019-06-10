@@ -12,20 +12,22 @@ const Stepper = (props) => {
 	let items = [];
 	
 	for (let number = 1; number <= total; number++) {
+		// TODO: cambiar tooltip por alguna otra forma de visualización
+		// React-bootstrap tiene un bug en versiones móviles: no desaparece el tooltip.
 		items.push(
 			<OverlayTrigger
 				key={number}
 				placement="bottom"
 				overlay={
 					<Tooltip id={`tooltip-bottom`}>
-						<strong>{props.stageTitles[number-1]}</strong>
+						{props.stageTitles[number-1]}
 					</Tooltip>
 				}
 			>
 				<Pagination.Item active={number === props.currentStage+1} onClick={() => props.goto(number-1)}>
 					{number}
 				</Pagination.Item>
-			</OverlayTrigger>,
+			</OverlayTrigger>
 		);
 	}
 

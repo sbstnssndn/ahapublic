@@ -40,16 +40,13 @@ class Postulante extends Component {
 				<section id="formularios">
 					<Container>
 						<Row>
-							<Col md={9} className="px-0">
-								<Card>
-									<Card.Header className="p-2">
-										
+							<Col md={9} className="">
+								
 										<MasterForm
 											formConfig={this.props.formPostulante}
 										/>
 
-									</Card.Header>
-								</Card>
+								
 							</Col>
 							<Col md={3}>
 								<Card variant="primary" bg="primary" text="white" className="text-center mb-3">

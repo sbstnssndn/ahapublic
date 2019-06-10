@@ -33,7 +33,6 @@ const Stage = (props) => {
 
   return (
     <React.Fragment>
-      <h2>{props.title}</h2>
       { inputElementsArray }
     </React.Fragment>
   );

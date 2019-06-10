@@ -152,8 +152,10 @@ class MasterForm extends Component {
 		}
 
     return (
-			<Card>
-				<Card.Header as="h5">{this.props.formConfig.category}</Card.Header>
+			<Card className="mb-4">
+				<Card.Header>
+					{this.props.formConfig.stages[this.state.currentStage].name}
+				</Card.Header>
 				<Card.Body>
 					<Stepper
 						currentStage={this.state.currentStage}
