@@ -24,11 +24,6 @@ const NavbarPanel = (props) => (
 
 					<Navbar.Collapse id="responsive-navbar-nav">
 						<Nav>
-							<LinkContainer to="/cuenta-usuario" className="px-4">
-								<Nav.Link>
-									Mi cuenta
-								</Nav.Link>
-							</LinkContainer>
 							<LinkContainer to="/postulantes/datos-personales" className="px-4">
 								<Nav.Link>
 									Datos personales
@@ -36,7 +31,12 @@ const NavbarPanel = (props) => (
 							</LinkContainer>
 							<LinkContainer to="/postulantes/perfil-laboral" className="px-4">
 								<Nav.Link>
-									Perfil laboral
+									Datos laborales
+								</Nav.Link>
+							</LinkContainer>
+							<LinkContainer to="/cuenta-usuario" className="px-4">
+								<Nav.Link>
+									Mi cuenta
 								</Nav.Link>
 							</LinkContainer>
 							{/*

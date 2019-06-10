@@ -5,288 +5,7 @@ import './App.css';
 
 function App() {
 
-  const stagesPostulante =
-  [
-    {
-      id: 0,
-      title: 'Datos de usuario',
-      inputs: {
-        rut: {
-          label: 'RUT',
-          inputStyle: 'input',
-          inputConfig: {
-            type: 'text',
-            placeholder: '12345678-0',
-            name: 'rut',
-            id: 'rut'
-          },
-          value: ''
-        },
-        firstName: {
-          label: 'Nombres',
-          inputStyle: 'input',
-          inputConfig: {
-            type: 'text',
-            placeholder: 'Juan Alberto',
-            name: 'firstName',
-            id: 'firstName'
-          },
-          value: ''
-        },
-        lastName: {
-          label: 'Apellidos',
-          inputStyle: 'input',
-          inputConfig: {
-            type: 'text',
-            placeholder: 'Pérez Soto',
-            name: 'lastName',
-            id: 'lastName'
-          },
-          value: ''
-        },
-        location: {
-          label: 'Dirección',
-          inputStyle: 'input',
-          inputConfig: {
-            type: 'text',
-            placeholder: 'Av. Pajaritos 754, casa 64',
-            name: 'location',
-            id: 'location'
-          },
-          value: ''
-        },
-        email: {
-          label: 'Correo electrónico',
-          inputStyle: 'input',
-          inputConfig: {
-            type: 'email',
-            placeholder: 'juan.perez@gmail.com',
-            name: 'email',
-            id: 'email'
-          },
-          value: ''
-        }
-      }
-    },
-    {
-      id: 1,
-      title: 'Datos de discapacidad',
-      inputs: {
-        credencial: {
-          label: '¿Tiene credencial de discapacidad?',
-          inputStyle: 'select',
-          inputConfig: {
-            name: 'credencial',
-            id: 'credencial',
-            options: [
-              { value: '', displayValue: 'Seleccione...', disabled: true },
-              { value: 'true', displayValue: 'Si' },
-              { value: 'false', displayValue: 'No' }
-            ]
-          },
-          value: ''
-        },
-        sillaRuedas: {
-          label: '¿Utiliza silla de ruedas?',
-          inputStyle: 'select',
-          inputConfig: {
-            name: 'sillaRuedas',
-            id: 'sillaRuedas',
-            options: [
-              { value: '', displayValue: 'Seleccione...', disabled: true },
-              { value: 'true', displayValue: 'Si' },
-              { value: 'false', displayValue: 'No' }
-            ]
-          },
-          value: ''
-        },
-        bañoAdaptado: {
-          label: '¿Requiere baño adaptado?',
-          inputStyle: 'select',
-          inputConfig: {
-            name: 'bañoAdaptado',
-            id: 'bañoAdaptado',
-            options: [
-              { value: '', displayValue: 'Seleccione...', disabled: true },
-              { value: 'true', displayValue: 'Si' },
-              { value: 'false', displayValue: 'No' }
-            ]
-          },
-          value: ''
-        },
-        
-        dAuditiva: {
-          label: 'Grado de discapacidad auditiva',
-          inputStyle: 'select',
-          inputConfig: {
-            name: 'dAuditiva',
-            id: 'dAuditiva',
-            options: [
-              { value: '', displayValue: 'Seleccione...', disabled: true },
-              { value: '0', displayValue: '0%' },
-              { value: '25', displayValue: '25%' },
-              { value: '50', displayValue: '50%' },
-              { value: '75', displayValue: '75%' },
-              { value: '100', displayValue: '100%' },
-            ]
-          },
-          value: ''
-        },
-        dFisica: {
-          label: 'Grado de discapacidad física',
-          inputStyle: 'select',
-          inputConfig: {
-            name: 'dFisica',
-            id: 'dFisica',
-            options: [
-              { value: '', displayValue: 'Seleccione...', disabled: true },
-              { value: '0', displayValue: '0%' },
-              { value: '25', displayValue: '25%' },
-              { value: '50', displayValue: '50%' },
-              { value: '75', displayValue: '75%' },
-              { value: '100', displayValue: '100%' },
-            ]
-          },
-          value: ''
-        },
-        dIntelectual: {
-          label: 'Grado de discapacidad intelectual',
-          inputStyle: 'select',
-          inputConfig: {
-            name: 'dIntelectual',
-            id: 'dIntelectual',
-            options: [
-              { value: '', displayValue: 'Seleccione...', disabled: true },
-              { value: '0', displayValue: '0%' },
-              { value: '25', displayValue: '25%' },
-              { value: '50', displayValue: '50%' },
-              { value: '75', displayValue: '75%' },
-              { value: '100', displayValue: '100%' },
-            ]
-          },
-          value: ''
-        },
-        dPsiquica: {
-          label: 'Grado de discapacidad psíquica',
-          inputStyle: 'select',
-          inputConfig: {
-            name: 'dPsiquica',
-            id: 'dPsiquica',
-            options: [
-              { value: '', displayValue: 'Seleccione...', disabled: true },
-              { value: '0', displayValue: '0%' },
-              { value: '25', displayValue: '25%' },
-              { value: '50', displayValue: '50%' },
-              { value: '75', displayValue: '75%' },
-              { value: '100', displayValue: '100%' },
-            ]
-          },
-          value: ''
-        },
-        dVisual: {
-          label: 'Grado de discapacidad visual',
-          inputStyle: 'select',
-          inputConfig: {
-            name: 'dVisual',
-            id: 'dVisual',
-            options: [
-              { value: '', displayValue: 'Seleccione...', disabled: true },
-              { value: '0', displayValue: '0%' },
-              { value: '25', displayValue: '25%' },
-              { value: '50', displayValue: '50%' },
-              { value: '75', displayValue: '75%' },
-              { value: '100', displayValue: '100%' },
-            ]
-          },
-          value: ''
-        },
-        adecuaciones: {
-          label: 'Indique si requiere de otras adecuaciones',
-          inputStyle: 'textarea',
-          inputConfig:{
-            name: 'adecuaciones',
-            id: 'adecuaciones'
-          },
-          value: ''
-        }
-      }
-    },
-    {
-      id: 2,
-      title: 'Experiencia laboral',
-      inputs: {
-        nivelEducacional: {
-          label: 'Nivel educacional',
-          inputStyle: 'select',
-          inputConfig: {
-            name: 'nivelEducacional',
-            id: 'nivelEducacional',
-            options: [
-              { value: '', displayValue: 'Seleccione...', disabled: true },
-              { value: 'basica incompleta', displayValue: 'Básica incompleta' },
-              { value: 'basica completa', displayValue: 'Básica completa' },
-              { value: 'media incompleta', displayValue: 'Media incompleta' },
-              { value: 'media completa', displayValue: 'Media completa' },
-              { value: 'técnica incompleta', displayValue: 'Técnica incompleta' },
-              { value: 'técnica completa', displayValue: 'Técnica completa' },
-              { value: 'superior incompleta', displayValue: 'Superior incompleta' },
-              { value: 'superior completa', displayValue: 'Superior completa' },
-            ]
-          },
-          value: ''
-        },
-        profesion: {
-          label: 'Profesión',
-          inputStyle: 'select',
-          inputConfig: {
-            name: 'profesion',
-            id: 'profesion',
-            options: [
-              { value: '', displayValue: 'Seleccione...', disabled: true },
-              { value: 'arquitecto', displayValue: 'Arquitecto' },
-              { value: 'ingeniero comercial', displayValue: 'Ingeniero Comercial' },
-              { value: 'ingeniero en informática', displayValue: 'Ingeniero en Informática' },
-              { value: 'abogado', displayValue: 'Abogado' },
-              { value: 'profesor', displayValue: 'Profesor' }
-            ]
-          },
-          value: ''
-        },
-        tiempoExperiencia: {
-          label: 'Experiencia laboral (tiempo)',
-          inputStyle: 'select',
-          inputConfig: {
-            name: 'tiempoExperiencia',
-            id: 'tiempoExperiencia',
-            options: [
-              { value: '', displayValue: 'Seleccione...', disabled: true },
-              { value: '0', displayValue: 'Menos de un año' },
-              { value: '1', displayValue: 'Entre 1 y 2 años' },
-              { value: '3', displayValue: 'Más de 2 años' }
-            ]
-          },
-          value: ''
-        },
-        areaExperiencia: {
-          label: 'Área de experiencia',
-          inputStyle: 'select',
-          inputConfig: {
-            name: 'areaExperiencia',
-            id: 'areaExperiencia',
-            options: [
-              { value: '', displayValue: 'Seleccione...', disabled: true },
-              { value: 'finanzas', displayValue: 'Finanzas' },
-              { value: 'informatica', displayValue: 'Informática' },
-              { value: 'publicidad', displayValue: 'Publicidad' },
-              { value: 'contabilidad', displayValue: 'Contabilidad' },
-              { value: 'salud', displayValue: 'Salud' },
-            ]
-          },
-          value: ''
-        }
-      }
-    }
-  ]
+  
 
   const stagesEmpresa =
   [
@@ -296,8 +15,8 @@ function App() {
       inputs: {
         location: {
           label: 'Ubicación',
-          inputStyle: 'input',
-          inputConfig: {
+          elementType: 'input',
+          elementConfig: {
             type: 'text',
             placeholder: 'Av. Tobalaba 417, piso 2',
             name: 'location',
@@ -307,8 +26,8 @@ function App() {
         },
         cargo: {
           label: 'Cargo',
-          inputStyle: 'input',
-          inputConfig: {
+          elementType: 'input',
+          elementConfig: {
             type: 'text',
             placeholder: 'Desarrollador PHP Jr.',
             name: 'cargo',
@@ -324,8 +43,8 @@ function App() {
       inputs: {
         sillaRuedas: {
           label: '¿Tiene acceso para silla de ruedas?',
-          inputStyle: 'select',
-          inputConfig: {
+          elementType: 'select',
+          elementConfig: {
             name: 'sillaRuedas',
             id: 'sillaRuedas',
             options: [
@@ -338,8 +57,8 @@ function App() {
         },
         dAuditiva: {
           label: 'Capacidad auditiva requerida',
-          inputStyle: 'select',
-          inputConfig: {
+          elementType: 'select',
+          elementConfig: {
             name: 'dAuditiva',
             id: 'dAuditiva',
             options: [
@@ -355,8 +74,8 @@ function App() {
         },
         dFisica: {
           label: 'Capacidad física requerida',
-          inputStyle: 'select',
-          inputConfig: {
+          elementType: 'select',
+          elementConfig: {
             name: 'dFisica',
             id: 'dFisica',
             options: [
@@ -372,8 +91,8 @@ function App() {
         },
         dIntelectual: {
           label: 'Capacidad intelectual requerida',
-          inputStyle: 'select',
-          inputConfig: {
+          elementType: 'select',
+          elementConfig: {
             name: 'dIntelectual',
             id: 'dIntelectual',
             options: [
@@ -389,8 +108,8 @@ function App() {
         },
         dPsiquica: {
           label: 'Capacidad psíquica requerida',
-          inputStyle: 'select',
-          inputConfig: {
+          elementType: 'select',
+          elementConfig: {
             name: 'dPsiquica',
             id: 'dPsiquica',
             options: [
@@ -406,8 +125,8 @@ function App() {
         },
         dVisual: {
           label: 'Capacidad visual requerida',
-          inputStyle: 'select',
-          inputConfig: {
+          elementType: 'select',
+          elementConfig: {
             name: 'dVisual',
             id: 'dVisual',
             options: [
@@ -432,8 +151,8 @@ function App() {
         },
         nivelEducacional: {
           label: 'Nivel educacional',
-          inputStyle: 'select',
-          inputConfig: {
+          elementType: 'select',
+          elementConfig: {
             name: 'nivelEducacional',
             id: 'nivelEducacional',
             options: [
@@ -452,8 +171,8 @@ function App() {
         },
         profesion: {
           label: 'Profesión',
-          inputStyle: 'select',
-          inputConfig: {
+          elementType: 'select',
+          elementConfig: {
             name: 'profesion',
             id: 'profesion',
             options: [
@@ -469,8 +188,8 @@ function App() {
         },
         tiempoExperiencia: {
           label: 'Experiencia laboral (tiempo)',
-          inputStyle: 'select',
-          inputConfig: {
+          elementType: 'select',
+          elementConfig: {
             name: 'tiempoExperiencia',
             id: 'tiempoExperiencia',
             options: [
@@ -484,8 +203,8 @@ function App() {
         },
         areaExperiencia: {
           label: 'Área de experiencia',
-          inputStyle: 'select',
-          inputConfig: {
+          elementType: 'select',
+          elementConfig: {
             name: 'areaExperiencia',
             id: 'areaExperiencia',
             options: [
@@ -511,8 +230,8 @@ function App() {
       inputs: {
         permanecerPie: {
           label: '¿Puedes permanecer en pie?',
-          inputStyle: 'select',
-          inputConfig: {
+          elementType: 'select',
+          elementConfig: {
             name: 'permanecerPie',
             id: 'permanecerPie',
             options: [
@@ -528,8 +247,8 @@ function App() {
         },
         permanecerSentado: {
           label: '¿Puedes permanecer sentado?',
-          inputStyle: 'select',
-          inputConfig: {
+          elementType: 'select',
+          elementConfig: {
             name: 'permanecerSentado',
             id: 'permanecerSentado',
             options: [
@@ -545,8 +264,8 @@ function App() {
         },
         desplazoTrayectos: {
           label: '¿Puedes desplazarte en trayectos, con o sin ayuda técnica?',
-          inputStyle: 'select',
-          inputConfig: {
+          elementType: 'select',
+          elementConfig: {
             name: 'desplazoTrayectos',
             id: 'desplazoTrayectos',
             options: [
@@ -562,8 +281,8 @@ function App() {
         },
         diferentesPisos: {
           label: '¿Puedes realizar actividades en diferentes pisos?',
-          inputStyle: 'select',
-          inputConfig: {
+          elementType: 'select',
+          elementConfig: {
             name: 'diferentesPisos',
             id: 'diferentesPisos',
             options: [
@@ -579,8 +298,8 @@ function App() {
         },
         diferentesAlturas: {
           label: '¿Puedes alcanzar o coger objetos en diferentes alturas?',
-          inputStyle: 'select',
-          inputConfig: {
+          elementType: 'select',
+          elementConfig: {
             name: 'diferentesAlturas',
             id: 'diferentesAlturas',
             options: [
@@ -596,8 +315,8 @@ function App() {
         },
         objetosPequeños: {
           label: '¿Puedes usar herramientas u objetos pequeños?',
-          inputStyle: 'select',
-          inputConfig: {
+          elementType: 'select',
+          elementConfig: {
             name: 'objetosPequeños',
             id: 'objetosPequeños',
             options: [
@@ -613,8 +332,8 @@ function App() {
         },
         actividadesVisual: {
           label: '¿Puedes realizar actividades que requieren agudeza visual corta y larga distancia?',
-          inputStyle: 'select',
-          inputConfig: {
+          elementType: 'select',
+          elementConfig: {
             name: 'actividadesVisual',
             id: 'actividadesVisual',
             options: [
@@ -630,8 +349,8 @@ function App() {
         },
         actividadesAuditiva: {
           label: '¿Puedes comunicarte de manera oral y fluida?',
-          inputStyle: 'select',
-          inputConfig: {
+          elementType: 'select',
+          elementConfig: {
             name: 'actividadesAuditiva',
             id: 'actividadesAuditiva',
             options: [
@@ -653,8 +372,8 @@ function App() {
       inputs: {
         comunicacionOral: {
           label: '¿Puedes comunicarte de manera oral y fluida?',
-          inputStyle: 'select',
-          inputConfig: {
+          elementType: 'select',
+          elementConfig: {
             name: 'comunicacionOral',
             id: 'comunicacionOral',
             options: [
@@ -670,8 +389,8 @@ function App() {
         },
         leerEscribir: {
           label: '¿Puedes leer y escribir?',
-          inputStyle: 'select',
-          inputConfig: {
+          elementType: 'select',
+          elementConfig: {
             name: 'leerEscribir',
             id: 'leerEscribir',
             options: [
@@ -687,8 +406,8 @@ function App() {
         },
         situacionesNuevas: {
           label: '¿Te adaptas a situaciones de trabajo nuevas?',
-          inputStyle: 'select',
-          inputConfig: {
+          elementType: 'select',
+          elementConfig: {
             name: 'situacionesNuevas',
             id: 'situacionesNuevas',
             options: [
@@ -704,8 +423,8 @@ function App() {
         },
         trabajoEquipo: {
           label: '¿Te adaptas a trabajo en equipo con varias personas?',
-          inputStyle: 'select',
-          inputConfig: {
+          elementType: 'select',
+          elementConfig: {
             name: 'trabajoEquipo',
             id: 'trabajoEquipo',
             options: [
@@ -721,8 +440,8 @@ function App() {
         },
         situacionesConflicto: {
           label: '¿Te adaptas a situaciones tensiones y conflicto?',
-          inputStyle: 'select',
-          inputConfig: {
+          elementType: 'select',
+          elementConfig: {
             name: 'situacionesConflicto',
             id: 'situacionesConflicto',
             options: [
@@ -738,8 +457,8 @@ function App() {
         },
         resolverProblemas: {
           label: '¿Te adaptas para resolver problemas?',
-          inputStyle: 'select',
-          inputConfig: {
+          elementType: 'select',
+          elementConfig: {
             name: 'resolverProblemas',
             id: 'resolverProblemas',
             options: [
@@ -755,8 +474,8 @@ function App() {
         },
         tareasEstresantes: {
           label: '¿Te manejas para desarrollar tareas estresantes?',
-          inputStyle: 'select',
-          inputConfig: {
+          elementType: 'select',
+          elementConfig: {
             name: 'tareasEstresantes',
             id: 'tareasEstresantes',
             options: [
@@ -778,8 +497,8 @@ function App() {
       inputs: {
         disponibilidad: {
           label: 'Indique disponibilidad',
-          inputStyle: 'select',
-          inputConfig: {
+          elementType: 'select',
+          elementConfig: {
             name: 'disponibilidad',
             id: 'disponibilidad',
             options: [
@@ -793,8 +512,8 @@ function App() {
         },
         expectativaSueldo: {
           label: 'Indique expectativa de sueldo',
-          inputStyle: 'select',
-          inputConfig: {
+          elementType: 'select',
+          elementConfig: {
             name: 'expectativaSueldo',
             id: 'expectativaSueldo',
             options: [
@@ -812,8 +531,8 @@ function App() {
         },
         ayudaFormulario: {
           label: '¿Requirió de ayuda para completar el formulario?',
-          inputStyle: 'select',
-          inputConfig: {
+          elementType: 'select',
+          elementConfig: {
             name: 'ayudaFormulario',
             id: 'ayudaFormulario',
             options: [
@@ -1083,10 +802,250 @@ function App() {
 			}  
 		]
 	}
+
+	const formPostulanteLaboral =
+	{
+		title: "Información postulante",
+		belongsTo: "postulante",
+		endpoint: "http://localhost:8080/api/postulante/:id/datos-laborales",
+		totalStages: 4,
+		stages: [
+			{
+				id: 0,
+				name: "Etapa uno",
+				fields: {
+					credencial: {
+						label: '¿Tiene credencial de discapacidad?',
+						elementType: 'select',
+						elementConfig: {
+							name: 'credencial',
+							id: 'credencial',
+							options: [
+								{ value: '', displayValue: 'Seleccione...', disabled: true },
+								{ value: 'true', displayValue: 'Si' },
+								{ value: 'false', displayValue: 'No' }
+							]
+						},
+						value: ''
+					},
+					sillaRuedas: {
+						label: '¿Utiliza silla de ruedas?',
+						elementType: 'select',
+						elementConfig: {
+							name: 'sillaRuedas',
+							id: 'sillaRuedas',
+							options: [
+								{ value: '', displayValue: 'Seleccione...', disabled: true },
+								{ value: 'true', displayValue: 'Si' },
+								{ value: 'false', displayValue: 'No' }
+							]
+						},
+						value: ''
+					},
+					bañoAdaptado: {
+						label: '¿Requiere baño adaptado?',
+						elementType: 'select',
+						elementConfig: {
+							name: 'bañoAdaptado',
+							id: 'bañoAdaptado',
+							options: [
+								{ value: '', displayValue: 'Seleccione...', disabled: true },
+								{ value: 'true', displayValue: 'Si' },
+								{ value: 'false', displayValue: 'No' }
+							]
+						},
+						value: ''
+					}
+				}
+			},
+			{
+				id: 1,
+				name: "Etapa dos",
+				fields: {
+					dAuditiva: {
+						label: 'Grado de discapacidad auditiva',
+						elementType: 'select',
+						elementConfig: {
+							name: 'dAuditiva',
+							id: 'dAuditiva',
+							options: [
+								{ value: '', displayValue: 'Seleccione...', disabled: true },
+								{ value: '0', displayValue: '0%' },
+								{ value: '25', displayValue: '25%' },
+								{ value: '50', displayValue: '50%' },
+								{ value: '75', displayValue: '75%' },
+								{ value: '100', displayValue: '100%' },
+							]
+						},
+						value: ''
+					},
+					dFisica: {
+						label: 'Grado de discapacidad física',
+						elementType: 'select',
+						elementConfig: {
+							name: 'dFisica',
+							id: 'dFisica',
+							options: [
+								{ value: '', displayValue: 'Seleccione...', disabled: true },
+								{ value: '0', displayValue: '0%' },
+								{ value: '25', displayValue: '25%' },
+								{ value: '50', displayValue: '50%' },
+								{ value: '75', displayValue: '75%' },
+								{ value: '100', displayValue: '100%' },
+							]
+						},
+						value: ''
+					},
+					dIntelectual: {
+						label: 'Grado de discapacidad intelectual',
+						elementType: 'select',
+						elementConfig: {
+							name: 'dIntelectual',
+							id: 'dIntelectual',
+							options: [
+								{ value: '', displayValue: 'Seleccione...', disabled: true },
+								{ value: '0', displayValue: '0%' },
+								{ value: '25', displayValue: '25%' },
+								{ value: '50', displayValue: '50%' },
+								{ value: '75', displayValue: '75%' },
+								{ value: '100', displayValue: '100%' },
+							]
+						},
+						value: ''
+					},
+				}
+			},
+			{
+				id: 2,
+				name: "Etapa tres",
+				fields: {
+					dPsiquica: {
+						label: 'Grado de discapacidad psíquica',
+						elementType: 'select',
+						elementConfig: {
+							name: 'dPsiquica',
+							id: 'dPsiquica',
+							options: [
+								{ value: '', displayValue: 'Seleccione...', disabled: true },
+								{ value: '0', displayValue: '0%' },
+								{ value: '25', displayValue: '25%' },
+								{ value: '50', displayValue: '50%' },
+								{ value: '75', displayValue: '75%' },
+								{ value: '100', displayValue: '100%' },
+							]
+						},
+						value: ''
+					},
+					dVisual: {
+						label: 'Grado de discapacidad visual',
+						elementType: 'select',
+						elementConfig: {
+							name: 'dVisual',
+							id: 'dVisual',
+							options: [
+								{ value: '', displayValue: 'Seleccione...', disabled: true },
+								{ value: '0', displayValue: '0%' },
+								{ value: '25', displayValue: '25%' },
+								{ value: '50', displayValue: '50%' },
+								{ value: '75', displayValue: '75%' },
+								{ value: '100', displayValue: '100%' },
+							]
+						},
+						value: ''
+					},
+					adecuaciones: {
+						label: 'Indique si requiere de otras adecuaciones',
+						elementType: 'textarea',
+						elementConfig:{
+							name: 'adecuaciones',
+							id: 'adecuaciones'
+						},
+						value: ''
+					}
+				}
+			},
+			{
+				id: 3,
+				name: "Etapa cuatro",
+				fields: {
+					nivelEducacional: {
+						label: 'Nivel educacional',
+						elementType: 'select',
+						elementConfig: {
+							name: 'nivelEducacional',
+							id: 'nivelEducacional',
+							options: [
+								{ value: '', displayValue: 'Seleccione...', disabled: true },
+								{ value: 'basica incompleta', displayValue: 'Básica incompleta' },
+								{ value: 'basica completa', displayValue: 'Básica completa' },
+								{ value: 'media incompleta', displayValue: 'Media incompleta' },
+								{ value: 'media completa', displayValue: 'Media completa' },
+								{ value: 'técnica incompleta', displayValue: 'Técnica incompleta' },
+								{ value: 'técnica completa', displayValue: 'Técnica completa' },
+								{ value: 'superior incompleta', displayValue: 'Superior incompleta' },
+								{ value: 'superior completa', displayValue: 'Superior completa' },
+							]
+						},
+						value: ''
+					},
+					profesion: {
+						label: 'Profesión',
+						elementType: 'select',
+						elementConfig: {
+							name: 'profesion',
+							id: 'profesion',
+							options: [
+								{ value: '', displayValue: 'Seleccione...', disabled: true },
+								{ value: 'arquitecto', displayValue: 'Arquitecto' },
+								{ value: 'ingeniero comercial', displayValue: 'Ingeniero Comercial' },
+								{ value: 'ingeniero en informática', displayValue: 'Ingeniero en Informática' },
+								{ value: 'abogado', displayValue: 'Abogado' },
+								{ value: 'profesor', displayValue: 'Profesor' }
+							]
+						},
+						value: ''
+					},
+					tiempoExperiencia: {
+						label: 'Experiencia laboral (tiempo)',
+						elementType: 'select',
+						elementConfig: {
+							name: 'tiempoExperiencia',
+							id: 'tiempoExperiencia',
+							options: [
+								{ value: '', displayValue: 'Seleccione...', disabled: true },
+								{ value: '0', displayValue: 'Menos de un año' },
+								{ value: '1', displayValue: 'Entre 1 y 2 años' },
+								{ value: '3', displayValue: 'Más de 2 años' }
+							]
+						},
+						value: ''
+					},
+					areaExperiencia: {
+						label: 'Área de experiencia',
+						elementType: 'select',
+						elementConfig: {
+							name: 'areaExperiencia',
+							id: 'areaExperiencia',
+							options: [
+								{ value: '', displayValue: 'Seleccione...', disabled: true },
+								{ value: 'finanzas', displayValue: 'Finanzas' },
+								{ value: 'informatica', displayValue: 'Informática' },
+								{ value: 'publicidad', displayValue: 'Publicidad' },
+								{ value: 'contabilidad', displayValue: 'Contabilidad' },
+								{ value: 'salud', displayValue: 'Salud' },
+							]
+						},
+						value: ''
+					}
+				}
+			} 
+		]
+	}
 	
   return (
     <Routes 
-      formPostulante={formPostulante} 
+			formPostulante={formPostulante}
+			formPostulanteLaboral={formPostulanteLaboral}
       stagesEmpresa={stagesEmpresa} 
       stagesPreguntas={stagesPreguntas}
     />

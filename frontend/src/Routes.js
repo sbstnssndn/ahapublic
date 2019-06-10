@@ -31,6 +31,16 @@ const Routes = (props) => {
 				)}
 			/>
 			<Route
+				path="/postulantes/panel/perfil-laboral"
+				exact
+				component={() => (
+					<Postulante
+						formPostulante={props.formPostulanteLaboral}
+						tipoFormulario="postulante"
+					/>
+				)}
+			/>
+			<Route
 				path="/empresas/panel"
 				exact
 				component={() => (

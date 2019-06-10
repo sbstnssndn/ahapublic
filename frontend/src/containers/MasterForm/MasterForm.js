@@ -4,6 +4,9 @@ import axios from 'axios';
 import Stepper from './Stepper/Stepper';
 import StageControls from './StageControls/StageControls';
 import Card from 'react-bootstrap/Card';
+//import Container from 'react-bootstrap/Container';
+//import Row from 'react-bootstrap/Row';
+//import Col from 'react-bootstrap/Col';
 
 
 class MasterForm extends Component {
@@ -54,10 +57,10 @@ class MasterForm extends Component {
 	}
 
 	componentDidMount() {
-		console.log(this.props)
+		
 	}
 
-  handleSubmit = (event) => {
+  handleSubmit = (event, method) => {
     event.preventDefault();
     
 		// extraer los datos de cada form, dentro de cada etapa
@@ -69,15 +72,15 @@ class MasterForm extends Component {
       }
 		}
 		console.log(payload)
+		console.log('metodo: '+method)
 		//window.location.href = "http://localhost:3000/";
-		/*
-		let method = 'HOLA';
+		
 		switch( method.toLowerCase() ) {
 			case 'get':
 				axios.get(this.props.formConfig.endpoint)
 					.then(response => {
 						console.log(response);
-						this.setState({postulante: response.data});
+						this.setState({formData: response.data});
 					})
 					.catch(function(error){
 						console.log(error);
@@ -93,8 +96,9 @@ class MasterForm extends Component {
 					})
 				break;
 			default:
+				console.log("Debes introducir un método válido");
 				break;
-		}*/
+		}
   }
 	
 	_goto = (stage) => {
@@ -153,17 +157,16 @@ class MasterForm extends Component {
 
     return (
 			<Card className="mb-4">
-				<Card.Header>
-					{this.props.formConfig.stages[this.state.currentStage].name}
+				<Card.Header className="px-2">
+					<Stepper
+							currentStage={this.state.currentStage}
+							totalStages={this.props.formConfig.totalStages}
+							stageTitles={stageTitlesArray}
+							goto={this._goto}
+						/>
 				</Card.Header>
 				<Card.Body>
-					<Stepper
-						currentStage={this.state.currentStage}
-						totalStages={this.props.formConfig.totalStages}
-						stageTitles={stageTitlesArray}
-						goto={this._goto}
-					/>
-					<form onSubmit={this.handleSubmit}>
+					<form onSubmit={(event) => this.handleSubmit(event, "POST")}>
 						{ stages }
 						<StageControls
 							totalStages={this.props.formConfig.totalStages}
