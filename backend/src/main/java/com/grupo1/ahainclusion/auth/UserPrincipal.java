@@ -63,7 +63,7 @@ public class UserPrincipal implements UserDetails {
             }
         }
 
-        if(isCandidato) {
+        if(isCandidato && user.getPerfilCandidato()!=null) {
             return new UserPrincipal(
                 user.getId(),
                 user.getPerfilCandidato().getFirstName(),
@@ -73,7 +73,7 @@ public class UserPrincipal implements UserDetails {
             );
         }
 
-        if(isEmpresa) {
+        if(isEmpresa && user.getPerfilEmpresa()!=null) {
             return new UserPrincipal(
                 user.getId(),
                 user.getPerfilEmpresa().getNameEmpresa(),
@@ -83,7 +83,7 @@ public class UserPrincipal implements UserDetails {
             );
         }
 
-        if(isAHA) {
+        if(isAHA && user.getPerfilAHA()!=null) {
             return new UserPrincipal(
                 user.getId(),
                 user.getPerfilAHA().getFirstName(),
@@ -93,7 +93,13 @@ public class UserPrincipal implements UserDetails {
             );
         }
         
-        return null;
+        return new UserPrincipal(
+            user.getId(),
+            user.getEmail(),
+            user.getEmail(),
+            user.getPassword(),
+            authorities
+        );
     }
 
     public Integer getId() {

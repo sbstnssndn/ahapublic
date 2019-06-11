@@ -239,20 +239,20 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
       pCandidato.setFirstName(firstName);
       pCandidato.setLastName(lastName);
       //pCandidato.setRut("");
-      pCandidato.setUser(usr);
-      perfilCandidatoRepository.save(pCandidato);
+      // pCandidato.setUser(usr);
+      // perfilCandidatoRepository.save(pCandidato);
 
-      PerfilLaboral pLaboral = new PerfilLaboral();
-      pLaboral.setCredencial(false);
-      pLaboral.setSillaDeRuedas(false);
-      pLaboral.setdAuditiva(50);
-      pLaboral.setdFisica(50);
-      pLaboral.setdIntelectual(50);
-      pLaboral.setdPsiquica(50);
-      pLaboral.setdVisual(50);      
-      pLaboral.setPerfilCandidato(pCandidato);
+      // PerfilLaboral pLaboral = new PerfilLaboral();
+      // pLaboral.setCredencial(false);
+      // pLaboral.setSillaDeRuedas(false);
+      // pLaboral.setdAuditiva(50);
+      // pLaboral.setdFisica(50);
+      // pLaboral.setdIntelectual(50);
+      // pLaboral.setdPsiquica(50);
+      // pLaboral.setdVisual(50);      
+      // pLaboral.setPerfilCandidato(pCandidato);
 
-      perfilLaboralRepository.save(pLaboral);
+      // perfilLaboralRepository.save(pLaboral);
 
     }
 
