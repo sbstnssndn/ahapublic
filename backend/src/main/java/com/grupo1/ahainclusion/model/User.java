@@ -27,13 +27,16 @@ public class User {
 	@JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
 	private Collection<Role> roles;
 
-	@OneToOne(cascade =  CascadeType.ALL )
+	@JsonManagedReference
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
 	private PerfilCandidato perfilCandidato;
 
-	@OneToOne(cascade = CascadeType.ALL )
+	@JsonManagedReference
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
 	private PerfilAHA perfilAHA;
 
-	@OneToOne(cascade = CascadeType.ALL )
+	@JsonManagedReference
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
 	private PerfilEmpresa perfilEmpresa;
 
 	public Integer getId() {
