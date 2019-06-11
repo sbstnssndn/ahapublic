@@ -22,12 +22,6 @@ public class Oferta {
     @JsonBackReference
     private PerfilEmpresa perfilEmpresa;
 
-    @OneToOne
-    private PerfilAccesibilidad perfilAccesibilidad;
-
-    @OneToOne
-    private ExigenciaLaboral exigenciaLaboral;
-
     public String getDescription() {
         return description;
     }
@@ -40,28 +34,12 @@ public class Oferta {
         this.perfilEmpresa = perfilEmpresa;
     }
 
-    public ExigenciaLaboral getExigenciaLaboral() {
-        return exigenciaLaboral;
-    }
-
-    public void setExigenciaLaboral(ExigenciaLaboral exigenciaLaboral) {
-        this.exigenciaLaboral = exigenciaLaboral;
-    }
-
     public Integer getId() {
         return id;
     }
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public PerfilAccesibilidad getPerfilAccesibilidad() {
-        return perfilAccesibilidad;
-    }
-
-    public void setPerfilAccesibilidad(PerfilAccesibilidad perfilAccesibilidad) {
-        this.perfilAccesibilidad = perfilAccesibilidad;
     }
 
     public void setDescription(String description) {

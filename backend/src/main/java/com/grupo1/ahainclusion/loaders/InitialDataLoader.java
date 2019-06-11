@@ -10,7 +10,6 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import com.grupo1.ahainclusion.model.Oferta;
-import com.grupo1.ahainclusion.model.PerfilAccesibilidad;
 import com.grupo1.ahainclusion.model.PerfilCandidato;
 import com.grupo1.ahainclusion.model.PerfilLaboral;
 import com.grupo1.ahainclusion.model.PerfilEmpresa;
@@ -19,7 +18,6 @@ import com.grupo1.ahainclusion.model.Role;
 import com.grupo1.ahainclusion.model.User;
 import com.grupo1.ahainclusion.repository.OfertaRepository;
 import com.grupo1.ahainclusion.repository.PerfilAHARepository;
-import com.grupo1.ahainclusion.repository.PerfilAccesibilidadRepository;
 import com.grupo1.ahainclusion.repository.PerfilCandidatoRepository;
 import com.grupo1.ahainclusion.repository.PerfilEmpresaRepository;
 import com.grupo1.ahainclusion.repository.PerfilLaboralRepository;
@@ -123,65 +121,42 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
     empresa2.setEnabled(true);
     userRepository.save(empresa2);
 
-    PerfilAccesibilidad perfilA1 = new PerfilAccesibilidad();
-    perfilA1.setName("Perfil Líder Ñuñoa");
-    perfilA1.setAccesoSilla(true);
-    perfilA1.setcAuditiva(90);
-    perfilA1.setcFisica(80);
-    perfilA1.setcIntelectual(80);
-    perfilA1.setcPsiquica(70);
-    perfilA1.setcVisual(60);
 
-
-    PerfilAccesibilidad perfilA2 = new PerfilAccesibilidad();
-    perfilA2.setName("Perfil Ripley Santiago Centro");
-    perfilA2.setAccesoSilla(false);
-    perfilA2.setcAuditiva(75);
-    perfilA2.setcFisica(100);
-    perfilA2.setcIntelectual(75);
-    perfilA2.setcPsiquica(75);
-    perfilA2.setcVisual(75);
-
-    
-    // PerfilEmpresa pEmpresa1 = new PerfilEmpresa();
-    // pEmpresa1.setNameEmpresa("Líder");
-    // pEmpresa1.setPerfilesAccesibilidad(Arrays.asList(perfilA1));
-    // //pEmpresa1.setRutEmpresa("");
-    // pEmpresa1.setUser(empresa1);
-    // perfilEmpresaRepository.save(pEmpresa1);
+    PerfilEmpresa pEmpresa1 = new PerfilEmpresa();
+    pEmpresa1.setNameEmpresa("Líder");
+    //pEmpresa1.setRutEmpresa("");
+    pEmpresa1.setUser(empresa1);
+    perfilEmpresaRepository.save(pEmpresa1);
   
 
-    // PerfilEmpresa pEmpresa2 = new PerfilEmpresa();
-    // pEmpresa2.setNameEmpresa("Ripley");
-    // pEmpresa2.setPerfilesAccesibilidad(Arrays.asList(perfilA2));
-    // //pEmpresa2.setRutEmpresa("");
-    // pEmpresa1.setUser(empresa2);
-    // perfilEmpresaRepository.save(pEmpresa2);
+    PerfilEmpresa pEmpresa2 = new PerfilEmpresa();
+    pEmpresa2.setNameEmpresa("Ripley");
+    //pEmpresa2.setRutEmpresa("");
+    pEmpresa2.setUser(empresa2);
+    perfilEmpresaRepository.save(pEmpresa2);
+
 
     // SE AGREGAN OFERTAS
 
-    // Oferta oferta1 = new Oferta();
-    // Oferta oferta2 = new Oferta();
-    // Oferta oferta3 = new Oferta();
+    Oferta oferta1 = new Oferta();
+    Oferta oferta2 = new Oferta();
+    Oferta oferta3 = new Oferta();
 
-    // oferta1.setName("Reponedor");
-    // oferta1.setDescription("Reponedor de productos");
-    // oferta1.setPerfilEmpresa(empresa1.getPerfilEmpresa());
-    // oferta1.setPerfilAccesibilidad(perfilA1);
+    oferta1.setName("Reponedor");
+    oferta1.setDescription("Reponedor de productos");
+    oferta1.setPerfilEmpresa(pEmpresa1);
 
-    // oferta2.setName("Guardia");
-    // oferta2.setDescription("Guardia de seguridad");
-    // oferta2.setPerfilEmpresa(empresa1.getPerfilEmpresa());
-    // oferta2.setPerfilAccesibilidad(perfilA1);
+    oferta2.setName("Guardia");
+    oferta2.setDescription("Guardia de seguridad");
+    oferta2.setPerfilEmpresa(pEmpresa1);
 
-    // oferta3.setName("Vendedor");
-    // oferta3.setDescription("Vendedor departamento de tecnología");
-    // oferta3.setPerfilEmpresa(empresa2.getPerfilEmpresa());
-    // oferta3.setPerfilAccesibilidad(perfilA2);
+    oferta3.setName("Vendedor");
+    oferta3.setDescription("Vendedor departamento de tecnología");
+    oferta3.setPerfilEmpresa(pEmpresa2);
 
-    // ofertaRepository.save(oferta1);
-    // ofertaRepository.save(oferta2);
-    // ofertaRepository.save(oferta3);
+    ofertaRepository.save(oferta1);
+    ofertaRepository.save(oferta2);
+    ofertaRepository.save(oferta3);
 
 
     alreadySetup = true;

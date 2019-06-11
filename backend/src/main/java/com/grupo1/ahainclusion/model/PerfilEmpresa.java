@@ -32,12 +32,7 @@ public class PerfilEmpresa {
     private String email2;
 
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "perfil_empresa_id")
-    @JsonManagedReference
-    private Collection<PerfilAccesibilidad> perfilesAccesibilidad;
-
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "perfil_empresa_id")
+    @JoinColumn(name = "perfil_empresa_user_id")
     @JsonManagedReference
     private Collection<Oferta> ofertas;
 
@@ -83,14 +78,6 @@ public class PerfilEmpresa {
 
     public void setOfertas(Collection<Oferta> ofertas) {
         this.ofertas = ofertas;
-    }
-
-    public Collection<PerfilAccesibilidad> getPerfilesAccesibilidad() {
-        return perfilesAccesibilidad;
-    }
-
-    public void setPerfilesAccesibilidad(Collection<PerfilAccesibilidad> perfilesAccesibilidad) {
-        this.perfilesAccesibilidad = perfilesAccesibilidad;
     }
 
     public String getRutEmpresa() {
