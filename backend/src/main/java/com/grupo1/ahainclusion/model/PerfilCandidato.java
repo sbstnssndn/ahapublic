@@ -6,8 +6,13 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.grupo1.ahainclusion.model.candidato.Direccion;
 
 
@@ -15,8 +20,12 @@ import com.grupo1.ahainclusion.model.candidato.Direccion;
 @Table(name="perfil_candidato")
 public class PerfilCandidato {
     @Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
     private Integer id;
+
+    @OneToOne
+    @MapsId
+    @JsonBackReference
+    private User user;
 
     // INFORMACIÓN PERSONAL
     // --------------------
@@ -32,13 +41,28 @@ public class PerfilCandidato {
     @OneToOne(cascade = CascadeType.ALL)
     private Direccion direccion;
 
-    // PERFIL LABORAL
-    // --------------
-    @OneToOne(cascade = CascadeType.ALL)
+    @JsonManagedReference
+    @OneToOne(mappedBy = "perfilCandidato", cascade = CascadeType.ALL)
     private PerfilLaboral perfilLaboral;
 
     public String getFirstName() {
         return firstName;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public PerfilLaboral getPerfilLaboral() {
+        return perfilLaboral;
+    }
+
+    public void setPerfilLaboral(PerfilLaboral perfilLaboral) {
+        this.perfilLaboral = perfilLaboral;
     }
 
     public String getEmail2() {
@@ -63,14 +87,6 @@ public class PerfilCandidato {
 
     public void setTelefono1(String telefono1) {
         this.telefono1 = telefono1;
-    }
-
-    public PerfilLaboral getPerfilLaboral() {
-        return perfilLaboral;
-    }
-
-    public void setPerfilLaboral(PerfilLaboral perfilLaboral) {
-        this.perfilLaboral = perfilLaboral;
     }
 
     public Integer getId() {

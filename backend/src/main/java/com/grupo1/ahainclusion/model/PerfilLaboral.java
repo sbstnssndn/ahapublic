@@ -3,28 +3,35 @@ package com.grupo1.ahainclusion.model;
 import java.util.Collection;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.MapsId;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.grupo1.ahainclusion.model.candidato.Curso;
 import com.grupo1.ahainclusion.model.candidato.Experiencia;
 import com.grupo1.ahainclusion.model.candidato.Titulo;
 
 @Entity
+@Table(name="perfil_laboral")
 public class PerfilLaboral {
 
     @Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
     private Integer id;
 
     @OneToOne
-    private User user;
+    @MapsId
+    @JsonBackReference
+    private PerfilCandidato perfilCandidato;
 
     private String name;
 
@@ -101,19 +108,19 @@ public class PerfilLaboral {
 
     // Titulos/carreras terminadas
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "perfil_laboral_id")
+    @JoinColumn(name = "perfil_laboral_perfil_candidato_user_id")
     @JsonManagedReference
     private Collection<Titulo> titulos;
 
     // Cursos realizados
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "perfil_laboral_id")
+    @JoinColumn(name = "perfil_laboral_perfil_candidato_user_id")
     @JsonManagedReference
     private Collection<Curso> cursos;
 
     // Experiencias laborales
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "perfil_laboral_id")
+    @JoinColumn(name = "perfil_laboral_perfil_candidato_user_id")
     @JsonManagedReference
     private Collection<Experiencia> experiencias;
 
@@ -138,12 +145,12 @@ public class PerfilLaboral {
         return name;
     }
 
-    public User getUser() {
-        return user;
+    public PerfilCandidato getPerfilCandidato() {
+        return perfilCandidato;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setPerfilCandidato(PerfilCandidato perfilCandidato) {
+        this.perfilCandidato = perfilCandidato;
     }
 
     public Integer getExpectativaSueldo() {
