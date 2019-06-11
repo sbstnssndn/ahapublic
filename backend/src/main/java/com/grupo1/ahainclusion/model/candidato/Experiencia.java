@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.grupo1.ahainclusion.model.PerfilCandidato;
+import com.grupo1.ahainclusion.model.PerfilLaboral;
 
 @Entity
 public class Experiencia {
@@ -18,27 +18,37 @@ public class Experiencia {
 
     // Tipo: Tipo de experiencia
     private String tipo;
+    // Cargo: nombre del cargo
+    private String cargo;
     // Empresa: Nombre de la empresa
     private String empresa;
     // Fechas: fecha inicio y fin de la experiencia
     private Date fechaInicio;
     private Date fechaFin;
 
-    // Perfil Candidato padre
+    // Perfil Laboral padre
     @ManyToOne
     @JsonBackReference
-    private PerfilCandidato perfilCandidato;
+    private PerfilLaboral perfilLaboral;
 
     public String getTipo() {
         return tipo;
     }
 
-    public PerfilCandidato getPerfilCandidato() {
-        return perfilCandidato;
+    public String getCargo() {
+        return cargo;
     }
 
-    public void setPerfilCandidato(PerfilCandidato perfilCandidato) {
-        this.perfilCandidato = perfilCandidato;
+    public void setCargo(String cargo) {
+        this.cargo = cargo;
+    }
+
+    public PerfilLaboral getPerfilLaboral() {
+        return perfilLaboral;
+    }
+
+    public void setPerfilLaboral(PerfilLaboral perfilLaboral) {
+        this.perfilLaboral = perfilLaboral;
     }
 
     public Date getFechaFin() {

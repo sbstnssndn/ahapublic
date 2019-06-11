@@ -10,15 +10,19 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import com.grupo1.ahainclusion.model.Oferta;
-import com.grupo1.ahainclusion.model.PerfilAccesibilidad;
 import com.grupo1.ahainclusion.model.PerfilCandidato;
-import com.grupo1.ahainclusion.model.PerfilDiscapacidad;
+import com.grupo1.ahainclusion.model.PerfilLaboral;
 import com.grupo1.ahainclusion.model.PerfilEmpresa;
 import com.grupo1.ahainclusion.model.Privilege;
 import com.grupo1.ahainclusion.model.Role;
 import com.grupo1.ahainclusion.model.User;
+import com.grupo1.ahainclusion.model.oferta.ExperienciaExigida;
+import com.grupo1.ahainclusion.repository.ExperienciaExigidaRepository;
 import com.grupo1.ahainclusion.repository.OfertaRepository;
-import com.grupo1.ahainclusion.repository.PerfilAccesibilidadRepository;
+import com.grupo1.ahainclusion.repository.PerfilAHARepository;
+import com.grupo1.ahainclusion.repository.PerfilCandidatoRepository;
+import com.grupo1.ahainclusion.repository.PerfilEmpresaRepository;
+import com.grupo1.ahainclusion.repository.PerfilLaboralRepository;
 import com.grupo1.ahainclusion.repository.PrivilegeRepository;
 import com.grupo1.ahainclusion.repository.RoleRepository;
 import com.grupo1.ahainclusion.repository.UserRepository;
@@ -31,6 +35,7 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -51,7 +56,24 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
   private OfertaRepository ofertaRepository;
 
   @Autowired
-  private PerfilAccesibilidadRepository perfilAccesibilidadRepository;
+  PasswordEncoder passwordEncoder;
+
+  @Autowired
+  private PerfilLaboralRepository perfilLaboralRepository;
+
+  @Autowired
+  private PerfilCandidatoRepository perfilCandidatoRepository;
+
+  @Autowired
+  private PerfilEmpresaRepository perfilEmpresaRepository;
+
+  @Autowired
+  private PerfilAHARepository perfilAHARepository;
+
+  @Autowired
+  private ExperienciaExigidaRepository experienciaExigidaRepository;
+  
+  
 
   @Override
   @Transactional
@@ -82,58 +104,42 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
 
     // SE AGREGAN USUARIOS CANDIDATOS RANDOM
     try {
-      List<User> users = getRandomUsers(candidatoRole, 20);
-      userRepository.saveAll(users);
+      getRandomUsers(candidatoRole, 20);
     } catch (JSONException | UnirestException | IOException e) {
       e.printStackTrace();
     }
 
     // SE AGREGAN USUARIOS EMPRESA + PERFILES DE ACCESIBILIDAD
     User empresa1 = new User();
-
-    PerfilAccesibilidad perfilA1 = new PerfilAccesibilidad();
-    perfilA1.setName("Perfil Líder Ñuñoa");
-    perfilA1.setAccesoSilla(true);
-    perfilA1.setcAuditiva(90);
-    perfilA1.setcFisica(80);
-    perfilA1.setcIntelectual(80);
-    perfilA1.setcPsiquica(70);
-    perfilA1.setcVisual(60);
+    empresa1.setEmail("contacto@lider.cl");
+    empresa1.setPassword("lider1234");
+    empresa1.setPassword(passwordEncoder.encode(empresa1.getPassword()));
+    empresa1.setRoles(Arrays.asList(empresaRole));
+    empresa1.setEnabled(true);
+    userRepository.save(empresa1);
 
     User empresa2 = new User();
-    PerfilAccesibilidad perfilA2 = new PerfilAccesibilidad();
-    perfilA2.setName("Perfil Ripley Santiago Centro");
-    perfilA2.setAccesoSilla(false);
-    perfilA2.setcAuditiva(75);
-    perfilA2.setcFisica(100);
-    perfilA2.setcIntelectual(75);
-    perfilA2.setcPsiquica(75);
-    perfilA2.setcVisual(75);
+    empresa2.setEmail("contacto@ripley.cl");
+    empresa2.setPassword("ripley1234");
+    empresa2.setPassword(passwordEncoder.encode(empresa2.getPassword()));
+    empresa2.setRoles(Arrays.asList(empresaRole));
+    empresa2.setEnabled(true);
+    userRepository.save(empresa2);
 
-    
+
     PerfilEmpresa pEmpresa1 = new PerfilEmpresa();
     pEmpresa1.setNameEmpresa("Líder");
     //pEmpresa1.setRutEmpresa("");
-
-    empresa1.setPerfilEmpresa(pEmpresa1);
-    empresa1.setEmail("contacto@lider.cl");
-    empresa1.setRoles(Arrays.asList(empresaRole));
-    empresa1.setPerfilesAccesibilidad(Arrays.asList(perfilA1));
-    empresa1.setEnabled(true);
+    pEmpresa1.setUser(empresa1);
+    perfilEmpresaRepository.save(pEmpresa1);
+  
 
     PerfilEmpresa pEmpresa2 = new PerfilEmpresa();
     pEmpresa2.setNameEmpresa("Ripley");
     //pEmpresa2.setRutEmpresa("");
+    pEmpresa2.setUser(empresa2);
+    perfilEmpresaRepository.save(pEmpresa2);
 
-    empresa2.setPerfilEmpresa(pEmpresa2);
-    empresa2.setEmail("contacto@ripley.cl");
-    empresa2.setRoles(Arrays.asList(empresaRole));
-    empresa2.setPerfilesAccesibilidad(Arrays.asList(perfilA2));
-    empresa2.setEnabled(true);
-    
-
-    userRepository.save(empresa1);
-    userRepository.save(empresa2);
 
     // SE AGREGAN OFERTAS
 
@@ -141,24 +147,55 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
     Oferta oferta2 = new Oferta();
     Oferta oferta3 = new Oferta();
 
+    //Detalles ofertas   
+
     oferta1.setName("Reponedor");
     oferta1.setDescription("Reponedor de productos");
-    oferta1.setUser(empresa1);
-    oferta1.setPerfilAccesibilidad(perfilA1);
+    oferta1.setPerfilEmpresa(pEmpresa1);
 
     oferta2.setName("Guardia");
     oferta2.setDescription("Guardia de seguridad");
-    oferta2.setUser(empresa1);
-    oferta2.setPerfilAccesibilidad(perfilA1);
+    oferta2.setPerfilEmpresa(pEmpresa1);
 
     oferta3.setName("Vendedor");
     oferta3.setDescription("Vendedor departamento de tecnología");
-    oferta3.setUser(empresa2);
-    oferta3.setPerfilAccesibilidad(perfilA2);
+    oferta3.setPerfilEmpresa(pEmpresa2);
 
     ofertaRepository.save(oferta1);
     ofertaRepository.save(oferta2);
     ofertaRepository.save(oferta3);
+
+    //Experiencias exigidas por las ofertas
+
+    ExperienciaExigida expExigida = new ExperienciaExigida();
+    expExigida.setTipo("Finanzas");
+    expExigida.setDuracion(2);
+    expExigida.setOferta(oferta1);
+    experienciaExigidaRepository.save(expExigida);
+
+    ExperienciaExigida expExigida2 = new ExperienciaExigida();
+    expExigida2.setTipo("Informática");
+    expExigida2.setDuracion(1);
+    expExigida2.setOferta(oferta1);
+    experienciaExigidaRepository.save(expExigida2);
+
+    ExperienciaExigida expExigida3 = new ExperienciaExigida();
+    expExigida3.setTipo("Gastronomía");
+    expExigida3.setDuracion(2);
+    expExigida3.setOferta(oferta2);
+    experienciaExigidaRepository.save(expExigida3);
+
+    ExperienciaExigida expExigida4 = new ExperienciaExigida();
+    expExigida4.setTipo("Docencia");
+    expExigida4.setDuracion(3);
+    expExigida4.setOferta(oferta3);
+    experienciaExigidaRepository.save(expExigida4);
+
+    ExperienciaExigida expExigida5 = new ExperienciaExigida();
+    expExigida5.setTipo("Obras Civiles");
+    expExigida5.setDuracion(1);
+    expExigida5.setOferta(oferta3);
+    experienciaExigidaRepository.save(expExigida5);
 
 
     alreadySetup = true;
@@ -190,11 +227,10 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
   }
 
   @Transactional
-  private List<User> getRandomUsers(Role role, Integer n) throws JSONException, UnirestException, IOException {
+  private void getRandomUsers(Role role, Integer n) throws JSONException, UnirestException, IOException {
       
-    List<User> users = new ArrayList<>();
-    
-    String url = "https://randomuser.me/api/?inc=gender,id,name,email&results="+n+"&nat=US";
+   
+    String url = "https://randomuser.me/api/?inc=gender,id,name,email&results="+n+"&nat=US&seed=foobar";
     JSONArray results = Unirest.get(url).asJson().getBody().getObject().getJSONArray("results");
 
     for(int i=0;i<results.length();i++)
@@ -206,36 +242,34 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
       String lastName = names.get("last").toString();
 
       User usr = new User();
+      usr.setEmail(email);
+      usr.setPassword("hola123");
+      usr.setPassword(passwordEncoder.encode(usr.getPassword()));
+      usr.setRoles(Arrays.asList(role));
+      usr.setEnabled(true);
+      userRepository.save(usr);
 
       PerfilCandidato pCandidato = new PerfilCandidato();
       pCandidato.setFirstName(firstName);
       pCandidato.setLastName(lastName);
       //pCandidato.setRut("");
+      pCandidato.setUser(usr);
+      perfilCandidatoRepository.save(pCandidato);
 
+      PerfilLaboral pLaboral = new PerfilLaboral();
+      pLaboral.setCredencial(false);
+      pLaboral.setSillaDeRuedas(false);
+      pLaboral.setdAuditiva(50);
+      pLaboral.setdFisica(50);
+      pLaboral.setdIntelectual(50);
+      pLaboral.setdPsiquica(50);
+      pLaboral.setdVisual(50);      
+      pLaboral.setPerfilCandidato(pCandidato);
 
-      usr.setEmail(email);
-      //usr.setPassword("");
-      usr.setPerfilCandidato(pCandidato);
-      usr.setRoles(Arrays.asList(role));
-      usr.setEnabled(true);
-
-      PerfilDiscapacidad pDiscapacidad = new PerfilDiscapacidad();
-      pDiscapacidad.setCredencial(false);
-      pDiscapacidad.setSillaDeRuedas(false);
-      pDiscapacidad.setdAuditiva(50);
-      pDiscapacidad.setdFisica(50);
-      pDiscapacidad.setdIntelectual(50);
-      pDiscapacidad.setdPsiquica(50);
-      pDiscapacidad.setdVisual(50);
-
-      usr.setPerfilDiscapacidad(pDiscapacidad);
-
-      users.add(usr);
+      perfilLaboralRepository.save(pLaboral);
 
     }
 
     Unirest.shutdown();
-    
-    return users;
     }
 }

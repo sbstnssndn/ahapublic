@@ -1,5 +1,6 @@
 import React from 'react';
-import Input from './../Input/Input';
+//import Input from './../Input/Input';
+import Form from 'react-bootstrap/Form'
 
 const Stage = (props) => {
   // Si el paso actual no es el id de esta etapa, no mostrar
@@ -28,7 +29,21 @@ const Stage = (props) => {
   let fields = (
     fieldsArray.map(field => (
       <React.Fragment key={field.id}>
-        <div className="form-group">
+        <Form>
+          <Form.Group controlId={field.config.inputConfig.id}>
+            <Form.Label>{field.config.label}</Form.Label>
+            <Form.Control
+							as={field.config.inputStyle}
+							type={field.config.inputConfig.type}
+							placeholder={field.config.inputConfig.placeholder}
+							name={field.config.inputConfig.name}
+							id={field.config.inputConfig.id}
+							value={field.config.value}
+							onChange={props.handleChange.bind(props.currentStage, field.id)}
+            />
+          </Form.Group>
+        </Form>
+        {/*<div className="form-group">
           <label>{field.config.label}</label>
           <Input
             inputStyle={field.config.inputStyle}
@@ -36,7 +51,7 @@ const Stage = (props) => {
             value={field.config.value}
             handleChange={(event) => props.handleChange(event, props.currentStage, field.id)}
           />
-        </div>
+        </div>*/}
       </React.Fragment>
     ))
   )

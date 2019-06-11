@@ -1,9 +1,6 @@
 package com.grupo1.ahainclusion.model;
 
 import java.util.Collection;
-import java.util.List;
-import java.util.Set;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -30,22 +27,17 @@ public class User {
 	@JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
 	private Collection<Role> roles;
 
-	@OneToOne(cascade =  CascadeType.ALL )
+	@JsonManagedReference
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
 	private PerfilCandidato perfilCandidato;
 
-	@OneToOne(cascade = CascadeType.ALL )
+	@JsonManagedReference
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
 	private PerfilAHA perfilAHA;
 
-	@OneToOne(cascade = CascadeType.ALL )
-	private PerfilEmpresa perfilEmpresa;
-
-	@OneToOne(cascade = CascadeType.ALL )
-	private PerfilDiscapacidad perfilDiscapacidad;
-
-	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name = "user_id")
 	@JsonManagedReference
-	private Collection<PerfilAccesibilidad> perfilesAccesibilidad;
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+	private PerfilEmpresa perfilEmpresa;
 
 	public Integer getId() {
 		return id;
@@ -57,14 +49,6 @@ public class User {
 
 	public void setPassword(String password) {
 		this.password = password;
-	}
-
-	public Collection<PerfilAccesibilidad> getPerfilesAccesibilidad() {
-		return perfilesAccesibilidad;
-	}
-
-	public void setPerfilesAccesibilidad(Collection<PerfilAccesibilidad> perfilesAccesibilidad) {
-		this.perfilesAccesibilidad = perfilesAccesibilidad;
 	}
 
 	public PerfilEmpresa getPerfilEmpresa() {
@@ -89,14 +73,6 @@ public class User {
 
 	public void setPerfilCandidato(PerfilCandidato perfilCandidato) {
 		this.perfilCandidato = perfilCandidato;
-	}
-
-	public PerfilDiscapacidad getPerfilDiscapacidad() {
-		return perfilDiscapacidad;
-	}
-
-	public void setPerfilDiscapacidad(PerfilDiscapacidad perfilDiscapacidad) {
-		this.perfilDiscapacidad = perfilDiscapacidad;
 	}
 
 	public void setId(Integer id) {

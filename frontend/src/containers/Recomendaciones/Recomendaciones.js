@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+//import axios from 'axios';
 
 class Recomendaciones extends Component {
 
@@ -8,8 +8,11 @@ class Recomendaciones extends Component {
   }
 
   componentDidMount () {
-    axios.get('http://localhost:8080/api/recommendation/get?idOferta=2&n=5')
-      .then(response => {
+    
+    //Ahora se requiere un objeto del tipo oferta para generar las recomendaciones
+
+    /*axios.get('http://localhost:8080/api/recommendation/get')
+    .then(response => {
         console.log(response);
         this.setState({
           usuarios: response.data
@@ -17,6 +20,10 @@ class Recomendaciones extends Component {
       }).catch(error => {
         console.log(error);
       });
+    */
+
+    console.log("Por implementar.");
+
   }
 
   render () {
@@ -39,8 +46,8 @@ class Recomendaciones extends Component {
                     <h5 className="card-title text-uppercase">{usuario.user.firstName} {usuario.user.lastName}</h5>
                     <h6 className="card-subtitle mb-2 text-muted">{usuario.user.email}</h6>
                     <p className="card-text">Porcentaje de compatibilidad: {usuario.percentage}%</p>
-                    <a href="#" className="card-link">Perfil</a>
-                    <a href="#" className="card-link">Contacto</a>
+                    <a href="/" className="card-link">Perfil</a>
+                    <a href="/" className="card-link">Contacto</a>
                   </div>
                 </div>
               );

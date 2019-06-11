@@ -1,28 +1,53 @@
 package com.grupo1.ahainclusion.model;
 
+import java.util.Collection;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.MapsId;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.grupo1.ahainclusion.model.candidato.Curso;
+import com.grupo1.ahainclusion.model.candidato.Experiencia;
+import com.grupo1.ahainclusion.model.candidato.Titulo;
 
 @Entity
-public class PerfilDiscapacidad {
+@Table(name="perfil_laboral")
+public class PerfilLaboral {
 
     @Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
     private Integer id;
+
+    @OneToOne
+    @MapsId
+    @JsonBackReference
+    private PerfilCandidato perfilCandidato;
 
     private String name;
 
+    // ---------------------
+    // DATOS DE INCLUSIVIDAD
+    // ---------------------
+
     // Importantes
-        //Tienes credencial?
-        private boolean credencial;
-        // Usas silla de ruedas (y por tanto Requieres rampa acceso)
-        private boolean sillaDeRuedas;
-        //Requieres baño adaptado
-        private boolean bañoAdaptado;
-        //Indica si requieres otras adecuaciones
-        private String adecuaciones;
+    // Tienes credencial?
+    private boolean credencial;
+    // Usas silla de ruedas (y por tanto Requieres rampa acceso)
+    private boolean sillaDeRuedas;
+    // Requieres baño adaptado
+    private boolean bañoAdaptado;
+    // Indica si requieres otras adecuaciones
+    private String adecuaciones;
 
     // Porcentajes de discapacidad
     private Integer dAuditiva;
@@ -64,8 +89,132 @@ public class PerfilDiscapacidad {
     // Te manejas para desarrollar tareas estresantes?
     private Integer tareasEstresantes;
 
+    // --------------------------
+    // DATOS LABORALES
+    // --------------------------
+
+    // LICENCIA DE CONDUCIR
+    // --------------------
+    private String licencia;
+
+    // AYUDA PARA LLENAR FORMULARIO
+    // ----------------------------
+    // 0: No 1: Si, parcial 2: Completamente
+    private Integer ayudaFormulario;
+
+    // EDUCACIÓN
+    // -----------------
+    private Integer nivelEducacional; // 0: Ed. Especial ..... 9:Postgrado
+
+    // Titulos/carreras terminadas
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "perfil_laboral_perfil_candidato_user_id")
+    @JsonManagedReference
+    private Collection<Titulo> titulos;
+
+    // Cursos realizados
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "perfil_laboral_perfil_candidato_user_id")
+    @JsonManagedReference
+    private Collection<Curso> cursos;
+
+    // Experiencias laborales
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "perfil_laboral_perfil_candidato_user_id")
+    @JsonManagedReference
+    private Collection<Experiencia> experiencias;
+
+    // DISPONIBILIDAD
+    // --------------
+    // Disponibilidad: 0:Lunes a Viernes
+    // 1: Sábados, Domingos y festivos
+    // 2: Cualquier día
+    private Integer disponibilidad;
+
+    // EXPECTATIVAS DE SUELDO
+    // ExpectativaSueldo: 0: Hasta 301.000
+    // 1: 301.0001 a 400.000
+    // 2: 400.001 a 550.000
+    // 3: 550.001 a 650.000
+    // 4: 650.001 a 800.000
+    // 5: 800.001 a 1.000.000
+    // 6: 1.000.000 o más
+    private Integer expectativaSueldo;
+
     public String getName() {
         return name;
+    }
+
+    public PerfilCandidato getPerfilCandidato() {
+        return perfilCandidato;
+    }
+
+    public void setPerfilCandidato(PerfilCandidato perfilCandidato) {
+        this.perfilCandidato = perfilCandidato;
+    }
+
+    public Integer getExpectativaSueldo() {
+        return expectativaSueldo;
+    }
+
+    public void setExpectativaSueldo(Integer expectativaSueldo) {
+        this.expectativaSueldo = expectativaSueldo;
+    }
+
+    public Integer getDisponibilidad() {
+        return disponibilidad;
+    }
+
+    public void setDisponibilidad(Integer disponibilidad) {
+        this.disponibilidad = disponibilidad;
+    }
+
+    public Collection<Experiencia> getExperiencias() {
+        return experiencias;
+    }
+
+    public void setExperiencias(Collection<Experiencia> experiencias) {
+        this.experiencias = experiencias;
+    }
+
+    public Collection<Curso> getCursos() {
+        return cursos;
+    }
+
+    public void setCursos(Collection<Curso> cursos) {
+        this.cursos = cursos;
+    }
+
+    public Collection<Titulo> getTitulos() {
+        return titulos;
+    }
+
+    public void setTitulos(Collection<Titulo> titulos) {
+        this.titulos = titulos;
+    }
+
+    public Integer getNivelEducacional() {
+        return nivelEducacional;
+    }
+
+    public void setNivelEducacional(Integer nivelEducacional) {
+        this.nivelEducacional = nivelEducacional;
+    }
+
+    public Integer getAyudaFormulario() {
+        return ayudaFormulario;
+    }
+
+    public void setAyudaFormulario(Integer ayudaFormulario) {
+        this.ayudaFormulario = ayudaFormulario;
+    }
+
+    public String getLicencia() {
+        return licencia;
+    }
+
+    public void setLicencia(String licencia) {
+        this.licencia = licencia;
     }
 
     public String getAdecuaciones() {
