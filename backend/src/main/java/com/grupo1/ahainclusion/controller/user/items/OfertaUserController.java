@@ -1,10 +1,11 @@
-package com.grupo1.ahainclusion.controller.user.perfiles;
+package com.grupo1.ahainclusion.controller.user.items;
 
 import com.grupo1.ahainclusion.auth.CurrentUser;
 import com.grupo1.ahainclusion.auth.UserPrincipal;
+import com.grupo1.ahainclusion.model.Oferta;
 import com.grupo1.ahainclusion.model.PerfilEmpresa;
 import com.grupo1.ahainclusion.model.User;
-import com.grupo1.ahainclusion.repository.PerfilEmpresaRepository;
+import com.grupo1.ahainclusion.repository.OfertaRepository;
 import com.grupo1.ahainclusion.repository.UserRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,37 +17,37 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 @RequestMapping(path = "/user")
-public class PerfilEmpresaController {
+public class OfertaUserController {
 
     @Autowired
     private UserRepository userRepository;
 
     @Autowired
-    private PerfilEmpresaRepository perfilEmpresaRepository;
+    private OfertaRepository ofertaRepository;
 
-    // Agregar Perfil Empresa
-    @RequestMapping(path = "/perfilEmpresa", method = RequestMethod.POST)
-    //SOLO USUARIOS EMPRESA O AHA
+    // Obtener Ofertas del usuario logeado
+    @RequestMapping(path = "/oferta", method = RequestMethod.GET)
+    //SOLO USUARIOS CANDIDATO O AHA
     //@PreAuthorize("hasRole('ROLE_EMPRESA') or hasRole('ROLE_AHA')")
-    public @ResponseBody String addNewPerfilEmpresa(@CurrentUser UserPrincipal currentUser, @RequestBody PerfilEmpresa perfilEmpresa) {
-
-        User user = userRepository.findById(currentUser.getId()).get();
-        perfilEmpresa.setUser(user);
-        perfilEmpresaRepository.save(perfilEmpresa);
-        return "Perfil Empresa Guardado";
-    }
-    
-    // Obtener Perfil Empresa
-    @RequestMapping(path = "/perfilEmpresa", method = RequestMethod.GET)
-    //SOLO USUARIOS EMPRESA O AHA
-    //@PreAuthorize("hasRole('ROLE_EMPRESA') or hasRole('ROLE_AHA')")
-    public @ResponseBody PerfilEmpresa getPerfilLaboral(@CurrentUser UserPrincipal currentUser) {
+    public @ResponseBody Iterable<Oferta> get(@CurrentUser UserPrincipal currentUser) {
 
         User user = userRepository.findById(currentUser.getId()).get();
         PerfilEmpresa pEmpresa = user.getPerfilEmpresa();
-
-        return pEmpresa;
-    
+        return ofertaRepository.findByPerfilEmpresa(pEmpresa);
     }
-    
+
+    // Agregar una oferta para el usuario logeado
+    @RequestMapping(path = "/oferta", method = RequestMethod.POST)
+    //SOLO USUARIOS CANDIDATO O AHA
+    //@PreAuthorize("hasRole('ROLE_EMPRESA') or hasRole('ROLE_AHA')")
+    public @ResponseBody String add(@CurrentUser UserPrincipal currentUser, @RequestBody Oferta oferta) {
+
+        User user = userRepository.findById(currentUser.getId()).get();
+        PerfilEmpresa pEmpresa = user.getPerfilEmpresa();
+        oferta.setPerfilEmpresa(pEmpresa);
+        ofertaRepository.save(oferta);
+
+        return "Oferta agregada";
+    }
+
 }

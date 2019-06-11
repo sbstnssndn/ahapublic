@@ -1,6 +1,9 @@
 package com.grupo1.ahainclusion.controller.user.perfiles;
 
+import com.grupo1.ahainclusion.auth.CurrentUser;
+import com.grupo1.ahainclusion.auth.UserPrincipal;
 import com.grupo1.ahainclusion.model.PerfilCandidato;
+import com.grupo1.ahainclusion.model.User;
 import com.grupo1.ahainclusion.repository.PerfilCandidatoRepository;
 import com.grupo1.ahainclusion.repository.UserRepository;
 
@@ -16,7 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class PerfilCandidatoController {
 
     @Autowired
-    private UserRepository UserRepository;
+    private UserRepository userRepository;
 
     @Autowired
     private PerfilCandidatoRepository perfilCandidatoRepository;
@@ -26,10 +29,24 @@ public class PerfilCandidatoController {
     @RequestMapping(path = "/perfilCandidato", method = RequestMethod.POST)
     //SOLO USUARIOS CANDIDATO O AHA
     //@PreAuthorize("hasRole('ROLE_CANDIDATO') or hasRole('ROLE_AHA')")
-    public @ResponseBody String addNewPerfilCandidato(@RequestBody PerfilCandidato perfilCandidato) {
+    public @ResponseBody String addNewPerfilCandidato(@CurrentUser UserPrincipal currentUser, @RequestBody PerfilCandidato perfilCandidato) {
 
+        User user = userRepository.findById(currentUser.getId()).get();
+        perfilCandidato.setUser(user);
         perfilCandidatoRepository.save(perfilCandidato);
-        return "Perfil Laboral Guardado";
+        return "Perfil Candidato Guardado";
     }
     
+    // Obtener Perfil Candidato
+    @RequestMapping(path = "/perfilCandidato", method = RequestMethod.GET)
+    //SOLO USUARIOS CANDIDATO O AHA
+    //@PreAuthorize("hasRole('ROLE_CANDIDATO') or hasRole('ROLE_AHA')")
+    public @ResponseBody PerfilCandidato getPerfilCandidato(@CurrentUser UserPrincipal currentUser) {
+
+        User user = userRepository.findById(currentUser.getId()).get();
+        PerfilCandidato pCandidato = user.getPerfilCandidato();
+
+        return pCandidato;
+    
+    }
 }

@@ -5,7 +5,9 @@ import com.grupo1.ahainclusion.auth.UserPrincipal;
 import com.grupo1.ahainclusion.model.PerfilLaboral;
 import com.grupo1.ahainclusion.model.User;
 import com.grupo1.ahainclusion.model.candidato.Curso;
+import com.grupo1.ahainclusion.model.candidato.Experiencia;
 import com.grupo1.ahainclusion.repository.CursoRepository;
+import com.grupo1.ahainclusion.repository.ExperienciaRepository;
 import com.grupo1.ahainclusion.repository.PerfilCandidatoRepository;
 import com.grupo1.ahainclusion.repository.PerfilLaboralRepository;
 import com.grupo1.ahainclusion.repository.UserRepository;
@@ -19,40 +21,40 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 @RequestMapping(path = "/user")
-public class CursoController {
+public class ExperienciaController {
 
     @Autowired
     private UserRepository userRepository;
 
     @Autowired
-    private CursoRepository cursoRepository;
+    private ExperienciaRepository experienciaRepository;
 
-    // Agregar un curso
-    @RequestMapping(path="/curso", method = RequestMethod.POST)
+    // Agregar una Experiencia
+    @RequestMapping(path="/experiencia", method = RequestMethod.POST)
     //SOLO USUARIOS CANDIDATO O AHA
     //@PreAuthorize("hasRole('ROLE_CANDIDATO') or hasRole('ROLE_AHA')")
-    public @ResponseBody String addCursoToUser (@CurrentUser UserPrincipal currentUser, 
-                                                @RequestBody Curso curso) {
+    public @ResponseBody String addExperienciaToUser (@CurrentUser UserPrincipal currentUser, 
+                                                      @RequestBody Experiencia experiencia) {
 
 
         User user = userRepository.findById(currentUser.getId()).get();
         PerfilLaboral pLaboral = user.getPerfilCandidato().getPerfilLaboral();
-        curso.setPerfilLaboral(pLaboral);
-        cursoRepository.save(curso);
+        experiencia.setPerfilLaboral(pLaboral);
+        experienciaRepository.save(experiencia);
         
 
 
-        return "Curso Guardado en usuario: " + user.getPerfilCandidato().getFirstName();
+        return "Experiencia Guardado en usuario: " + user.getPerfilCandidato().getFirstName();
     }
 
-    // Obtener Cursos
-    @RequestMapping(path = "/curso", method = RequestMethod.GET)
+    // Obtener Experiencia
+    @RequestMapping(path = "/experiencia", method = RequestMethod.GET)
     //SOLO USUARIOS CANDIDATO O AHA
     //@PreAuthorize("hasRole('ROLE_CANDIDATO') or hasRole('ROLE_AHA')")
-    public @ResponseBody Iterable<Curso> getCursos(@CurrentUser UserPrincipal currentUser) {
+    public @ResponseBody Iterable<Experiencia> getExperiencias(@CurrentUser UserPrincipal currentUser) {
 
         User user = userRepository.findById(currentUser.getId()).get();
-        return user.getPerfilCandidato().getPerfilLaboral().getCursos();
+        return user.getPerfilCandidato().getPerfilLaboral().getExperiencias();
     }
 
 }
