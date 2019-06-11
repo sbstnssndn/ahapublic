@@ -8,7 +8,6 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.grupo1.ahainclusion.model.PerfilCandidato;
 import com.grupo1.ahainclusion.model.PerfilLaboral;
 
 @Entity
@@ -19,6 +18,8 @@ public class Experiencia {
 
     // Tipo: Tipo de experiencia
     private String tipo;
+    // Cargo: nombre del cargo
+    private String cargo;
     // Empresa: Nombre de la empresa
     private String empresa;
     // Fechas: fecha inicio y fin de la experiencia
@@ -32,6 +33,14 @@ public class Experiencia {
 
     public String getTipo() {
         return tipo;
+    }
+
+    public String getCargo() {
+        return cargo;
+    }
+
+    public void setCargo(String cargo) {
+        this.cargo = cargo;
     }
 
     public PerfilLaboral getPerfilLaboral() {
