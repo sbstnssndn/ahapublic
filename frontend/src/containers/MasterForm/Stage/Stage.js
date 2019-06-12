@@ -1,31 +1,48 @@
 import React from 'react';
 import Input from './../Input/Input';
+import ExperienciaLaboralForm from '../../../components/ExperienciaLaboralForm/ExperienciaLaboralForm';
 
 const Stage = (props) => {
   // Si el paso actual no es el id de esta etapa, no mostrar
   if (props.currentStage !== props.id) {
     return null;
 	}
-	
-	let fieldsArray = [];
-	for(let field in props.stageFields) {
-		fieldsArray.push({
+
+	let fieldElementsArray = [];
+	for (let field in props.stageFields) {
+		fieldElementsArray.push({
 			id: field,
-			config: props.stageFields[field]
-		});
+			type: props.stageFields[field].type,
+			elements: props.stageFields[field].elements
+		})
 	}
 
+	
 	let inputElementsArray = (
-		fieldsArray.map(field => (
-			<Input
-				key={field.id}
-				label={field.config.label}
-				elementType={field.config.elementType}
-				elementConfig={field.config.elementConfig}
-				value={field.config.value}
-				handleChange={(event) => props.handleChange(event, field.id)}
-			/>
-		))
+		fieldElementsArray.map(field => {
+
+			if (field.type === 'normal') {
+				return field.elements.map(element => (
+					<Input
+						key={field.id}
+						type={field.type}
+						label={element.label}
+						elementType={element.elementType}
+						elementConfig={element.elementConfig}
+						value={element.value}
+						handleChange={(event) => props.handleChange(event, field.id, element.elementConfig.id)}
+					/>
+				))
+			} else {
+				return <ExperienciaLaboralForm
+						key={field.id}
+						field={field.id}
+						type={field.type}
+						elements={field.elements}
+						handleChange={props.handleChange}
+					/>
+			}
+		})
 	)
 
   return (
