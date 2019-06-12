@@ -17,17 +17,14 @@ const Stage = (props) => {
 
 	let inputElementsArray = (
 		fieldsArray.map(field => (
-			<React.Fragment key={field.id}>
-				<div className="form-group">
-					<label>{field.config.label}</label>
-					<Input
-						elementType={field.config.elementType}
-						elementConfig={field.config.elementConfig}
-						value={field.config.value}
-						handleChange={(event) => props.handleChange(event, field.id)}
-					/>
-				</div>
-			</React.Fragment>
+			<Input
+				key={field.id}
+				label={field.config.label}
+				elementType={field.config.elementType}
+				elementConfig={field.config.elementConfig}
+				value={field.config.value}
+				handleChange={(event) => props.handleChange(event, field.id)}
+			/>
 		))
 	)
 

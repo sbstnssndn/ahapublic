@@ -50,6 +50,8 @@ class MasterForm extends Component {
 		updatedFormElement.value = event.target.value;
 		// guardar en el clon del form original, el nuevo elemento del formulario
 		updatedForm.stages[this.state.currentStage].fields[inputIdentifier] = updatedFormElement;
+
+		console.log(event.target.selectedOptions);
 		
     this.setState({
       form: updatedForm
