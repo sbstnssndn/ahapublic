@@ -681,7 +681,7 @@ function App() {
 		title: "Información postulante",
 		belongsTo: "postulante",
 		endpoint: "http://localhost:8080/api/postulante/:id/datos-personales",
-		totalStages: 3,
+		totalStages: 5,
 		stages: [
 			{
 				id: 0,
@@ -734,11 +734,107 @@ function App() {
 								value: ''
 							}
 						]
+					},
+					fechaEntrevista: {
+						type: 'normal',
+						elements: [
+							{
+								label: 'Fecha de entrevista',
+								elementType: 'input',
+								elementConfig: {
+									type: 'text',
+									placeholder: '20/10/2019',
+									name: 'fechaEntrevista',
+									id: 'fechaEntrevista'
+								},
+								value: ''
+							}
+						]
+					},
+					personaQueEntrevista: {
+						type: 'normal',
+						elements: [
+							{
+								label: 'Persona que entrevista',
+								elementType: 'input',
+								elementConfig: {
+									type: 'text',
+									placeholder: 'Karina Cisterna',
+									name: 'personaQueEntrevista',
+									id: 'personaQueEntrevista'
+								},
+								value: ''
+							}
+						]
 					}
 				}
 			},
 			{
 				id: 1,
+				name: "Datos personales",
+				fields: {
+					genero: {
+						type: 'normal',
+						elements: [
+							{
+								label: 'Género',
+								elementType: 'select',
+								elementConfig: {
+									name: 'genero',
+									id: 'genero',
+									options: [
+										{ value: '', displayValue: 'Seleccione...', disabled: true },
+										{ value: 0, displayValue: 'Femenino' },
+										{ value: 1, displayValue: 'Masculino' },
+										{ value: 2, displayValue: 'No especifica' }
+									]
+								},
+								value: ''
+							}
+						]
+					},
+					fechaNacimiento: {
+						type: 'normal',
+						elements: [
+							{
+								label: 'Fecha de nacimiento',
+								elementType: 'input',
+								elementConfig: {
+									type: 'text',
+									placeholder: '20/10/1987',
+									name: 'fechaNacimiento',
+									id: 'fechaNacimiento'
+								},
+								value: ''
+							}
+						]
+					},
+					nacionalidad: {
+						type: 'normal',
+						elements: [
+							{
+								label: 'País de nacionalidad',
+								elementType: 'select',
+								elementConfig: {
+									name: 'nacionalidad',
+									id: 'nacionalidad',
+									options: [
+										{ value: 'Chile', displayValue: 'Chile' },
+										{ value: 'Argentina', displayValue: 'Argentina' },
+										{ value: 'Venezuela', displayValue: 'Venezuela' },
+										{ value: 'Colombia', displayValue: 'Colombia' },
+										{ value: 'Perú', displayValue: 'Perú' },
+										{ value: 'Bolivia', displayValue: 'Bolivia' },
+									]
+								},
+								value: 'Chile'
+							}
+						]
+					}
+				}
+			},
+			{
+				id: 2,
 				name: "Contacto",
 				fields: {
 					email: {
@@ -792,7 +888,7 @@ function App() {
 				}
 			},
 			{
-				id: 2,
+				id: 3,
 				name: "Ubicación",
 				fields: {
 					calle: {
@@ -844,7 +940,7 @@ function App() {
 						]
 					},
 				}
-			}  
+			}
 		]
 	}
 
@@ -1092,31 +1188,327 @@ function App() {
 		title: "Información postulante",
 		belongsTo: "postulante",
 		endpoint: "http://localhost:8080/api/postulante/:id/datos-laborales",
-		totalStages: 4,
+		totalStages: 6,
 		stages: [
 			{
 				id: 0,
-				name: "Etapa uno",
+				name: "Educación",
 				fields: {
-					credencial: {
+					nivelEducacional: {
 						type: 'normal',
 						elements: [
 							{
-								label: '¿Tiene credencial de discapacidad?',
+								label: 'Nivel educacional',
 								elementType: 'select',
 								elementConfig: {
-									name: 'credencial',
-									id: 'credencial',
+									name: 'nivelEducacional',
+									id: 'nivelEducacional',
 									options: [
 										{ value: '', displayValue: 'Seleccione...', disabled: true },
-										{ value: 'true', displayValue: 'Si' },
-										{ value: 'false', displayValue: 'No' }
+										{ value: '0', displayValue: 'Educación Especial' },
+										{ value: '1', displayValue: 'Ed. Básica Incompleta' },
+										{ value: '2', displayValue: 'Ed. Básica Completa' },
+										{ value: '3', displayValue: 'Ed. Media Incompleta' },
+										{ value: '4', displayValue: 'Ed. Media Completa' },
+										{ value: '5', displayValue: 'Ed. Media Técnica-Profesional Incompleta' },
+										{ value: '6', displayValue: 'Ed. Media Técnica-Profesional Completa' },
+										{ value: '7', displayValue: 'Ed. Superior Profesional Incompleta' },
+										{ value: '8', displayValue: 'Ed. Superior Profesional Completa' },
+										{ value: '9', displayValue: 'Postgrado' },
 									]
 								},
 								value: ''
 							}
 						]
 					},
+					titulo: {
+						type: 'normal',
+						elements: [
+							{
+								label: 'Título cursado u obtenido',
+								elementType: 'input',
+								elementConfig: {
+									type: 'text',
+									placeholder: 'Pedagogía en Lenguaje',
+									name: 'titulo',
+									id: 'titulo'
+								},
+								value: ''
+							}
+						]
+					},
+					institucion: {
+						type: 'normal',
+						elements: [
+							{
+								label: 'Institución educacional',
+								elementType: 'input',
+								elementConfig: {
+									type: 'text',
+									placeholder: 'Universidad de Santiago de Chile',
+									name: 'institucion',
+									id: 'institucion'
+								},
+								value: ''
+							}
+						]
+					},
+					egreso: {
+						type: 'normal',
+						elements: [
+							{
+								label: 'Año de egreso',
+								elementType: 'input',
+								elementConfig: {
+									type: 'text',
+									placeholder: '2010',
+									name: 'egreso',
+									id: 'egreso'
+								},
+								value: ''
+							}
+						]
+					}
+				}
+			},
+			{
+				id: 1,
+				name: "Otra formación",
+				fields: {
+					curso: {
+						type: 'normal',
+						elements: [
+							{
+								label: 'Curso de capacitación',
+								elementType: 'input',
+								elementConfig: {
+									type: 'text',
+									placeholder: 'Administración pública',
+									name: 'curso',
+									id: 'curso'
+								},
+								value: ''
+							}
+						]
+					},
+					institucionCurso: {
+						type: 'normal',
+						elements: [
+							{
+								label: 'Institución donde se realizó',
+								elementType: 'input',
+								elementConfig: {
+									type: 'text',
+									placeholder: 'Universidad de Santiago de Chile',
+									name: 'institucionCurso',
+									id: 'institucionCurso'
+								},
+								value: ''
+							}
+						]
+					},
+					fechaInicioCurso: {
+						type: 'normal',
+						elements: [
+							{
+								label: 'Fecha de inicio',
+								elementType: 'input',
+								elementConfig: {
+									type: 'text',
+									placeholder: '20/04/2010',
+									name: 'fechaInicioCurso',
+									id: 'fechaInicioCurso'
+								},
+								value: ''
+							}
+						]
+					},
+					fechaTerminoCurso: {
+						type: 'normal',
+						elements: [
+							{
+								label: 'Fecha de término',
+								elementType: 'input',
+								elementConfig: {
+									type: 'text',
+									placeholder: '15/06/2010',
+									name: 'fechaTerminoCurso',
+									id: 'fechaTerminoCurso'
+								},
+								value: ''
+							}
+						]
+					}
+				}
+			},
+			{
+				id: 2,
+				name: "Experiencia laboral",
+				fields: {
+					empresaExperienciaLaboral: {
+						type: 'normal',
+						elements: [
+							{
+								label: 'Empresa',
+								elementType: 'input',
+								elementConfig: {
+									type: 'text',
+									placeholder: 'AHA Inclusión',
+									name: 'empresaExperienciaLaboral',
+									id: 'empresaExperienciaLaboral'
+								},
+								value: ''
+							}
+						]
+					},
+					expFechaInicio: {
+						type: 'normal',
+						elements: [
+							{
+								label: 'Fecha de término',
+								elementType: 'input',
+								elementConfig: {
+									type: 'text',
+									placeholder: '06/2012',
+									name: 'expFechaInicio',
+									id: 'expFechaInicio'
+								},
+								value: ''
+							}
+						]
+					},
+					expFechaTermino: {
+						type: 'normal',
+						elements: [
+							{
+								label: 'Fecha de término',
+								elementType: 'input',
+								elementConfig: {
+									type: 'text',
+									placeholder: '02/2013',
+									name: 'expFechaTermino',
+									id: 'expFechaTermino'
+								},
+								value: ''
+							}
+						]
+					},
+					expArea: {
+						type: 'normal',
+						elements: [
+							{
+								label: 'Indica tu cargo',
+								elementType: 'select',
+								elementConfig: {
+									name: 'expArea',
+									id: 'expArea',
+									options: [
+										{ value: '', displayValue: 'Seleccione...', disabled: true },
+										{ value: '00', displayValue: 'Administración, contabilidad o finanzas' },
+										{ value: '01', displayValue: 'Aduana y comercio exterior' },
+										{ value: '02', displayValue: 'Abastecimiento o Logística' },
+										{ value: '03', displayValue: 'Agrícola o Ganadero' },
+										{ value: '04', displayValue: 'Auxiliar de Aseo o Servicios de Alimentación' },
+										{ value: '05', displayValue: 'Atención al Cliente, Call Center o Telemarketing' },
+										{ value: '06', displayValue: 'Ingeniería Civil y Construcción' },
+										{ value: '07', displayValue: 'Comercial, Ventas o Negocios' },
+										{ value: '08', displayValue: 'Comunicación, Relaciones Públicas o Institucionales' },
+										{ value: '09', displayValue: 'Construcción' },
+										{ value: '10', displayValue: 'Diseño' },
+										{ value: '11', displayValue: 'Educación, Docencia o Investigación' },
+										{ value: '12', displayValue: 'Gastronomía y Turismo' },
+										{ value: '13', displayValue: 'Gerencia y Dirección General' },
+										{ value: '14', displayValue: 'Ingenierías' },
+										{ value: '15', displayValue: 'Legal' },
+										{ value: '16', displayValue: 'Mantención de áreas verdes o jardinería' },
+										{ value: '17', displayValue: 'Marketing y Publicidad' },
+										{ value: '18', displayValue: 'Minería, Petróleo o Gas' },
+										{ value: '19', displayValue: 'Operaciones' },
+										{ value: '20', displayValue: 'Producción y Manufactura' },
+										{ value: '21', displayValue: 'Recursos Humanos o Formación' },
+										{ value: '22', displayValue: 'Salud, Medicina y Farmacia' },
+										{ value: '23', displayValue: 'Secretaría y Recepción' },
+										{ value: '24', displayValue: 'Seguridad o Vigilancia' },
+										{ value: '25', displayValue: 'Tecnología, Informática, Sistemas' },
+										{ value: '26', displayValue: 'Textil y Confección' },
+										{ value: '27', displayValue: 'Transporte' }
+									]
+								},
+								value: ''
+							}
+						]
+					},
+				}
+			},
+			{
+				id: 3,
+				name: "Otros datos laborales",
+				fields: {
+					interesesLaborales: {
+						type: 'normal',
+						elements: [
+							{
+								label: 'Intereses laborales',
+								elementType: 'input',
+								elementConfig: {
+									type: 'text',
+									placeholder: 'Ventas',
+									name: 'interesesLaborales',
+									id: 'interesesLaborales'
+								},
+								value: ''
+							}
+						]
+					},
+					expectativaSueldo: {
+						type: 'normal',
+						elements: [
+							{
+								label: 'Pretención de renta (en pesos)',
+								elementType: 'money',
+								elementConfig: {
+									type: 'text',
+									placeholder: '600.000',
+									name: 'expectativaSueldo',
+									id: 'expectativaSueldo'
+								},
+								value: ''
+							}
+						]
+					},
+					licencia: {
+						type: 'normal',
+						elements: [
+							{
+								label: 'Licencia de conducir',
+								elementType: 'select',
+								elementConfig: {
+									name: 'licencia',
+									id: 'licencia',
+									options: [
+										{ value: 'No tiene', displayValue: 'No tiene' },
+										{ value: 'A1', displayValue: 'Clase A1' },
+										{ value: 'A2', displayValue: 'Clase A2' },
+										{ value: 'A3', displayValue: 'Clase A3' },
+										{ value: 'A4', displayValue: 'Clase A4' },
+										{ value: 'A5', displayValue: 'Clase A5' },
+										{ value: 'B', displayValue: 'Clase B' },
+										{ value: 'C', displayValue: 'Clase C' },
+										{ value: 'D', displayValue: 'Clase D' },
+										{ value: 'E', displayValue: 'Clase E' },
+										{ value: 'F', displayValue: 'Clase F' }
+									]
+								},
+								value: ''
+							}
+						]
+					},
+				}
+			},
+			{
+				id: 4,
+				name: "Perfil funcional",
+				fields: {
 					sillaRuedas: {
 						type: 'normal',
 						elements: [
@@ -1154,13 +1546,7 @@ function App() {
 								value: ''
 							}
 						]
-					}
-				}
-			},
-			{
-				id: 1,
-				name: "Etapa dos",
-				fields: {
+					},
 					dAuditiva: {
 						type: 'normal',
 						elements: [
@@ -1230,7 +1616,7 @@ function App() {
 				}
 			},
 			{
-				id: 2,
+				id: 5,
 				name: "Etapa tres",
 				fields: {
 					dPsiquica: {
@@ -1293,111 +1679,7 @@ function App() {
 					}
 				}
 			},
-			{
-				id: 3,
-				name: "Etapa cuatro",
-				fields: {
-					nivelEducacional: {
-						type: 'normal',
-						elements: [
-							{
-								label: 'Nivel educacional',
-								elementType: 'select',
-								elementConfig: {
-									name: 'nivelEducacional',
-									id: 'nivelEducacional',
-									options: [
-										{ value: '', displayValue: 'Seleccione...', disabled: true },
-										{ value: 'basica incompleta', displayValue: 'Básica incompleta' },
-										{ value: 'basica completa', displayValue: 'Básica completa' },
-										{ value: 'media incompleta', displayValue: 'Media incompleta' },
-										{ value: 'media completa', displayValue: 'Media completa' },
-										{ value: 'técnica incompleta', displayValue: 'Técnica incompleta' },
-										{ value: 'técnica completa', displayValue: 'Técnica completa' },
-										{ value: 'superior incompleta', displayValue: 'Superior incompleta' },
-										{ value: 'superior completa', displayValue: 'Superior completa' },
-									]
-								},
-								value: ''
-							}
-						]
-					},
-					profesion: {
-						type: 'normal',
-						elements: [
-							{
-								label: 'Profesión',
-								elementType: 'select',
-								elementConfig: {
-									name: 'profesion',
-									id: 'profesion',
-									options: [
-										{ value: '', displayValue: 'Seleccione...', disabled: true },
-										{ value: 'arquitecto', displayValue: 'Arquitecto' },
-										{ value: 'ingeniero comercial', displayValue: 'Ingeniero Comercial' },
-										{ value: 'ingeniero en informática', displayValue: 'Ingeniero en Informática' },
-										{ value: 'abogado', displayValue: 'Abogado' },
-										{ value: 'profesor', displayValue: 'Profesor' }
-									]
-								},
-								value: ''
-							}
-						]
-					},
-					experienciaLaboral: {
-						type: 'multi',
-						elements: [
-							{
-								label: 'Inicio',
-								elementType: 'select',
-								elementConfig: {
-									name: 'fechaInicio',
-									id: 'fechaInicio',
-									options: [
-										{ value: '', displayValue: 'Seleccione...', disabled: true },
-										{ value: '0', displayValue: 'fecha uno' },
-										{ value: '1', displayValue: 'fecha dos' },
-										{ value: '2', displayValue: 'fecha 3' }
-									]
-								},
-								value: ''
-							},
-							{
-								label: 'Término',
-								elementType: 'select',
-								elementConfig: {
-									name: 'fechaTermino',
-									id: 'fechaTermino',
-									options: [
-										{ value: '', displayValue: 'Seleccione...', disabled: true },
-										{ value: '0', displayValue: 'fecha termino uno' },
-										{ value: '1', displayValue: 'fecha termino dos' },
-										{ value: '2', displayValue: 'fecha termino 3' }
-									]
-								},
-								value: ''
-							},
-							{
-								label: 'Área de experiencia',
-								elementType: 'select',
-								elementConfig: {
-									name: 'areaExperiencia',
-									id: 'areaExperiencia',
-									options: [
-										{ value: '', displayValue: 'Seleccione...', disabled: true },
-										{ value: 'finanzas', displayValue: 'Finanzas' },
-										{ value: 'informatica', displayValue: 'Informática' },
-										{ value: 'publicidad', displayValue: 'Publicidad' },
-										{ value: 'contabilidad', displayValue: 'Contabilidad' },
-										{ value: 'salud', displayValue: 'Salud' },
-									]
-								},
-								value: ''
-							}
-						]
-					},
-				}
-			} 
+			
 		]
 	}
 

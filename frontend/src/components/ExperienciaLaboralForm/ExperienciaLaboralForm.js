@@ -54,14 +54,26 @@ class ExperienciaLaboralForm extends Component {
 					</Form.Control>
 				</Form.Group>
 
-				<Form.Group>
+				<Form.Group as={Col} controlId={this.props.elements[2].elementConfig.id}>
 					<Form.Label>{this.props.elements[2].label}</Form.Label>
 					<Form.Control
-						placeholder="Operador telefónico"
+						as="select"
 						onChange={(event) => this.props.handleChange(event, this.props.field, this.props.elements[2].elementConfig.id)}
-						{...this.props.elements[2].elementConfig}
-					/>
+						name={this.props.elements[2].elementConfig.name}
+						value={this.props.elements[2].value}
+					>
+						{this.props.elements[2].elementConfig.options.map(option => (
+							<option
+								key={option.value}
+								value={option.value}
+								disabled={option.disabled}
+							>
+								{option.displayValue}
+							</option>
+						))}
+					</Form.Control>
 				</Form.Group>
+
 			</Form.Row>
 		)
 	}

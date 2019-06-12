@@ -57,6 +57,25 @@ const Input = (props) => {
 					</div>
 				);
 				break;
+			case ('money'):
+					inputElement = (
+						<React.Fragment>
+							<label>{props.label}</label>
+							<div className="input-group mb-3">
+								<div className="input-group-prepend">
+									<span className="input-group-text">$</span>
+								</div>
+								<input 
+									onChange={props.handleChange}
+									{...props.elementConfig}
+									value={props.value}
+									className="form-control"
+									aria-label="cantidad"
+								/>
+						</div>
+						</React.Fragment>
+					);
+					break;
 			default:
 				inputElement = (
 					<div className="form-group">
