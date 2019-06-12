@@ -1,4 +1,5 @@
 import React from 'react';
+import DatePicker from "react-datepicker";
 
 const Input = (props) => {
 
@@ -73,6 +74,23 @@ const Input = (props) => {
 								/>
 						</div>
 						</React.Fragment>
+					);
+					break;
+				case ('date'):
+					inputElement = (
+						<div className="form-group">
+							<label>{props.label}</label>
+							<br></br>
+							<DatePicker
+								name={props.elementConfig.name}
+								id={props.elementConfig.id}
+								selected={new Date()}
+								onChange={props.handleChange}
+								dateFormat="dd/MM/yyyy"
+								showYearDropdown
+								showMonthDropdown
+							/>
+						</div>
 					);
 					break;
 			default:
