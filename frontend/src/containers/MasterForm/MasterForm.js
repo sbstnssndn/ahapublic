@@ -188,7 +188,7 @@ class MasterForm extends Component {
 				label: 'Curso de capacitación',
 				elementType: 'input',
 				elementConfig: {
-					type: 'date',
+					type: 'text',
 					placeholder: 'Administración pública',
 					name: 'curso' + idAppend,
 					id: 'curso' + idAppend
@@ -210,7 +210,7 @@ class MasterForm extends Component {
 				label: 'Fecha de inicio',
 				elementType: 'input',
 				elementConfig: {
-					type: 'text',
+					type: 'date',
 					placeholder: '20/04/2010',
 					name: 'fechaInicioCurso' + idAppend,
 					id: 'fechaInicioCurso' + idAppend
@@ -221,7 +221,7 @@ class MasterForm extends Component {
 				label: 'Fecha de término',
 				elementType: 'input',
 				elementConfig: {
-					type: 'text',
+					type: 'date',
 					placeholder: '15/06/2010',
 					name: 'fechaTerminoCurso' + idAppend,
 					id: 'fechaTerminoCurso' + idAppend
