@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col'
+import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
+import axios from 'axios';
 
 class Login extends Component {
 
@@ -12,18 +14,16 @@ class Login extends Component {
     isLoggedIn: false,
   }
 
-  this.handleChange = this.handleChange.bind(this);
-  this.handleSubmit = this.handleSubmit.bind(this);
+  handleChange = this.handleChange.bind(this)
+  handleSubmit = this.handleSubmit.bind(this)
 
   handleChange(event) {
-    const { name, value } = event.target;
-    this.setState({ [name]: value });
+    const { name, value } = event.target
+    this.setState({ [name]: value })
   }
 
   handleSubmit(event) {
-    event.preventDefault;
-
-
+    event.preventDefault()
   }
 
   render () {
@@ -48,7 +48,11 @@ class Login extends Component {
                   placeholder="Ingrese su contraseña"
                   onChange={this.handleChange} />
               </Form.Group>
-              <Button type="submit">Ingresar</Button>
+              <Button
+                variant="primary"
+                type="submit"
+                onClick={this.handleSubmit}>
+                  Ingresar</Button>
             </Form>
           </Col>
         </Row>
