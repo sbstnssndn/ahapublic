@@ -1188,7 +1188,7 @@ function App() {
 		title: "Información postulante",
 		belongsTo: "postulante",
 		endpoint: "http://localhost:8080/api/postulante/:id/datos-laborales",
-		totalStages: 6,
+		totalStages: 7,
 		stages: [
 			{
 				id: 0,
@@ -1592,7 +1592,19 @@ function App() {
 					}
 				}
 			},
-			
+			{
+				id: 6,
+				name: "Otra formación",
+				fields: {
+					cursos: {
+						type: 'cursos',
+						elements: [
+							
+						]
+					}, // fields
+				}
+			},
+			// stages
 		]
 	}
 

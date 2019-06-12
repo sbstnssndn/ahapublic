@@ -156,10 +156,93 @@ class MasterForm extends Component {
       });
   }
 	
-	onChange = (event) => {
+	addCurso = (inputIdentifier) => {
+		const updatedForm = {
+			...this.props.formConfig
+		}
+		const updatedStages = {
+			...updatedForm.stages
+		}
+		const updatedCurrentStage = {
+			...updatedStages[this.state.currentStage]
+		}
+		const updatedStageFields = {
+			...updatedCurrentStage.fields
+		}
+		// updatedFieldElements es un objeto con keys numéricas para cada elemento del grupoFormulario
+		const updatedFieldElements = {
+			...updatedStageFields[inputIdentifier].elements
+		}
+
+		// clonar el array elements
+		const elementsArray = [];
+		for (let elem in updatedFieldElements) {
+			elementsArray.push({
+				...updatedFieldElements[elem]
+			})
+		}
+
+		let idAppend = updatedForm.stages[this.state.currentStage].fields[inputIdentifier].elements.length/4;
+		let newCurso = [
+			{
+				label: 'Curso de capacitación',
+				elementType: 'input',
+				elementConfig: {
+					type: 'date',
+					placeholder: 'Administración pública',
+					name: 'curso' + idAppend,
+					id: 'curso' + idAppend
+				},
+				value: ''
+			},
+			{
+				label: 'Institución donde se realizó',
+				elementType: 'input',
+				elementConfig: {
+					type: 'text',
+					placeholder: 'Universidad de Santiago de Chile',
+					name: 'institucionCurso' + idAppend,
+					id: 'institucionCurso' + idAppend
+				},
+				value: ''
+			},
+			{
+				label: 'Fecha de inicio',
+				elementType: 'input',
+				elementConfig: {
+					type: 'text',
+					placeholder: '20/04/2010',
+					name: 'fechaInicioCurso' + idAppend,
+					id: 'fechaInicioCurso' + idAppend
+				},
+				value: ''
+			},
+			{
+				label: 'Fecha de término',
+				elementType: 'input',
+				elementConfig: {
+					type: 'text',
+					placeholder: '15/06/2010',
+					name: 'fechaTerminoCurso' + idAppend,
+					id: 'fechaTerminoCurso' + idAppend
+				},
+				value: ''
+			}
+		]
+
+		console.log(elementsArray)
+
+		const newElementsArray = elementsArray.concat(newCurso);
+
+		console.log(newElementsArray)
+
+		updatedForm.stages[this.state.currentStage].fields[inputIdentifier].elements = newElementsArray;
+
+		
+
 		this.setState({
-			stages: 'onChange triggered'
-		})
+      form: updatedForm
+    });
 	}
 
 	addExperiencia = (inputIdentifier) => {
@@ -203,37 +286,25 @@ class MasterForm extends Component {
 			},
 			{
 				label: 'Fecha de inicio',
-		    elementType: 'select',
+		    elementType: 'input',
 		    elementConfig: {
+					type: 'date',
+					placeholder: new Date(),
 		      name: 'expFechaInicio' + idAppend,
-		      id: 'expFechaInicio' + idAppend,
-		      options: [
-			      { value: '', displayValue: 'Seleccione...', disabled: true },
-			      { value: 'finanzas', displayValue: 'Finanzas' },
-			      { value: 'informatica', displayValue: 'Informática' },
-			      { value: 'publicidad', displayValue: 'Publicidad' },
-			      { value: 'contabilidad', displayValue: 'Contabilidad' },
-			      { value: 'salud', displayValue: 'Salud' },
-		      ]
+		      id: 'expFechaInicio' + idAppend
 	      },
-	      value: ''
+	      value: new Date()
 			},
 			{
 				label: 'Fecha de término',
-		    elementType: 'select',
+		    elementType: 'input',
 		    elementConfig: {
+					type: 'date',
+					placeholder: new Date(),
 		      name: 'expFechaTermino' + idAppend,
-		      id: 'expFechaTermino' + idAppend,
-		      options: [
-			      { value: '', displayValue: 'Seleccione...', disabled: true },
-			      { value: 'finanzas', displayValue: 'Finanzas' },
-			      { value: 'informatica', displayValue: 'Informática' },
-			      { value: 'publicidad', displayValue: 'Publicidad' },
-			      { value: 'contabilidad', displayValue: 'Contabilidad' },
-			      { value: 'salud', displayValue: 'Salud' },
-		      ]
+		      id: 'expFechaTermino' + idAppend
 	      },
-	      value: ''
+	      value: new Date()
 			},
 			{
 				label: 'Indica tu cargo',
@@ -306,6 +377,7 @@ class MasterForm extends Component {
 					totalStages={this.props.formConfig.totalStages}
 					handleChange={this.handleChange}
 					addExperiencia={this.addExperiencia}
+					addCurso={this.addCurso}
 					/>
 				})
 		);
