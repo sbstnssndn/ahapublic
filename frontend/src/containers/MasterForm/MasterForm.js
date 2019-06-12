@@ -188,11 +188,22 @@ class MasterForm extends Component {
 			})
 		}
 
-		let idAppend = updatedForm.stages[this.state.currentStage].fields[inputIdentifier].elements.length/3;
+		let idAppend = updatedForm.stages[this.state.currentStage].fields[inputIdentifier].elements.length/4;
 		let newExperiencia = [
 			{
+				label: 'Empresa',
+				elementType: 'input',
+				elementConfig: {
+					type: 'text',
+					placeholder: 'AHA Inclusión',
+					name: 'empresaExperienciaLaboral',
+					id: 'empresaExperienciaLaboral'
+				},
+				value: ''
+			},
+			{
 				label: 'Fecha de inicio',
-		    elementType: 'experiencia_laboral',
+		    elementType: 'select',
 		    elementConfig: {
 		      name: 'expFechaInicio' + idAppend,
 		      id: 'expFechaInicio' + idAppend,
@@ -209,7 +220,7 @@ class MasterForm extends Component {
 			},
 			{
 				label: 'Fecha de término',
-		    elementType: 'experiencia_laboral',
+		    elementType: 'select',
 		    elementConfig: {
 		      name: 'expFechaTermino' + idAppend,
 		      id: 'expFechaTermino' + idAppend,

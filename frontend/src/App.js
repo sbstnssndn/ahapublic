@@ -1345,8 +1345,8 @@ function App() {
 				id: 2,
 				name: "Experiencia laboral",
 				fields: {
-					empresaExperienciaLaboral: {
-						type: 'normal',
+					experiencias: {
+						type: 'multi',
 						elements: [
 							{
 								label: 'Empresa',
@@ -1358,12 +1358,7 @@ function App() {
 									id: 'empresaExperienciaLaboral'
 								},
 								value: ''
-							}
-						]
-					},
-					experiencias: {
-						type: 'multi',
-						elements: [
+							},
 							{
 								label: 'Fecha de inicio',
 								elementType: 'select',

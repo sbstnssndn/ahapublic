@@ -45,6 +45,7 @@ const StageControls = (props) => {
 
   return (
 		<Container fluid>
+			<hr />
 			<Row>
 				<Col xs={4} className="text-left px-0">
 				{ prevButton }
