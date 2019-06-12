@@ -1,5 +1,4 @@
 import React from 'react';
-import ExperienciaLaboralForm from '../../../components/ExperienciaLaboralForm/ExperienciaLaboralForm';
 
 const Input = (props) => {
 

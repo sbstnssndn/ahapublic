@@ -196,8 +196,8 @@ class MasterForm extends Component {
 				elementConfig: {
 					type: 'text',
 					placeholder: 'AHA Inclusión',
-					name: 'empresaExperienciaLaboral',
-					id: 'empresaExperienciaLaboral'
+					name: 'empresaExperienciaLaboral' + idAppend,
+					id: 'empresaExperienciaLaboral' + idAppend
 				},
 				value: ''
 			},
