@@ -740,7 +740,7 @@ function App() {
 						elements: [
 							{
 								label: 'Fecha de entrevista',
-								elementType: 'input',
+								elementType: 'date',
 								elementConfig: {
 									type: 'text',
 									placeholder: '20/10/2019',
@@ -798,7 +798,7 @@ function App() {
 						elements: [
 							{
 								label: 'Fecha de nacimiento',
-								elementType: 'input',
+								elementType: 'date',
 								elementConfig: {
 									type: 'text',
 									placeholder: '20/10/1987',
@@ -1312,7 +1312,7 @@ function App() {
 						elements: [
 							{
 								label: 'Fecha de inicio',
-								elementType: 'input',
+								elementType: 'date',
 								elementConfig: {
 									type: 'text',
 									placeholder: '20/04/2010',
@@ -1328,7 +1328,7 @@ function App() {
 						elements: [
 							{
 								label: 'Fecha de término',
-								elementType: 'input',
+								elementType: 'date',
 								elementConfig: {
 									type: 'text',
 									placeholder: '15/06/2010',
