@@ -89,17 +89,7 @@ const Input = (props) => {
 					</div>
 				);
 		}
-	} else if (props.type === 'multi') {
-		inputElement = (
-			<ExperienciaLaboralForm
-				elementConfig={props.elementConfig}
-				value={props.value}
-				label={props.label}
-				handleChange={props.handleChange}
-			/>
-		)
-	}
-
+	} 
 
   return (
     <div>

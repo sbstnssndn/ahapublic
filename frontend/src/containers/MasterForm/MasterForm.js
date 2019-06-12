@@ -44,8 +44,12 @@ class MasterForm extends Component {
 		}
 
 		for (let elem in elementsArray) {
-			elementsArray[elem].value = event.target.value;
-			updatedForm.stages[this.state.currentStage].fields[inputIdentifier].elements[elem] = elementsArray[elem];
+			console.log(elementsArray[elem].elementConfig.id)
+			if(elementsArray[elem].elementConfig.id === element) {
+				elementsArray[elem].value = event.target.value;
+				updatedForm.stages[this.state.currentStage].fields[inputIdentifier].elements[elem] = elementsArray[elem];
+			}		
+			
 		}
 		this.setState({
       form: updatedForm
@@ -157,6 +161,125 @@ class MasterForm extends Component {
 			stages: 'onChange triggered'
 		})
 	}
+
+	addExperiencia = (inputIdentifier) => {
+		const updatedForm = {
+			...this.props.formConfig
+		}
+		const updatedStages = {
+			...updatedForm.stages
+		}
+		const updatedCurrentStage = {
+			...updatedStages[this.state.currentStage]
+		}
+		const updatedStageFields = {
+			...updatedCurrentStage.fields
+		}
+		// updatedFieldElements es un objeto con keys numéricas para cada elemento del grupoFormulario
+		const updatedFieldElements = {
+			...updatedStageFields[inputIdentifier].elements
+		}
+
+		// clonar el array elements
+		const elementsArray = [];
+		for (let elem in updatedFieldElements) {
+			elementsArray.push({
+				...updatedFieldElements[elem]
+			})
+		}
+
+		let idAppend = updatedForm.stages[this.state.currentStage].fields[inputIdentifier].elements.length/3;
+		let newExperiencia = [
+			{
+				label: 'Fecha de inicio',
+		    elementType: 'experiencia_laboral',
+		    elementConfig: {
+		      name: 'expFechaInicio' + idAppend,
+		      id: 'expFechaInicio' + idAppend,
+		      options: [
+			      { value: '', displayValue: 'Seleccione...', disabled: true },
+			      { value: 'finanzas', displayValue: 'Finanzas' },
+			      { value: 'informatica', displayValue: 'Informática' },
+			      { value: 'publicidad', displayValue: 'Publicidad' },
+			      { value: 'contabilidad', displayValue: 'Contabilidad' },
+			      { value: 'salud', displayValue: 'Salud' },
+		      ]
+	      },
+	      value: ''
+			},
+			{
+				label: 'Fecha de término',
+		    elementType: 'experiencia_laboral',
+		    elementConfig: {
+		      name: 'expFechaTermino' + idAppend,
+		      id: 'expFechaTermino' + idAppend,
+		      options: [
+			      { value: '', displayValue: 'Seleccione...', disabled: true },
+			      { value: 'finanzas', displayValue: 'Finanzas' },
+			      { value: 'informatica', displayValue: 'Informática' },
+			      { value: 'publicidad', displayValue: 'Publicidad' },
+			      { value: 'contabilidad', displayValue: 'Contabilidad' },
+			      { value: 'salud', displayValue: 'Salud' },
+		      ]
+	      },
+	      value: ''
+			},
+			{
+				label: 'Indica tu cargo',
+				elementType: 'select',
+				elementConfig: {
+					name: 'expArea' + idAppend,
+					id: 'expArea' + idAppend,
+					options: [
+						{ value: '', displayValue: 'Seleccione...', disabled: true },
+						{ value: '00', displayValue: 'Administración, contabilidad o finanzas' },
+						{ value: '01', displayValue: 'Aduana y comercio exterior' },
+						{ value: '02', displayValue: 'Abastecimiento o Logística' },
+						{ value: '03', displayValue: 'Agrícola o Ganadero' },
+						{ value: '04', displayValue: 'Auxiliar de Aseo o Servicios de Alimentación' },
+						{ value: '05', displayValue: 'Atención al Cliente, Call Center o Telemarketing' },
+						{ value: '06', displayValue: 'Ingeniería Civil y Construcción' },
+						{ value: '07', displayValue: 'Comercial, Ventas o Negocios' },
+						{ value: '08', displayValue: 'Comunicación, Relaciones Públicas o Institucionales' },
+						{ value: '09', displayValue: 'Construcción' },
+						{ value: '10', displayValue: 'Diseño' },
+						{ value: '11', displayValue: 'Educación, Docencia o Investigación' },
+						{ value: '12', displayValue: 'Gastronomía y Turismo' },
+						{ value: '13', displayValue: 'Gerencia y Dirección General' },
+						{ value: '14', displayValue: 'Ingenierías' },
+						{ value: '15', displayValue: 'Legal' },
+						{ value: '16', displayValue: 'Mantención de áreas verdes o jardinería' },
+						{ value: '17', displayValue: 'Marketing y Publicidad' },
+						{ value: '18', displayValue: 'Minería, Petróleo o Gas' },
+						{ value: '19', displayValue: 'Operaciones' },
+						{ value: '20', displayValue: 'Producción y Manufactura' },
+						{ value: '21', displayValue: 'Recursos Humanos o Formación' },
+						{ value: '22', displayValue: 'Salud, Medicina y Farmacia' },
+						{ value: '23', displayValue: 'Secretaría y Recepción' },
+						{ value: '24', displayValue: 'Seguridad o Vigilancia' },
+						{ value: '25', displayValue: 'Tecnología, Informática, Sistemas' },
+						{ value: '26', displayValue: 'Textil y Confección' },
+						{ value: '27', displayValue: 'Transporte' }
+					]
+				},
+				value: ''
+			}
+		]
+
+		console.log(elementsArray)
+
+		const newElementsArray = elementsArray.concat(newExperiencia);
+
+		console.log(newElementsArray)
+
+		updatedForm.stages[this.state.currentStage].fields[inputIdentifier].elements = newElementsArray;
+
+		
+
+		this.setState({
+      form: updatedForm
+    });
+	}
   
   render () {
 
@@ -171,6 +294,7 @@ class MasterForm extends Component {
 					currentStage={this.state.currentStage}
 					totalStages={this.props.formConfig.totalStages}
 					handleChange={this.handleChange}
+					addExperiencia={this.addExperiencia}
 					/>
 				})
 		);

@@ -1361,41 +1361,43 @@ function App() {
 							}
 						]
 					},
-					expFechaInicio: {
-						type: 'normal',
+					experiencias: {
+						type: 'multi',
 						elements: [
 							{
-								label: 'Fecha de término',
-								elementType: 'input',
+								label: 'Fecha de inicio',
+								elementType: 'select',
 								elementConfig: {
-									type: 'text',
-									placeholder: '06/2012',
 									name: 'expFechaInicio',
-									id: 'expFechaInicio'
+									id: 'expFechaInicio',
+									options: [
+										{ value: '', displayValue: 'Seleccione...', disabled: true },
+										{ value: 'finanzas', displayValue: 'Finanzas' },
+										{ value: 'informatica', displayValue: 'Informática' },
+										{ value: 'publicidad', displayValue: 'Publicidad' },
+										{ value: 'contabilidad', displayValue: 'Contabilidad' },
+										{ value: 'salud', displayValue: 'Salud' },
+									]
 								},
 								value: ''
-							}
-						]
-					},
-					expFechaTermino: {
-						type: 'normal',
-						elements: [
+							},
 							{
 								label: 'Fecha de término',
-								elementType: 'input',
+								elementType: 'select',
 								elementConfig: {
-									type: 'text',
-									placeholder: '02/2013',
 									name: 'expFechaTermino',
-									id: 'expFechaTermino'
+									id: 'expFechaTermino',
+									options: [
+										{ value: '', displayValue: 'Seleccione...', disabled: true },
+										{ value: '1', displayValue: '1' },
+										{ value: '2', displayValue: '2' },
+										{ value: '3', displayValue: '3' },
+										{ value: '4', displayValue: '4' },
+										{ value: '5', displayValue: '5' },
+									]
 								},
 								value: ''
-							}
-						]
-					},
-					expArea: {
-						type: 'normal',
-						elements: [
+							},
 							{
 								label: 'Indica tu cargo',
 								elementType: 'select',
@@ -1435,9 +1437,9 @@ function App() {
 									]
 								},
 								value: ''
-							}
+							},
 						]
-					},
+					}
 				}
 			},
 			{

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Form from 'react-bootstrap/Form';
 import Col from 'react-bootstrap/Col';
+import Button from 'react-bootstrap/Button';
 
 class ExperienciaLaboralForm extends Component {
 
@@ -10,71 +11,89 @@ class ExperienciaLaboralForm extends Component {
 
 	render () {
 
+		let formqty = 0;
+		let experiencias = [];
+		for(let i=0; i<this.props.elements.length; i=i+3) {
+
+			experiencias.push({
+				id: this.props.field + "_" + i,
+				field1: this.props.elements[i],
+				field2: this.props.elements[i+1],
+				field3: this.props.elements[i+2]
+			})
+			formqty++;
 		
+		}
 
 		return (
-			<Form.Row>
-				<Form.Group as={Col} controlId={this.props.elements[0].elementConfig.id}>
-					<Form.Label>{this.props.elements[0].label}</Form.Label>
-					<Form.Control
-						as="select"
-						onChange={(event) => this.props.handleChange(event, this.props.field, this.props.elements[0].elementConfig.id)}
-						name={this.props.elements[0].elementConfig.name}
-						value={this.props.elements[0].value}
-					>
-						{this.props.elements[0].elementConfig.options.map(option => (
-							<option
-								key={option.value}
-								value={option.value}
-								disabled={option.disabled}
+			<React.Fragment>
+				{ experiencias.map(experiencia => ( 
+					<Form.Row key={experiencia.id}>
+						{console.log(formqty)}
+						<Form.Group as={Col} controlId={experiencia.field1.elementConfig.id}>
+							<Form.Label>{experiencia.field1.label}</Form.Label>
+							<Form.Control
+								as="select"
+								onChange={(event) => this.props.handleChange(event, this.props.field, experiencia.field1.elementConfig.id)}
+								name={experiencia.field1.elementConfig.name}
+								value={experiencia.field1.value}
 							>
-								{option.displayValue}
-							</option>
-						))}
-					</Form.Control>
-				</Form.Group>
+								{experiencia.field1.elementConfig.options.map(option => (
+									<option
+										key={option.value}
+										value={option.value}
+										disabled={option.disabled}
+									>
+										{option.displayValue}
+									</option>
+								))}
+							</Form.Control>
+						</Form.Group>
 
-				<Form.Group as={Col} controlId={this.props.elements[1].elementConfig.id}>
-					<Form.Label>{this.props.elements[1].label}</Form.Label>
-					<Form.Control
-						as="select"
-						onChange={(event) => this.props.handleChange(event, this.props.field, this.props.elements[1].elementConfig.id)}
-						name={this.props.elements[1].elementConfig.name}
-						value={this.props.elements[1].value}
-					>
-						{this.props.elements[1].elementConfig.options.map(option => (
-							<option
-								key={option.value}
-								value={option.value}
-								disabled={option.disabled}
+						<Form.Group as={Col} controlId={experiencia.field2.elementConfig.id}>
+							<Form.Label>{experiencia.field2.label}</Form.Label>
+							<Form.Control
+								as="select"
+								onChange={(event) => this.props.handleChange(event, this.props.field, experiencia.field2.elementConfig.id)}
+								name={experiencia.field2.elementConfig.name}
+								value={experiencia.field2.value}
 							>
-								{option.displayValue}
-							</option>
-						))}
-					</Form.Control>
-				</Form.Group>
+								{experiencia.field2.elementConfig.options.map(option => (
+									<option
+										key={option.value}
+										value={option.value}
+										disabled={option.disabled}
+									>
+										{option.displayValue}
+									</option>
+								))}
+							</Form.Control>
+						</Form.Group>
 
-				<Form.Group as={Col} controlId={this.props.elements[2].elementConfig.id}>
-					<Form.Label>{this.props.elements[2].label}</Form.Label>
-					<Form.Control
-						as="select"
-						onChange={(event) => this.props.handleChange(event, this.props.field, this.props.elements[2].elementConfig.id)}
-						name={this.props.elements[2].elementConfig.name}
-						value={this.props.elements[2].value}
-					>
-						{this.props.elements[2].elementConfig.options.map(option => (
-							<option
-								key={option.value}
-								value={option.value}
-								disabled={option.disabled}
+						<Form.Group as={Col} controlId={experiencia.field3.elementConfig.id}>
+							<Form.Label>{experiencia.field3.label}</Form.Label>
+							<Form.Control
+								as="select"
+								onChange={(event) => this.props.handleChange(event, this.props.field, experiencia.field3.elementConfig.id)}
+								name={experiencia.field3.elementConfig.name}
+								value={experiencia.field3.value}
 							>
-								{option.displayValue}
-							</option>
-						))}
-					</Form.Control>
-				</Form.Group>
+								{experiencia.field3.elementConfig.options.map(option => (
+									<option
+										key={option.value}
+										value={option.value}
+										disabled={option.disabled}
+									>
+										{option.displayValue}
+									</option>
+								))}
+							</Form.Control>
+						</Form.Group>
 
-			</Form.Row>
+					</Form.Row>
+				)) }
+			<Button onClick={() => this.props.addExperiencia(this.props.field)}>Agregar</Button>
+			</React.Fragment>
 		)
 	}
 }

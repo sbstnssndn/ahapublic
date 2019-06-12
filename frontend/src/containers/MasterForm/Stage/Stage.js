@@ -40,6 +40,7 @@ const Stage = (props) => {
 						type={field.type}
 						elements={field.elements}
 						handleChange={props.handleChange}
+						addExperiencia={props.addExperiencia}
 					/>
 			}
 		})
