@@ -687,55 +687,53 @@ function App() {
 				id: 0,
 				name: "Identificación",
 				fields: {
-					experienciaPostulante: {
-						label: 'Experiencia laboral',
-						elementType: 'experiencia_laboral',
-						elementConfig: {
-							name: 'experienciaLaboral',
-							id: 'experienciaLaboral',
-							options: [
-								{ value: '', displayValue: 'Seleccione...', disabled: true },
-								{ value: 'finanzas', displayValue: 'Finanzas' },
-								{ value: 'informatica', displayValue: 'Informática' },
-								{ value: 'publicidad', displayValue: 'Publicidad' },
-								{ value: 'contabilidad', displayValue: 'Contabilidad' },
-								{ value: 'salud', displayValue: 'Salud' },
-							]
-						},
-						value: ''
-					},
 					rut: {
-						label: 'RUT',
-						elementType: 'input',
-						elementConfig: {
-							type: 'text',
-							placeholder: '12345678-0',
-							name: 'rut',
-							id: 'rut'
-						},
-						value: ''
+						type: 'normal',
+						elements: [
+							{
+								label: 'RUT',
+								elementType: 'input',
+								elementConfig: {
+									type: 'text',
+									placeholder: '12345678-0',
+									name: 'rut',
+									id: 'rut'
+								},
+								value: ''
+							}
+						]
 					},
 					firstName: {
-						label: 'Nombres',
-						elementType: 'input',
-						elementConfig: {
-							type: 'text',
-							placeholder: 'Juan Alberto',
-							name: 'firstName',
-							id: 'firstName'
-						},
-						value: ''
+						type: 'normal',
+						elements: [
+							{
+								label: 'Nombres',
+								elementType: 'input',
+								elementConfig: {
+									type: 'text',
+									placeholder: 'Juan Alberto',
+									name: 'firstName',
+									id: 'firstName'
+								},
+								value: ''
+							}
+						]
 					},
 					lastName: {
-						label: 'Apellidos',
-						elementType: 'input',
-						elementConfig: {
-							type: 'text',
-							placeholder: 'Pérez Soto',
-							name: 'lastName',
-							id: 'lastName'
-						},
-						value: ''
+						type: 'normal',
+						elements: [
+							{
+								label: 'Apellidos',
+								elementType: 'input',
+								elementConfig: {
+									type: 'text',
+									placeholder: 'Pérez Soto',
+									name: 'lastName',
+									id: 'lastName'
+								},
+								value: ''
+							}
+						]
 					}
 				}
 			},
@@ -744,37 +742,52 @@ function App() {
 				name: "Contacto",
 				fields: {
 					email: {
-						label: 'Correo electrónico de contacto',
-						elementType: 'input',
-						elementConfig: {
-							type: 'email',
-							placeholder: 'juan.perez@gmail.com',
-							name: 'email',
-							id: 'email'
-						},
-						value: ''
+						type: 'normal',
+						elements: [
+							{
+								label: 'Correo electrónico de contacto',
+								elementType: 'input',
+								elementConfig: {
+									type: 'email',
+									placeholder: 'juan.perez@gmail.com',
+									name: 'email',
+									id: 'email'
+								},
+								value: ''
+							}
+						]
 					},
 					telefono: {
-						label: 'Teléfono',
-						elementType: 'input',
-						elementConfig: {
-							type: 'text',
-							placeholder: '+56912345678',
-							name: 'telefono',
-							id: 'telefono'
-						},
-						value: ''
+						type: 'normal',
+						elements: [
+							{
+								label: 'Teléfono',
+								elementType: 'input',
+								elementConfig: {
+									type: 'text',
+									placeholder: '+56912345678',
+									name: 'telefono',
+									id: 'telefono'
+								},
+								value: ''
+							}
+						]
 					},
 					telefono2: {
-						label: 'Teléfono alternativo',
-						elementType: 'input',
-						elementConfig: {
-							type: 'text',
-							placeholder: '+56987654321',
-							name: 'telefono2',
-							id: 'telefono2'
-						},
-						value: ''
+						type: 'normal',
+						elements: [
+							{
+								label: 'Teléfono alternativo',
+								elementType: 'input',
+								elementConfig: {
+									type: 'text',
+									placeholder: '+56987654321',
+									name: 'telefono2',
+									id: 'telefono2'
+								},
+								value: ''
+							}
+						]
 					}
 				}
 			},
@@ -783,37 +796,52 @@ function App() {
 				name: "Ubicación",
 				fields: {
 					calle: {
-						label: 'Calle y número',
-						elementType: 'input',
-						elementConfig: {
-							type: 'text',
-							placeholder: 'Av. Pajaritos 1234',
-							name: 'calle',
-							id: 'calle'
-						},
-						value: ''
+						type: 'normal',
+						elements: [
+							{
+								label: 'Calle y número',
+								elementType: 'input',
+								elementConfig: {
+									type: 'text',
+									placeholder: 'Av. Pajaritos 1234',
+									name: 'calle',
+									id: 'calle'
+								},
+								value: ''
+							}
+						]
 					},
 					region: {
-						label: 'Región',
-						elementType: 'input',
-						elementConfig: {
-							type: 'text',
-							placeholder: 'Región Metropolitana',
-							name: 'region',
-							id: 'region'
-						},
-						value: ''
+						type: 'normal',
+						elements: [
+							{
+								label: 'Región',
+								elementType: 'input',
+								elementConfig: {
+									type: 'text',
+									placeholder: 'Región Metropolitana',
+									name: 'region',
+									id: 'region'
+								},
+								value: ''
+							}
+						]
 					},
 					comuna: {
-						label: 'Comuna',
-						elementType: 'input',
-						elementConfig: {
-							type: 'text',
-							placeholder: 'Maipú',
-							name: 'comuna',
-							id: 'comuna'
-						},
-						value: ''
+						type: 'normal',
+						elements: [
+							{
+								label: 'Comuna',
+								elementType: 'input',
+								elementConfig: {
+									type: 'text',
+									placeholder: 'Maipú',
+									name: 'comuna',
+									id: 'comuna'
+								},
+								value: ''
+							}
+						]
 					},
 				}
 			}  
@@ -1071,6 +1099,7 @@ function App() {
 				name: "Etapa uno",
 				fields: {
 					credencial: {
+						type: 'normal',
 						elements: [
 							{
 								label: '¿Tiene credencial de discapacidad?',
@@ -1089,6 +1118,7 @@ function App() {
 						]
 					},
 					sillaRuedas: {
+						type: 'normal',
 						elements: [
 							{
 								label: '¿Utiliza silla de ruedas?',
@@ -1107,6 +1137,7 @@ function App() {
 						]
 					},
 					bañoAdaptado: {
+						type: 'normal',
 						elements: [
 							{
 								label: '¿Requiere baño adaptado?',
@@ -1131,6 +1162,7 @@ function App() {
 				name: "Etapa dos",
 				fields: {
 					dAuditiva: {
+						type: 'normal',
 						elements: [
 							{
 								label: 'Grado de discapacidad auditiva',
@@ -1152,6 +1184,7 @@ function App() {
 						]
 					},
 					dFisica: {
+						type: 'normal',
 						elements: [
 							{
 								label: 'Grado de discapacidad física',
@@ -1173,6 +1206,7 @@ function App() {
 						]
 					},
 					dIntelectual: {
+						type: 'normal',
 						elements: [
 							{
 								label: 'Grado de discapacidad intelectual',
@@ -1200,6 +1234,7 @@ function App() {
 				name: "Etapa tres",
 				fields: {
 					dPsiquica: {
+						type: 'normal',
 						elements: [
 							{
 								label: 'Grado de discapacidad psíquica',
@@ -1221,6 +1256,7 @@ function App() {
 						]
 					},
 					dVisual: {
+						type: 'normal',
 						elements: [
 							{
 								label: 'Grado de discapacidad visual',
@@ -1242,6 +1278,7 @@ function App() {
 						]
 					},
 					adecuaciones: {
+						type: 'normal',
 						elements: [
 							{
 								label: 'Indique si requiere de otras adecuaciones',
@@ -1261,6 +1298,7 @@ function App() {
 				name: "Etapa cuatro",
 				fields: {
 					nivelEducacional: {
+						type: 'normal',
 						elements: [
 							{
 								label: 'Nivel educacional',
@@ -1285,6 +1323,7 @@ function App() {
 						]
 					},
 					profesion: {
+						type: 'normal',
 						elements: [
 							{
 								label: 'Profesión',
@@ -1305,27 +1344,39 @@ function App() {
 							}
 						]
 					},
-					tiempoExperiencia: {
+					experienciaLaboral: {
+						type: 'multi',
 						elements: [
 							{
-								label: 'Experiencia laboral (tiempo)',
+								label: 'Inicio',
 								elementType: 'select',
 								elementConfig: {
-									name: 'tiempoExperiencia',
-									id: 'tiempoExperiencia',
+									name: 'fechaInicio',
+									id: 'fechaInicio',
 									options: [
 										{ value: '', displayValue: 'Seleccione...', disabled: true },
-										{ value: '0', displayValue: 'Menos de un año' },
-										{ value: '1', displayValue: 'Entre 1 y 2 años' },
-										{ value: '3', displayValue: 'Más de 2 años' }
+										{ value: '0', displayValue: 'fecha uno' },
+										{ value: '1', displayValue: 'fecha dos' },
+										{ value: '2', displayValue: 'fecha 3' }
 									]
 								},
 								value: ''
-							}
-						]
-					},
-					areaExperiencia: {
-						elements: [
+							},
+							{
+								label: 'Término',
+								elementType: 'select',
+								elementConfig: {
+									name: 'fechaTermino',
+									id: 'fechaTermino',
+									options: [
+										{ value: '', displayValue: 'Seleccione...', disabled: true },
+										{ value: '0', displayValue: 'fecha termino uno' },
+										{ value: '1', displayValue: 'fecha termino dos' },
+										{ value: '2', displayValue: 'fecha termino 3' }
+									]
+								},
+								value: ''
+							},
 							{
 								label: 'Área de experiencia',
 								elementType: 'select',
@@ -1344,7 +1395,7 @@ function App() {
 								value: ''
 							}
 						]
-					}
+					},
 				}
 			} 
 		]
@@ -1353,7 +1404,7 @@ function App() {
   return (
     <Routes 
 			formPostulante={formPostulante}
-			formPostulanteLaboral={formPostulanteLaboral}
+			formPostulanteLaboral={formPostulanteLaboralNew}
       stagesEmpresa={stagesEmpresa} 
       stagesPreguntas={stagesPreguntas}
     />

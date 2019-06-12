@@ -17,7 +17,7 @@ class MasterForm extends Component {
 	}
 
 	// handleChange(event, firstName)
-  handleChange = (event, inputIdentifier) => {
+  handleChange = (event, inputIdentifier, element) => {
 	 	const updatedForm = {
 			...this.props.formConfig
 		}
@@ -30,9 +30,30 @@ class MasterForm extends Component {
 		const updatedStageFields = {
 			...updatedCurrentStage.fields
 		}
-		const updatedFormElement = {
-			...updatedStageFields[inputIdentifier]
+		// updatedFieldElements es un objeto con keys numéricas para cada elemento del grupoFormulario
+		const updatedFieldElements = {
+			...updatedStageFields[inputIdentifier].elements
 		}
+
+		// clonar el array elements
+		const elementsArray = [];
+		for (let elem in updatedFieldElements) {
+			elementsArray.push({
+				...updatedFieldElements[elem]
+			})
+		}
+
+		for (let elem in elementsArray) {
+			elementsArray[elem].value = event.target.value;
+			updatedForm.stages[this.state.currentStage].fields[inputIdentifier].elements[elem] = elementsArray[elem];
+		}
+		this.setState({
+      form: updatedForm
+    });
+
+		// para cada elemento del form group, capturar su value y modificarlo
+
+		
 		/* objeto clonado para no mutar el estado al cambiar "value"
 		updatedFormElement = {
 			"elementType": "input",
@@ -47,6 +68,8 @@ class MasterForm extends Component {
 			"valid": false
 			}
 		*/
+
+		/*
 		updatedFormElement.value = event.target.value;
 		// guardar en el clon del form original, el nuevo elemento del formulario
 		updatedForm.stages[this.state.currentStage].fields[inputIdentifier] = updatedFormElement;
@@ -55,7 +78,7 @@ class MasterForm extends Component {
 		
     this.setState({
       form: updatedForm
-    });
+    });*/
 	}
 
 	componentDidMount() {
@@ -138,8 +161,8 @@ class MasterForm extends Component {
   render () {
 
 		let stages = (
-			this.props.formConfig.stages.map(stage => (
-				<Stage
+			this.props.formConfig.stages.map(stage => {
+				return <Stage
 					key={stage.id}
 					title={stage.name}
 					id={stage.id}
@@ -148,8 +171,8 @@ class MasterForm extends Component {
 					currentStage={this.state.currentStage}
 					totalStages={this.props.formConfig.totalStages}
 					handleChange={this.handleChange}
-				/>
-			))
+					/>
+				})
 		);
 
 		let stageTitlesArray = [];
