@@ -83,13 +83,15 @@ const Input = (props) => {
 							<label>{props.label}</label>
 							<br></br>
 							<DatePicker
+								className="form-control"
 								name={props.elementConfig.name}
 								id={props.elementConfig.id}
 								selected={new Date()}
-								onChange={props.handleChange}
+								maxDate={new Date()}
 								dateFormat="dd/MM/yyyy"
 								showYearDropdown
 								showMonthDropdown
+								onChange={props.handleChange}
 							/>
 						</div>
 					);

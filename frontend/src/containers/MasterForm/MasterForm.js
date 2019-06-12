@@ -46,8 +46,14 @@ class MasterForm extends Component {
 		for (let elem in elementsArray) {
 			console.log(elementsArray[elem].elementConfig.id)
 			if(elementsArray[elem].elementConfig.id === element) {
-				elementsArray[elem].value = event.target.value;
-				updatedForm.stages[this.state.currentStage].fields[inputIdentifier].elements[elem] = elementsArray[elem];
+				if (event === Date){
+					elementsArray[elem].value = event
+				}
+
+				else {
+					elementsArray[elem].value = event.target.value;
+					updatedForm.stages[this.state.currentStage].fields[inputIdentifier].elements[elem] = elementsArray[elem];
+				}
 			}		
 			
 		}
