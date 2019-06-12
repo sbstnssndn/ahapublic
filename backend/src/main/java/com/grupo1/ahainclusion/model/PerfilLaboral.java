@@ -3,24 +3,35 @@ package com.grupo1.ahainclusion.model;
 import java.util.Collection;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.MapsId;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.grupo1.ahainclusion.model.candidato.Curso;
 import com.grupo1.ahainclusion.model.candidato.Experiencia;
 import com.grupo1.ahainclusion.model.candidato.Titulo;
 
 @Entity
+@Table(name="perfil_laboral")
 public class PerfilLaboral {
 
     @Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
     private Integer id;
+
+    @OneToOne
+    @MapsId
+    @JsonBackReference
+    private PerfilCandidato perfilCandidato;
 
     private String name;
 
@@ -29,96 +40,96 @@ public class PerfilLaboral {
     // ---------------------
 
     // Importantes
-        //Tienes credencial?
-        private boolean credencial;
-        // Usas silla de ruedas (y por tanto Requieres rampa acceso)
-        private boolean sillaDeRuedas;
-        //Requieres baño adaptado
-        private boolean bañoAdaptado;
-        //Indica si requieres otras adecuaciones
-        private String adecuaciones;
+    // Tienes credencial?
+    private boolean credencial;
+    // Usas silla de ruedas (y por tanto Requieres rampa acceso)
+    private boolean sillaDeRuedas;
+    // Requieres baño adaptado
+    private boolean bañoAdaptado;
+    // Indica si requieres otras adecuaciones
+    private String adecuaciones;
 
     // Porcentajes de discapacidad
-        private Integer dAuditiva;
-        private Integer dFisica;
-        private Integer dIntelectual;
-        private Integer dPsiquica;
-        private Integer dVisual;
+    private Integer dAuditiva;
+    private Integer dFisica;
+    private Integer dIntelectual;
+    private Integer dPsiquica;
+    private Integer dVisual;
 
     // Datos funcionales
-        // Puedes permanecer de pie?
-        private Integer permanecerPie;
-        // Puedes permanecer sentado?
-        private Integer permanecerSentado;
-        // Puedes desplazarte en trayectos, con o sin ayuda técnica?
-        private Integer desplazoTrayectos;
-        // Puedes realizar actividades en diferentes pisos?
-        private Integer diferentesPisos;
-        // Puedes alcanzar o coger objetos en diferentes alturas?
-        private Integer diferentesAlturas;
-        // Puedes usar herramientas u objetos pequeños?
-        private Integer objetosPequeños;
-        // Puedes realizar actividades que requieren agudeza visual corta y larga
-        // distancia?
-        private Integer actividadesVisual;
-        // Puedes realizar actividades que requieren agudeza auditiva?
-        private Integer actividadesAuditiva;
-        // Puedes comunicarte de manera oral y fluida?
-        private Integer comunicacionOral;
-        // Puedes leer y escribir?
-        private Integer leerEscribir;
-        // Te adaptas a situaciones de trabajo nuevas?
-        private Integer situacionesNuevas;
-        // Te adaptas a trabajo en equipo con varias personas?
-        private Integer trabajoEquipo;
-        // Te adaptas a situaciones tensiones y conflicto?
-        private Integer situacionesConflicto;
-        // Te adaptas para resolver problemas?
-        private Integer resolverProblemas;
-        // Te manejas para desarrollar tareas estresantes?
-        private Integer tareasEstresantes;
+    // Puedes permanecer de pie?
+    private Integer permanecerPie;
+    // Puedes permanecer sentado?
+    private Integer permanecerSentado;
+    // Puedes desplazarte en trayectos, con o sin ayuda técnica?
+    private Integer desplazoTrayectos;
+    // Puedes realizar actividades en diferentes pisos?
+    private Integer diferentesPisos;
+    // Puedes alcanzar o coger objetos en diferentes alturas?
+    private Integer diferentesAlturas;
+    // Puedes usar herramientas u objetos pequeños?
+    private Integer objetosPequeños;
+    // Puedes realizar actividades que requieren agudeza visual corta y larga
+    // distancia?
+    private Integer actividadesVisual;
+    // Puedes realizar actividades que requieren agudeza auditiva?
+    private Integer actividadesAuditiva;
+    // Puedes comunicarte de manera oral y fluida?
+    private Integer comunicacionOral;
+    // Puedes leer y escribir?
+    private Integer leerEscribir;
+    // Te adaptas a situaciones de trabajo nuevas?
+    private Integer situacionesNuevas;
+    // Te adaptas a trabajo en equipo con varias personas?
+    private Integer trabajoEquipo;
+    // Te adaptas a situaciones tensiones y conflicto?
+    private Integer situacionesConflicto;
+    // Te adaptas para resolver problemas?
+    private Integer resolverProblemas;
+    // Te manejas para desarrollar tareas estresantes?
+    private Integer tareasEstresantes;
 
-    //--------------------------
+    // --------------------------
     // DATOS LABORALES
-    //--------------------------
+    // --------------------------
 
     // LICENCIA DE CONDUCIR
     // --------------------
-        private String licencia;
+    private String licencia;
 
     // AYUDA PARA LLENAR FORMULARIO
     // ----------------------------
     // 0: No 1: Si, parcial 2: Completamente
-        private Integer ayudaFormulario;
+    private Integer ayudaFormulario;
 
     // EDUCACIÓN
     // -----------------
-        private Integer nivelEducacional; // 0: Ed. Especial ..... 9:Postgrado
+    private Integer nivelEducacional; // 0: Ed. Especial ..... 9:Postgrado
 
     // Titulos/carreras terminadas
-        @OneToMany(cascade = CascadeType.ALL)
-        @JoinColumn(name = "perfil_laboral_id")
-        @JsonManagedReference
-        private Collection<Titulo> titulos;
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "perfil_laboral_perfil_candidato_user_id")
+    @JsonManagedReference
+    private Collection<Titulo> titulos;
 
     // Cursos realizados
-        @OneToMany(cascade = CascadeType.ALL)
-        @JoinColumn(name = "perfil_laboral_id")
-        @JsonManagedReference
-        private Collection<Curso> cursos;
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "perfil_laboral_perfil_candidato_user_id")
+    @JsonManagedReference
+    private Collection<Curso> cursos;
 
     // Experiencias laborales
-        @OneToMany(cascade = CascadeType.ALL)
-        @JoinColumn(name = "perfil_laboral_id")
-        @JsonManagedReference
-        private Collection<Experiencia> experiencias;
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "perfil_laboral_perfil_candidato_user_id")
+    @JsonManagedReference
+    private Collection<Experiencia> experiencias;
 
     // DISPONIBILIDAD
     // --------------
     // Disponibilidad: 0:Lunes a Viernes
     // 1: Sábados, Domingos y festivos
     // 2: Cualquier día
-        private Integer disponibilidad;
+    private Integer disponibilidad;
 
     // EXPECTATIVAS DE SUELDO
     // ExpectativaSueldo: 0: Hasta 301.000
@@ -128,10 +139,18 @@ public class PerfilLaboral {
     // 4: 650.001 a 800.000
     // 5: 800.001 a 1.000.000
     // 6: 1.000.000 o más
-        private Integer expectativaSueldo;
+    private Integer expectativaSueldo;
 
     public String getName() {
         return name;
+    }
+
+    public PerfilCandidato getPerfilCandidato() {
+        return perfilCandidato;
+    }
+
+    public void setPerfilCandidato(PerfilCandidato perfilCandidato) {
+        this.perfilCandidato = perfilCandidato;
     }
 
     public Integer getExpectativaSueldo() {

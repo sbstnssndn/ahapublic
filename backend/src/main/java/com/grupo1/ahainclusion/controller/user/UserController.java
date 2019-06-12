@@ -1,8 +1,7 @@
-package com.grupo1.ahainclusion.controller;
+package com.grupo1.ahainclusion.controller.user;
 
 import java.net.URI;
 import java.util.Collections;
-import java.util.Optional;
 
 import javax.validation.Valid;
 
@@ -11,14 +10,9 @@ import com.grupo1.ahainclusion.auth.UserPrincipal;
 import com.grupo1.ahainclusion.aux.payload.ApiResponse;
 import com.grupo1.ahainclusion.aux.payload.SignUpRequest;
 import com.grupo1.ahainclusion.aux.payload.UserSummary;
-import com.grupo1.ahainclusion.model.PerfilAccesibilidad;
-import com.grupo1.ahainclusion.model.PerfilLaboral;
 import com.grupo1.ahainclusion.model.Role;
 import com.grupo1.ahainclusion.model.User;
-import com.grupo1.ahainclusion.model.candidato.Curso;
-import com.grupo1.ahainclusion.model.candidato.Titulo;
 import com.grupo1.ahainclusion.repository.CursoRepository;
-import com.grupo1.ahainclusion.repository.PerfilAccesibilidadRepository;
 import com.grupo1.ahainclusion.repository.PerfilLaboralRepository;
 import com.grupo1.ahainclusion.repository.RoleRepository;
 import com.grupo1.ahainclusion.repository.TituloRepository;
@@ -30,7 +24,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -45,22 +38,10 @@ public class UserController {
     private UserRepository userRepository;
 
     @Autowired
-    private CursoRepository cursoRepository;
-
-    @Autowired
-    private TituloRepository tituloRepository;
-
-    @Autowired
     private RoleRepository roleRepository;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
-
-    @Autowired
-    private PerfilAccesibilidadRepository perfilAccesibilidadRepository;
-    
-    @Autowired
-    private PerfilLaboralRepository perfilLaboralRepository;
 
 
     // Obtener usuario logeado
@@ -112,62 +93,13 @@ public class UserController {
     }
 
     // Obtener Usuarios
-    @GetMapping(path = "/all")
+    @RequestMapping(path = "/all", method = RequestMethod.GET)
+    //SOLO USUARIOS AHA DEBERIAN PODER VER A TODOS LOS USUARIOS DESPUES
+    //@PreAuthorize("hasRole('ROLE_AHA'")
     public @ResponseBody Iterable<User> getAllUsers() {
         return userRepository.findAll();
     }
 
-    // Agregar Perfil Accesibilidad
-    @RequestMapping(path = "/perfilAccesibilidad", method = RequestMethod.POST)
-    public @ResponseBody String addNewPerfilAccesibilidad(@RequestBody PerfilAccesibilidad perfilAccesibilidad) {
-
-        perfilAccesibilidadRepository.save(perfilAccesibilidad);
-
-        return "Perfil Accesibilidad Guardado";
-    }
-
-    // Obtener Perfiles Accesibilidad
-    @RequestMapping(path = "/perfilAccesibilidad", method = RequestMethod.GET)
-    public @ResponseBody Iterable<PerfilAccesibilidad> getPerfilAccesibilidadByUser(@RequestBody User user) {
-
-        Optional<User> usr = userRepository.findById(user.getId());
-        return usr.get().getPerfilEmpresa().getPerfilesAccesibilidad();
-    }
-
-    // Agregar Perfil Laboral
-    @RequestMapping(path = "/perfilLaboral", method = RequestMethod.POST)
-    public @ResponseBody String addNewPerfilLaboral(@RequestBody PerfilLaboral perfilLaboral) {
-
-        perfilLaboralRepository.save(perfilLaboral);
-
-        return "Perfil Laboral Guardado";
-    }
-
-    // Obtener Perfil Laboral
-    @RequestMapping(path = "/perfilLaboral", method = RequestMethod.GET)
-    public @ResponseBody PerfilLaboral getPerfilLaboral(@RequestBody User user) {
-
-        Optional<User> usr = userRepository.findById(user.getId());
-        return usr.get().getPerfilCandidato().getPerfilLaboral();
-    }
-
-    // Agregar un curso a usuario
-    @RequestMapping(path="/addCurso", method = RequestMethod.POST)
-    public @ResponseBody String addCursoToUser (@RequestBody Curso curso) {
-
-    cursoRepository.save(curso);
-
-    return "Curso Guardado en usuario: " + curso.getPerfilLaboral().getId();
-    }
-
-    // Agregar un titulo a usuario
-    @RequestMapping(path="/addTitulo", method = RequestMethod.POST)
-    public @ResponseBody String addTituloToUser (@RequestBody Titulo titulo) {
-
-    tituloRepository.save(titulo);
-
-    return "Titulo Guardado en usuario: " + titulo.getPerfilLaboral().getId();
-    }
 
 
 

@@ -8,7 +8,6 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.grupo1.ahainclusion.model.PerfilCandidato;
 import com.grupo1.ahainclusion.model.PerfilLaboral;
 
 @Entity
