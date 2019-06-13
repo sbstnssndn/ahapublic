@@ -11,7 +11,7 @@ class Recomendaciones extends Component {
     
     //Ahora se requiere un objeto del tipo oferta para generar las recomendaciones
 
-    axios.get('http://localhost:8080/api/recommendation')
+    axios.post('http://localhost:8080/api/recommendation', {id: 1})
     .then(response => {
         console.log(response);
         this.setState({
@@ -22,7 +22,7 @@ class Recomendaciones extends Component {
       });
     
 
-    console.log("Por implementar.");
+    //console.log("Por implementar.");
 
   }
 
