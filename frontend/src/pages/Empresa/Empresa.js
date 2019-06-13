@@ -15,6 +15,11 @@ import NavbarEmpresa from './NavbarEmpresa/NavbarEmpresa';
 class Empresa extends Component {
 
 	render () {
+		/*
+		<MasterForm
+			formConfig={this.props.formEmpresa}
+		/>
+		*/
 
 		return (
 			<React.Fragment>
@@ -25,9 +30,7 @@ class Empresa extends Component {
 						<Row>
 							<Col md={9} className="">
 								
-								<MasterForm
-									formConfig={this.props.formEmpresa}
-								/>
+								{this.props.children}
 
 							</Col>
 							<Col md={3}>
