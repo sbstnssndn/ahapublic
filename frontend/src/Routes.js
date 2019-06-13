@@ -108,6 +108,17 @@ const Routes = (props) => {
 					)}
 				/>
 				<Route
+					path="/empresas/panel/recomendaciones"
+					exact
+					render={({match}) => (
+						<Empresa
+							match={match}
+						>
+							<Recomendaciones/>
+						</Empresa>
+					)}
+				/>
+				<Route
 					path="/empresas"
 					render={({match}) => (
 						<Empresa
@@ -119,6 +130,7 @@ const Routes = (props) => {
 						</Empresa>
 					)}
 				/>
+				
 
 
 				<Route path="/recomendaciones" exact component={Recomendaciones} />
