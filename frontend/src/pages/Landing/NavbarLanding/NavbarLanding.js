@@ -65,9 +65,11 @@ const NavbarLanding = (props) => {
 						</NavDropdown>
 						*/}
 					</Nav>
-					<Nav>
-						<Button variant="outline-primary">Ingresar</Button>
-					</Nav>
+					<LinkContainer to="/login">
+							<Nav.Link>
+								<Button variant="outline-primary">Ingresar</Button>
+							</Nav.Link>
+						</LinkContainer>
 				</Navbar.Collapse>
 
 			</Container>
