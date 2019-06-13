@@ -5,6 +5,7 @@ import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import { Link } from 'react-router-dom';
 import { LinkContainer } from 'react-router-bootstrap'
+import LoginButton from './LoginButton';
  
 import logo from '../../../assets/img/aha-logo.png';
 import styles from './NavbarLanding.module.css';
@@ -66,7 +67,7 @@ const NavbarLanding = (props) => {
 						*/}
 					</Nav>
 					<Nav>
-						<Button variant="outline-primary">Ingresar</Button>
+						<LoginButton />
 					</Nav>
 				</Navbar.Collapse>
 
