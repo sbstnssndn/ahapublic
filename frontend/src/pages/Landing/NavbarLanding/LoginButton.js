@@ -56,11 +56,11 @@ class LoginButton extends React.Component {
             </Modal.Body>
             <Modal.Footer>
               <Button variant="secondary" onClick={this.handleClose}>
-                Close
+                Cerrar
               </Button>
             <LinkContainer to="/postulantes/panel">
                 <Nav.Link>
-                    <Button variant="primary" type="submit">
+                    <Button variant="primary" type="submit" onClick={this.handleClose}>
                                 Iniciar Sesión
                     </Button>
                 </Nav.Link>
