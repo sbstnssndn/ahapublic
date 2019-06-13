@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import MasterForm from '../../containers/MasterForm/MasterForm';
 //import Card from 'react-bootstrap/Card';
 import Footer from '../../components/Footer/Footer';
 //import { LinkContainer } from 'react-router-bootstrap';

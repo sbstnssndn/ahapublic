@@ -75,7 +75,7 @@ const Routes = (props) => {
 							match={match}
 						>
 							<MasterForm
-								formConfig={props.formPostulante}
+								formConfig={props.formEmpresa}
 							/>
 						</Empresa>
 					)}
