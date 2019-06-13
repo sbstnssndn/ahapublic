@@ -2,6 +2,9 @@ import React from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
+import Nav from 'react-bootstrap/Nav';
+import { Link } from 'react-router-dom';
+import { LinkContainer } from 'react-router-bootstrap';
 
 
 
@@ -55,9 +58,13 @@ class LoginButton extends React.Component {
               <Button variant="secondary" onClick={this.handleClose}>
                 Close
               </Button>
-              <Button variant="primary" type="submit" onClick={this.handleClose}>
-                        Iniciar Sesión
-            </Button>
+            <LinkContainer to="/postulantes/panel">
+                <Nav.Link>
+                    <Button variant="primary" type="submit">
+                                Iniciar Sesión
+                    </Button>
+                </Nav.Link>
+            </LinkContainer>
             </Modal.Footer>
           </Modal>
         </>
