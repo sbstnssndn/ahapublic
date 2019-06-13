@@ -221,7 +221,7 @@ class MasterForm extends Component {
 					name: 'fechaInicioCurso' + idAppend,
 					id: 'fechaInicioCurso' + idAppend
 				},
-				value: ''
+				value: new Date()
 			},
 			{
 				label: 'Fecha de término',
@@ -232,7 +232,7 @@ class MasterForm extends Component {
 					name: 'fechaTerminoCurso' + idAppend,
 					id: 'fechaTerminoCurso' + idAppend
 				},
-				value: ''
+				value: new Date()
 			}
 		]
 

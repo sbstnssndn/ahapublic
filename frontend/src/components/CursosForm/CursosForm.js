@@ -2,6 +2,8 @@ import React from 'react';
 import Form from 'react-bootstrap/Form';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 const CursosForm = (props) => {
 
@@ -60,27 +62,36 @@ const CursosForm = (props) => {
 					</Form.Group>
 
 					<Form.Row>
+
 						<Form.Group as={Col} controlId={curso.field3.elementConfig.id}>
 							<Form.Label>{curso.field3.label}</Form.Label>
-							<Form.Control
-								as={curso.field3.elementType}
+							<DatePicker
+								className="form-control"
 								type={curso.field3.elementConfig.type}
-								onChange={(event) => props.handleChange(event, props.field, curso.field3.elementConfig.id)}
 								name={curso.field3.elementConfig.name}
-								placeholder={curso.field3.elementConfig.placeholder}
-								value={curso.field3.value}
+								id={curso.field3.elementConfig.id}
+								selected={curso.field3.value}
+								maxDate={new Date()}
+								dateFormat="dd/MM/yyyy"
+								showYearDropdown
+								showMonthDropdown
+								onChange={(event) => props.handleChange(event, props.field, curso.field3.elementConfig.id, curso.field3.elementConfig.type)}
 							/>
 						</Form.Group>
 
 						<Form.Group as={Col} controlId={curso.field4.elementConfig.id}>
 							<Form.Label>{curso.field4.label}</Form.Label>
-							<Form.Control
-								as={curso.field4.elementType}
+							<DatePicker
+								className="form-control"
 								type={curso.field4.elementConfig.type}
-								onChange={(event) => props.handleChange(event, props.field, curso.field4.elementConfig.id)}
 								name={curso.field4.elementConfig.name}
-								placeholder={curso.field4.elementConfig.placeholder}
-								value={curso.field4.value}
+								id={curso.field4.elementConfig.id}
+								selected={curso.field4.value}
+								maxDate={new Date()}
+								dateFormat="dd/MM/yyyy"
+								showYearDropdown
+								showMonthDropdown
+								onChange={(event) => props.handleChange(event, props.field, curso.field4.elementConfig.id, curso.field4.elementConfig.type)}
 							/>
 						</Form.Group>
 

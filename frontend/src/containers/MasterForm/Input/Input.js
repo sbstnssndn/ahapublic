@@ -82,7 +82,6 @@ const Input = (props) => {
 					inputElement = (
 						<div className="form-group">
 							<label>{props.label}</label>
-						
 							<DatePicker
 								className="form-control"
 								name={props.elementConfig.name}
