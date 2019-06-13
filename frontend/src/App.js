@@ -5,7 +5,7 @@ import './App.css';
 
 function App() {
 
-  
+
 
   const stagesEmpresa =
   [
@@ -236,11 +236,10 @@ function App() {
             id: 'permanecerPie',
             options: [
               { value: '', displayValue: 'Seleccione...', disabled: true },
-              { value: '0', displayValue: '0%' },
-              { value: '25', displayValue: '25%' },
-              { value: '50', displayValue: '50%' },
-              { value: '75', displayValue: '75%' },
-              { value: '100', displayValue: '100%' },
+              { value: '0', displayValue: 'No, o muy poco tiempo' },
+              { value: '1', displayValue: 'Esporádicamente (Hasta un 20% de la jornada laboral)' },
+              { value: '2', displayValue: 'Entre un 20% y 70% de la jornada laboral' },
+              { value: '3', displayValue: 'La mayor parte del tiempo' }
             ]
           },
           value: ''
@@ -253,11 +252,10 @@ function App() {
             id: 'permanecerSentado',
             options: [
               { value: '', displayValue: 'Seleccione...', disabled: true },
-              { value: '0', displayValue: '0%' },
-              { value: '25', displayValue: '25%' },
-              { value: '50', displayValue: '50%' },
-              { value: '75', displayValue: '75%' },
-              { value: '100', displayValue: '100%' },
+              { value: '0', displayValue: 'No, o muy poco tiempo' },
+              { value: '1', displayValue: 'Esporádicamente (Hasta un 20% de la jornada laboral)' },
+              { value: '2', displayValue: 'Entre un 20% y 70% de la jornada laboral' },
+              { value: '3', displayValue: 'La mayor parte del tiempo' }
             ]
           },
           value: ''
@@ -270,11 +268,10 @@ function App() {
             id: 'desplazoTrayectos',
             options: [
               { value: '', displayValue: 'Seleccione...', disabled: true },
-              { value: '0', displayValue: '0%' },
-              { value: '25', displayValue: '25%' },
-              { value: '50', displayValue: '50%' },
-              { value: '75', displayValue: '75%' },
-              { value: '100', displayValue: '100%' },
+              { value: '0', displayValue: 'No, o muy poco tiempo' },
+              { value: '1', displayValue: 'Esporádicamente (Hasta un 20% de la jornada laboral)' },
+              { value: '2', displayValue: 'Entre un 20% y 70% de la jornada laboral' },
+              { value: '3', displayValue: 'La mayor parte del tiempo' }
             ]
           },
           value: ''
@@ -287,11 +284,10 @@ function App() {
             id: 'diferentesPisos',
             options: [
               { value: '', displayValue: 'Seleccione...', disabled: true },
-              { value: '0', displayValue: '0%' },
-              { value: '25', displayValue: '25%' },
-              { value: '50', displayValue: '50%' },
-              { value: '75', displayValue: '75%' },
-              { value: '100', displayValue: '100%' },
+              { value: '0', displayValue: 'No, o muy poco tiempo' },
+              { value: '1', displayValue: 'Esporádicamente (Hasta un 20% de la jornada laboral)' },
+              { value: '2', displayValue: 'Entre un 20% y 70% de la jornada laboral' },
+              { value: '3', displayValue: 'La mayor parte del tiempo' }
             ]
           },
           value: ''
@@ -304,11 +300,10 @@ function App() {
             id: 'diferentesAlturas',
             options: [
               { value: '', displayValue: 'Seleccione...', disabled: true },
-              { value: '0', displayValue: '0%' },
-              { value: '25', displayValue: '25%' },
-              { value: '50', displayValue: '50%' },
-              { value: '75', displayValue: '75%' },
-              { value: '100', displayValue: '100%' },
+              { value: '0', displayValue: 'No, o muy poco tiempo' },
+              { value: '1', displayValue: 'Esporádicamente (Hasta un 20% de la jornada laboral)' },
+              { value: '2', displayValue: 'Entre un 20% y 70% de la jornada laboral' },
+              { value: '3', displayValue: 'La mayor parte del tiempo' }
             ]
           },
           value: ''
@@ -321,11 +316,10 @@ function App() {
             id: 'objetosPequeños',
             options: [
               { value: '', displayValue: 'Seleccione...', disabled: true },
-              { value: '0', displayValue: '0%' },
-              { value: '25', displayValue: '25%' },
-              { value: '50', displayValue: '50%' },
-              { value: '75', displayValue: '75%' },
-              { value: '100', displayValue: '100%' },
+              { value: '0', displayValue: 'No, o muy poco tiempo' },
+              { value: '1', displayValue: 'Esporádicamente (Hasta un 20% de la jornada laboral)' },
+              { value: '2', displayValue: 'Entre un 20% y 70% de la jornada laboral' },
+              { value: '3', displayValue: 'La mayor parte del tiempo' }
             ]
           },
           value: ''
@@ -338,11 +332,10 @@ function App() {
             id: 'actividadesVisual',
             options: [
               { value: '', displayValue: 'Seleccione...', disabled: true },
-              { value: '0', displayValue: '0%' },
-              { value: '25', displayValue: '25%' },
-              { value: '50', displayValue: '50%' },
-              { value: '75', displayValue: '75%' },
-              { value: '100', displayValue: '100%' },
+              { value: '0', displayValue: 'No, o muy poco tiempo' },
+              { value: '1', displayValue: 'Esporádicamente (Hasta un 20% de la jornada laboral)' },
+              { value: '2', displayValue: 'Entre un 20% y 70% de la jornada laboral' },
+              { value: '3', displayValue: 'La mayor parte del tiempo' }
             ]
           },
           value: ''
@@ -355,11 +348,10 @@ function App() {
             id: 'actividadesAuditiva',
             options: [
               { value: '', displayValue: 'Seleccione...', disabled: true },
-              { value: '0', displayValue: '0%' },
-              { value: '25', displayValue: '25%' },
-              { value: '50', displayValue: '50%' },
-              { value: '75', displayValue: '75%' },
-              { value: '100', displayValue: '100%' },
+              { value: '0', displayValue: 'No, o muy poco tiempo' },
+              { value: '1', displayValue: 'Esporádicamente (Hasta un 20% de la jornada laboral)' },
+              { value: '2', displayValue: 'Entre un 20% y 70% de la jornada laboral' },
+              { value: '3', displayValue: 'La mayor parte del tiempo' }
             ]
           },
           value: ''
@@ -378,11 +370,10 @@ function App() {
             id: 'comunicacionOral',
             options: [
               { value: '', displayValue: 'Seleccione...', disabled: true },
-              { value: '0', displayValue: '0%' },
-              { value: '25', displayValue: '25%' },
-              { value: '50', displayValue: '50%' },
-              { value: '75', displayValue: '75%' },
-              { value: '100', displayValue: '100%' },
+              { value: '0', displayValue: 'No, o muy poco tiempo' },
+              { value: '1', displayValue: 'Esporádicamente (Hasta un 20% de la jornada laboral)' },
+              { value: '2', displayValue: 'Entre un 20% y 70% de la jornada laboral' },
+              { value: '3', displayValue: 'La mayor parte del tiempo' }
             ]
           },
           value: ''
@@ -395,11 +386,10 @@ function App() {
             id: 'leerEscribir',
             options: [
               { value: '', displayValue: 'Seleccione...', disabled: true },
-              { value: '0', displayValue: '0%' },
-              { value: '25', displayValue: '25%' },
-              { value: '50', displayValue: '50%' },
-              { value: '75', displayValue: '75%' },
-              { value: '100', displayValue: '100%' },
+              { value: '0', displayValue: 'No, o muy poco tiempo' },
+              { value: '1', displayValue: 'Esporádicamente (Hasta un 20% de la jornada laboral)' },
+              { value: '2', displayValue: 'Entre un 20% y 70% de la jornada laboral' },
+              { value: '3', displayValue: 'La mayor parte del tiempo' }
             ]
           },
           value: ''
@@ -412,11 +402,10 @@ function App() {
             id: 'situacionesNuevas',
             options: [
               { value: '', displayValue: 'Seleccione...', disabled: true },
-              { value: '0', displayValue: '0%' },
-              { value: '25', displayValue: '25%' },
-              { value: '50', displayValue: '50%' },
-              { value: '75', displayValue: '75%' },
-              { value: '100', displayValue: '100%' },
+              { value: '0', displayValue: 'No, o muy poco tiempo' },
+              { value: '1', displayValue: 'Esporádicamente (Hasta un 20% de la jornada laboral)' },
+              { value: '2', displayValue: 'Entre un 20% y 70% de la jornada laboral' },
+              { value: '3', displayValue: 'La mayor parte del tiempo' }
             ]
           },
           value: ''
@@ -429,11 +418,10 @@ function App() {
             id: 'trabajoEquipo',
             options: [
               { value: '', displayValue: 'Seleccione...', disabled: true },
-              { value: '0', displayValue: '0%' },
-              { value: '25', displayValue: '25%' },
-              { value: '50', displayValue: '50%' },
-              { value: '75', displayValue: '75%' },
-              { value: '100', displayValue: '100%' },
+              { value: '0', displayValue: 'No, o muy poco tiempo' },
+              { value: '1', displayValue: 'Esporádicamente (Hasta un 20% de la jornada laboral)' },
+              { value: '2', displayValue: 'Entre un 20% y 70% de la jornada laboral' },
+              { value: '3', displayValue: 'La mayor parte del tiempo' }
             ]
           },
           value: ''
@@ -446,11 +434,10 @@ function App() {
             id: 'situacionesConflicto',
             options: [
               { value: '', displayValue: 'Seleccione...', disabled: true },
-              { value: '0', displayValue: '0%' },
-              { value: '25', displayValue: '25%' },
-              { value: '50', displayValue: '50%' },
-              { value: '75', displayValue: '75%' },
-              { value: '100', displayValue: '100%' },
+              { value: '0', displayValue: 'No, o muy poco tiempo' },
+              { value: '1', displayValue: 'Esporádicamente (Hasta un 20% de la jornada laboral)' },
+              { value: '2', displayValue: 'Entre un 20% y 70% de la jornada laboral' },
+              { value: '3', displayValue: 'La mayor parte del tiempo' }
             ]
           },
           value: ''
@@ -463,11 +450,10 @@ function App() {
             id: 'resolverProblemas',
             options: [
               { value: '', displayValue: 'Seleccione...', disabled: true },
-              { value: '0', displayValue: '0%' },
-              { value: '25', displayValue: '25%' },
-              { value: '50', displayValue: '50%' },
-              { value: '75', displayValue: '75%' },
-              { value: '100', displayValue: '100%' },
+              { value: '0', displayValue: 'No, o muy poco tiempo' },
+              { value: '1', displayValue: 'Esporádicamente (Hasta un 20% de la jornada laboral)' },
+              { value: '2', displayValue: 'Entre un 20% y 70% de la jornada laboral' },
+              { value: '3', displayValue: 'La mayor parte del tiempo' }
             ]
           },
           value: ''
@@ -480,11 +466,10 @@ function App() {
             id: 'tareasEstresantes',
             options: [
               { value: '', displayValue: 'Seleccione...', disabled: true },
-              { value: '0', displayValue: '0%' },
-              { value: '25', displayValue: '25%' },
-              { value: '50', displayValue: '50%' },
-              { value: '75', displayValue: '75%' },
-              { value: '100', displayValue: '100%' },
+              { value: '0', displayValue: 'No, o muy poco tiempo' },
+              { value: '1', displayValue: 'Esporádicamente (Hasta un 20% de la jornada laboral)' },
+              { value: '2', displayValue: 'Entre un 20% y 70% de la jornada laboral' },
+              { value: '3', displayValue: 'La mayor parte del tiempo' }
             ]
           },
           value: ''
@@ -547,8 +532,8 @@ function App() {
       }
     }
   ]
-  
-  
+
+
   const regiones = [
     {
       region: "Región Metropolitana de Santiago",
@@ -659,12 +644,12 @@ function App() {
         "Primavera","Timaukel","Natales","Torres del Paine"
       ]
     },
-  
+
     {
       region: "Arica y Parinacota",
       comunas: ["Arica", "Camarones", "Putre", "General Lagos"]
     },
-  
+
     {
       region: "Región de Ñuble",
       comunas: [
@@ -674,7 +659,7 @@ function App() {
       ]
     }
   ];
-	
+
 
 	const formPostulante =
 	{
@@ -1179,10 +1164,10 @@ function App() {
 						value: ''
 					}
 				}
-			} 
+			}
 		]
 	}
-	
+
 	const formPostulanteLaboralNew =
 	{
 		title: "Información postulante",
@@ -1348,7 +1333,7 @@ function App() {
 					experiencias: {
 						type: 'multi',
 						elements: [
-							
+
 						]
 					}
 				}
@@ -1599,7 +1584,7 @@ function App() {
 					cursos: {
 						type: 'cursos',
 						elements: [
-							
+
 						]
 					}, // fields
 				}
@@ -1609,10 +1594,10 @@ function App() {
 	}
 
   return (
-    <Routes 
+    <Routes
 			formPostulante={formPostulante}
 			formPostulanteLaboral={formPostulanteLaboralNew}
-      stagesEmpresa={stagesEmpresa} 
+      stagesEmpresa={stagesEmpresa}
       stagesPreguntas={stagesPreguntas}
     />
   );
