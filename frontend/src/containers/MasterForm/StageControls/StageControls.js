@@ -18,7 +18,7 @@ const StageControls = (props) => {
 	let prevButton = null;
 	if (currentStage !== firstStage) {
 		prevButton = (
-			<Button variant="secondary" onClick={props._prev} className={styles.BotonAnterior}>
+			<Button variant="secondary" onClick={props._prev}>
 				Anterior
 			</Button>
 		);
@@ -27,7 +27,7 @@ const StageControls = (props) => {
 	let nextButton = null;
 	if (currentStage < lastStage) {
 		nextButton = (
-		<Button variant="primary" onClick={props._next} className={styles.BotonSiguiente}>
+		<Button variant="primary" onClick={props._next}>
 			Siguiente
 		</Button>        
 		);
