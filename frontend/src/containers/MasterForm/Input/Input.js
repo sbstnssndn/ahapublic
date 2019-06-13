@@ -86,6 +86,7 @@ const Input = (props) => {
 								className="form-control"
 								name={props.elementConfig.name}
 								id={props.elementConfig.id}
+								placeholderText={props.elementConfig.placeholder}
 								selected={props.value}
 								maxDate={new Date()}
 								dateFormat="dd/MM/yyyy"
