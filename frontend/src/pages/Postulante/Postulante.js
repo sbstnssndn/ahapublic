@@ -15,7 +15,7 @@ import { Link } from 'react-router-dom';
 class Postulante extends Component {
 
 	render () {
-
+		console.log(this.props.match)
 		return (
 			<React.Fragment>
 				<NavbarPanel />

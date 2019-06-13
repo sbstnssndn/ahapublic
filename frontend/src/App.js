@@ -1331,11 +1331,30 @@ function App() {
 							}
 						]
 					},
+					autoPropio: {
+						type: 'normal',
+						elements: [
+							{
+								label: '¿Tiene auto propio?',
+								elementType: 'select',
+								elementConfig: {
+									name: 'autoPropio',
+									id: 'autoPropio',
+									options: [
+										{ value: '', displayValue: 'Seleccione...', disabled: true },
+										{ value: 'no', displayValue: 'No' },
+										{ value: 'si', displayValue: 'Sí' }
+									]
+								},
+								value: ''
+							}
+						]
+					},
 				}
 			},
 			{
 				id: 3,
-				name: "Perfil funcional",
+				name: "Perfil funcional (1/2)",
 				fields: {
 					sillaRuedas: {
 						type: 'normal',
@@ -1445,7 +1464,7 @@ function App() {
 			},
 			{
 				id: 4,
-				name: "Etapa tres",
+				name: "Perfil funcional (2/2)",
 				fields: {
 					dPsiquica: {
 						type: 'normal',
