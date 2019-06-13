@@ -5,6 +5,7 @@ import Recomendaciones from './containers/Recomendaciones/Recomendaciones';
 import Login from './containers/Login/Login';
 import Postulante from "./pages/Postulante/Postulante";
 import Empresa from "./pages/Empresa/Empresa";
+import MasterForm from './containers/MasterForm/MasterForm';
 
 const Routes = (props) => {
 	/*
@@ -72,10 +73,12 @@ const Routes = (props) => {
 					exact
 					render={({match}) => (
 						<Empresa
-							formEmpresa={props.formPostulante}
-							tipoFormulario="empresa"
 							match={match}
-						/>
+						>
+							<MasterForm
+								formConfig={props.formEmpresa}
+							/>
+						</Empresa>
 					)}
 				/>
 				<Route
@@ -83,10 +86,12 @@ const Routes = (props) => {
 					exact
 					render={({match}) => (
 						<Empresa
-							formEmpresa={props.formPostulanteLaboral}
-							tipoFormulario="empresa"
 							match={match}
-						/>
+						>
+							<MasterForm
+								formConfig={props.formPostulanteLaboral}
+							/>
+						</Empresa>
 					)}
 				/>
 				<Route
@@ -94,20 +99,24 @@ const Routes = (props) => {
 					exact
 					render={({match}) => (
 						<Empresa
-							formEmpresa={props.formCuentaUsuario}
-							tipoFormulario="empresa"
 							match={match}
-						/>
+						>
+							<MasterForm
+								formConfig={props.formCuentaUsuario}
+							/>
+						</Empresa>
 					)}
 				/>
 				<Route
 					path="/empresas"
 					render={({match}) => (
 						<Empresa
-							formEmpresa={props.formPostulante}
-							tipoFormulario="empresa"
 							match={match}
-						/>
+						>
+							<MasterForm
+								formConfig={props.formPostulante}
+							/>
+						</Empresa>
 					)}
 				/>
 

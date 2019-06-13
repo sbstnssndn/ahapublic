@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-//import axios from 'axios';
+import axios from 'axios';
 
 class Recomendaciones extends Component {
 
@@ -11,7 +11,7 @@ class Recomendaciones extends Component {
     
     //Ahora se requiere un objeto del tipo oferta para generar las recomendaciones
 
-    /*axios.get('http://localhost:8080/api/recommendation/get')
+    axios.get('http://localhost:8080/api/recommendation/get')
     .then(response => {
         console.log(response);
         this.setState({
@@ -20,7 +20,7 @@ class Recomendaciones extends Component {
       }).catch(error => {
         console.log(error);
       });
-    */
+    
 
     console.log("Por implementar.");
 
