@@ -6,6 +6,7 @@ import Login from './containers/Login/Login';
 import Postulante from "./pages/Postulante/Postulante";
 import Empresa from "./pages/Empresa/Empresa";
 import MasterForm from './containers/MasterForm/MasterForm';
+import ListarOfertas from "./components/ListarOfertas/ListarOFertas";
 
 const Routes = (props) => {
 	/*
@@ -88,9 +89,7 @@ const Routes = (props) => {
 						<Empresa
 							match={match}
 						>
-							<MasterForm
-								formConfig={props.formPostulanteLaboral}
-							/>
+							<ListarOfertas />
 						</Empresa>
 					)}
 				/>

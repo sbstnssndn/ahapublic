@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Card from 'react-bootstrap/Card';
+
 
 class ListarOfertas extends Component {
 
@@ -28,35 +32,13 @@ class ListarOfertas extends Component {
           <h1 className="tp-2">Ofertas</h1>
             {this.state.ofertas.map(oferta => {
               return (
-                <Row>
-                  <Col lg={2}>
-                  	<Card key={oferta.id}>
-                  		<Card.Body>
-                  			<Card.Title>{oferta.name}</Card.Title>
-                  			<Card.Subtitle className="mb-2 text-muted">{oferta.description}</Card.Subtitle>
-                  			<Card.Text>
-                  				<h5>Requiere silla de ruedas</h5>
-                  				<h6>{oferta.sillaDeRuedas}</h6>
-                  				<h5>Requiere baños amplios</h5>
-                  				<h6>{oferta.bañoAdaptado}</h6>
-                  			</Card.Text>
-                  		</Card.Body>
-                  	</Card>
-                  </Col>
-                  <Col lg={2}>
-                    <Card>
-                      <Card.Body>
-                        <Card.Title>Experiencias</Card.Title>
-                        <Card.Text>
-                          oferta.experiencias.map(experiencia => {
-                            <h5>Área: {experiencia.tipo}</h5>
-                            <h6>Duración: {experiencia.duracion}</h6>
-                          })
-                        </Card.Text>
-                      </Card.Body>
-                    </Card>
-                  </Col>
-                </Row>
+                <div className="card" style={{width: "100%", marginBottom: "20px"}} key={oferta.id}>
+                  <div className="card-body">
+                    <h5 className="card-title text-uppercase">{oferta.name}</h5>
+                    <h6 className="card-subtitle mb-2 text-muted">Líder</h6>
+                    <p className="card-text">Descripción: {oferta.description}</p>
+                  </div>
+                </div>
               );
             })}
           
