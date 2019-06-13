@@ -1,9 +1,9 @@
 import React from "react";
-import { Route, Switch } from "react-router-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Landing from './pages/Landing/Landing';
 import Recomendaciones from './containers/Recomendaciones/Recomendaciones';
-import PanelPostulante from './containers/PanelPostulante/PanelPostulante';
 import Postulante from "./pages/Postulante/Postulante";
+import Empresa from "./pages/Empresa/Empresa";
 
 const Routes = (props) => {
 	/*
@@ -19,61 +19,97 @@ const Routes = (props) => {
 		/>
 	*/
 	return (
-		<Switch>
-			<Route
-				path="/postulantes/panel"
-				exact
-				component={() => (
-					<Postulante
-						formPostulante={props.formPostulante}
-						tipoFormulario="postulante"
-					/>
-				)}
-			/>
-			<Route
-				path="/postulantes/panel/perfil-laboral"
-				exact
-				component={() => (
-					<Postulante
-						formPostulante={props.formPostulanteLaboral}
-						tipoFormulario="postulante"
-					/>
-				)}
-			/>
-			<Route
-				path="/empresas/panel"
-				exact
-				component={() => (
-					<PanelPostulante
-						stages={props.stagesEmpresa}
-						tipoFormulario="empresa"
-					/>
-				)}
-			/>
-			<Route
-				path="/postulantes/preguntas"
-				exact
-				component={() => (
-					<PanelPostulante
-						stages={props.stagesPreguntas}
-					/>
-				)}
-			/>
+		<BrowserRouter>
+			<Switch>
+				<Route
+					path="/postulantes/panel"
+					exact
+					render={() => (
+						<Postulante
+							formPostulante={props.formPostulante}
+							tipoFormulario="postulante"
+							{...props}
+						/>
+					)}
+				/>
+				<Route
+					path="/postulantes/panel/perfil-laboral"
+					exact
+					render={() => (
+						<Postulante
+							formPostulante={props.formPostulanteLaboral}
+							tipoFormulario="postulante"
+						/>
+					)}
+				/>
+				<Route
+					path="/postulantes"
+					render={() => (
+						<Postulante
+							formPostulante={props.formPostulante}
+							tipoFormulario="postulante"
+							{...props}
+						/>
+					)}
+				/>
 
-			<Route path="/recomendaciones" exact component={Recomendaciones} />
-			{/*
-			<Route path="/postulantes" exact component={() => (
-				<MasterForm stages={props.stagesPostulante} tipoFormulario="postulante" titulo={"Registro postulante"} />
-			)}/>
-			<Route path="/empresas" exact component={() => (
-				<MasterForm stages={props.stagesEmpresa} tipoFormulario="empresa" titulo={"Ingresar oferta"} />
-			)}/>
-			*/}
+				
+				<Route
+					path="/empresas/panel"
+					exact
+					render={() => (
+						<Empresa
+							formEmpresa={props.formPostulante}
+							tipoFormulario="empresa"
+						/>
+					)}
+				/>
+				<Route
+					path="/empresas/panel/ofertas-laborales"
+					exact
+					render={() => (
+						<Empresa
+							formEmpresa={props.formPostulanteLaboral}
+							tipoFormulario="empresa"
+						/>
+					)}
+				/>
+				<Route
+					path="/empresas"
+					render={() => (
+						<Empresa
+							formEmpresa={props.formPostulante}
+							tipoFormulario="empresa"
+						/>
+					)}
+				/>
 
-			<Route path="/logout" exact component={Landing} />
 
-			<Route path="/" exact component={Landing} />
-		</Switch>
+				<Route path="/recomendaciones" exact component={Recomendaciones} />
+				{/*
+				<Route path="/postulantes" exact component={() => (
+					<MasterForm stages={props.stagesPostulante} tipoFormulario="postulante" titulo={"Registro postulante"} />
+				)}/>
+				<Route path="/empresas" exact component={() => (
+					<MasterForm stages={props.stagesEmpresa} tipoFormulario="empresa" titulo={"Ingresar oferta"} />
+				)}/>
+				*/}
+
+				<Route
+					path="/cuenta-usuario"
+					exact
+					render={() => (
+						<Postulante
+							formEmpresa={props.formPostulanteLaboral}
+						/>
+					)}
+				/>
+
+				<Route path="/logout" exact component={Landing} />
+
+				<Route path="/" exact component={Landing} />
+			</Switch>
+		</BrowserRouter>
 	);
 }
 

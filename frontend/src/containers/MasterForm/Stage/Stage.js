@@ -52,6 +52,8 @@ const Stage = (props) => {
 						handleChange={props.handleChange}
 						addCurso={props.addCurso}
 					/>
+			} else {
+				return null;
 			}
 		})
 	)
