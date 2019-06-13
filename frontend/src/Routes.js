@@ -24,39 +24,43 @@ const Routes = (props) => {
 				<Route
 					path="/postulantes/panel"
 					exact
-					render={() => (
+					render={({match}) => (
 						<Postulante
 							formPostulante={props.formPostulante}
 							tipoFormulario="postulante"
+							match={match}
 						/>
 					)}
 				/>
 				<Route
 					path="/postulantes/panel/perfil-laboral"
 					exact
-					render={() => (
+					render={({match}) => (
 						<Postulante
 							formPostulante={props.formPostulanteLaboral}
 							tipoFormulario="postulante"
+							match={match}
 						/>
 					)}
 				/>
 				<Route
 					path="/postulantes/panel/cuenta-usuario"
 					exact
-					render={() => (
+					render={({match}) => (
 						<Postulante
 							formPostulante={props.formCuentaUsuario}
 							tipoFormulario="postulante"
+							match={match}
 						/>
 					)}
 				/>
 				<Route
 					path="/postulantes"
-					render={() => (
+					render={({match}) => (
 						<Postulante
 							formPostulante={props.formPostulante}
 							tipoFormulario="postulante"
+							match={match}
 						/>
 					)}
 				/>
@@ -65,39 +69,43 @@ const Routes = (props) => {
 				<Route
 					path="/empresas/panel"
 					exact
-					render={() => (
+					render={({match}) => (
 						<Empresa
 							formEmpresa={props.formPostulante}
 							tipoFormulario="empresa"
+							match={match}
 						/>
 					)}
 				/>
 				<Route
 					path="/empresas/panel/ofertas-laborales"
 					exact
-					render={() => (
+					render={({match}) => (
 						<Empresa
 							formEmpresa={props.formPostulanteLaboral}
 							tipoFormulario="empresa"
+							match={match}
 						/>
 					)}
 				/>
 				<Route
 					path="/empresas/panel/cuenta-usuario"
 					exact
-					render={() => (
+					render={({match}) => (
 						<Empresa
 							formEmpresa={props.formCuentaUsuario}
 							tipoFormulario="empresa"
+							match={match}
 						/>
 					)}
 				/>
 				<Route
 					path="/empresas"
-					render={() => (
+					render={({match}) => (
 						<Empresa
 							formEmpresa={props.formPostulante}
 							tipoFormulario="empresa"
+							match={match}
 						/>
 					)}
 				/>
