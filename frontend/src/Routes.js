@@ -59,7 +59,7 @@ const Routes = (props) => {
 					exact
 					render={() => (
 						<Empresa
-							formEmpresa={props.formPostulante}
+							formEmpresa={props.formEmpresa}
 							tipoFormulario="empresa"
 						/>
 					)}
