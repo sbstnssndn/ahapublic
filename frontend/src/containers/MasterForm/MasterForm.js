@@ -46,7 +46,7 @@ class MasterForm extends Component {
 		for (let elem in elementsArray) {
 			console.log(elementsArray[elem].elementConfig.id)
 			if(elementsArray[elem].elementConfig.id === element) {
-				if (elementIndentifier == 'date'){
+				if (elementIndentifier === 'date'){
 					elementsArray[elem].value = event
 					console.log(elementsArray[elem].value)
 				}

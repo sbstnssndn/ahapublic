@@ -24,12 +24,12 @@ const NavbarPanel = (props) => (
 
 					<Navbar.Collapse id="responsive-navbar-nav">
 						<Nav>
-							<LinkContainer to="/postulantes/datos-personales" className="px-4">
+							<LinkContainer exact to="/postulantes/panel" className="px-4">
 								<Nav.Link>
 									Datos personales
 								</Nav.Link>
 							</LinkContainer>
-							<LinkContainer to="/postulantes/perfil-laboral" className="px-4">
+							<LinkContainer exact to="/postulantes/panel/perfil-laboral" className="px-4">
 								<Nav.Link>
 									Datos laborales
 								</Nav.Link>

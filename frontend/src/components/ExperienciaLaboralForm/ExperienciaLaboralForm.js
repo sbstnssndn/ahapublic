@@ -20,8 +20,16 @@ const ExperienciaLaboralForm = (props) => {
 		
 		}
 
+		let mensaje = null;
+		if (props.elements.length === 0) {
+			mensaje = <p>Agrega los cargos que hayas ocupado.</p>
+		} else {
+			mensaje = null;
+		}
+
 		return (
 			<React.Fragment>
+				{ mensaje }
 				{ experiencias.map(experiencia => ( 
 					<React.Fragment key={experiencia.id}>
 

@@ -666,7 +666,7 @@ function App() {
 		title: "Información postulante",
 		belongsTo: "postulante",
 		endpoint: "http://localhost:8080/api/postulante/:id/datos-personales",
-		totalStages: 5,
+		totalStages: 4,
 		stages: [
 			{
 				id: 0,
@@ -1173,7 +1173,7 @@ function App() {
 		title: "Información postulante",
 		belongsTo: "postulante",
 		endpoint: "http://localhost:8080/api/postulante/:id/datos-laborales",
-		totalStages: 7,
+		totalStages: 6,
 		stages: [
 			{
 				id: 0,
@@ -1258,76 +1258,6 @@ function App() {
 			},
 			{
 				id: 1,
-				name: "Otra formación",
-				fields: {
-					curso: {
-						type: 'normal',
-						elements: [
-							{
-								label: 'Curso de capacitación',
-								elementType: 'input',
-								elementConfig: {
-									type: 'text',
-									placeholder: 'Administración pública',
-									name: 'curso',
-									id: 'curso'
-								},
-								value: ''
-							}
-						]
-					},
-					institucionCurso: {
-						type: 'normal',
-						elements: [
-							{
-								label: 'Institución donde se realizó',
-								elementType: 'input',
-								elementConfig: {
-									type: 'text',
-									placeholder: 'Universidad de Santiago de Chile',
-									name: 'institucionCurso',
-									id: 'institucionCurso'
-								},
-								value: ''
-							}
-						]
-					},
-					fechaInicioCurso: {
-						type: 'normal',
-						elements: [
-							{
-								label: 'Fecha de inicio',
-								elementType: 'date',
-								elementConfig: {
-									type: 'text',
-									placeholder: '20/04/2010',
-									name: 'fechaInicioCurso',
-									id: 'fechaInicioCurso'
-								},
-								value: new Date()
-							}
-						]
-					},
-					fechaTerminoCurso: {
-						type: 'normal',
-						elements: [
-							{
-								label: 'Fecha de término',
-								elementType: 'date',
-								elementConfig: {
-									type: 'text',
-									placeholder: '15/06/2010',
-									name: 'fechaTerminoCurso',
-									id: 'fechaTerminoCurso'
-								},
-								value: new Date()
-							}
-						]
-					}
-				}
-			},
-			{
-				id: 2,
 				name: "Experiencia laboral",
 				fields: {
 					experiencias: {
@@ -1339,7 +1269,7 @@ function App() {
 				}
 			},
 			{
-				id: 3,
+				id: 2,
 				name: "Otros datos laborales",
 				fields: {
 					interesesLaborales: {
@@ -1404,7 +1334,7 @@ function App() {
 				}
 			},
 			{
-				id: 4,
+				id: 3,
 				name: "Perfil funcional",
 				fields: {
 					sillaRuedas: {
@@ -1514,7 +1444,7 @@ function App() {
 				}
 			},
 			{
-				id: 5,
+				id: 4,
 				name: "Etapa tres",
 				fields: {
 					dPsiquica: {
@@ -1578,7 +1508,7 @@ function App() {
 				}
 			},
 			{
-				id: 6,
+				id: 5,
 				name: "Otra formación",
 				fields: {
 					cursos: {
