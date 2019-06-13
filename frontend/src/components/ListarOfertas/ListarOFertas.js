@@ -35,9 +35,9 @@ class ListarOfertas extends Component {
                   			<Card.Title>{oferta.name}</Card.Title>
                   			<Card.Subtitle className="mb-2 text-muted">{oferta.description}</Card.Subtitle>
                   			<Card.Text>
-                  				<h5>Habilitado para silla de ruedas</h5>
+                  				<h5>Requiere silla de ruedas</h5>
                   				<h6>{oferta.sillaDeRuedas}</h6>
-                  				<h5>Tiene baños amplios</h5>
+                  				<h5>Requiere baños amplios</h5>
                   				<h6>{oferta.bañoAdaptado}</h6>
                   			</Card.Text>
                   		</Card.Body>
