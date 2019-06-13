@@ -31,7 +31,7 @@ const Stage = (props) => {
 						elementType={element.elementType}
 						elementConfig={element.elementConfig}
 						value={element.value}
-						handleChange={(event) => props.handleChange(event, field.id, element.elementConfig.id)}
+						handleChange={(event) => props.handleChange(event, field.id, element.elementConfig.id, element.elementType)}
 					/>
 				))
 			} else if (field.type === 'multi') {

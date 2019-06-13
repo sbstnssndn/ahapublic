@@ -17,7 +17,7 @@ class MasterForm extends Component {
 	}
 
 	// handleChange(event, firstName)
-  handleChange = (event, inputIdentifier, element) => {
+  handleChange = (event, inputIdentifier, element, elementIndentifier) => {
 	 	const updatedForm = {
 			...this.props.formConfig
 		}
@@ -46,7 +46,7 @@ class MasterForm extends Component {
 		for (let elem in elementsArray) {
 			console.log(elementsArray[elem].elementConfig.id)
 			if(elementsArray[elem].elementConfig.id === element) {
-				if (event === Date){
+				if (elementIndentifier == 'date'){
 					elementsArray[elem].value = event
 				}
 
