@@ -19,7 +19,7 @@ public class OfertaController {
     private OfertaRepository ofertaRepository;
 
     // Agregar Oferta
-    @RequestMapping(path="/add", method = RequestMethod.POST)
+    @RequestMapping(path="", method = RequestMethod.POST)
     public @ResponseBody String addNewOferta(@RequestBody Oferta oferta) {
 
         ofertaRepository.save(oferta);
@@ -28,7 +28,7 @@ public class OfertaController {
     }
 
     // Obtener Ofertas
-    @GetMapping(path="/all")
+    @RequestMapping(path="", method = RequestMethod.GET)
     public @ResponseBody Iterable<Oferta> gettAllOfertas() {
         return ofertaRepository.findAll();
     }
