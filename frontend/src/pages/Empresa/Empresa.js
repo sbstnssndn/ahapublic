@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import MasterForm from '../../containers/MasterForm/MasterForm';
 //import Card from 'react-bootstrap/Card';
 import Footer from '../../components/Footer/Footer';
 //import { LinkContainer } from 'react-router-bootstrap';
@@ -15,6 +14,11 @@ import NavbarEmpresa from './NavbarEmpresa/NavbarEmpresa';
 class Empresa extends Component {
 
 	render () {
+		/*
+		<MasterForm
+			formConfig={this.props.formEmpresa}
+		/>
+		*/
 
 		return (
 			<React.Fragment>
@@ -25,9 +29,7 @@ class Empresa extends Component {
 						<Row>
 							<Col md={9} className="">
 								
-								<MasterForm
-									formConfig={this.props.formEmpresa}
-								/>
+								{this.props.children}
 
 							</Col>
 							<Col md={3}>

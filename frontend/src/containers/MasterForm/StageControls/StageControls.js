@@ -3,6 +3,7 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
+import styles from './StageControls.module.css';
 //import Tooltip from 'react-bootstrap/Tooltip';
 //import { LinkContainer } from 'react-router-bootstrap';
 
@@ -17,7 +18,7 @@ const StageControls = (props) => {
 	let prevButton = null;
 	if (currentStage !== firstStage) {
 		prevButton = (
-			<Button variant="secondary" onClick={props._prev}>
+			<Button variant="secondary" onClick={props._prev} className={styles.BotonAnterior}>
 				Anterior
 			</Button>
 		);
@@ -26,7 +27,7 @@ const StageControls = (props) => {
 	let nextButton = null;
 	if (currentStage < lastStage) {
 		nextButton = (
-		<Button variant="primary" onClick={props._next}> 
+		<Button variant="primary" onClick={props._next} className={styles.BotonSiguiente}>
 			Siguiente
 		</Button>        
 		);

@@ -1,0 +1,23 @@
+.BotonSiguiente {
+	background-color: #006C84;
+	border-color: #006C84;
+}
+
+.BotonSiguiente:hover {
+	background-color: #6EB5C0 ;
+	border-color: #6EB5C0 ;
+}
+.BotonAnterior:active{
+	background-color: #6EB5C0 ;
+	border-color: #6EB5C0 ;
+}
+
+.BotonAnterior {
+	background-color: #6EB5C0;
+	border-color: #6EB5C0;
+}
+
+.BotonAnterior:hover {
+	background-color: #006C84 ;
+	border-color: #006C84;
+}
