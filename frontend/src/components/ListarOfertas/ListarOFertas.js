@@ -22,31 +22,41 @@ class ListarOfertas extends Component {
   }
 
   render () {
-
-  	console.log(ofertas);
-
-    const offers = {...this.state.ofertas}
-    console.log(users);
-
-
     return (
       <React.Fragment>
         <div className="container">
           <h1 className="tp-2">Ofertas</h1>
             {this.state.ofertas.map(oferta => {
               return (
-              	<Card key={oferta.id}>
-              		<Card.Body>
-              			<Card.Title>{oferta.name}</Card.Title>
-              			<Card.Subtitle className="mb-2 text-muted">{oferta.description}</Card.Subtitle>
-              			<Card.Text>
-              				<h5>Habilitado para silla de ruedas</h5>
-              				<h6>{oferta.sillaDeRuedas}</h6>
-              				<h5>Tiene baños amplios</h5>
-              				<h6>{oferta.bañoAdaptado}</h6>
-              			</Card.Text>
-              		</Card.Body>
-              	</Card>
+                <Row>
+                  <Col lg={2}>
+                  	<Card key={oferta.id}>
+                  		<Card.Body>
+                  			<Card.Title>{oferta.name}</Card.Title>
+                  			<Card.Subtitle className="mb-2 text-muted">{oferta.description}</Card.Subtitle>
+                  			<Card.Text>
+                  				<h5>Habilitado para silla de ruedas</h5>
+                  				<h6>{oferta.sillaDeRuedas}</h6>
+                  				<h5>Tiene baños amplios</h5>
+                  				<h6>{oferta.bañoAdaptado}</h6>
+                  			</Card.Text>
+                  		</Card.Body>
+                  	</Card>
+                  </Col>
+                  <Col lg={2}>
+                    <Card>
+                      <Card.Body>
+                        <Card.Title>Experiencias</Card.Title>
+                        <Card.Text>
+                          oferta.experiencias.map(experiencia => {
+                            <h5>Área: {experiencia.tipo}</h5>
+                            <h6>Duración: {experiencia.duracion}</h6>
+                          })
+                        </Card.Text>
+                      </Card.Body>
+                    </Card>
+                  </Col>
+                </Row>
               );
             })}
           
