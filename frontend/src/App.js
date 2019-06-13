@@ -982,7 +982,7 @@ function App() {
 			},
 			{
 				id: 5,
-				name: "Perfil Capacidades (3/6)",
+				name: "Perfil Funcional (3/6)",
 				fields: {
 					permanecerPie:{
 						type: 'normal',
@@ -1072,7 +1072,7 @@ function App() {
 			},
 			{
 				id: 6,
-				name: "Perfil Capacidades (4/6)",
+				name: "Perfil Funcional (4/6)",
 				fields: {
 					diferentesAlturas:{
 						type: 'normal',
@@ -1162,7 +1162,7 @@ function App() {
 			},
 			{
 				id: 7,
-				name: "Perfil Capacidades (5/6)",
+				name: "Perfil Funcional (5/6)",
 				fields: {
 					comunicacionOral:{
 						type: 'normal',
@@ -1252,7 +1252,7 @@ function App() {
 			},
 			{
 				id: 8,
-				name: "Perfil Capacidades (6/6)",
+				name: "Perfil Funcional (6/6)",
 				fields: {
 					situacionesConflicto:{
 						type: 'normal',
