@@ -28,7 +28,6 @@ const Routes = (props) => {
 						<Postulante
 							formPostulante={props.formPostulante}
 							tipoFormulario="postulante"
-							{...props}
 						/>
 					)}
 				/>
@@ -43,12 +42,21 @@ const Routes = (props) => {
 					)}
 				/>
 				<Route
+					path="/postulantes/panel/cuenta-usuario"
+					exact
+					render={() => (
+						<Postulante
+							formPostulante={props.formCuentaUsuario}
+							tipoFormulario="postulante"
+						/>
+					)}
+				/>
+				<Route
 					path="/postulantes"
 					render={() => (
 						<Postulante
 							formPostulante={props.formPostulante}
 							tipoFormulario="postulante"
-							{...props}
 						/>
 					)}
 				/>
@@ -75,6 +83,16 @@ const Routes = (props) => {
 					)}
 				/>
 				<Route
+					path="/empresas/panel/cuenta-usuario"
+					exact
+					render={() => (
+						<Empresa
+							formEmpresa={props.formCuentaUsuario}
+							tipoFormulario="empresa"
+						/>
+					)}
+				/>
+				<Route
 					path="/empresas"
 					render={() => (
 						<Empresa
@@ -95,15 +113,7 @@ const Routes = (props) => {
 				)}/>
 				*/}
 
-				<Route
-					path="/cuenta-usuario"
-					exact
-					render={() => (
-						<Postulante
-							formEmpresa={props.formPostulanteLaboral}
-						/>
-					)}
-				/>
+				
 
 				<Route path="/logout" exact component={Landing} />
 

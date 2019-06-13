@@ -34,7 +34,7 @@ const NavbarPanel = (props) => (
 									Datos laborales
 								</Nav.Link>
 							</LinkContainer>
-							<LinkContainer to="/cuenta-usuario" className="px-4">
+							<LinkContainer to="postulantes/panel/cuenta-usuario" className="px-4">
 								<Nav.Link>
 									Mi cuenta
 								</Nav.Link>

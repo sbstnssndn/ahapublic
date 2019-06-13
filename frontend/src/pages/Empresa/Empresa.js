@@ -31,25 +31,25 @@ class Empresa extends Component {
 
 							</Col>
 							<Col md={3}>
-								<Link className="btn btn-primary btn-block" role="button" to ="/empresas/panel">
+								<Link className="btn btn-primary btn-block" role="button" to="/empresas/panel">
 									<h2>
 										<i className="fas fa-address-card"></i>
 									</h2>
 									<h5>Datos empresa</h5>
 								</Link>
-								<Link className="btn btn-outline-secondary btn-block" role="button" to ="/empresas/panel/ofertas-laborales">
+								<Link className="btn btn-outline-secondary btn-block" role="button" to="/empresas/panel/ofertas-laborales">
 									<h2>
 										<i className="fas fa-briefcase"></i>
 									</h2>
 									<h5>Ofertas laborales</h5>
 								</Link>
-								<Link className="btn btn-outline-secondary btn-block" role="button" to ="/empresas/panel/recomendaciones">
+								<Link className="btn btn-outline-secondary btn-block" role="button" to="/empresas/panel/recomendaciones">
 									<h2>
 										<i className="fas fa-hands-helping"></i>
 									</h2>
 									<h5>Recomendados</h5>
 								</Link>
-								<Link className="btn btn-outline-secondary btn-block" role="button" to ="/">
+								<Link className="btn btn-outline-secondary btn-block" role="button" to="/empresas/panel/cuenta-usuario">
 									<h2>
 										<i className="fas fa-user"></i>
 									</h2>
