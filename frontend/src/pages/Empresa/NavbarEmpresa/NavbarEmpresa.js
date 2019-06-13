@@ -39,7 +39,7 @@ const NavbarEmpresa = (props) => (
 									Recomendaciones
 								</Nav.Link>
 							</LinkContainer>
-							<LinkContainer to="/cuenta-usuario" className="px-4">
+							<LinkContainer to="/empresas/panel/cuenta-usuario" className="px-4">
 								<Nav.Link>
 									Mi cuenta
 								</Nav.Link>

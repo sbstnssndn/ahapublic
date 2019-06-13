@@ -15,7 +15,7 @@ import { Link } from 'react-router-dom';
 class Postulante extends Component {
 
 	render () {
-
+		console.log(this.props.match)
 		return (
 			<React.Fragment>
 				<NavbarPanel />
@@ -31,19 +31,19 @@ class Postulante extends Component {
 
 							</Col>
 							<Col md={3}>
-								<Link className="btn btn-primary btn-block" role="button" to ="/postulantes/panel">
+								<Link className="btn btn-primary btn-block" role="button" to="/postulantes/panel">
 									<h2>
 										<i className="fas fa-address-card"></i>
 									</h2>
 									<h5>Datos personales</h5>
 								</Link>
-								<Link className="btn btn-outline-secondary btn-block" role="button" to ="/postulantes/panel/perfil-laboral">
+								<Link className="btn btn-outline-secondary btn-block" role="button" to="/postulantes/panel/perfil-laboral">
 									<h2>
 										<i className="fas fa-briefcase"></i>
 									</h2>
 									<h5>Datos laborales</h5>
 								</Link>
-								<Link className="btn btn-outline-secondary btn-block" role="button" to ="/">
+								<Link className="btn btn-outline-secondary btn-block" role="button" to="/postulantes/panel/cuenta-usuario">
 									<h2>
 										<i className="fas fa-user"></i>
 									</h2>
