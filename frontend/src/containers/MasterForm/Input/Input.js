@@ -1,6 +1,7 @@
 import React from 'react';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import "./customDatePickerWidth.css";
 
 const Input = (props) => {
 
@@ -81,7 +82,7 @@ const Input = (props) => {
 					inputElement = (
 						<div className="form-group">
 							<label>{props.label}</label>
-							<br></br>
+						
 							<DatePicker
 								className="form-control"
 								name={props.elementConfig.name}

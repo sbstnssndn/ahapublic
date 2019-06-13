@@ -50,11 +50,9 @@ class MasterForm extends Component {
 					elementsArray[elem].value = event
 					console.log(elementsArray[elem].value)
 				}
-
 				else {
 					elementsArray[elem].value = event.target.value;
 				}
-
 				updatedForm.stages[this.state.currentStage].fields[inputIdentifier].elements[elem] = elementsArray[elem];
 			}		
 			

@@ -1304,7 +1304,7 @@ function App() {
 									name: 'fechaInicioCurso',
 									id: 'fechaInicioCurso'
 								},
-								value: ''
+								value: new Date()
 							}
 						]
 					},
@@ -1320,7 +1320,7 @@ function App() {
 									name: 'fechaTerminoCurso',
 									id: 'fechaTerminoCurso'
 								},
-								value: ''
+								value: new Date()
 							}
 						]
 					}
