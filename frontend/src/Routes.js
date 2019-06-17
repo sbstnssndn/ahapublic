@@ -9,18 +9,7 @@ import MasterForm from './containers/MasterForm/MasterForm';
 import ListarOfertas from "./components/ListarOfertas/ListarOFertas";
 
 const Routes = (props) => {
-	/*
-		<Route
-			path="/postulantes/panel"
-			exact
-			component={() => (
-				<PanelPostulante
-					stages={props.stagesPostulante}
-					tipoFormulario="postulante"
-				/>
-			)}
-		/>
-	*/
+	
 	return (
 		<BrowserRouter>
 			<Switch>
@@ -52,6 +41,17 @@ const Routes = (props) => {
 					render={({match}) => (
 						<Postulante
 							formPostulante={props.formCuentaUsuario}
+							tipoFormulario="postulante"
+							match={match}
+						/>
+					)}
+				/>
+				<Route
+					path="/postulantes/panel/preguntas"
+					exact
+					render={({match}) => (
+						<Postulante
+							formPostulante={props.formPreguntas}
 							tipoFormulario="postulante"
 							match={match}
 						/>
