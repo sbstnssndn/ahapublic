@@ -28,7 +28,7 @@ public class OfertaController {
     @GetMapping(value = "user/{userId}/oferta")
     public @ResponseBody Iterable<Oferta> getAll(@PathVariable("userId") Integer userId) {
 
-        User user = userRepository.findById(userId).get();    
+        User user = userRepository.findById(userId).get();
         return user.getPerfilEmpresa().getOfertas();
     }
 

@@ -60,7 +60,7 @@ public class ExperienciaController {
     }
 
     // Obtener experiencia por id
-    @GetMapping(path = "curso/{id}")
+    @GetMapping(path = "experiencia/{id}")
     public @ResponseBody Experiencia get(@PathVariable("id") Integer id) {
         return experienciaRepository.findById(id).get();
     }
