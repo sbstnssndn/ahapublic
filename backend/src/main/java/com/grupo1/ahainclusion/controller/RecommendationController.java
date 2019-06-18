@@ -28,10 +28,11 @@ public class RecommendationController {
     private RecGenerator recgen = new RecGenerator();
 
     // Obtener Recomendaciones
-    @RequestMapping(method = RequestMethod.POST)
-    public @ResponseBody Iterable<Recommendation> getRecommendations(@RequestBody Oferta oferta) {
+    @RequestMapping(method = RequestMethod.GET)
+    public @ResponseBody Iterable<Recommendation> getRecommendations() {
         List<Recommendation> recommendations = new ArrayList<>();
 
+        Oferta oferta = ofertaRepository.findById(1).get();
         recommendations = recgen.generate(oferta, 5);
 
         return recommendations;
