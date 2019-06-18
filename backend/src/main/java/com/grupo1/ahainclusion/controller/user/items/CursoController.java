@@ -12,13 +12,16 @@ import com.grupo1.ahainclusion.repository.UserRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-@RequestMapping(path = "/user")
+@RequestMapping(path = "/user/curso")
 public class CursoController {
 
     @Autowired
@@ -28,10 +31,10 @@ public class CursoController {
     private CursoRepository cursoRepository;
 
     // Agregar un curso
-    @RequestMapping(path="/curso", method = RequestMethod.POST)
+    @PostMapping
     //SOLO USUARIOS CANDIDATO O AHA
     //@PreAuthorize("hasRole('ROLE_CANDIDATO') or hasRole('ROLE_AHA')")
-    public @ResponseBody String addCursoToUser (@CurrentUser UserPrincipal currentUser, 
+    public @ResponseBody String add (@CurrentUser UserPrincipal currentUser, 
                                                 @RequestBody Curso curso) {
 
 
@@ -46,13 +49,18 @@ public class CursoController {
     }
 
     // Obtener Cursos
-    @RequestMapping(path = "/curso", method = RequestMethod.GET)
+    @GetMapping(value = "/{id}")
     //SOLO USUARIOS CANDIDATO O AHA
     //@PreAuthorize("hasRole('ROLE_CANDIDATO') or hasRole('ROLE_AHA')")
-    public @ResponseBody Iterable<Curso> getCursos(@CurrentUser UserPrincipal currentUser) {
+    public @ResponseBody Iterable<Curso> getAll(@PathVariable("id") Integer id) {
 
-        User user = userRepository.findById(currentUser.getId()).get();
+        User user = userRepository.findById(id).get();
         return user.getPerfilCandidato().getPerfilLaboral().getCursos();
     }
 
+    //Obtener curso por id
+    @GetMapping(value = "/{id}")
+    public @ResponseBody Curso get(@PathVariable("id") Integer id) {
+        return cursoRepository.findById(id).get();
+    }
 }
