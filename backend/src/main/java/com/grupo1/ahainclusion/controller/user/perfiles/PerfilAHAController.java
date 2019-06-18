@@ -9,6 +9,9 @@ import com.grupo1.ahainclusion.repository.UserRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -26,24 +29,24 @@ public class PerfilAHAController {
 
 
     // Agregar Perfil AHA
-    @RequestMapping(path = "/perfilAHA", method = RequestMethod.POST)
+    @PostMapping(path = "/{userId}/perfilAHA")
     //SOLO USUARIOS AHA
     //@PreAuthorize("hasRole('ROLE_AHA')")
-    public @ResponseBody String addNewPerfilAHA(@CurrentUser UserPrincipal currentUser, @RequestBody PerfilAHA perfilAHA) {
+    public @ResponseBody String addNewPerfilAHA(@PathVariable("userId") Integer userId, @RequestBody PerfilAHA perfilAHA) {
 
-        User user = userRepository.findById(currentUser.getId()).get();
+        User user = userRepository.findById(userId).get();
         perfilAHA.setUser(user);
         perfilAHARepository.save(perfilAHA);
         return "Perfil AHA Guardado";
     }
     
     // Obtener Perfil AHA
-    @RequestMapping(path = "/perfilAHA", method = RequestMethod.GET)
+    @GetMapping(path = "/{userId}/perfilAHA")
     //SOLO USUARIOS AHA
     //@PreAuthorize("hasRole('ROLE_AHA')")
-    public @ResponseBody PerfilAHA getPerfilAHA(@CurrentUser UserPrincipal currentUser) {
+    public @ResponseBody PerfilAHA getPerfilAHA(@PathVariable("userId") Integer userId) {
 
-        User user = userRepository.findById(currentUser.getId()).get();
+        User user = userRepository.findById(userId).get();
         PerfilAHA pAHA = user.getPerfilAHA();
 
         return pAHA;

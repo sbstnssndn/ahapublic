@@ -9,6 +9,9 @@ import com.grupo1.ahainclusion.repository.UserRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -25,24 +28,24 @@ public class PerfilEmpresaController {
     private PerfilEmpresaRepository perfilEmpresaRepository;
 
     // Agregar Perfil Empresa
-    @RequestMapping(path = "/perfilEmpresa", method = RequestMethod.POST)
+    @PostMapping(path = "/{userId}/perfilEmpresa")
     //SOLO USUARIOS EMPRESA O AHA
     //@PreAuthorize("hasRole('ROLE_EMPRESA') or hasRole('ROLE_AHA')")
-    public @ResponseBody String addNewPerfilEmpresa(@CurrentUser UserPrincipal currentUser, @RequestBody PerfilEmpresa perfilEmpresa) {
+    public @ResponseBody String addNewPerfilEmpresa(@PathVariable("userId") Integer userId, @RequestBody PerfilEmpresa perfilEmpresa) {
 
-        User user = userRepository.findById(currentUser.getId()).get();
+        User user = userRepository.findById(userId).get();
         perfilEmpresa.setUser(user);
         perfilEmpresaRepository.save(perfilEmpresa);
         return "Perfil Empresa Guardado";
     }
     
     // Obtener Perfil Empresa
-    @RequestMapping(path = "/perfilEmpresa", method = RequestMethod.GET)
+    @GetMapping(path = "/{userId}/perfilEmpresa")
     //SOLO USUARIOS EMPRESA O AHA
     //@PreAuthorize("hasRole('ROLE_EMPRESA') or hasRole('ROLE_AHA')")
-    public @ResponseBody PerfilEmpresa getPerfilLaboral(@CurrentUser UserPrincipal currentUser) {
+    public @ResponseBody PerfilEmpresa getPerfilLaboral(@PathVariable("userId") Integer userId) {
 
-        User user = userRepository.findById(currentUser.getId()).get();
+        User user = userRepository.findById(userId).get();
         PerfilEmpresa pEmpresa = user.getPerfilEmpresa();
 
         return pEmpresa;
