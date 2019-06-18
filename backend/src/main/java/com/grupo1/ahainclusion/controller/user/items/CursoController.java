@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-@RequestMapping(path = "/user/curso")
+@RequestMapping
 public class CursoController {
 
     @Autowired
@@ -31,7 +31,7 @@ public class CursoController {
     private CursoRepository cursoRepository;
 
     // Agregar un curso
-    @PostMapping
+    @PostMapping("user/{userId}/curso")
     //SOLO USUARIOS CANDIDATO O AHA
     //@PreAuthorize("hasRole('ROLE_CANDIDATO') or hasRole('ROLE_AHA')")
     public @ResponseBody String add (@CurrentUser UserPrincipal currentUser, 
@@ -49,7 +49,7 @@ public class CursoController {
     }
 
     // Obtener Cursos
-    @GetMapping(value = "/{id}")
+    @GetMapping(value = "user/curso/{id}")
     //SOLO USUARIOS CANDIDATO O AHA
     //@PreAuthorize("hasRole('ROLE_CANDIDATO') or hasRole('ROLE_AHA')")
     public @ResponseBody Iterable<Curso> getAll(@PathVariable("id") Integer id) {
@@ -59,7 +59,7 @@ public class CursoController {
     }
 
     //Obtener curso por id
-    @GetMapping(value = "/{id}")
+    @GetMapping(value = "user/curso/{id}")
     public @ResponseBody Curso get(@PathVariable("id") Integer id) {
         return cursoRepository.findById(id).get();
     }
