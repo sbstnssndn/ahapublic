@@ -9,6 +9,9 @@ import com.grupo1.ahainclusion.repository.UserRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -26,24 +29,24 @@ public class PerfilCandidatoController {
 
 
     // Agregar Perfil Candidato
-    @RequestMapping(path = "/perfilCandidato", method = RequestMethod.POST)
+    @PostMapping(path = "/{userId}/perfilCandidato")
     //SOLO USUARIOS CANDIDATO O AHA
     //@PreAuthorize("hasRole('ROLE_CANDIDATO') or hasRole('ROLE_AHA')")
-    public @ResponseBody String addNewPerfilCandidato(@CurrentUser UserPrincipal currentUser, @RequestBody PerfilCandidato perfilCandidato) {
+    public @ResponseBody String addNewPerfilCandidato(@PathVariable("userId") Integer userId, @RequestBody PerfilCandidato perfilCandidato) {
 
-        User user = userRepository.findById(currentUser.getId()).get();
+        User user = userRepository.findById(userId).get();
         perfilCandidato.setUser(user);
         perfilCandidatoRepository.save(perfilCandidato);
         return "Perfil Candidato Guardado";
     }
     
     // Obtener Perfil Candidato
-    @RequestMapping(path = "/perfilCandidato", method = RequestMethod.GET)
+    @GetMapping(path = "/{userId}/perfilCandidato")
     //SOLO USUARIOS CANDIDATO O AHA
     //@PreAuthorize("hasRole('ROLE_CANDIDATO') or hasRole('ROLE_AHA')")
-    public @ResponseBody PerfilCandidato getPerfilCandidato(@CurrentUser UserPrincipal currentUser) {
+    public @ResponseBody PerfilCandidato getPerfilCandidato(@PathVariable("userId") Integer userId) {
 
-        User user = userRepository.findById(currentUser.getId()).get();
+        User user = userRepository.findById(userId).get();
         PerfilCandidato pCandidato = user.getPerfilCandidato();
 
         return pCandidato;

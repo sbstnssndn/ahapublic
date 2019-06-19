@@ -24,6 +24,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -45,7 +48,7 @@ public class UserController {
 
 
     // Obtener usuario logeado
-    @RequestMapping(path = "/me", method = RequestMethod.GET)
+    @GetMapping(path = "/me")
     @PreAuthorize("hasRole('ROLE_CANDIDATO') or hasRole('ROLE_EMPRESA') or hasRole('ROLE_AHA')")
     public @ResponseBody UserSummary getCurrentUser(@CurrentUser UserPrincipal currentUser) {
         UserSummary userSummary = new UserSummary(currentUser.getId(), currentUser.getName(), currentUser.getEmail());
@@ -53,7 +56,7 @@ public class UserController {
     }
 
     // Agregar usuario (Registrar)
-    @RequestMapping(path = "/add", method = RequestMethod.POST)
+    @PostMapping(path = "/add")
     public ResponseEntity<?> registerUser(@Valid @RequestBody SignUpRequest signUpRequest) {
 
         if (userRepository.existsByEmail(signUpRequest.getEmail())) {
@@ -90,6 +93,13 @@ public class UserController {
                 .buildAndExpand(result.getId()).toUri();
 
         return ResponseEntity.created(location).body(new ApiResponse(true, "Usuario creado correctamente."));
+    }
+
+
+    //Obtener usuario por id
+    @GetMapping(value = "/{id}")
+    public @ResponseBody User get(@PathVariable("id") Integer id) {
+        return userRepository.findById(id).get();
     }
 
     // Obtener Usuarios
