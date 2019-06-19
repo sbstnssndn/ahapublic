@@ -12,13 +12,16 @@ import com.grupo1.ahainclusion.repository.UserRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-@RequestMapping(path = "/user")
+@RequestMapping
 public class CursoController {
 
     @Autowired
@@ -28,31 +31,32 @@ public class CursoController {
     private CursoRepository cursoRepository;
 
     // Agregar un curso
-    @RequestMapping(path="/curso", method = RequestMethod.POST)
+    @PostMapping("user/{userId}/curso")
     //SOLO USUARIOS CANDIDATO O AHA
     //@PreAuthorize("hasRole('ROLE_CANDIDATO') or hasRole('ROLE_AHA')")
-    public @ResponseBody String addCursoToUser (@CurrentUser UserPrincipal currentUser, 
-                                                @RequestBody Curso curso) {
+    public @ResponseBody String add (@PathVariable("userId") Integer userId, @RequestBody Curso curso) {
 
 
-        User user = userRepository.findById(currentUser.getId()).get();
+        User user = userRepository.findById(userId).get();
         PerfilLaboral pLaboral = user.getPerfilCandidato().getPerfilLaboral();
         curso.setPerfilLaboral(pLaboral);
         cursoRepository.save(curso);
-        
-
-
         return "Curso Guardado en usuario: " + user.getPerfilCandidato().getFirstName();
     }
 
     // Obtener Cursos
-    @RequestMapping(path = "/curso", method = RequestMethod.GET)
+    @GetMapping(value = "user/{userId}/curso/")
     //SOLO USUARIOS CANDIDATO O AHA
     //@PreAuthorize("hasRole('ROLE_CANDIDATO') or hasRole('ROLE_AHA')")
-    public @ResponseBody Iterable<Curso> getCursos(@CurrentUser UserPrincipal currentUser) {
+    public @ResponseBody Iterable<Curso> getAll(@PathVariable("userId") Integer userId) {
 
-        User user = userRepository.findById(currentUser.getId()).get();
+        User user = userRepository.findById(userId).get();
         return user.getPerfilCandidato().getPerfilLaboral().getCursos();
     }
 
+    //Obtener curso por id
+    @GetMapping(value = "curso/{id}")
+    public @ResponseBody Curso get(@PathVariable("id") Integer id) {
+        return cursoRepository.findById(id).get();
+    }
 }
