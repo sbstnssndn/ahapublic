@@ -78,7 +78,6 @@ class LandingForm extends Component {
 			);
 		}
 
-
 		return (
 			<Card bg="primary" className="card-form">
 				<Card.Body>

@@ -25,7 +25,6 @@ class Landing extends Component {
 								<Col lg={8} className="d-none d-lg-block">
 									<LandingText />
 								</Col>
-
 								<Col lg={4}>
 									<LandingForm />
 								</Col>
