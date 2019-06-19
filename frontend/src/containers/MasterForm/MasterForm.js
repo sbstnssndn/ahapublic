@@ -11,13 +11,13 @@ import Card from 'react-bootstrap/Card';
 
 class MasterForm extends Component {
   
-  state = {
+  	state = {
 		currentStage: 0,
 		formData: ''
 	}
 
 	// handleChange(event, firstName)
-  handleChange = (event, inputIdentifier, element, elementIndentifier) => {
+  	handleChange = (event, inputIdentifier, element, elementIndentifier) => {
 	 	const updatedForm = {
 			...this.props.formConfig
 		}
@@ -99,14 +99,22 @@ class MasterForm extends Component {
     
 		// extraer los datos de cada form, dentro de cada etapa
 		let payload = Object.create(null);
-    for (let index in this.props.formConfig.stages) {
-      for (let formElementIdentifier in this.props.formConfig.stages[index].fields) {
+    	/*for (let index in this.props.formConfig.stages) {
+      		for (let formElementIdentifier in this.props.formConfig.stages[index].fields) {
 				// poblar objeto con todos los datos del formulario
 				payload[formElementIdentifier] = this.props.formConfig.stages[index].fields[formElementIdentifier].value;
-      }
+      		}
+		}*/
+		console.log(this.props.formConfig);
+		for (let index in this.props.formConfig.stages){
+			for (let formElementIdentifier in this.props.formConfig.stages[index].fields) {
+				for (let index2 in this.props.formConfig.stages[index].fields[formElementIdentifier].elements){
+					payload[formElementIdentifier] = this.props.formConfig.stages[index].fields[formElementIdentifier].elements[index2].value;
+				}
+			}
 		}
-		console.log(payload)
-		console.log('metodo: '+method)
+		console.log(payload);
+		console.log('metodo: '+method);
 		//window.location.href = "http://localhost:3000/";
 		
 		switch( method.toLowerCase() ) {
