@@ -2,7 +2,8 @@ export default
 	{
 		title: "Información postulante",
 		belongsTo: "postulante",
-		endpoint: "http://localhost:8080/api/postulante/:id/datos-personales",
+		endpoint: "http://localhost:8080/api/user/:id/guardarCandidato",
+		//problema de cors
 		totalStages: 4,
 		stages: [
 			{
