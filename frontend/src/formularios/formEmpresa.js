@@ -3,6 +3,7 @@ export default
         title: "Información empresa",
         belongsTo: "empresa",
         endpoint: "",
+        //definir en back.
         totalStages: 1,
         stages:
         [

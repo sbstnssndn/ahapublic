@@ -2,7 +2,8 @@ export default
     {
         title: "Información cuenta de usuario",
         belongsTo: "user",
-        endpoint: "http://localhost:8080/api/user",
+        endpoint: "",
+        //definir en back
         totalStages: 1,
         stages: [
             {

@@ -41,18 +41,18 @@ class LoginButton extends React.Component {
               <Modal.Title>Ingresa a tu cuenta</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <Form>
-                    <Form.Group controlId="formBasicEmail">
-                        <Form.Control type="email" placeholder="Correo" />
-                        <Form.Text className="text-muted">
-                        Nunca compartiremos tu correo con nadie.
-                        </Form.Text>
-                    </Form.Group>
+							<Form>
+								<Form.Group controlId="formBasicEmail">
+									<Form.Control type="email" placeholder="Correo" />
+									<Form.Text className="text-muted">
+										Nunca compartiremos tu correo con nadie.
+									</Form.Text>
+								</Form.Group>
 
-                    <Form.Group controlId="formBasicPassword">
-                        <Form.Control type="password" placeholder="Contraseña" />
-                    </Form.Group>
-                </Form>     
+									<Form.Group controlId="formBasicPassword">
+											<Form.Control type="password" placeholder="Contraseña" />
+									</Form.Group>
+							</Form>     
             </Modal.Body>
             <Modal.Footer>
               <Button variant="secondary" onClick={this.handleClose}>

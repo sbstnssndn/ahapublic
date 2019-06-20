@@ -47,17 +47,6 @@ const Routes = (props) => {
 					)}
 				/>
 				<Route
-					path="/postulantes/panel/preguntas"
-					exact
-					render={({match}) => (
-						<Postulante
-							formPostulante={props.formPreguntas}
-							tipoFormulario="postulante"
-							match={match}
-						/>
-					)}
-				/>
-				<Route
 					path="/postulantes"
 					render={({match}) => (
 						<Postulante
