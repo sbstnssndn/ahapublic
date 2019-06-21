@@ -3,7 +3,8 @@ import React, { Component } from 'react';
 import {
 	Route,
 	Switch,
-	withRouter
+	withRouter,
+	Redirect
 } from "react-router-dom";
 import './App.css';
 /*
@@ -91,7 +92,11 @@ class App extends Component {
 	render () {
 		return (
 			<React.Fragment>
-				<Navigation userType="postulante" />
+				<Navigation
+					userType="postulante"
+					currentUser={this.state.currentUser}
+					isAuthenticated={this.state.isAuthenticated}
+					handleLogout={this.handleLogout} />
 				<Switch>
 					<Route
 						exact
@@ -101,7 +106,7 @@ class App extends Component {
 					<Route
 						path="/login" 
 						render={
-							(props) =>  <Login onLogin={this.handleLogin} {...props} />
+							(props) =>  !this.state.isAuthenticated ? <Login onLogin={this.handleLogin} {...props} /> : <Redirect to="/" />
 						} />
 
 					<Route

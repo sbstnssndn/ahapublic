@@ -102,7 +102,7 @@ const Navigation = ( props ) => {
 								{ navbarItems }
 							</Nav>
 							<Nav className="ml-auto">
-								<NavigationUserOptions userType={props.userType} />
+								<NavigationUserOptions userType={props.userType} isAuthenticated={props.isAuthenticated} handleLogout={props.handleLogout} />
 							</Nav>
 
 						</Navbar.Collapse>
