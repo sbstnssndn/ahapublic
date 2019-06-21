@@ -67,8 +67,6 @@ const Routes = (props) => {
 						/>
 					)}
 				/>
-
-				
 				<Route
 					path="/empresas/panel"
 					exact
