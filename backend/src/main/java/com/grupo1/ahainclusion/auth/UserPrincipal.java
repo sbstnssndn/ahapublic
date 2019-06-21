@@ -61,16 +61,20 @@ public class UserPrincipal implements UserDetails {
         boolean isCandidato = false;
         boolean isEmpresa = false;
         boolean isAHA = false;
+        String role = "none";
 
         for (GrantedAuthority grantedAuthority : authorities) {
             if ("ROLE_CANDIDATO".equals(grantedAuthority.getAuthority())) {
                 isCandidato = true;
+                role = "candidato";
             }
             if ("ROLE_EMPRESA".equals(grantedAuthority.getAuthority())) {
                 isEmpresa = true;
+                role = "empresa";
             }
             if ("ROLE_AHA".equals(grantedAuthority.getAuthority())) {
                 isAHA = true;
+                role = "aha";
             }
         }
 
@@ -81,7 +85,7 @@ public class UserPrincipal implements UserDetails {
                 user.getEmail(),
                 user.getPassword(),
                 authorities,
-                "candidato"
+                role
             );
         }
 
@@ -92,7 +96,7 @@ public class UserPrincipal implements UserDetails {
                 user.getEmail(),
                 user.getPassword(),
                 authorities,
-                "empresa"
+                role
             );
         }
 
@@ -103,7 +107,7 @@ public class UserPrincipal implements UserDetails {
                 user.getEmail(),
                 user.getPassword(),
                 authorities,
-                "aha"
+                role
             );
         }
         
@@ -113,7 +117,7 @@ public class UserPrincipal implements UserDetails {
             user.getEmail(),
             user.getPassword(),
             authorities,
-            "none"
+            role
         );
     }
 
