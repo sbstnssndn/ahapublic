@@ -3,10 +3,10 @@ import {
 	Route,
 	Link
 } from "react-router-dom";
-import Formulario from '../Formulario/Formulario';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import Landing from '../Landing/Landing';
 
 const Panel = ( props ) => {
 	return (
@@ -17,7 +17,7 @@ const Panel = ( props ) => {
 						<Col md={9} className="">
 							<Link to={`${props.match.url}/cuenta`}>Formulario</Link>
 
-							<Route path={`${props.match.path}/cuenta`} component={Formulario}></Route>
+							<Route path={`${props.match.path}/cuenta`} component={Landing}></Route>
 						</Col>
 						<Col md={3}>
 							Cards
