@@ -19,6 +19,7 @@ import Navigation from './components/Navigation/Navigation';
 import Landing from './components/Landing/Landing';
 import Panel from './components/Panel/Panel';
 import Login from './containers/Login/Login';
+import PrivateRoute from './components/PrivateRoute/PrivateRoute';
 
 class App extends Component {
 
@@ -81,12 +82,6 @@ class App extends Component {
    isAuthenticated state, which other components will use to render their JSX
   */
   handleLogin = () => {
-		/*
-    notification.success({
-      message: 'AHA Inclusión',
-      description: "Iniciaste sesión correctamente.",
-		});
-		*/
 		console.log("ejecutando handleLogin() en App.js");
 		this.loadCurrentUser();
 		console.log(this.state.currentUser);
@@ -98,12 +93,28 @@ class App extends Component {
 			<React.Fragment>
 				<Navigation userType="postulante" />
 				<Switch>
-					<Route exact path='/' component={Landing} />
+					<Route
+						exact
+						path='/'
+						component={Landing} />
 
-					<Route path="/login" 
-						render={(props) => <Login onLogin={this.handleLogin} {...props} />} />
+					<Route
+						path="/login" 
+						render={
+							(props) =>  <Login onLogin={this.handleLogin} {...props} />
+						} />
 
-					<Route path='/postulante' component={Panel} />
+					<Route
+						path='/postulante'
+						component={Panel} />
+
+					<PrivateRoute
+						path='/private'
+						isAuthenticated={this.state.isAuthenticated}
+						component={
+							(props) => <Landing {...props} />
+						} />
+
 					{/*
 					<Routes
 						formPostulante={formPostulante}

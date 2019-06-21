@@ -57,6 +57,7 @@ class Login extends Component {
 
 		return (
 			<React.Fragment>
+				<p>{this.props.prueba}</p>
 				<section id="formularios" className="py-4" style={{minHeight: '90vh'}}>
 					<Container style={{paddingTop: '100px'}}>
 						<Row>

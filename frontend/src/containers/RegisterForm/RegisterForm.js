@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import Card from 'react-bootstrap/Card';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import axios from 'axios';
-import { API_BASE_URL } from '../../constants';
+import Alert from 'react-bootstrap/Alert';
+import { signup } from '../../util/APIUtils';
 
 class LandingForm extends Component {
 
@@ -12,8 +12,11 @@ class LandingForm extends Component {
 		email: '',
 		password: '',
 		confirmPassword: '',
-		errorMessage: null
+		errorMessage: null,
+		show: false
 	}
+
+	handleDismiss = () => this.setState({ show: false });
 
 	validateForm = () => {
     return (
@@ -37,25 +40,27 @@ class LandingForm extends Component {
 	
 	handleSubmit = (event) => {
 		event.preventDefault();
-		//window.location.href = "http://localhost:3000/";
-		
+
 		let rol = "candidato";
 		if (this.state.empresa)
 			rol = "empresa"
 
-		const payload = {
+		const signupRequest = {
 			email: this.state.email,
 			password: this.state.password,
 			role: rol
 		}
-		
-		axios.post(API_BASE_URL + '/user/add', payload)
+
+		signup(signupRequest)
 			.then(response => {
-				console.log(response);
-			})
-			.catch(function(error){
+				this.props.history.push("/login");
+			}).catch(error => {
 				console.log(error);
-			});
+				this.setState({
+					errorMessage: error.message,
+					show: true
+				})
+		});
 	}
 
 	render () {
@@ -118,11 +123,17 @@ class LandingForm extends Component {
 							Registrarse
 						</Button>
 
-						{ this.state.errorMessage }
+						{/* TODO: Cambiar esto por un toast */}
+						<Alert
+							className="mb-0 mt-2"
+							variant="secondary"
+							show={this.state.show}
+							onClose={this.handleDismiss}
+							dismissible>
+							{ this.state.errorMessage }
+						</Alert>
 
 					</Form>
-
-
 				</Card.Body>
 			</Card>
 		);

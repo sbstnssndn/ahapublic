@@ -1,5 +1,5 @@
 import { API_BASE_URL, ACCESS_TOKEN } from '../constants';
-import axios from 'axios';
+//import axios from 'axios';
 
 const request = (options) => {
 	const headers = new Headers({
@@ -25,19 +25,20 @@ const request = (options) => {
 
 	let ok = null;
 	return fetch(options.url, options)
-			.then(response => {
-					ok = response.ok;
-					return response.json();
-			})
-			.then(json => {
-					if (!ok) {
-							return Promise.reject(json);
-					}
-					return json;
-			});
+		.then(response => {
+			ok = response.ok;
+			return response.json();
+		})
+		.then(json => {
+			if (!ok) {
+				console.log(json)
+				return Promise.reject(json);
+			}
+			return json;
+		});
 }
 
-const axiosRequest = (config) => {
+//const axiosRequest = (config) => {
 	// {url: REQUIRED, method:, data:}
 	// headers: {'X-Requested-With': 'XMLHttpRequest'}
 	/*
@@ -57,7 +58,7 @@ const axiosRequest = (config) => {
 	// `withCredentials` indicates whether or not cross-site Access-Control requests
   // should be made using credentials
 	//withCredentials: false, // default
-	let headers = {
+	/*let headers = {
 		'Content-Type': 'application/json',
 	}
 
@@ -77,7 +78,7 @@ const axiosRequest = (config) => {
 		.catch(error => {
 			console.log(error);
 		});
-}
+}*/
 
 // loginRequest = { email: 'asdf', password: 'asdf' }
 export const login = (loginRequest) => {
@@ -99,5 +100,13 @@ export const getCurrentUser = () => {
 	return request({
 			url: API_BASE_URL + "/user/me",
 			method: 'GET'
+	});
+}
+
+export const signup = (signupRequest) => {
+	return request({
+			url: API_BASE_URL + "/user/add",
+			method: 'POST',
+			body: JSON.stringify(signupRequest)
 	});
 }
