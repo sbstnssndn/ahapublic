@@ -52,7 +52,7 @@ public class UserController {
     @PreAuthorize("hasRole('ROLE_CANDIDATO') or hasRole('ROLE_EMPRESA') or hasRole('ROLE_AHA')")
     public @ResponseBody UserSummary getCurrentUser(@CurrentUser UserPrincipal currentUser) {
 
-        UserSummary userSummary = new UserSummary(currentUser.getId(), currentUser.getName(), currentUser.getEmail(), currentUser.getAuthorities());
+        UserSummary userSummary = new UserSummary(currentUser.getId(), currentUser.getName(), currentUser.getEmail(), currentUser.getAuthorities(), currentUser.getRole());
 
         return userSummary;
     }

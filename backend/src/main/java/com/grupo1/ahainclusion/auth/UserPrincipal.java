@@ -25,13 +25,24 @@ public class UserPrincipal implements UserDetails {
 
     private Collection<? extends GrantedAuthority> authorities;
 
+    private String role;
+
     public UserPrincipal(Integer id, String name, String email, String password,
-            Collection<? extends GrantedAuthority> authorities) {
+            Collection<? extends GrantedAuthority> authorities, String role) {
         this.id = id;
         this.setName(name);
         this.email = email;
         this.password = password;
         this.authorities = authorities;
+        this.role = role;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 
     public String getName() {
@@ -69,7 +80,8 @@ public class UserPrincipal implements UserDetails {
                 user.getPerfilCandidato().getFirstName(),
                 user.getEmail(),
                 user.getPassword(),
-                authorities
+                authorities,
+                "candidato"
             );
         }
 
@@ -79,7 +91,8 @@ public class UserPrincipal implements UserDetails {
                 user.getPerfilEmpresa().getNameEmpresa(),
                 user.getEmail(),
                 user.getPassword(),
-                authorities
+                authorities,
+                "empresa"
             );
         }
 
@@ -89,7 +102,8 @@ public class UserPrincipal implements UserDetails {
                 user.getPerfilAHA().getFirstName(),
                 user.getEmail(),
                 user.getPassword(),
-                authorities
+                authorities,
+                "aha"
             );
         }
         
@@ -98,7 +112,8 @@ public class UserPrincipal implements UserDetails {
             user.getEmail(),
             user.getEmail(),
             user.getPassword(),
-            authorities
+            authorities,
+            "none"
         );
     }
 

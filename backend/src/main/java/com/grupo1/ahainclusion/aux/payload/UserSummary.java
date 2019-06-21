@@ -10,12 +10,22 @@ public class UserSummary {
     private String name;
     private String email;
     private Collection<? extends GrantedAuthority> authorities;
+    private String role;
 
-    public UserSummary(Integer id, String name, String email, Collection<? extends GrantedAuthority> authorities) {
+    public UserSummary(Integer id, String name, String email, Collection<? extends GrantedAuthority> authorities, String role) {
         this.setId(id);
         this.setName(name);
         this.setEmail(email);
         this.setAuthorities(authorities);
+        this.setRole(role);
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 
     public Collection<? extends GrantedAuthority> getAuthorities() {
