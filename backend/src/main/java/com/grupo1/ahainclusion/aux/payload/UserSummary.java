@@ -1,14 +1,29 @@
 package com.grupo1.ahainclusion.aux.payload;
 
+import java.util.Collection;
+
+import org.springframework.security.core.GrantedAuthority;
+
+
 public class UserSummary {
     private Integer id;
     private String name;
     private String email;
+    private Collection<? extends GrantedAuthority> authorities;
 
-    public UserSummary(Integer id, String name, String email) {
+    public UserSummary(Integer id, String name, String email, Collection<? extends GrantedAuthority> authorities) {
         this.setId(id);
         this.setName(name);
         this.setEmail(email);
+        this.setAuthorities(authorities);
+    }
+
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return authorities;
+    }
+
+    public void setAuthorities(Collection<? extends GrantedAuthority> authorities) {
+        this.authorities = authorities;
     }
 
     public String getName() {
