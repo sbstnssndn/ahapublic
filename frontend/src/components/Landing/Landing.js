@@ -19,7 +19,7 @@ const Landing = ( props ) => {
 							<LandingText />
 						</Col>
 						<Col lg={4}>
-							<RegisterForm />
+							<RegisterForm {...props} />
 						</Col>
 					</Row>
 				</Container>

@@ -101,7 +101,9 @@ class App extends Component {
 					<Route
 						exact
 						path='/'
-						component={Landing} />
+						render={
+							(props) => <Landing {...props} />
+						} />
 
 					<Route
 						path="/login" 
