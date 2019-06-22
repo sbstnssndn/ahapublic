@@ -23,7 +23,9 @@ export default
 								},
 								value: ''
 							}
-						]
+						],
+						dirty: false,
+						touched: false,
 					},
 					firstName: {
 						type: 'normal',

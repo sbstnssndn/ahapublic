@@ -13,7 +13,54 @@ class MasterForm extends Component {
   
   state = {
 		currentStage: 0,
-		formData: ''
+		formData: '',
+		touched: false,
+	}
+
+	handleValidation = (event, inputIdentifier, element) => {
+	 	const updatedForm = {
+			...this.props.formConfig
+		}
+		const updatedStages = {
+			...updatedForm.stages
+		}
+		const updatedCurrentStage = {
+			...updatedStages[this.state.currentStage]
+		}
+		const updatedStageFields = {
+			...updatedCurrentStage.fields
+		}
+		// updatedFieldElements es un objeto con keys numéricas para cada elemento del grupoFormulario
+		const updatedFieldElements = {
+			...updatedStageFields[inputIdentifier].elements
+		}
+
+		// clonar el array elements
+		const elementsArray = [];
+		for (let elem in updatedFieldElements) {
+			elementsArray.push({
+				...updatedFieldElements[elem]
+			})
+		}
+
+		for (let elem in elementsArray) {
+			console.log(elementsArray[elem].elementConfig.id)
+			if(elementsArray[elem].elementConfig.id === element) {
+
+				if (event.target.value != ''){
+					elementsArray[elem].dirty = true
+					this.touched = true
+				}
+
+				elementsArray[elem].touched = true
+
+				updatedForm.stages[this.state.currentStage].fields[inputIdentifier].elements[elem] = elementsArray[elem];
+			}		
+			
+		}
+		this.setState({
+      form: updatedForm
+    });
 	}
 
 	// handleChange(event, firstName)
@@ -91,8 +138,9 @@ class MasterForm extends Component {
 	}
 
 	componentDidMount() {
+		console.log('didmount')
 		
-	}
+	};
 
   handleSubmit = (event, method) => {
     event.preventDefault();

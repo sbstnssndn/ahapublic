@@ -15,6 +15,7 @@ const Input = (props) => {
 						<label>{props.label}</label>
 						<input 
 							onChange={props.handleChange}
+							onBlur={props.handleValidation}
 							{...props.elementConfig}
 							value={props.value}
 							className="form-control"
