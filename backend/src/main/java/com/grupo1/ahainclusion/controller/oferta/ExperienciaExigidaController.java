@@ -13,17 +13,17 @@ import com.grupo1.ahainclusion.repository.UserRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-@RequestMapping(path = "/oferta")
+@RequestMapping
 public class ExperienciaExigidaController {
-
-    @Autowired
-    private UserRepository userRepository;
 
     @Autowired
     private OfertaRepository ofertaRepository;
@@ -33,22 +33,25 @@ public class ExperienciaExigidaController {
 
 
     // Agregar una experiencia exigida
-    @RequestMapping(path="/experiencia", method = RequestMethod.POST)
+    @PostMapping(path="(/oferta/{ofertaId}/experiencia")
     //SOLO USUARIOS EMPRESA O AHA
     //@PreAuthorize("hasRole('ROLE_EMPRESA') or hasRole('ROLE_AHA')")
-    public @ResponseBody String add (@RequestBody ExperienciaExigida expExigida) {
+    public @ResponseBody String add(@PathVariable("ofertaId") Integer ofertaId, @RequestBody ExperienciaExigida expExigida) {
 
+        Oferta oferta = ofertaRepository.findById(ofertaId).get();
+        expExigida.setOferta(oferta);
         experienciaExigidaRepository.save(expExigida);
 
         return "Experiencia agregada a la oferta";
     }
 
     // Obtener Experiencias exigidas
-    @RequestMapping(path = "/experiencia", method = RequestMethod.GET)
+    @GetMapping(path = "/oferta/{ofertaId}/experiencia")
     //SOLO USUARIOS CANDIDATO O AHA
     //@PreAuthorize("hasRole('ROLE_CANDIDATO') or hasRole('ROLE_AHA')")
-    public @ResponseBody Iterable<ExperienciaExigida> getTitulos(@RequestBody Oferta oferta) {
+    public @ResponseBody Iterable<ExperienciaExigida> get(@PathVariable("ofertaId") Integer ofertaId) {
 
+        Oferta oferta = ofertaRepository.findById(ofertaId).get();
         return experienciaExigidaRepository.findByOferta(oferta);
 
     }

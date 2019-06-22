@@ -9,13 +9,16 @@ import com.grupo1.ahainclusion.repository.UserRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-@RequestMapping(path = "/user")
+@RequestMapping
 public class TituloController {
 
     @Autowired
@@ -26,13 +29,13 @@ public class TituloController {
 
 
     // Agregar un titulo
-    @RequestMapping(path="/titulo", method = RequestMethod.POST)
+    @PostMapping("user/{userId}/titulo")
     //SOLO USUARIOS CANDIDATO O AHA
     //@PreAuthorize("hasRole('ROLE_CANDIDATO') or hasRole('ROLE_AHA')")
-    public @ResponseBody String addTituloToUser (@CurrentUser UserPrincipal currentUser,
+    public @ResponseBody String addTituloToUser (@PathVariable("userId") Integer userId,
                                                  @RequestBody Titulo titulo) {
 
-        User user = userRepository.findById(currentUser.getId()).get();
+        User user = userRepository.findById(userId).get();
         titulo.setPerfilLaboral(user.getPerfilCandidato().getPerfilLaboral());
         tituloRepository.save(titulo);
 
@@ -40,13 +43,19 @@ public class TituloController {
     }
 
     // Obtener Titulos
-    @RequestMapping(path = "/titulo", method = RequestMethod.GET)
+    @GetMapping(path = "user/{userId}/titulo/")
     //SOLO USUARIOS CANDIDATO O AHA
     //@PreAuthorize("hasRole('ROLE_CANDIDATO') or hasRole('ROLE_AHA')")
-    public @ResponseBody Iterable<Titulo> getTitulos(@CurrentUser UserPrincipal currentUser) {
+    public @ResponseBody Iterable<Titulo> getAll(@PathVariable("userId") Integer userId) {
 
-        User user = userRepository.findById(currentUser.getId()).get();
+        User user = userRepository.findById(userId).get();
         return user.getPerfilCandidato().getPerfilLaboral().getTitulos();
+    }
+
+    //Obtener titulo por id
+    @GetMapping(value = "titulo/{id}")
+    public @ResponseBody Titulo get(@PathVariable("id") Integer id) {
+        return tituloRepository.findById(id).get();
     }
 
 

@@ -10,6 +10,10 @@ import com.grupo1.ahainclusion.repository.UserRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -27,12 +31,12 @@ public class PerfilLaboralController {
 
 
     // Agregar Perfil Laboral
-    @RequestMapping(path = "/perfilLaboral", method = RequestMethod.POST)
+    @PostMapping(path = "/{userId}/perfilLaboral")
     //SOLO USUARIOS CANDIDATO O AHA
     //@PreAuthorize("hasRole('ROLE_CANDIDATO') or hasRole('ROLE_AHA')")
-    public @ResponseBody String addNewPerfilLaboral(@CurrentUser UserPrincipal currentUser, @RequestBody PerfilLaboral perfilLaboral) {
+    public @ResponseBody String addNewPerfilLaboral(@PathVariable("userId") Integer userId, @RequestBody PerfilLaboral perfilLaboral) {
 
-        User user = userRepository.findById(currentUser.getId()).get();
+        User user = userRepository.findById(userId).get();
         perfilLaboral.setPerfilCandidato(user.getPerfilCandidato());
         perfilLaboralRepository.save(perfilLaboral);
 
@@ -40,12 +44,12 @@ public class PerfilLaboralController {
     }
 
     // Obtener Perfil Laboral
-    @RequestMapping(path = "/perfilLaboral", method = RequestMethod.GET)
+    @GetMapping(path = "/{userId}/perfilLaboral")
     //SOLO USUARIOS CANDIDATO O AHA
     //@PreAuthorize("hasRole('ROLE_CANDIDATO') or hasRole('ROLE_AHA')")
-    public @ResponseBody PerfilLaboral getPerfilLaboral(@CurrentUser UserPrincipal currentUser) {
+    public @ResponseBody PerfilLaboral getPerfilLaboral(@PathVariable("userId") Integer userId) {
 
-        User user = userRepository.findById(currentUser.getId()).get();
+        User user = userRepository.findById(userId).get();
         PerfilLaboral pLaboral = user.getPerfilCandidato().getPerfilLaboral();
 
         return pLaboral;
@@ -53,12 +57,12 @@ public class PerfilLaboralController {
     }
 
     // Actualizar Perfil Laboral
-    @RequestMapping(path = "/perfilLaboral", method = RequestMethod.PUT)
+    @PutMapping(path = "/{userId}/perfilLaboral")
     //SOLO USUARIOS CANDIDATO O AHA
     //@PreAuthorize("hasRole('ROLE_CANDIDATO') or hasRole('ROLE_AHA')")
-    public @ResponseBody String updatePerfilLaboral(@CurrentUser UserPrincipal currentUser, @RequestBody PerfilLaboral pLaboralNew) {
+    public @ResponseBody String updatePerfilLaboral(@PathVariable("userId") Integer userId, @RequestBody PerfilLaboral pLaboralNew) {
 
-        User user = userRepository.findById(currentUser.getId()).get();
+        User user = userRepository.findById(userId).get();
         PerfilLaboral pLaboral = user.getPerfilCandidato().getPerfilLaboral();
         pLaboral.setActividadesAuditiva(pLaboralNew.getActividadesAuditiva());
         pLaboral.setActividadesVisual(pLaboralNew.getActividadesAuditiva());
