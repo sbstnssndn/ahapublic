@@ -14,8 +14,13 @@ import NavigationUserOptions from '../NavigationUserOptions/NavigationUserOption
 const Navigation = ( props ) => {
 
 	let navbarItems = null;
+	let userType = "GUEST";
 
-	switch (props.userType) {
+	if (props.currentUser !== null) {
+		userType = props.currentUser.role;
+	}
+
+	switch (userType) {
 		case USER_TYPE_POSTULANTE:
 			navbarItems = (
 				<React.Fragment>

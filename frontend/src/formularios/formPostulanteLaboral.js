@@ -1,4 +1,4 @@
-export default 
+export const formPostulanteLaboral = 
 	{
 		title: "Información postulante",
 		belongsTo: "postulante",

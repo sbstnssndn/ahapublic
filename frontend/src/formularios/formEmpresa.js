@@ -1,4 +1,4 @@
-export default 
+export const formEmpresa = 
     {
         title: "Información empresa",
         belongsTo: "empresa",

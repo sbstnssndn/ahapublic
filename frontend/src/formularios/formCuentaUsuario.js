@@ -1,4 +1,4 @@
-export default
+export const formCuentaUsuario =
     {
         title: "Información cuenta de usuario",
         belongsTo: "user",

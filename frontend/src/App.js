@@ -27,7 +27,8 @@ class App extends Component {
 	state = {
 		currentUser: null,
 		isAuthenticated: false,
-		isLoading: false
+		isLoading: false,
+		wasInitialized: false,
 	}
 
 	loadCurrentUser = () => {
@@ -42,21 +43,24 @@ class App extends Component {
 				this.setState({
 					currentUser: response,
 					isAuthenticated: true,
-					isLoading: false
+					isLoading: false,
+					wasInitialized: true
 				});
 				console.log(this.state)
 			})
 			.catch(error => {
 				console.log(error)
 				this.setState({
-					isLoading: false
+					isLoading: false,
+					wasInitialized: true
 				});  
 			});
   }
 
   componentDidMount() {
 		console.log("Estoy en componentDidMount() App.js")
-    this.loadCurrentUser();
+		this.loadCurrentUser();
+		console.log(this.state)
   }
 
   // Handle Logout, Set currentUser and isAuthenticated state which will be passed to other components
@@ -87,17 +91,23 @@ class App extends Component {
 		this.loadCurrentUser();
 		console.log(this.state.currentUser);
     this.props.history.push("/");
-  }
+	}
 
 	render () {
 		return (
 			<React.Fragment>
 				<Navigation
-					userType="postulante"
 					currentUser={this.state.currentUser}
 					isAuthenticated={this.state.isAuthenticated}
 					handleLogout={this.handleLogout} />
 				<Switch>
+					<PrivateRoute
+						authenticated={this.state.isAuthenticated}
+						exact
+						path='/postulante'
+						component={Panel}
+						wasInitialized={this.state.wasInitialized}
+						currentUser={this.state.currentUser} />
 					<Route
 						exact
 						path='/'
@@ -106,21 +116,19 @@ class App extends Component {
 						} />
 
 					<Route
-						path="/login" 
+						path="/login"
+						exact
 						render={
-							(props) =>  !this.state.isAuthenticated ? <Login onLogin={this.handleLogin} {...props} /> : <Redirect to="/" />
+							(props) =>  this.state.isAuthenticated ? this.props.history.goBack() : <Login onLogin={this.handleLogin} {...props} />
 						} />
 
+					{/*
 					<Route
-						path='/postulante'
-						component={Panel} />
+						path={`/postulante/:id`}
+						render={
+							this.state.currentUser === null ? <Redirect to="/" /> : <Panel currentUser={this.state.currentUser} />} />
+					*/}
 
-					<PrivateRoute
-						path='/private'
-						isAuthenticated={this.state.isAuthenticated}
-						component={
-							(props) => <Landing {...props} />
-						} />
 
 					{/*
 					<Routes
