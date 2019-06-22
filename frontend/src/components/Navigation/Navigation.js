@@ -24,13 +24,13 @@ const Navigation = ( props ) => {
 		case USER_TYPE_POSTULANTE:
 			navbarItems = (
 				<React.Fragment>
-					<NavigationItem exact to="/postulantes/panel">
+					<NavigationItem exact to='/postulante'>
 						Datos personales
 					</NavigationItem>
-					<NavigationItem exact to="/postulantes/panel/perfil-laboral">
+					<NavigationItem exact to='/postulante/perfil-laboral'>
 						Datos laborales
 					</NavigationItem>
-					<NavigationItem exact to="postulantes/panel/cuenta-usuario">
+					<NavigationItem exact to='/postulante/cuenta'>
 						Mi cuenta
 					</NavigationItem>
 				</React.Fragment>
@@ -107,7 +107,10 @@ const Navigation = ( props ) => {
 								{ navbarItems }
 							</Nav>
 							<Nav className="ml-auto">
-								<NavigationUserOptions userType={props.userType} isAuthenticated={props.isAuthenticated} handleLogout={props.handleLogout} />
+								<NavigationUserOptions
+									userType={props.userType}
+									isAuthenticated={props.isAuthenticated}
+									handleLogout={props.handleLogout} />
 							</Nav>
 
 						</Navbar.Collapse>

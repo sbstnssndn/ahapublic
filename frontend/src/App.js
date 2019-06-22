@@ -21,6 +21,7 @@ import Landing from './components/Landing/Landing';
 import Panel from './components/Panel/Panel';
 import Login from './containers/Login/Login';
 import PrivateRoute from './components/PrivateRoute/PrivateRoute';
+import NotFound from './components/NotFound/NotFound';
 
 class App extends Component {
 
@@ -99,11 +100,11 @@ class App extends Component {
 				<Navigation
 					currentUser={this.state.currentUser}
 					isAuthenticated={this.state.isAuthenticated}
-					handleLogout={this.handleLogout} />
+					handleLogout={this.handleLogout}
+					match={this.props.match} />
 				<Switch>
 					<PrivateRoute
 						authenticated={this.state.isAuthenticated}
-						exact
 						path='/postulante'
 						component={Panel}
 						wasInitialized={this.state.wasInitialized}
@@ -114,7 +115,6 @@ class App extends Component {
 						render={
 							(props) => <Landing {...props} />
 						} />
-
 					<Route
 						path="/login"
 						exact
@@ -139,6 +139,8 @@ class App extends Component {
 						formPreguntas={formPreguntas}
 					/>
 					*/}
+					
+					<Route component={NotFound} />
 				</Switch>
 			</React.Fragment>
 		);

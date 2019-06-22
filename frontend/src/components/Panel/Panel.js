@@ -9,23 +9,21 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Landing from '../Landing/Landing';
-import Tabs from '../Tabs/Tab';
+import Tabs from '../Tabs/Tabs';
 import { formPostulante } from '../../formularios/formPostulante';
 import { formPostulanteLaboral } from '../../formularios/formPostulanteLaboral';
 import { formEmpresa } from '../../formularios/formEmpresa';
 import { formCuentaUsuario } from '../../formularios/formCuentaUsuario';
 import { formPreguntas } from '../../formularios/formPreguntas';
 import MasterForm from '../../containers/MasterForm/MasterForm';
-import { fixPath } from '../../util/common';
-import { USER_TYPE_POSTULANTE } from '../../constants';
+import { USER_TYPE_POSTULANTE, USER_TYPE_EMPRESA } from '../../constants';
 
 const Panel = ( props ) => {
 
 	let routes = null;
 
-	console.log("PANEL:")
-	console.log(props.currentUser)
-	console.log(USER_TYPE_POSTULANTE)
+	console.log("match:")
+	console.log(props.match)
 
 	switch (props.currentUser.role) {
 		case USER_TYPE_POSTULANTE:
@@ -54,6 +52,7 @@ const Panel = ( props ) => {
 						)} />
 					<Route
 						path={`${props.match.path}`}
+						exact
 						render={(props) => (
 							<MasterForm
 								formConfig={formPostulante} currentUser={props.currentUser} {...props} />
@@ -61,6 +60,39 @@ const Panel = ( props ) => {
 				</>
 			);
 			break;
+		case USER_TYPE_EMPRESA:
+				routes = (
+					<>
+						<Route
+							path={`${props.match.path}/perfil-laboral`}
+							exact
+							render={(props) => (
+								<MasterForm
+									formConfig={formPostulanteLaboral} currentUser={props.currentUser} {...props} />
+							)} />
+						<Route
+							path={`${props.match.path}/cuenta`}
+							exact
+							render={(props) => (
+								<MasterForm
+									formConfig={formCuentaUsuario} currentUser={props.currentUser} {...props} />
+							)} />
+						<Route
+							path={`${props.match.path}/preguntas`}
+							exact
+							render={(props) => (
+								<MasterForm
+									formConfig={formPreguntas} currentUser={props.currentUser} {...props} />
+							)} />
+						<Route
+							path={`${props.match.path}`}
+							render={(props) => (
+								<MasterForm
+									formConfig={formEmpresa} currentUser={props.currentUser} {...props} />
+							)} />
+					</>
+				);
+				break;
 		default:
 			routes = <p>Rutas</p>;
 	}
@@ -72,8 +104,6 @@ const Panel = ( props ) => {
 					<Row>
 						<Col md={9} className="">
 
-							<Link to={fixPath(props.match.url, 'cuenta')}>Cuenta</Link>
-
 							<Switch>
 								{ routes }
 							</Switch>
@@ -81,7 +111,7 @@ const Panel = ( props ) => {
 						</Col>
 						<Col md={3}>
 
-							<Tabs />
+							<Tabs match={props.match} />
 
 						</Col>
 					</Row>
