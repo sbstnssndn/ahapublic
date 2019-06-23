@@ -47,10 +47,12 @@ class MasterForm extends Component {
 			console.log(elementsArray[elem].elementConfig.id)
 			if(elementsArray[elem].elementConfig.id === element) {
 
-				elementsArray[elem].subtext = ''
+				//elementsArray[elem].subtext = ''
 
 				const singleField = event.target.value
-				const len = singleField.length
+				let len = singleField.length
+				//console.log('rut: '+singleField + ' largo:'+len)
+
 
 				switch(element){
 					case('rut'):
@@ -59,14 +61,17 @@ class MasterForm extends Component {
 
 						if (len < 2){
 							elementsArray[elem].subtext = 'Rut incorrecto'
+							this.missing = true
 							break;
 						}
+						console.log('len mayor a 2')
 
 						for (let i=0; i<len; i++){
 							if (rut.charAt(i) != ' '
 								&& rut.charAt(i) != '.'
-								&& rut.charAt(i) != '-')
+								&& rut.charAt(i) != '-'){
 									temp = temp + rut.charAt(i)
+								}
 						}
 
 						len = temp.length
@@ -105,13 +110,14 @@ class MasterForm extends Component {
 							dvr = '0'
 						else {
 							const dvi = 11-res
-							dvr = dvi + ""
+							dvr = dvi + ''
 						}
 
-						if (dvr != dv.toLowerCase()) {
-							elementsArray[elem].subtext = 'Rut incorrecto'
-							break;
-						}
+						//if (dvr != dv.toLowerCase()) {
+						//	elementsArray[elem].subtext = 'Rut incorrecto'
+						//	break;
+						//}
+						console.log('Rut correcto')
 						break;
 
 					case('email'):
@@ -494,6 +500,7 @@ class MasterForm extends Component {
 					stageFields={stage.fields}
 					currentStage={this.state.currentStage}
 					totalStages={this.props.formConfig.totalStages}
+					handleValidation={this.handleValidation}
 					handleChange={this.handleChange}
 					addExperiencia={this.addExperiencia}
 					addCurso={this.addCurso}

@@ -14,6 +14,7 @@ const StageControls = (props) => {
 	const lastStage = totalStages - 1;
 
 	let currentStage = props.currentStage;
+	let missing = props.missing;
 		
 	let prevButton = null;
 	if (currentStage !== firstStage) {
@@ -26,11 +27,20 @@ const StageControls = (props) => {
 
 	let nextButton = null;
 	if (currentStage < lastStage) {
-		nextButton = (
-		<Button variant="primary" onClick={props._next}>
-			Siguiente
-		</Button>        
-		);
+
+		if (missing == true){
+			nextButton = (
+			<Button variant="primary" disabled>
+				Siguiente
+			</Button>        
+			);
+		}
+		else {
+			nextButton = (
+			<Button variant="primary" onClick={props._next}>
+				Siguiente
+			</Button>
+			);}
 	}
 
 	// TODO: implementar touched, togglear si el usuario ingresa algo a algún campo

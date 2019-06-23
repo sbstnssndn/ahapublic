@@ -38,6 +38,7 @@ export default
                                     name: "rut",
                                     id: "rut"
                                 },
+                                subtext: "Rut bonito",
                                 value: ""
                             }
                         ]
