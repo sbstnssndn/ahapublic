@@ -59,7 +59,7 @@ public class ExperienciaController {
     @GetMapping(path = "user/{userId}/experiencia")
     //SOLO USUARIOS CANDIDATO O AHA
     //@PreAuthorize("hasRole('ROLE_CANDIDATO') or hasRole('ROLE_AHA')")
-    public @ResponseBody Iterable<Experiencia> getExperiencias(@PathVariable("userId") Integer userId) {
+    public @ResponseBody Iterable<Experiencia> getFromUser(@PathVariable("userId") Integer userId) {
 
         User user = userRepository.findById(userId).get();
         return user.getPerfilCandidato().getPerfilLaboral().getExperiencias();

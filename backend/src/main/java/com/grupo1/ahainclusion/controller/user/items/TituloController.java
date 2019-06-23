@@ -52,7 +52,7 @@ public class TituloController {
     @GetMapping(path = "user/{userId}/titulo/")
     //SOLO USUARIOS CANDIDATO O AHA
     //@PreAuthorize("hasRole('ROLE_CANDIDATO') or hasRole('ROLE_AHA')")
-    public @ResponseBody Iterable<Titulo> getAll(@PathVariable("userId") Integer userId) {
+    public @ResponseBody Iterable<Titulo> getFromUser(@PathVariable("userId") Integer userId) {
 
         User user = userRepository.findById(userId).get();
         return user.getPerfilCandidato().getPerfilLaboral().getTitulos();

@@ -54,7 +54,7 @@ public class CursoController {
     @GetMapping(value = "user/{userId}/curso/")
     //SOLO USUARIOS CANDIDATO O AHA
     //@PreAuthorize("hasRole('ROLE_CANDIDATO') or hasRole('ROLE_AHA')")
-    public @ResponseBody Iterable<Curso> getAll(@PathVariable("userId") Integer userId) {
+    public @ResponseBody Iterable<Curso> getFromUser(@PathVariable("userId") Integer userId) {
 
         User user = userRepository.findById(userId).get();
         return user.getPerfilCandidato().getPerfilLaboral().getCursos();
