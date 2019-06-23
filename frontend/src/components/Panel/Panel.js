@@ -2,14 +2,18 @@ import React from 'react';
 import { 
 	Route
 } from "react-router-dom";
+
+import MasterForm from '../../containers/MasterForm/MasterForm';
 import Tabs from '../Tabs/Tabs';
 import { formPostulante } from '../../formularios/formPostulante';
 import { formPostulanteLaboral } from '../../formularios/formPostulanteLaboral';
 import { formEmpresa } from '../../formularios/formEmpresa';
 import { formCuentaUsuario } from '../../formularios/formCuentaUsuario';
 import { formPreguntas } from '../../formularios/formPreguntas';
-import MasterForm from '../../containers/MasterForm/MasterForm';
-import { USER_TYPE_POSTULANTE, USER_TYPE_EMPRESA } from '../../constants';
+import {
+	USER_TYPE_POSTULANTE,
+	USER_TYPE_EMPRESA
+} from '../../constants';
 
 const Panel = ( props ) => {
 
@@ -52,9 +56,9 @@ const Panel = ( props ) => {
 			);
 			tabs = (
 				<Tabs routes={routes}>
-					<React.Fragment label="Datos personales" to={`${props.match.url}`} icon="fas fa-address-card" />
-					<React.Fragment label="Datos laborales" to={`${props.match.url}/perfil-laboral`} icon="fas fa-briefcase" />
-					<React.Fragment label="Mi cuenta" to={`${props.match.url}/cuenta`} icon="fas fa-user" />
+					<div label="Datos personales" to={`${props.match.url}`} icon="fas fa-address-card"></div>
+					<div label="Datos laborales" to={`${props.match.url}/perfil-laboral`} icon="fas fa-briefcase"></div>
+					<div label="Mi cuenta" to={`${props.match.url}/cuenta`} icon="fas fa-user"></div>
 				</Tabs>
 			);
 			break;
@@ -92,10 +96,10 @@ const Panel = ( props ) => {
 				);
 				tabs = (
 					<Tabs routes={routes}>
-						<React.Fragment label="Datos empresa" to={`${props.match.url}`} icon="fas fa-address-card" />
-						<React.Fragment label="Ofertas laborales" to={`${props.match.url}/ofertas`} icon="fas fa-briefcase" />
-						<React.Fragment label="Recomendaciones" to={`${props.match.url}/recomendaciones`} icon="fas fa-user" />
-						<React.Fragment label="Mi cuenta" to={`${props.match.url}/cuenta`} icon="fas fa-user" />
+						<div label="Datos empresa" to={`${props.match.url}`} icon="fas fa-address-card"></div>
+						<div label="Ofertas laborales" to={`${props.match.url}/ofertas`} icon="fas fa-briefcase"></div>
+						<div label="Recomendaciones" to={`${props.match.url}/recomendaciones`} icon="fas fa-user"></div>
+						<div label="Mi cuenta" to={`${props.match.url}/cuenta`} icon="fas fa-user"></div>
 					</Tabs>
 				);
 				break;

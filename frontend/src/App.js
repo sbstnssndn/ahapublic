@@ -1,21 +1,10 @@
 import React, { Component } from 'react';
-//import Routes from "./Routes";
 import {
 	Route,
 	Switch,
 	withRouter,
 	Redirect
 } from "react-router-dom";
-import './App.css';
-/*
-import formPreguntas from './formularios/formPreguntas';
-import formPostulanteLaboral from './formularios/formPostulanteLaboral';
-import formPostulante from './formularios/formPostulante';
-import formEmpresa from './formularios/formEmpresa';
-import formCuentaUsuario from './formularios/formCuentaUsuario';
-*/
-import { getCurrentUser } from './util/APIUtils';
-import { ACCESS_TOKEN } from './constants';
 import Navigation from './components/Navigation/Navigation';
 import Landing from './components/Landing/Landing';
 import Panel from './components/Panel/Panel';
@@ -23,7 +12,14 @@ import Login from './containers/Login/Login';
 import PrivateRoute from './components/PrivateRoute/PrivateRoute';
 import NotFound from './components/NotFound/NotFound';
 import Footer from './components/Footer/Footer';
-import { USER_TYPE_POSTULANTE, USER_TYPE_EMPRESA } from './constants';
+import {
+	ACCESS_TOKEN, 
+	USER_TYPE_POSTULANTE,
+	USER_TYPE_EMPRESA
+} from './constants';
+import { getCurrentUser } from './util/APIUtils';
+
+import './App.css';
 
 class App extends Component {
 
@@ -71,11 +67,6 @@ class App extends Component {
     this.props.history.push(redirectTo);
   }
 
-  /* 
-   This method is called by the Login component after successful login 
-   so that we can load the logged-in user details and set the currentUser &
-   isAuthenticated state, which other components will use to render their JSX
-  */
   handleLogin = () => {
 		this.loadCurrentUser();
     this.props.history.push("/");
@@ -127,18 +118,6 @@ class App extends Component {
 						render={
 							this.state.currentUser === null ? <Redirect to="/" /> : <Panel currentUser={this.state.currentUser} />} />
 					*/}
-
-
-					{/*
-					<Routes
-						formPostulante={formPostulante}
-						formPostulanteLaboral={formPostulanteLaboral}
-						formEmpresa={formEmpresa}
-						formCuentaUsuario={formCuentaUsuario}
-						formPreguntas={formPreguntas}
-					/>
-					*/}
-					
 					<Route component={NotFound} />
 				</Switch>
 				<Footer />

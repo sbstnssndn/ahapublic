@@ -7,7 +7,6 @@ import LandingText from '../LandingText/LandingText';
 import RegisterForm from '../../containers/RegisterForm/RegisterForm';
 
 import styles from './Landing.module.css';
-import Footer from '../Footer/Footer';
 
 const Landing = ( props ) => {
 	return (
@@ -24,7 +23,6 @@ const Landing = ( props ) => {
 					</Row>
 				</Container>
 			</div>
-			<Footer />
 		</div>
 	)
 }

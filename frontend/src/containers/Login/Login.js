@@ -5,7 +5,6 @@ import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-//import Footer from '../../components/Footer/Footer';
 
 import { login } from '../../util/APIUtils';
 import { ACCESS_TOKEN } from '../../constants';
@@ -27,25 +26,20 @@ class Login extends Component {
 		event.preventDefault();
 
 		const loginRequest = Object.assign({}, this.state);
-		//console.log(loginRequest);
 
 		login(loginRequest)
 			.then(response => {
-				console.log("response en Login.js:");
-				console.log(response);
 				localStorage.setItem(ACCESS_TOKEN, response.accessToken);
 				this.props.onLogin();
 			}).catch(error => {
 				if(error.status === 401) {
-					console.log('Your Username or Password is incorrect. Please try again!');
+					console.log('Usuario o contraseña incorrectos.');
 				} else {
-					console.log('Sorry! Something went wrong. Please try again!');                                         
+					console.log('Algo salió mal, intenta nuevamente.');                                         
 				}
 			});
-
 	}
 	
-
 	handlePageChange = this.handlePageChange.bind(this);
 
   handlePageChange() {
@@ -98,7 +92,6 @@ class Login extends Component {
 			</React.Fragment>
 		);
 	}
-    
 }
 
 export default Login;

@@ -33,7 +33,7 @@ class Tabs extends Component {
 					<Row>
 						<Col md={9} className="">
 
-							{routes}
+							{ routes }
 
 						</Col>
 						<Col md={3}>
