@@ -22,7 +22,8 @@ export default
                                     name: "nombre",
                                     id: "nombre"
                                 },
-                                value: ""
+                                subtext: '',
+                                value: "",
                             }
                         ]
                     },
@@ -38,9 +39,8 @@ export default
                                     name: "rut",
                                     id: "rut"
                                 },
+                                subtext: '',
                                 value: "",
-                                subtext: "",
-                                class: "form-group"
                             }
                         ]
                     },
@@ -56,6 +56,7 @@ export default
                                     name: "telefono1",
                                     id: "telefono1"
                                 },
+                                subtext: '',
                                 value: ""
                             }
                         ]
@@ -72,6 +73,7 @@ export default
                                     name: "telefono2",
                                     id: "telefono2"
                                 },
+                                subtext: '',
                                 value: ""
                             }
                         ]
@@ -88,6 +90,7 @@ export default
                                     name: "correo2",
                                     id: "correo2"
                                 },
+                                subtext: '',
                                 value: ""
                             }
                         ]

@@ -22,7 +22,7 @@ export default
 									id: 'rut'
 								},
 								subtext: '',
-								value: ''
+								value: '',
 							}
 						],
 					},
@@ -38,7 +38,8 @@ export default
 									name: 'firstName',
 									id: 'firstName'
 								},
-								value: ''
+								subtext: '',
+								value: '',
 							}
 						]
 					},
@@ -54,7 +55,8 @@ export default
 									name: 'lastName',
 									id: 'lastName'
 								},
-								value: ''
+								subtext: '',
+								value: '',
 							}
 						]
 					},
@@ -70,7 +72,8 @@ export default
 									name: 'fechaEntrevista',
 									id: 'fechaEntrevista'
 								},
-								value: ''
+								subtext: '',
+								value: '',
 							}
 						]
 					},
@@ -86,7 +89,8 @@ export default
 									name: 'personaQueEntrevista',
 									id: 'personaQueEntrevista'
 								},
-								value: ''
+								subtext: '',
+								value: '',
 							}
 						]
 					}
@@ -112,7 +116,8 @@ export default
 										{ value: 2, displayValue: 'No especifica' }
 									]
 								},
-								value: ''
+								subtext: '',
+								value: '',
 							}
 						]
 					},
@@ -128,7 +133,8 @@ export default
 									name: 'fechaNacimiento',
 									id: 'fechaNacimiento'
 								},
-								value: ''
+								subtext: '',
+								value: '',
 							}
 						]
 					},
@@ -172,7 +178,8 @@ export default
 									name: 'email',
 									id: 'email'
 								},
-								value: ''
+								subtext: '',
+								value: '',
 							}
 						]
 					},
@@ -188,7 +195,8 @@ export default
 									name: 'telefono',
 									id: 'telefono'
 								},
-								value: ''
+								subtext: '',
+								value: '',
 							}
 						]
 					},
@@ -204,7 +212,8 @@ export default
 									name: 'telefono2',
 									id: 'telefono2'
 								},
-								value: ''
+								subtext: '',
+								value: '',
 							}
 						]
 					}
@@ -226,7 +235,8 @@ export default
 									name: 'calle',
 									id: 'calle'
 								},
-								value: ''
+								subtext: '',
+								value: '',
 							}
 						]
 					},
@@ -242,7 +252,8 @@ export default
 									name: 'region',
 									id: 'region'
 								},
-								value: ''
+								subtext: '',
+								value: '',
 							}
 						]
 					},
@@ -258,7 +269,8 @@ export default
 									name: 'comuna',
 									id: 'comuna'
 								},
-								value: ''
+								subtext: '',
+								value: '',
 							}
 						]
 					},

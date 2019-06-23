@@ -18,7 +18,7 @@ const Input = (props) => {
 							onBlur={props.handleValidation}
 							{...props.elementConfig}
 							value={props.value}
-							className="form-control has-error"
+							className="form-control"
 						/>
 						<small class="form-text text-danger">{props.subtext}</small>
 					</div>
@@ -34,6 +34,7 @@ const Input = (props) => {
 							value={props.value}
 							className="form-control"
 						/>
+						<small class="form-text text-danger">{props.subtext}</small>
 					</div>
 				);
 				break;
@@ -109,6 +110,7 @@ const Input = (props) => {
 							value={props.value}
 							className="form-control"
 						/>
+						<small class="form-text text-danger">{props.subtext}</small>
 					</div>
 				);
 		}

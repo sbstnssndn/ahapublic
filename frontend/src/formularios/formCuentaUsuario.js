@@ -21,6 +21,7 @@ export default
                                     name: 'email',
                                     id: 'email'
                                 },
+                                subtext: '',
                                 value: ''
                             }
                         ]
@@ -37,6 +38,7 @@ export default
                                     name: 'password',
                                     id: 'password'
                                 },
+                                subtext: '',
                                 value: ''
                             }
                         ]

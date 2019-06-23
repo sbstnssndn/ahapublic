@@ -136,6 +136,17 @@ class MasterForm extends Component {
 						else
 							this.setState({missing: false})
 						break;
+					case('password'):
+						if (len<6){
+							elementsArray[elem].subtext = 'La contraseña debe ser al menos 6 caracteres'
+							break;
+						}
+						if (len>30){
+							elementsArray[elem].subtext = 'La contraseña no puede superar los 30 caracteres'
+							break;
+						}
+
+						break;
 					default:
 						if (len>255){
 							elementsArray[elem].subtext = 'El valor ingresado supera la cantidad máxima permitida'
