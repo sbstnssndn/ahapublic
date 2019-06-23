@@ -49,7 +49,7 @@ public class TituloController {
     }
 
     // Obtener Titulos
-    @GetMapping(path = "user/{userId}/titulo/")
+    @GetMapping(path = "user/{userId}/titulo")
     //SOLO USUARIOS CANDIDATO O AHA
     //@PreAuthorize("hasRole('ROLE_CANDIDATO') or hasRole('ROLE_AHA')")
     public @ResponseBody Iterable<Titulo> getFromUser(@PathVariable("userId") Integer userId) {

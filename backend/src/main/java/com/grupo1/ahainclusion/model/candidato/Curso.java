@@ -8,7 +8,10 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.grupo1.ahainclusion.model.PerfilLaboral;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 public class Curso {
@@ -20,7 +23,11 @@ public class Curso {
     // Institución: nombre de la institución donde se realizo el curso.
     private String institucion;
     // Fechas: de inicio y termino del curso.
+    @JsonFormat(pattern="dd-MM-yyyy")
+    @DateTimeFormat(pattern="dd-MM-yyyy")
     private Date fechaInicio;
+    @JsonFormat(pattern="dd-MM-yyyy")
+    @DateTimeFormat(pattern="dd-MM-yyyy")
     private Date fechaFin;
     
     // Perfil Laboral padre

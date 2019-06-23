@@ -51,7 +51,7 @@ public class CursoController {
     }
 
     // Obtener Cursos del usuario
-    @GetMapping(value = "user/{userId}/curso/")
+    @GetMapping(value = "user/{userId}/curso")
     //SOLO USUARIOS CANDIDATO O AHA
     //@PreAuthorize("hasRole('ROLE_CANDIDATO') or hasRole('ROLE_AHA')")
     public @ResponseBody Iterable<Curso> getFromUser(@PathVariable("userId") Integer userId) {
