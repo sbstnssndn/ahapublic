@@ -1,14 +1,7 @@
 import React from 'react';
 import { 
-	Route,
-	Link,
-	Switch,
-	withRouter
+	Route
 } from "react-router-dom";
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-import Landing from '../Landing/Landing';
 import Tabs from '../Tabs/Tabs';
 import { formPostulante } from '../../formularios/formPostulante';
 import { formPostulanteLaboral } from '../../formularios/formPostulanteLaboral';
@@ -21,9 +14,7 @@ import { USER_TYPE_POSTULANTE, USER_TYPE_EMPRESA } from '../../constants';
 const Panel = ( props ) => {
 
 	let routes = null;
-
-	console.log("match:")
-	console.log(props.match)
+	let tabs = null;
 
 	switch (props.currentUser.role) {
 		case USER_TYPE_POSTULANTE:
@@ -59,26 +50,33 @@ const Panel = ( props ) => {
 						)} />
 				</>
 			);
+			tabs = (
+				<Tabs routes={routes}>
+					<React.Fragment label="Datos personales" to={`${props.match.url}`} icon="fas fa-address-card" />
+					<React.Fragment label="Datos laborales" to={`${props.match.url}/perfil-laboral`} icon="fas fa-briefcase" />
+					<React.Fragment label="Mi cuenta" to={`${props.match.url}/cuenta`} icon="fas fa-user" />
+				</Tabs>
+			);
 			break;
 		case USER_TYPE_EMPRESA:
 				routes = (
 					<>
 						<Route
-							path={`${props.match.path}/perfil-laboral`}
+							path={`${props.match.path}/ofertas`}
 							exact
 							render={(props) => (
 								<MasterForm
 									formConfig={formPostulanteLaboral} currentUser={props.currentUser} {...props} />
 							)} />
 						<Route
-							path={`${props.match.path}/cuenta`}
+							path={`${props.match.path}/recomendaciones`}
 							exact
 							render={(props) => (
 								<MasterForm
 									formConfig={formCuentaUsuario} currentUser={props.currentUser} {...props} />
 							)} />
 						<Route
-							path={`${props.match.path}/preguntas`}
+							path={`${props.match.path}/accesibilidad`}
 							exact
 							render={(props) => (
 								<MasterForm
@@ -92,32 +90,23 @@ const Panel = ( props ) => {
 							)} />
 					</>
 				);
+				tabs = (
+					<Tabs routes={routes}>
+						<React.Fragment label="Datos empresa" to={`${props.match.url}`} icon="fas fa-address-card" />
+						<React.Fragment label="Ofertas laborales" to={`${props.match.url}/ofertas`} icon="fas fa-briefcase" />
+						<React.Fragment label="Recomendaciones" to={`${props.match.url}/recomendaciones`} icon="fas fa-user" />
+						<React.Fragment label="Mi cuenta" to={`${props.match.url}/cuenta`} icon="fas fa-user" />
+					</Tabs>
+				);
 				break;
 		default:
-			routes = <p>Rutas</p>;
+			routes = <p>Error al cargar contenido.</p>;
 	}
 
 	return (
-		<React.Fragment>
-			<section id="formularios" className="py-4" style={{minHeight: '80vh'}}>
-				<Container>
-					<Row>
-						<Col md={9} className="">
-
-							<Switch>
-								{ routes }
-							</Switch>
-
-						</Col>
-						<Col md={3}>
-
-							<Tabs match={props.match} />
-
-						</Col>
-					</Row>
-				</Container>
-			</section>
-		</React.Fragment>
+		<section id="formularios" className="py-4" style={{minHeight: '80vh'}}>
+			{ tabs }
+		</section>
 	)
 }
 
