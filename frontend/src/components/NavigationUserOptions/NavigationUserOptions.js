@@ -1,7 +1,5 @@
 import React from 'react';
-import Nav from 'react-bootstrap/Nav';
 import Button from 'react-bootstrap/Button';
-import { LinkContainer } from 'react-router-bootstrap'
 import { USER_TYPE_AHA } from '../../constants';
 import LoginButton from '../Navigation/LoginButton';
 

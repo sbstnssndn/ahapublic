@@ -22,6 +22,8 @@ import Panel from './components/Panel/Panel';
 import Login from './containers/Login/Login';
 import PrivateRoute from './components/PrivateRoute/PrivateRoute';
 import NotFound from './components/NotFound/NotFound';
+import Footer from './components/Footer/Footer';
+import { USER_TYPE_POSTULANTE, USER_TYPE_EMPRESA } from './constants';
 
 class App extends Component {
 
@@ -36,21 +38,16 @@ class App extends Component {
     this.setState({
       isLoading: true
 		});
-		console.log("voy a ejecutar getCurrentUser() en App.js");
 		getCurrentUser()
 			.then(response => {
-				console.log("response en getCurrentUser():")
-				console.log(response)
 				this.setState({
 					currentUser: response,
 					isAuthenticated: true,
 					isLoading: false,
 					wasInitialized: true
 				});
-				console.log(this.state)
 			})
 			.catch(error => {
-				console.log(error)
 				this.setState({
 					isLoading: false,
 					wasInitialized: true
@@ -59,9 +56,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-		console.log("Estoy en componentDidMount() App.js")
 		this.loadCurrentUser();
-		console.log(this.state)
   }
 
   // Handle Logout, Set currentUser and isAuthenticated state which will be passed to other components
@@ -74,12 +69,6 @@ class App extends Component {
     });
 
     this.props.history.push(redirectTo);
-    /*
-    notification[notificationType]({
-      message: 'AHA Inclusión',
-      description: description,
-		});
-		*/
   }
 
   /* 
@@ -88,13 +77,23 @@ class App extends Component {
    isAuthenticated state, which other components will use to render their JSX
   */
   handleLogin = () => {
-		console.log("ejecutando handleLogin() en App.js");
 		this.loadCurrentUser();
-		console.log(this.state.currentUser);
     this.props.history.push("/");
 	}
 
 	render () {
+
+		let tipoPanel = "/postulante"
+		if (this.state.currentUser !== null) {
+			if(this.state.currentUser.role === USER_TYPE_POSTULANTE) {
+				tipoPanel = "/postulante";
+			} else if(this.state.currentUser.role === USER_TYPE_EMPRESA) {
+				tipoPanel = "/empresa";
+			} else {
+				tipoPanel = "/aha";
+			}
+		}
+
 		return (
 			<React.Fragment>
 				<Navigation
@@ -113,7 +112,7 @@ class App extends Component {
 						exact
 						path='/'
 						render={
-							(props) => <Landing {...props} />
+							(props) => this.state.isAuthenticated ? <Redirect to={tipoPanel} /> : <Landing {...props} />
 						} />
 					<Route
 						path="/login"
@@ -142,6 +141,7 @@ class App extends Component {
 					
 					<Route component={NotFound} />
 				</Switch>
+				<Footer />
 			</React.Fragment>
 		);
 	}
