@@ -5,11 +5,11 @@ import {
 
 import MasterForm from '../../containers/MasterForm/MasterForm';
 import Tabs from '../Tabs/Tabs';
-import { formPostulante } from '../../formularios/formPostulante';
-import { formPostulanteLaboral } from '../../formularios/formPostulanteLaboral';
-import { formEmpresa } from '../../formularios/formEmpresa';
-import { formCuentaUsuario } from '../../formularios/formCuentaUsuario';
-import { formPreguntas } from '../../formularios/formPreguntas';
+import { formPostulante } from '../../constants/forms/formPostulante';
+import { formPostulanteLaboral } from '../../constants/forms/formPostulanteLaboral';
+import { formEmpresa } from '../../constants/forms/formEmpresa';
+import { formCuentaUsuario } from '../../constants/forms/formCuentaUsuario';
+import { formPreguntas } from '../../constants/forms/formPreguntas';
 import {
 	USER_TYPE_POSTULANTE,
 	USER_TYPE_EMPRESA
