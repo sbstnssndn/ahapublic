@@ -5,10 +5,7 @@ import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
 //import { Link } from 'react-router-dom';
 import { LinkContainer } from 'react-router-bootstrap';
-import 
-
-
-
+import regexMail from '../../constants/regexMail';
 
 class LoginButton extends React.Component {
     constructor(props, context) {
@@ -18,8 +15,6 @@ class LoginButton extends React.Component {
         show: false,
       };
     }
-    
-    const result = regex.test(String(singleField).toLowerCase())
 
     handleBlur = (event) => {
       const id = event.target.id
@@ -27,6 +22,8 @@ class LoginButton extends React.Component {
 
       switch(value){
         case('formBasicEmail'):
+          const result = regexMail.test(String(value).toLowerCase())
+          console.log(result)
           break;
         case('formBasicPassword'):
           break;

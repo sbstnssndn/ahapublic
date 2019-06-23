@@ -8,17 +8,66 @@ import Button from 'react-bootstrap/Button';
 
 import { login } from '../../util/APIUtils';
 import { ACCESS_TOKEN } from '../../constants';
+import { REGEX_MAIL } from '../../constants/regexMail';
 
 class Login extends Component {
 
 	state = {
 		email: '',
-		password: ''
+		password: '',
+		mailAlert: '',
+        passAlert: '',
+        allowed: 'enabled',
 	}
 
 	handleBlur = (event) => {
-		console.log(event)
-	}
+		console.log(event.target)
+      const id = event.target.id
+      const value = event.target.value
+      const regex = REGEX_MAIL;
+
+      switch(id){
+        case('email'):
+          const result = regex.test(String(value).toLowerCase())
+          this.setState({
+          	mailAlert: '',
+          	allowed: 'disabled'
+          })
+
+          if (!result) {
+            this.setState({
+            	mailAlert: 'Correo electrónico incorrecto',
+            	allowed: 'disabled'
+            })
+            break;
+          }
+          break;
+        case('password'):
+          const len = value.length
+          this.setState({
+          	passAlert: '',
+          	allowed: 'disabled'
+          })
+
+          if (len<6){
+            this.setState({
+            	passAlert: 'La contraseña debe ser al menos 6 caracteres',
+            	allowed: 'disabled'
+            })
+            break;
+          }
+
+          if (len>30){
+            this.setState({
+            	passAlert: 'La contraseña no puede superar los 30 caracteres',
+            	allowed: 'disabled'
+            })
+            break;
+          }
+
+          break;
+      }
+    }
 
 	handleChange = (event) => {
 		this.setState({
@@ -73,6 +122,9 @@ class Login extends Component {
 															value={this.state.email}
 															onBlur={this.handleBlur}
 															onChange={this.handleChange} />
+															<Form.Text className="text-danger">
+									                        	{this.state.mailAlert}
+									                      	</Form.Text>
 													</Form.Group>
 													<Form.Group controlId="password">
 														<Form.Label>Contraseña</Form.Label>
@@ -82,6 +134,9 @@ class Login extends Component {
 															value={this.state.password}
 															onBlur={this.handleBlur}
 															onChange={this.handleChange} />
+															<Form.Text className="text-danger">
+									                        	{this.state.passAlert}
+									                      	</Form.Text>
 													</Form.Group>
 													<Button variant="primary" type="submit">
 														Iniciar sesión
