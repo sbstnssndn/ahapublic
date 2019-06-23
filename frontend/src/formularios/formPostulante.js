@@ -21,11 +21,10 @@ export default
 									name: 'rut',
 									id: 'rut'
 								},
+								subtext: '',
 								value: ''
 							}
 						],
-						dirty: false,
-						touched: false,
 					},
 					firstName: {
 						type: 'normal',

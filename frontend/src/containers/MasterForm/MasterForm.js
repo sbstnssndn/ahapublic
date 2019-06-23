@@ -14,7 +14,7 @@ class MasterForm extends Component {
   state = {
 		currentStage: 0,
 		formData: '',
-		touched: false,
+		missing: false,
 	}
 
 	handleValidation = (event, inputIdentifier, element) => {
@@ -47,20 +47,86 @@ class MasterForm extends Component {
 			console.log(elementsArray[elem].elementConfig.id)
 			if(elementsArray[elem].elementConfig.id === element) {
 
-				if (event.target.value != ''){
-					elementsArray[elem].dirty = true
-					this.touched = true
-				}
+				elementsArray[elem].subtext = ''
 
-				elementsArray[elem].touched = true
+				const singleField = event.target.value
+				const len = singleField.length
+
+				switch(element){
+					case('rut'):
+						let temp = ''
+						let rut = singleField
+
+						if (len < 2){
+							elementsArray[elem].subtext = 'Rut incorrecto'
+							break;
+						}
+
+						for (let i=0; i<len; i++){
+							if (rut.charAt(i) != ' '
+								&& rut.charAt(i) != '.'
+								&& rut.charAt(i) != '-')
+									temp = temp + rut.charAt(i)
+						}
+
+						len = temp.length
+						rut = temp
+
+						if (len > 2)
+							rut = temp.substring(0, len)
+						else
+							rut = temp.charAt(0)
+
+						let dv = temp.charAt(len-1)
+
+						if (rut == null || dv == null){
+							elementsArray[elem].subtext = 'Rut incorrecto'
+							break;
+						}
+
+						let dvr = '0'
+						let sum = 0
+						let mul = 2
+
+						for (let i=rut.length; i>=0; i--){
+							sum = sum + rut.charAt(i) * mul
+
+							if (mul == 7)
+								mul = 2
+							else
+								mul++
+						}
+
+						let res = sum % 11
+
+						if (res == 1)
+							dvr = 'k'
+						else if (res == 0)
+							dvr = '0'
+						else {
+							const dvi = 11-res
+							dvr = dvi + ""
+						}
+
+						if (dvr != dv.toLowerCase()) {
+							elementsArray[elem].subtext = 'Rut incorrecto'
+							break;
+						}
+						break;
+
+					case('email'):
+						break;
+					default:
+						if (len>255){
+							elementsArray[elem].subtext = 'El valor ingresado supera la cantidad máxima permitida'
+						}
+				}
+				}
 
 				updatedForm.stages[this.state.currentStage].fields[inputIdentifier].elements[elem] = elementsArray[elem];
 			}		
-			
-		}
-		this.setState({
-      form: updatedForm
-    });
+
+			this.setState({form: updatedForm});		
 	}
 
 	// handleChange(event, firstName)

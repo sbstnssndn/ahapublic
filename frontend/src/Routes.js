@@ -2,7 +2,6 @@ import React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Landing from './pages/Landing/Landing';
 import Recomendaciones from './containers/Recomendaciones/Recomendaciones';
-import Login from './containers/Login/Login';
 import Postulante from "./pages/Postulante/Postulante";
 import Empresa from "./pages/Empresa/Empresa";
 import MasterForm from './containers/MasterForm/MasterForm';
@@ -141,8 +140,6 @@ const Routes = (props) => {
 					<MasterForm stages={props.stagesEmpresa} tipoFormulario="empresa" titulo={"Ingresar oferta"} />
 				)}/>
 				*/}
-
-				<Route path="/login" exact component={Login} />				
 
 				<Route path="/logout" exact component={Landing} />
 
