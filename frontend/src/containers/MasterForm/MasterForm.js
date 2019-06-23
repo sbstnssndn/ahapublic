@@ -47,12 +47,11 @@ class MasterForm extends Component {
 			console.log(elementsArray[elem].elementConfig.id)
 			if(elementsArray[elem].elementConfig.id === element) {
 
-				//elementsArray[elem].subtext = ''
+				elementsArray[elem].subtext = ''
+				this.missing = false
 
 				const singleField = event.target.value
 				let len = singleField.length
-				//console.log('rut: '+singleField + ' largo:'+len)
-
 
 				switch(element){
 					case('rut'):
@@ -64,7 +63,6 @@ class MasterForm extends Component {
 							this.missing = true
 							break;
 						}
-						console.log('len mayor a 2')
 
 						for (let i=0; i<len; i++){
 							if (rut.charAt(i) != ' '
@@ -78,22 +76,21 @@ class MasterForm extends Component {
 						rut = temp
 
 						if (len > 2)
-							rut = temp.substring(0, len)
+							rut = temp.substring(0, len-1)
 						else
 							rut = temp.charAt(0)
 
-						let dv = temp.charAt(len-1)
+						let verificador = temp.charAt(len-1)
 
-						if (rut == null || dv == null){
+						if (rut == null || verificador == null){
 							elementsArray[elem].subtext = 'Rut incorrecto'
 							break;
 						}
 
-						let dvr = '0'
 						let sum = 0
 						let mul = 2
 
-						for (let i=rut.length; i>=0; i--){
+						for (let i=rut.length-1; i>=0; i--){
 							sum = sum + rut.charAt(i) * mul
 
 							if (mul == 7)
@@ -102,7 +99,8 @@ class MasterForm extends Component {
 								mul++
 						}
 
-						let res = sum % 11
+						const res = sum % 11
+						let dvr = '0'
 
 						if (res == 1)
 							dvr = 'k'
@@ -113,10 +111,10 @@ class MasterForm extends Component {
 							dvr = dvi + ''
 						}
 
-						//if (dvr != dv.toLowerCase()) {
-						//	elementsArray[elem].subtext = 'Rut incorrecto'
-						//	break;
-						//}
+						if (dvr != verificador.toLowerCase()) {
+							elementsArray[elem].subtext = 'Rut incorrecto'
+							break;
+						}
 						console.log('Rut correcto')
 						break;
 

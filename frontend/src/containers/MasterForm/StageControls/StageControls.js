@@ -40,7 +40,8 @@ const StageControls = (props) => {
 			<Button variant="primary" onClick={props._next}>
 				Siguiente
 			</Button>
-			);}
+			);
+		}
 	}
 
 	// TODO: implementar touched, togglear si el usuario ingresa algo a algún campo
