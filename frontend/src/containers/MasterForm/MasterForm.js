@@ -48,7 +48,7 @@ class MasterForm extends Component {
 			if(elementsArray[elem].elementConfig.id === element) {
 
 				elementsArray[elem].subtext = ''
-				this.missing = false
+				this.setState({missing: false})
 
 				const singleField = event.target.value
 				let len = singleField.length
@@ -60,7 +60,7 @@ class MasterForm extends Component {
 
 						if (len < 2){
 							elementsArray[elem].subtext = 'Rut incorrecto'
-							this.missing = true
+							this.setState({missing: true})
 							break;
 						}
 
@@ -84,6 +84,7 @@ class MasterForm extends Component {
 
 						if (rut == null || verificador == null){
 							elementsArray[elem].subtext = 'Rut incorrecto'
+							this.setState({missing: true})
 							break;
 						}
 
@@ -113,6 +114,7 @@ class MasterForm extends Component {
 
 						if (dvr != verificador.toLowerCase()) {
 							elementsArray[elem].subtext = 'Rut incorrecto'
+							this.setState({missing: true})
 							break;
 						}
 						console.log('Rut correcto')
