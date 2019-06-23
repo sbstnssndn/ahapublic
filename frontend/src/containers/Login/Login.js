@@ -16,6 +16,10 @@ class Login extends Component {
 		password: ''
 	}
 
+	handleBlur = (event) => {
+		console.log(event)
+	}
+
 	handleChange = (event) => {
 		this.setState({
 			[event.target.id]: event.target.value
@@ -67,6 +71,7 @@ class Login extends Component {
 															type="email"
 															placeholder="nombre@mail.cl"
 															value={this.state.email}
+															onBlur={this.handleBlur}
 															onChange={this.handleChange} />
 													</Form.Group>
 													<Form.Group controlId="password">
@@ -75,6 +80,7 @@ class Login extends Component {
 															type="password"
 															placeholder="Ingrese su contraseña..."
 															value={this.state.password}
+															onBlur={this.handleBlur}
 															onChange={this.handleChange} />
 													</Form.Group>
 													<Button variant="primary" type="submit">

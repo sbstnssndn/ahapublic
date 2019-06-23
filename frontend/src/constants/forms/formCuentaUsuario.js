@@ -21,6 +21,7 @@ export const formCuentaUsuario =
                                     name: 'email',
                                     id: 'email'
                                 },
+                                subtext: '',
                                 value: ''
                             }
                         ]
@@ -37,6 +38,7 @@ export const formCuentaUsuario =
                                     name: 'password',
                                     id: 'password'
                                 },
+                                subtext: '',
                                 value: ''
                             }
                         ]

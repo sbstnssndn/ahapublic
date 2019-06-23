@@ -5,6 +5,7 @@ import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
 //import { Link } from 'react-router-dom';
 import { LinkContainer } from 'react-router-bootstrap';
+import 
 
 
 
@@ -13,19 +14,30 @@ class LoginButton extends React.Component {
     constructor(props, context) {
       super(props, context);
   
-      this.handleShow = this.handleShow.bind(this);
-      this.handleClose = this.handleClose.bind(this);
-  
       this.state = {
         show: false,
       };
     }
+    
+    const result = regex.test(String(singleField).toLowerCase())
+
+    handleBlur = (event) => {
+      const id = event.target.id
+      const value = event.target.value
+
+      switch(value){
+        case('formBasicEmail'):
+          break;
+        case('formBasicPassword'):
+          break;
+      }
+    }
   
-    handleClose() {
+    handleClose = () => {
       this.setState({ show: false });
     }
   
-    handleShow() {
+    handleShow = () => {
       this.setState({ show: true });
     }
   
@@ -42,7 +54,7 @@ class LoginButton extends React.Component {
             </Modal.Header>
             <Modal.Body>
 							<Form>
-								<Form.Group controlId="formBasicEmail">
+								<Form.Group controlId="formBasicEmail" onBlur={this.handleBlur}>
 									<Form.Control type="email" placeholder="Correo" />
 									<Form.Text className="text-muted">
 										Nunca compartiremos tu correo con nadie.

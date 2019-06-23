@@ -26,6 +26,7 @@ export const formPreguntas =
 										{ value: '3', displayValue: 'La mayor parte del tiempo' }
 									]
 								},
+								subtext: '',
 								value: ''
 							}
 						]
@@ -47,6 +48,7 @@ export const formPreguntas =
 										{ value: '3', displayValue: 'La mayor parte del tiempo' }
 									]
 								},
+								subtext: '',
 								value: ''
 							}
 						]
@@ -68,6 +70,7 @@ export const formPreguntas =
 										{ value: '3', displayValue: 'La mayor parte del tiempo' }
 									]
 								},
+								subtext: '',
 								value: ''
 							}
 						]
@@ -89,6 +92,7 @@ export const formPreguntas =
 										{ value: '3', displayValue: 'La mayor parte del tiempo' }
 									]
 								},
+								subtext: '',
 								value: ''
 							}
 						]
@@ -116,6 +120,7 @@ export const formPreguntas =
 										{ value: '3', displayValue: 'La mayor parte del tiempo' }
 									]
 								},
+								subtext: '',
 								value: ''
 							}
 						]
@@ -137,6 +142,7 @@ export const formPreguntas =
 										{ value: '3', displayValue: 'La mayor parte del tiempo' }
 									]
 								},
+								subtext: '',
 								value: ''
 							}
 						]
@@ -158,6 +164,7 @@ export const formPreguntas =
 										{ value: '3', displayValue: 'La mayor parte del tiempo' }
 									]
 								},
+								subtext: '',
 								value: ''
 							}
 						]
@@ -179,6 +186,7 @@ export const formPreguntas =
 										{ value: '3', displayValue: 'La mayor parte del tiempo' }
 									]
 								},
+								subtext: '',
 								value: ''
 							}
 						]
@@ -206,6 +214,7 @@ export const formPreguntas =
 										{ value: '3', displayValue: 'La mayor parte del tiempo' }
 									]
 								},
+								subtext: '',
 								value: ''
 							}
 						]
@@ -227,6 +236,7 @@ export const formPreguntas =
 										{ value: '3', displayValue: 'La mayor parte del tiempo' }
 									]
 								},
+								subtext: '',
 								value: ''
 							}
 						]
@@ -248,6 +258,7 @@ export const formPreguntas =
 										{ value: '3', displayValue: 'La mayor parte del tiempo' }
 									]
 								},
+								subtext: '',
 								value: ''
 							}
 						]
@@ -269,6 +280,7 @@ export const formPreguntas =
 										{ value: '3', displayValue: 'La mayor parte del tiempo' }
 									]
 								},
+								subtext: '',
 								value: ''
 							}
 						]
@@ -296,6 +308,7 @@ export const formPreguntas =
 										{ value: '3', displayValue: 'La mayor parte del tiempo' }
 									]
 								},
+								subtext: '',
 								value: ''
 							}
 						]
@@ -317,6 +330,7 @@ export const formPreguntas =
 										{ value: '3', displayValue: 'La mayor parte del tiempo' }
 									]
 								},
+								subtext: '',
 								value: ''
 							}
 						]
@@ -338,6 +352,7 @@ export const formPreguntas =
 										{ value: '3', displayValue: 'La mayor parte del tiempo' }
 									]
 								},
+								subtext: '',
 								value: ''
 							}
 						]
