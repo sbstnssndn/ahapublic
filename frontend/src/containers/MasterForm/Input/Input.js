@@ -11,14 +11,14 @@ const Input = (props) => {
 		switch ( props.elementType ) {
 			case ('input'):
 				inputElement = (
-					<div className="form-group">
+					<div className="form-group has-error">
 						<label>{props.label}</label>
 						<input 
 							onChange={props.handleChange}
 							onBlur={props.handleValidation}
 							{...props.elementConfig}
 							value={props.value}
-							className="form-control"
+							className="form-control has-error"
 						/>
 						<small class="form-text text-danger">{props.subtext}</small>
 					</div>

@@ -48,7 +48,6 @@ class MasterForm extends Component {
 			if(elementsArray[elem].elementConfig.id === element) {
 
 				elementsArray[elem].subtext = ''
-				elementsArray[elem].class = 'form-control'
 				this.setState({missing: false})
 
 				const singleField = event.target.value
@@ -59,17 +58,19 @@ class MasterForm extends Component {
 						let temp = ''
 						let rut = singleField
 
+						if (singleField === '')
+							break;
+
 						if (len < 2){
 							elementsArray[elem].subtext = 'Rut incorrecto'
-							elementsArray[elem].class = 'form-control has-error'
 							this.setState({missing: true})
 							break;
 						}
 
 						for (let i=0; i<len; i++){
-							if (rut.charAt(i) != ' '
-								&& rut.charAt(i) != '.'
-								&& rut.charAt(i) != '-'){
+							if (rut.charAt(i) !== ' '
+								&& rut.charAt(i) !== '.'
+								&& rut.charAt(i) !== '-'){
 									temp = temp + rut.charAt(i)
 								}
 						}
@@ -86,7 +87,6 @@ class MasterForm extends Component {
 
 						if (rut == null || verificador == null){
 							elementsArray[elem].subtext = 'Rut incorrecto'
-							elementsArray[elem].class = 'form-control has-error'
 							this.setState({missing: true})
 							break;
 						}
@@ -97,7 +97,7 @@ class MasterForm extends Component {
 						for (let i=rut.length-1; i>=0; i--){
 							sum = sum + rut.charAt(i) * mul
 
-							if (mul == 7)
+							if (mul === 7)
 								mul = 2
 							else
 								mul++
@@ -106,18 +106,17 @@ class MasterForm extends Component {
 						const res = sum % 11
 						let dvr = '0'
 
-						if (res == 1)
+						if (res === 1)
 							dvr = 'k'
-						else if (res == 0)
+						else if (res === 0)
 							dvr = '0'
 						else {
 							const dvi = 11-res
 							dvr = dvi + ''
 						}
 
-						if (dvr != verificador.toLowerCase()) {
+						if (dvr !== verificador.toLowerCase()) {
 							elementsArray[elem].subtext = 'Rut incorrecto'
-							elementsArray[elem].class = 'form-control has-error'
 							this.setState({missing: true})
 
 							break;
@@ -128,8 +127,6 @@ class MasterForm extends Component {
 					case('email'):
 						const regex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 						const result = regex.test(String(singleField).toLowerCase())
-
-						console.log(result)
 
 						if (!result){
 							elementsArray[elem].subtext = 'Email incorrecto'

@@ -34,7 +34,6 @@ const Stage = (props) => {
 						subtext={element.subtext}
 						handleValidation={(event) => props.handleValidation(event, field.id, element.elementConfig.id)}
 						handleChange={(event) => props.handleChange(event, field.id, element.elementConfig.id, element.elementType)}
-						//className={element.class}
 					/>
 				))
 			} else if (field.type === 'multi') {
@@ -46,7 +45,6 @@ const Stage = (props) => {
 						subtext={field.subtext}
 						handleChange={props.handleChange}
 						addExperiencia={props.addExperiencia}
-						//className={field.class}
 					/>
 			} else if (field.type === 'cursos') {
 				return <CursosForm
@@ -58,7 +56,6 @@ const Stage = (props) => {
 						handleValidation={props.handleValidation}
 						handleChange={props.handleChange}
 						addCurso={props.addCurso}
-						//className={field.class}
 					/>
 			} else {
 				return null;

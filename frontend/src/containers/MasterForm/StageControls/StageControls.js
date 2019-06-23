@@ -28,7 +28,7 @@ const StageControls = (props) => {
 	let nextButton = null;
 	if (currentStage < lastStage) {
 
-		if (missing == true){
+		if (missing === true){
 			nextButton = (
 			<Button variant="primary" disabled>
 				Siguiente
