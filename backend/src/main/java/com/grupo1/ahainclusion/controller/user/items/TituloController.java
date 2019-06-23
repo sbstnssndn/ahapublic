@@ -1,14 +1,20 @@
 package com.grupo1.ahainclusion.controller.user.items;
 
+import java.util.Optional;
+
 import com.grupo1.ahainclusion.auth.CurrentUser;
 import com.grupo1.ahainclusion.auth.UserPrincipal;
+import com.grupo1.ahainclusion.aux.payload.ApiResponse;
 import com.grupo1.ahainclusion.model.User;
 import com.grupo1.ahainclusion.model.candidato.Titulo;
 import com.grupo1.ahainclusion.repository.TituloRepository;
 import com.grupo1.ahainclusion.repository.UserRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -56,6 +62,20 @@ public class TituloController {
     @GetMapping(value = "titulo/{id}")
     public @ResponseBody Titulo get(@PathVariable("id") Integer id) {
         return tituloRepository.findById(id).get();
+    }
+
+    //Eliminar un curso por id
+    @DeleteMapping(value = "titulo/{id}")
+    public @ResponseBody ResponseEntity<Object> delete(@PathVariable("id") Integer id) {
+        
+        Optional<Titulo> tituloOptional = tituloRepository.findById(id);
+
+        if (!tituloOptional.isPresent())
+        return new ResponseEntity(new ApiResponse(false, "Título no encontrado"), HttpStatus.NOT_FOUND);
+
+        tituloRepository.deleteById(id);
+
+        return new ResponseEntity(new ApiResponse(true, "Título Eliminado"), HttpStatus.OK);
     }
 
 
