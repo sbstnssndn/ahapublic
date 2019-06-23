@@ -1,7 +1,10 @@
 package com.grupo1.ahainclusion.controller.user.perfiles;
 
+import java.util.Optional;
+
 import com.grupo1.ahainclusion.auth.CurrentUser;
 import com.grupo1.ahainclusion.auth.UserPrincipal;
+import com.grupo1.ahainclusion.aux.payload.ApiResponse;
 import com.grupo1.ahainclusion.model.PerfilCandidato;
 import com.grupo1.ahainclusion.model.PerfilLaboral;
 import com.grupo1.ahainclusion.model.User;
@@ -9,6 +12,8 @@ import com.grupo1.ahainclusion.repository.PerfilLaboralRepository;
 import com.grupo1.ahainclusion.repository.UserRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -60,10 +65,16 @@ public class PerfilLaboralController {
     @PutMapping(path = "/{userId}/perfilLaboral")
     //SOLO USUARIOS CANDIDATO O AHA
     //@PreAuthorize("hasRole('ROLE_CANDIDATO') or hasRole('ROLE_AHA')")
-    public @ResponseBody String updatePerfilLaboral(@PathVariable("userId") Integer userId, @RequestBody PerfilLaboral pLaboralNew) {
+    public @ResponseBody ResponseEntity<Object> updatePerfilLaboral(@PathVariable("userId") Integer userId, @RequestBody PerfilLaboral pLaboralNew) {
 
-        User user = userRepository.findById(userId).get();
-        PerfilLaboral pLaboral = user.getPerfilCandidato().getPerfilLaboral();
+        
+        Optional<PerfilLaboral> pLaboralOptional = perfilLaboralRepository.findById(userId);
+
+        if (!pLaboralOptional.isPresent())
+        return new ResponseEntity(new ApiResponse(false, "Perfil Laboral no encontrado"), HttpStatus.NOT_FOUND);
+
+        PerfilLaboral pLaboral = pLaboralOptional.get();
+
         pLaboral.setActividadesAuditiva(pLaboralNew.getActividadesAuditiva());
         pLaboral.setActividadesVisual(pLaboralNew.getActividadesAuditiva());
         pLaboral.setAdecuaciones(pLaboralNew.getAdecuaciones());
@@ -71,12 +82,13 @@ public class PerfilLaboralController {
         pLaboral.setBañoAdaptado(pLaboralNew.isBañoAdaptado());
         pLaboral.setComunicacionOral(pLaboralNew.getComunicacionOral());
         pLaboral.setCredencial(pLaboralNew.isCredencial());
-        pLaboral.setCursos(pLaboralNew.getCursos());
+        // pLaboral.setCursos(pLaboralNew.getCursos());
         pLaboral.setDesplazoTrayectos(pLaboralNew.getDesplazoTrayectos());
         pLaboral.setDiferentesAlturas(pLaboralNew.getDiferentesAlturas());
         pLaboral.setDiferentesPisos(pLaboralNew.getDiferentesPisos());
         pLaboral.setDisponibilidad(pLaboralNew.getDisponibilidad());
         pLaboral.setExpectativaSueldo(pLaboralNew.getExpectativaSueldo());
+        // pLaboral.setExperiencias(pLaboralNew.getExperiencias());
         pLaboral.setLeerEscribir(pLaboralNew.getLeerEscribir());
         pLaboral.setLicencia(pLaboralNew.getLicencia());
         pLaboral.setName(pLaboralNew.getName());
@@ -84,7 +96,8 @@ public class PerfilLaboralController {
         pLaboral.setObjetosPequeños(pLaboralNew.getObjetosPequeños());
 
         perfilLaboralRepository.save(pLaboral);
-        return "Perfil Laboral Actualizado";
+
+        return new ResponseEntity(new ApiResponse(true, "Perfil Laboral Actualizado"), HttpStatus.OK);
     }
 
 
