@@ -105,6 +105,14 @@ public class Oferta {
         return description;
     }
 
+    public Collection<ExperienciaExigida> getExperiencias() {
+        return experiencias;
+    }
+
+    public void setExperiencias(Collection<ExperienciaExigida> experiencias) {
+        this.experiencias = experiencias;
+    }
+
     public Integer getNivelEducacional() {
         return nivelEducacional;
     }
