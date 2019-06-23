@@ -20,7 +20,7 @@ const Input = (props) => {
 							value={props.value}
 							className="form-control"
 						/>
-						<sup className="text-danger">{props.subtext}</sup>
+						<small class="form-text text-danger">{props.subtext}</small>
 					</div>
 				);
 				break;

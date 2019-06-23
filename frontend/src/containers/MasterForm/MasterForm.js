@@ -48,6 +48,7 @@ class MasterForm extends Component {
 			if(elementsArray[elem].elementConfig.id === element) {
 
 				elementsArray[elem].subtext = ''
+				elementsArray[elem].class = 'form-control'
 				this.setState({missing: false})
 
 				const singleField = event.target.value
@@ -60,6 +61,7 @@ class MasterForm extends Component {
 
 						if (len < 2){
 							elementsArray[elem].subtext = 'Rut incorrecto'
+							elementsArray[elem].class = 'form-control has-error'
 							this.setState({missing: true})
 							break;
 						}
@@ -84,6 +86,7 @@ class MasterForm extends Component {
 
 						if (rut == null || verificador == null){
 							elementsArray[elem].subtext = 'Rut incorrecto'
+							elementsArray[elem].class = 'form-control has-error'
 							this.setState({missing: true})
 							break;
 						}
@@ -114,7 +117,9 @@ class MasterForm extends Component {
 
 						if (dvr != verificador.toLowerCase()) {
 							elementsArray[elem].subtext = 'Rut incorrecto'
+							elementsArray[elem].class = 'form-control has-error'
 							this.setState({missing: true})
+
 							break;
 						}
 						console.log('Rut correcto')
@@ -124,7 +129,9 @@ class MasterForm extends Component {
 						const regex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 						const result = regex.test(String(singleField).toLowerCase())
 
-						if (result){
+						console.log(result)
+
+						if (!result){
 							elementsArray[elem].subtext = 'Email incorrecto'
 							this.setState({missing: true})
 							break;

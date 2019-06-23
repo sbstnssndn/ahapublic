@@ -38,8 +38,9 @@ export default
                                     name: "rut",
                                     id: "rut"
                                 },
-                                subtext: "Rut bonito",
-                                value: ""
+                                value: "",
+                                subtext: "",
+                                class: "form-group"
                             }
                         ]
                     },
