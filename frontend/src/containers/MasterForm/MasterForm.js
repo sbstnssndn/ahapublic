@@ -5,326 +5,242 @@ import Stepper from './Stepper/Stepper';
 import StageControls from './StageControls/StageControls';
 import Card from 'react-bootstrap/Card';
 import { 
-	REGEX_MAIL,
-	REGEX_PHONE
- } from '../../constants/regex';
+  emailIsValid,
+  passwordLengthIsValid,
+  rutIsValid,
+  phoneIsValid,
+  genericIsValid,
+   } from '../../util/ValidationUtils';
 
 
 class MasterForm extends Component {
   
   state = {
-		currentStage: 0,
-		formData: '',
-		missing: false,
-	}
+    currentStage: 0,
+    formData: '',
+    missing: false,
+  }
 
-	handleValidation = (event, inputIdentifier, element) => {
-	 	const updatedForm = {
-			...this.props.formConfig
-		}
-		const updatedStages = {
-			...updatedForm.stages
-		}
-		const updatedCurrentStage = {
-			...updatedStages[this.state.currentStage]
-		}
-		const updatedStageFields = {
-			...updatedCurrentStage.fields
-		}
-		// updatedFieldElements es un objeto con keys numéricas para cada elemento del grupoFormulario
-		const updatedFieldElements = {
-			...updatedStageFields[inputIdentifier].elements
-		}
+  handleValidation = (event, inputIdentifier, element) => {
+    const updatedForm = {
+      ...this.props.formConfig
+    }
+    const updatedStages = {
+      ...updatedForm.stages
+    }
+    const updatedCurrentStage = {
+      ...updatedStages[this.state.currentStage]
+    }
+    const updatedStageFields = {
+      ...updatedCurrentStage.fields
+    }
+    // updatedFieldElements es un objeto con keys numéricas para cada elemento del grupoFormulario
+    const updatedFieldElements = {
+      ...updatedStageFields[inputIdentifier].elements
+    }
 
-		// clonar el array elements
-		const elementsArray = [];
-		for (let elem in updatedFieldElements) {
-			elementsArray.push({
-				...updatedFieldElements[elem]
-			})
-		}
+    // clonar el array elements
+    const elementsArray = [];
+    for (let elem in updatedFieldElements) {
+      elementsArray.push({
+        ...updatedFieldElements[elem]
+      })
+    }
 
-		for (let elem in elementsArray) {
-			console.log(elementsArray[elem].elementConfig.id)
-			if(elementsArray[elem].elementConfig.id === element) {
+    for (let elem in elementsArray) {
+      console.log(elementsArray[elem].elementConfig.id)
+      if(elementsArray[elem].elementConfig.id === element) {
 
-				elementsArray[elem].subtext = ''
-				this.setState({missing: false})
+        elementsArray[elem].subtext = ''
+        this.setState({missing: false})
 
-				const singleField = event.target.value
-				let len = singleField.length
+        const singleField = event.target.value
+        let len = singleField.length
 
-				switch(element){
-					case('rut'):
-						let temp = ''
-						let rut = singleField
-						this.setState({missing: false})
+        switch(element){
+          case('rut'):
+            if (singleField === '' || rutIsValid(singleField)) {
+              elementsArray[elem].subtext = ''
+              this.setState({missing: false})
+            }
+            else {
+              elementsArray[elem].subtext = 'Rut incorrecto'
+              this.setState({missing: true})
+            }
+            break;
 
-						if (singleField === '')
-							break;
+          case('email'):
+            if (singleField === '' || emailIsValid(singleField)) {
+              elementsArray[elem].subtext = ''
+              this.setState({missing: false})
+            }
+            else {
+              elementsArray[elem].subtext = 'Correo electrónico incorrecto'
+              this.setState({missing: true})
+            }
+            break;
 
-						if (len < 2){
-							elementsArray[elem].subtext = 'Rut incorrecto'
-							this.setState({missing: true})
-							break;
-						}
+          case('telefono'):
+            if (singleField === '' || phoneIsValid(singleField)) {
+              elementsArray[elem].subtext = ''
+              this.setState({missing: false})
+            }
+            else {
+              elementsArray[elem].subtext = 'El teléfono es incorrecto'
+              this.setState({missing: true})
+            }
+            break;
 
-						for (let i=0; i<len; i++){
-							if (rut.charAt(i) !== ' '
-								&& rut.charAt(i) !== '.'
-								&& rut.charAt(i) !== '-'){
-									temp = temp + rut.charAt(i)
-								}
-						}
+          case('password'):
+            if (singleField === '' || passwordLengthIsValid(singleField)) {
+              elementsArray[elem].subtext = ''
+              this.setState({missing: false})
+            }
+            else {
+              elementsArray[elem].subtext = 'La contraseña debe ser entre 6 y 30 caracteres'
+              this.setState({missing: true})
+            }
+            break;
 
-						len = temp.length
-						rut = temp
+          default:
+            if (singleField === '' || genericIsValid(singleField)) {
+              elementsArray[elem].subtext = ''
+              this.setState({missing: false})
+            }
+            else {
+              elementsArray[elem].subtext = 'El valor ingresado supera la cantidad máxima permitida'
+              this.setState({missing: true})
+            }
+        }
+        }
 
-						if (len > 2)
-							rut = temp.substring(0, len-1)
-						else
-							rut = temp.charAt(0)
+        updatedForm.stages[this.state.currentStage].fields[inputIdentifier].elements[elem] = elementsArray[elem];
+      }   
 
-						let verificador = temp.charAt(len-1)
+      this.setState({form: updatedForm});   
+  }
 
-						if (rut == null || verificador == null){
-							elementsArray[elem].subtext = 'Rut incorrecto'
-							this.setState({missing: true})
-							break;
-						}
-
-						let sum = 0
-						let mul = 2
-
-						for (let i=rut.length-1; i>=0; i--){
-							sum = sum + rut.charAt(i) * mul
-
-							if (mul === 7)
-								mul = 2
-							else
-								mul++
-						}
-
-						const res = sum % 11
-						let dvr = '0'
-
-						if (res === 1)
-							dvr = 'k'
-						else if (res === 0)
-							dvr = '0'
-						else {
-							const dvi = 11-res
-							dvr = dvi + ''
-						}
-
-						if (dvr !== verificador.toLowerCase()) {
-							elementsArray[elem].subtext = 'Rut incorrecto'
-							this.setState({missing: true})
-
-							break;
-						}
-						console.log('Rut correcto')
-						break;
-
-					case('email'):
-						const regex = REGEX_MAIL
-						const result = regex.test(String(singleField).toLowerCase())
-
-						this.setState({missing: false})
-
-						if (!result){
-							elementsArray[elem].subtext = 'Email incorrecto'
-							this.setState({missing: true})
-							break;
-						}
-							
-						break;
-					case('telefono'):
-						if (singleField === '')
-							break;
-
-						if (len !== 9 && len !== 12) {
-							elementsArray[elem].subtext = 'El teléfono es incorrecto'
-							this.setState({missing: true})
-							break;
-						}
-
-						if (len === 9) {
-							const regex = REGEX_PHONE
-							const result = regex.test(String(singleField).toLowerCase())
-
-							if (!result) {
-								elementsArray[elem].subtext = 'El teléfono solo debe contener números'
-								this.setState({missing: true})
-								break;
-							}
-						}
-
-						if (len === 12) {
-							const mas = singleField.charAt(0)
-
-							if (mas !== '+') {
-								elementsArray[elem].subtext = 'El teléfono es incorrecto'
-								this.setState({missing: true})
-								break;
-							}
-
-							const num = singleField.substring(1, len-1)
-							const regex = REGEX_PHONE
-							const result = regex.test(String(num).toLowerCase())
-
-							if (!result) {
-								elementsArray[elem].subtext = 'El teléfono solo debe contener números'
-								this.setState({missing: true})
-								break;
-							}
-						}
-						break;
-					case('password'):
-						if (len<6){
-							elementsArray[elem].subtext = 'La contraseña debe ser al menos 6 caracteres'
-							break;
-						}
-						if (len>30){
-							elementsArray[elem].subtext = 'La contraseña no puede superar los 30 caracteres'
-							break;
-						}
-
-						break;
-					default:
-						if (len>255){
-							elementsArray[elem].subtext = 'El valor ingresado supera la cantidad máxima permitida'
-						}
-				}
-				}
-
-				updatedForm.stages[this.state.currentStage].fields[inputIdentifier].elements[elem] = elementsArray[elem];
-			}		
-
-			this.setState({form: updatedForm});		
-	}
-
-	// handleChange(event, firstName)
+  // handleChange(event, firstName)
   handleChange = (event, inputIdentifier, element, elementIndentifier) => {
-	 	const updatedForm = {
-			...this.props.formConfig
-		}
-		const updatedStages = {
-			...updatedForm.stages
-		}
-		const updatedCurrentStage = {
-			...updatedStages[this.state.currentStage]
-		}
-		const updatedStageFields = {
-			...updatedCurrentStage.fields
-		}
-		// updatedFieldElements es un objeto con keys numéricas para cada elemento del grupoFormulario
-		const updatedFieldElements = {
-			...updatedStageFields[inputIdentifier].elements
-		}
+    const updatedForm = {
+      ...this.props.formConfig
+    }
+    const updatedStages = {
+      ...updatedForm.stages
+    }
+    const updatedCurrentStage = {
+      ...updatedStages[this.state.currentStage]
+    }
+    const updatedStageFields = {
+      ...updatedCurrentStage.fields
+    }
+    // updatedFieldElements es un objeto con keys numéricas para cada elemento del grupoFormulario
+    const updatedFieldElements = {
+      ...updatedStageFields[inputIdentifier].elements
+    }
 
-		// clonar el array elements
-		const elementsArray = [];
-		for (let elem in updatedFieldElements) {
-			elementsArray.push({
-				...updatedFieldElements[elem]
-			})
-		}
+    // clonar el array elements
+    const elementsArray = [];
+    for (let elem in updatedFieldElements) {
+      elementsArray.push({
+        ...updatedFieldElements[elem]
+      })
+    }
 
-		for (let elem in elementsArray) {
-			console.log(elementsArray[elem].elementConfig.id)
-			if(elementsArray[elem].elementConfig.id === element) {
-				if (elementIndentifier === 'date'){
-					elementsArray[elem].value = event
-				}
-				else {
-					elementsArray[elem].value = event.target.value;
-				}
-				updatedForm.stages[this.state.currentStage].fields[inputIdentifier].elements[elem] = elementsArray[elem];
-			}		
-			
-		}
-		this.setState({
+    for (let elem in elementsArray) {
+      console.log(elementsArray[elem].elementConfig.id)
+      if(elementsArray[elem].elementConfig.id === element) {
+        if (elementIndentifier === 'date'){
+          elementsArray[elem].value = event
+        }
+        else {
+          elementsArray[elem].value = event.target.value;
+        }
+        updatedForm.stages[this.state.currentStage].fields[inputIdentifier].elements[elem] = elementsArray[elem];
+      }   
+      
+    }
+    this.setState({
       form: updatedForm
     });
 
-		// para cada elemento del form group, capturar su value y modificarlo
+    // para cada elemento del form group, capturar su value y modificarlo
 
-		
-		/* objeto clonado para no mutar el estado al cambiar "value"
-		updatedFormElement = {
-			"elementType": "input",
-			"elementConfig": {
-				"type": "text",
-				"placeholder": "Juan Alberto"
-			},
-			"value": "",
-			"rules": {
-				"required": true
-			},
-			"valid": false
-			}
-		*/
+    
+    /* objeto clonado para no mutar el estado al cambiar "value"
+    updatedFormElement = {
+      "elementType": "input",
+      "elementConfig": {
+        "type": "text",
+        "placeholder": "Juan Alberto"
+      },
+      "value": "",
+      "rules": {
+        "required": true
+      },
+      "valid": false
+      }
+    */
 
-		/*
-		updatedFormElement.value = event.target.value;
-		// guardar en el clon del form original, el nuevo elemento del formulario
-		updatedForm.stages[this.state.currentStage].fields[inputIdentifier] = updatedFormElement;
+    /*
+    updatedFormElement.value = event.target.value;
+    // guardar en el clon del form original, el nuevo elemento del formulario
+    updatedForm.stages[this.state.currentStage].fields[inputIdentifier] = updatedFormElement;
 
-		console.log(event.target.selectedOptions);
-		
+    console.log(event.target.selectedOptions);
+    
     this.setState({
       form: updatedForm
     });*/
-	}
+  }
 
-	componentDidMount() {
-		console.log('didmount')
-		
-	};
+  componentDidMount() {
+    console.log('didmount')
+    
+  };
 
   handleSubmit = (event, method) => {
     event.preventDefault();
     
-		// extraer los datos de cada form, dentro de cada etapa
-		let payload = Object.create(null);
+    // extraer los datos de cada form, dentro de cada etapa
+    let payload = Object.create(null);
     for (let index in this.props.formConfig.stages) {
       for (let formElementIdentifier in this.props.formConfig.stages[index].fields) {
-				// poblar objeto con todos los datos del formulario
-				payload[formElementIdentifier] = this.props.formConfig.stages[index].fields[formElementIdentifier].value;
+        // poblar objeto con todos los datos del formulario
+        payload[formElementIdentifier] = this.props.formConfig.stages[index].fields[formElementIdentifier].value;
       }
-		}
-		console.log(payload)
-		console.log('metodo: '+method)
-		//window.location.href = "http://localhost:3000/";
-		
-		switch( method.toLowerCase() ) {
-			case 'get':
-				axios.get(this.props.formConfig.endpoint)
-					.then(response => {
-						console.log(response);
-						this.setState({formData: response.data});
-					})
-					.catch(function(error){
-						console.log(error);
-					})
-				break;
-			case 'post':
-				axios.post(this.props.formConfig.endpoint, payload)
-					.then(response => {
-						console.log(response);
-					})
-					.catch(function(error){
-						console.log(error);
-					})
-				break;
-			default:
-				console.log("Debes introducir un método válido");
-				break;
-		}
+    }
+    console.log(payload)
+    console.log('metodo: '+method)
+    //window.location.href = "http://localhost:3000/";
+    
+    switch( method.toLowerCase() ) {
+      case 'get':
+        axios.get(this.props.formConfig.endpoint)
+          .then(response => {
+            console.log(response);
+            this.setState({formData: response.data});
+          })
+          .catch(function(error){
+            console.log(error);
+          })
+        break;
+      case 'post':
+        axios.post(this.props.formConfig.endpoint, payload)
+          .then(response => {
+            console.log(response);
+          })
+          .catch(function(error){
+            console.log(error);
+          })
+        break;
+      default:
+        console.log("Debes introducir un método válido");
+        break;
+    }
   }
-	
-	_goto = (stage) => {
+  
+  _goto = (stage) => {
     this.setState({
       currentStage: stage
     });
@@ -349,261 +265,261 @@ class MasterForm extends Component {
         currentStage: currentStage
       });
   }
-	
-	addCurso = (inputIdentifier) => {
-		const updatedForm = {
-			...this.props.formConfig
-		}
-		const updatedStages = {
-			...updatedForm.stages
-		}
-		const updatedCurrentStage = {
-			...updatedStages[this.state.currentStage]
-		}
-		const updatedStageFields = {
-			...updatedCurrentStage.fields
-		}
-		// updatedFieldElements es un objeto con keys numéricas para cada elemento del grupoFormulario
-		const updatedFieldElements = {
-			...updatedStageFields[inputIdentifier].elements
-		}
+  
+  addCurso = (inputIdentifier) => {
+    const updatedForm = {
+      ...this.props.formConfig
+    }
+    const updatedStages = {
+      ...updatedForm.stages
+    }
+    const updatedCurrentStage = {
+      ...updatedStages[this.state.currentStage]
+    }
+    const updatedStageFields = {
+      ...updatedCurrentStage.fields
+    }
+    // updatedFieldElements es un objeto con keys numéricas para cada elemento del grupoFormulario
+    const updatedFieldElements = {
+      ...updatedStageFields[inputIdentifier].elements
+    }
 
-		// clonar el array elements
-		const elementsArray = [];
-		for (let elem in updatedFieldElements) {
-			elementsArray.push({
-				...updatedFieldElements[elem]
-			})
-		}
+    // clonar el array elements
+    const elementsArray = [];
+    for (let elem in updatedFieldElements) {
+      elementsArray.push({
+        ...updatedFieldElements[elem]
+      })
+    }
 
-		let idAppend = updatedForm.stages[this.state.currentStage].fields[inputIdentifier].elements.length/4;
-		let newCurso = [
-			{
-				label: 'Curso de capacitación',
-				elementType: 'input',
-				elementConfig: {
-					type: 'text',
-					placeholder: 'Administración pública',
-					name: 'curso' + idAppend,
-					id: 'curso' + idAppend
-				},
-				value: ''
-			},
-			{
-				label: 'Institución donde se realizó',
-				elementType: 'input',
-				elementConfig: {
-					type: 'text',
-					placeholder: 'Universidad de Santiago de Chile',
-					name: 'institucionCurso' + idAppend,
-					id: 'institucionCurso' + idAppend
-				},
-				value: ''
-			},
-			{
-				label: 'Fecha de inicio',
-				elementType: 'input',
-				elementConfig: {
-					type: 'date',
-					placeholder: '20/04/2010',
-					name: 'fechaInicioCurso' + idAppend,
-					id: 'fechaInicioCurso' + idAppend
-				},
-				value: new Date()
-			},
-			{
-				label: 'Fecha de término',
-				elementType: 'input',
-				elementConfig: {
-					type: 'date',
-					placeholder: '15/06/2010',
-					name: 'fechaTerminoCurso' + idAppend,
-					id: 'fechaTerminoCurso' + idAppend
-				},
-				value: new Date()
-			}
-		]
+    let idAppend = updatedForm.stages[this.state.currentStage].fields[inputIdentifier].elements.length/4;
+    let newCurso = [
+      {
+        label: 'Curso de capacitación',
+        elementType: 'input',
+        elementConfig: {
+          type: 'text',
+          placeholder: 'Administración pública',
+          name: 'curso' + idAppend,
+          id: 'curso' + idAppend
+        },
+        value: ''
+      },
+      {
+        label: 'Institución donde se realizó',
+        elementType: 'input',
+        elementConfig: {
+          type: 'text',
+          placeholder: 'Universidad de Santiago de Chile',
+          name: 'institucionCurso' + idAppend,
+          id: 'institucionCurso' + idAppend
+        },
+        value: ''
+      },
+      {
+        label: 'Fecha de inicio',
+        elementType: 'input',
+        elementConfig: {
+          type: 'date',
+          placeholder: '20/04/2010',
+          name: 'fechaInicioCurso' + idAppend,
+          id: 'fechaInicioCurso' + idAppend
+        },
+        value: new Date()
+      },
+      {
+        label: 'Fecha de término',
+        elementType: 'input',
+        elementConfig: {
+          type: 'date',
+          placeholder: '15/06/2010',
+          name: 'fechaTerminoCurso' + idAppend,
+          id: 'fechaTerminoCurso' + idAppend
+        },
+        value: new Date()
+      }
+    ]
 
-		console.log(elementsArray)
+    console.log(elementsArray)
 
-		const newElementsArray = elementsArray.concat(newCurso);
+    const newElementsArray = elementsArray.concat(newCurso);
 
-		console.log(newElementsArray)
+    console.log(newElementsArray)
 
-		updatedForm.stages[this.state.currentStage].fields[inputIdentifier].elements = newElementsArray;
+    updatedForm.stages[this.state.currentStage].fields[inputIdentifier].elements = newElementsArray;
 
-		
+    
 
-		this.setState({
+    this.setState({
       form: updatedForm
     });
-	}
+  }
 
-	addExperiencia = (inputIdentifier) => {
-		const updatedForm = {
-			...this.props.formConfig
-		}
-		const updatedStages = {
-			...updatedForm.stages
-		}
-		const updatedCurrentStage = {
-			...updatedStages[this.state.currentStage]
-		}
-		const updatedStageFields = {
-			...updatedCurrentStage.fields
-		}
-		// updatedFieldElements es un objeto con keys numéricas para cada elemento del grupoFormulario
-		const updatedFieldElements = {
-			...updatedStageFields[inputIdentifier].elements
-		}
+  addExperiencia = (inputIdentifier) => {
+    const updatedForm = {
+      ...this.props.formConfig
+    }
+    const updatedStages = {
+      ...updatedForm.stages
+    }
+    const updatedCurrentStage = {
+      ...updatedStages[this.state.currentStage]
+    }
+    const updatedStageFields = {
+      ...updatedCurrentStage.fields
+    }
+    // updatedFieldElements es un objeto con keys numéricas para cada elemento del grupoFormulario
+    const updatedFieldElements = {
+      ...updatedStageFields[inputIdentifier].elements
+    }
 
-		// clonar el array elements
-		const elementsArray = [];
-		for (let elem in updatedFieldElements) {
-			elementsArray.push({
-				...updatedFieldElements[elem]
-			})
-		}
+    // clonar el array elements
+    const elementsArray = [];
+    for (let elem in updatedFieldElements) {
+      elementsArray.push({
+        ...updatedFieldElements[elem]
+      })
+    }
 
-		let idAppend = updatedForm.stages[this.state.currentStage].fields[inputIdentifier].elements.length/4;
-		let newExperiencia = [
-			{
-				label: 'Empresa',
-				elementType: 'input',
-				elementConfig: {
-					type: 'text',
-					placeholder: 'AHA Inclusión',
-					name: 'empresaExperienciaLaboral' + idAppend,
-					id: 'empresaExperienciaLaboral' + idAppend
-				},
-				value: ''
-			},
-			{
-				label: 'Fecha de inicio',
-		    elementType: 'input',
-		    elementConfig: {
-					type: 'date',
-					placeholder: new Date(),
-		      name: 'expFechaInicio' + idAppend,
-		      id: 'expFechaInicio' + idAppend
-	      },
-	      value: new Date()
-			},
-			{
-				label: 'Fecha de término',
-		    elementType: 'input',
-		    elementConfig: {
-					type: 'date',
-					placeholder: new Date(),
-		      name: 'expFechaTermino' + idAppend,
-		      id: 'expFechaTermino' + idAppend
-	      },
-	      value: new Date()
-			},
-			{
-				label: 'Indica tu cargo',
-				elementType: 'select',
-				elementConfig: {
-					name: 'expArea' + idAppend,
-					id: 'expArea' + idAppend,
-					options: [
-						{ value: '', displayValue: 'Seleccione...', disabled: true },
-						{ value: '00', displayValue: 'Administración, contabilidad o finanzas' },
-						{ value: '01', displayValue: 'Aduana y comercio exterior' },
-						{ value: '02', displayValue: 'Abastecimiento o Logística' },
-						{ value: '03', displayValue: 'Agrícola o Ganadero' },
-						{ value: '04', displayValue: 'Auxiliar de Aseo o Servicios de Alimentación' },
-						{ value: '05', displayValue: 'Atención al Cliente, Call Center o Telemarketing' },
-						{ value: '06', displayValue: 'Ingeniería Civil y Construcción' },
-						{ value: '07', displayValue: 'Comercial, Ventas o Negocios' },
-						{ value: '08', displayValue: 'Comunicación, Relaciones Públicas o Institucionales' },
-						{ value: '09', displayValue: 'Construcción' },
-						{ value: '10', displayValue: 'Diseño' },
-						{ value: '11', displayValue: 'Educación, Docencia o Investigación' },
-						{ value: '12', displayValue: 'Gastronomía y Turismo' },
-						{ value: '13', displayValue: 'Gerencia y Dirección General' },
-						{ value: '14', displayValue: 'Ingenierías' },
-						{ value: '15', displayValue: 'Legal' },
-						{ value: '16', displayValue: 'Mantención de áreas verdes o jardinería' },
-						{ value: '17', displayValue: 'Marketing y Publicidad' },
-						{ value: '18', displayValue: 'Minería, Petróleo o Gas' },
-						{ value: '19', displayValue: 'Operaciones' },
-						{ value: '20', displayValue: 'Producción y Manufactura' },
-						{ value: '21', displayValue: 'Recursos Humanos o Formación' },
-						{ value: '22', displayValue: 'Salud, Medicina y Farmacia' },
-						{ value: '23', displayValue: 'Secretaría y Recepción' },
-						{ value: '24', displayValue: 'Seguridad o Vigilancia' },
-						{ value: '25', displayValue: 'Tecnología, Informática, Sistemas' },
-						{ value: '26', displayValue: 'Textil y Confección' },
-						{ value: '27', displayValue: 'Transporte' }
-					]
-				},
-				value: ''
-			}
-		]
+    let idAppend = updatedForm.stages[this.state.currentStage].fields[inputIdentifier].elements.length/4;
+    let newExperiencia = [
+      {
+        label: 'Empresa',
+        elementType: 'input',
+        elementConfig: {
+          type: 'text',
+          placeholder: 'AHA Inclusión',
+          name: 'empresaExperienciaLaboral' + idAppend,
+          id: 'empresaExperienciaLaboral' + idAppend
+        },
+        value: ''
+      },
+      {
+        label: 'Fecha de inicio',
+        elementType: 'input',
+        elementConfig: {
+          type: 'date',
+          placeholder: new Date(),
+          name: 'expFechaInicio' + idAppend,
+          id: 'expFechaInicio' + idAppend
+        },
+        value: new Date()
+      },
+      {
+        label: 'Fecha de término',
+        elementType: 'input',
+        elementConfig: {
+          type: 'date',
+          placeholder: new Date(),
+          name: 'expFechaTermino' + idAppend,
+          id: 'expFechaTermino' + idAppend
+        },
+        value: new Date()
+      },
+      {
+        label: 'Indica tu cargo',
+        elementType: 'select',
+        elementConfig: {
+          name: 'expArea' + idAppend,
+          id: 'expArea' + idAppend,
+          options: [
+            { value: '', displayValue: 'Seleccione...', disabled: true },
+            { value: '00', displayValue: 'Administración, contabilidad o finanzas' },
+            { value: '01', displayValue: 'Aduana y comercio exterior' },
+            { value: '02', displayValue: 'Abastecimiento o Logística' },
+            { value: '03', displayValue: 'Agrícola o Ganadero' },
+            { value: '04', displayValue: 'Auxiliar de Aseo o Servicios de Alimentación' },
+            { value: '05', displayValue: 'Atención al Cliente, Call Center o Telemarketing' },
+            { value: '06', displayValue: 'Ingeniería Civil y Construcción' },
+            { value: '07', displayValue: 'Comercial, Ventas o Negocios' },
+            { value: '08', displayValue: 'Comunicación, Relaciones Públicas o Institucionales' },
+            { value: '09', displayValue: 'Construcción' },
+            { value: '10', displayValue: 'Diseño' },
+            { value: '11', displayValue: 'Educación, Docencia o Investigación' },
+            { value: '12', displayValue: 'Gastronomía y Turismo' },
+            { value: '13', displayValue: 'Gerencia y Dirección General' },
+            { value: '14', displayValue: 'Ingenierías' },
+            { value: '15', displayValue: 'Legal' },
+            { value: '16', displayValue: 'Mantención de áreas verdes o jardinería' },
+            { value: '17', displayValue: 'Marketing y Publicidad' },
+            { value: '18', displayValue: 'Minería, Petróleo o Gas' },
+            { value: '19', displayValue: 'Operaciones' },
+            { value: '20', displayValue: 'Producción y Manufactura' },
+            { value: '21', displayValue: 'Recursos Humanos o Formación' },
+            { value: '22', displayValue: 'Salud, Medicina y Farmacia' },
+            { value: '23', displayValue: 'Secretaría y Recepción' },
+            { value: '24', displayValue: 'Seguridad o Vigilancia' },
+            { value: '25', displayValue: 'Tecnología, Informática, Sistemas' },
+            { value: '26', displayValue: 'Textil y Confección' },
+            { value: '27', displayValue: 'Transporte' }
+          ]
+        },
+        value: ''
+      }
+    ]
 
-		console.log(elementsArray)
+    console.log(elementsArray)
 
-		const newElementsArray = elementsArray.concat(newExperiencia);
+    const newElementsArray = elementsArray.concat(newExperiencia);
 
-		console.log(newElementsArray)
+    console.log(newElementsArray)
 
-		updatedForm.stages[this.state.currentStage].fields[inputIdentifier].elements = newElementsArray;
+    updatedForm.stages[this.state.currentStage].fields[inputIdentifier].elements = newElementsArray;
 
-		
+    
 
-		this.setState({
+    this.setState({
       form: updatedForm
     });
-	}
+  }
   
   render () {
 
-		let stages = (
-			this.props.formConfig.stages.map(stage => {
-				return <Stage
-					key={stage.id}
-					title={stage.name}
-					id={stage.id}
-					// stageFields = { apellidos: {elementConfig: {}, elementType: '', ...}, nombres: {}, ... }
-					stageFields={stage.fields}
-					currentStage={this.state.currentStage}
-					totalStages={this.props.formConfig.totalStages}
-					handleValidation={this.handleValidation}
-					handleChange={this.handleChange}
-					addExperiencia={this.addExperiencia}
-					addCurso={this.addCurso}
-					/>
-				})
-		);
+    let stages = (
+      this.props.formConfig.stages.map(stage => {
+        return <Stage
+          key={stage.id}
+          title={stage.name}
+          id={stage.id}
+          // stageFields = { apellidos: {elementConfig: {}, elementType: '', ...}, nombres: {}, ... }
+          stageFields={stage.fields}
+          currentStage={this.state.currentStage}
+          totalStages={this.props.formConfig.totalStages}
+          handleValidation={this.handleValidation}
+          handleChange={this.handleChange}
+          addExperiencia={this.addExperiencia}
+          addCurso={this.addCurso}
+          />
+        })
+    );
 
-		let stageTitlesArray = [];
-		for (let stage in this.props.formConfig.stages) {
-			stageTitlesArray.push(this.props.formConfig.stages[stage].name);
-		}
+    let stageTitlesArray = [];
+    for (let stage in this.props.formConfig.stages) {
+      stageTitlesArray.push(this.props.formConfig.stages[stage].name);
+    }
 
     return (
-			<Card className="mb-4">
-				<Card.Header className="px-2">
-					<Stepper
-							currentStage={this.state.currentStage}
-							totalStages={this.props.formConfig.totalStages}
-							stageTitles={stageTitlesArray}
-							goto={this._goto}
-						/>
-				</Card.Header>
-				<Card.Body>
-					<form onSubmit={(event) => this.handleSubmit(event, "POST")}>
-						{ stages }
-						<StageControls
-							totalStages={this.props.formConfig.totalStages}
-							currentStage={this.state.currentStage}
-							_prev={this._prev}
-							_next={this._next}
-						/>
-					</form>
-				</Card.Body>
-			</Card>
+      <Card className="mb-4">
+        <Card.Header className="px-2">
+          <Stepper
+              currentStage={this.state.currentStage}
+              totalStages={this.props.formConfig.totalStages}
+              stageTitles={stageTitlesArray}
+              goto={this._goto}
+            />
+        </Card.Header>
+        <Card.Body>
+          <form onSubmit={(event) => this.handleSubmit(event, "POST")}>
+            { stages }
+            <StageControls
+              totalStages={this.props.formConfig.totalStages}
+              currentStage={this.state.currentStage}
+              _prev={this._prev}
+              _next={this._next}
+            />
+          </form>
+        </Card.Body>
+      </Card>
     );
   }
 }
