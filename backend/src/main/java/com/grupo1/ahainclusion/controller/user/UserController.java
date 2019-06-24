@@ -85,7 +85,7 @@ public class UserController {
             userRole = roleRepository.findByName("ROLE_AHA");
 
         User user = new User();
-        user.setEmail(signUpRequest.getEmail());
+        user.setEmail(signUpRequest.getEmail().toLowerCase());
         user.setPassword(signUpRequest.getPassword());
 
         user.setPassword(passwordEncoder.encode(user.getPassword()));
