@@ -65,7 +65,7 @@ class MasterForm extends Component {
               this.setState({missing: false})
             }
             else {
-              elementsArray[elem].subtext = 'No se permiten números ni caracteres especiales (/, #, $, etc) en el nombre'
+              elementsArray[elem].subtext = 'No se permiten números ni caracteres especiales (/, #, $, etc)'
               this.setState({missing: true})
             }
             break;
@@ -550,7 +550,7 @@ class MasterForm extends Component {
 					stageFields={stage.fields}
 					currentStage={this.state.currentStage}
 					totalStages={this.props.formConfig.totalStages}
-          handleValidation={this.handleValidation}
+          			handleValidation={this.handleValidation}
 					handleChange={this.handleChange}
 					addExperiencia={this.addExperiencia}
 					addCurso={this.addCurso}
