@@ -35,12 +35,12 @@ public class RecGenerator {
             Recommendation rcm = new Recommendation();
             UserSummary userSummary = new UserSummary(u.getId(), u.getPerfilCandidato().getFirstName() +" "+ u.getPerfilCandidato().getLastName(), u.getEmail(), null, "Candidato");
             rcm.setUserSummary(userSummary);
-            perc = perc - 3;
+            perc = perc;
             rcm.setPercentage(perc);
 
             recommendations.add(rcm);
 
-            System.out.println("Usuario: " +rcm.getUserSummary().getName() +" "+"Porcentaje: "+rcm.getPercentage());
+            System.out.println("Usuario " + u.getId() + ": " +rcm.getUserSummary().getName() +" "+"Porcentaje: "+rcm.getPercentage());
         }
         System.out.println("----------------------------");
         
