@@ -15,10 +15,12 @@ const Input = (props) => {
 						<label>{props.label}</label>
 						<input 
 							onChange={props.handleChange}
+							onBlur={props.handleValidation}
 							{...props.elementConfig}
 							value={props.value}
 							className="form-control"
 						/>
+						<small className="form-text text-danger">{props.subtext}</small>
 					</div>
 				);
 				break;
@@ -32,6 +34,7 @@ const Input = (props) => {
 							value={props.value}
 							className="form-control"
 						/>
+						<small className="form-text text-danger">{props.subtext}</small>
 					</div>
 				);
 				break;
@@ -74,6 +77,7 @@ const Input = (props) => {
 									className="form-control"
 									aria-label="cantidad"
 								/>
+								<small className="form-text text-danger">{props.subtext}</small>
 						</div>
 						</React.Fragment>
 					);
@@ -107,6 +111,7 @@ const Input = (props) => {
 							value={props.value}
 							className="form-control"
 						/>
+						<small className="form-text text-danger">{props.subtext}</small>
 					</div>
 				);
 		}

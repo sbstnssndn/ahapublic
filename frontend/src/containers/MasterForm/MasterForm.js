@@ -4,17 +4,133 @@ import axios from 'axios';
 import Stepper from './Stepper/Stepper';
 import StageControls from './StageControls/StageControls';
 import Card from 'react-bootstrap/Card';
-//import Container from 'react-bootstrap/Container';
-//import Row from 'react-bootstrap/Row';
-//import Col from 'react-bootstrap/Col';
+import { 
+  emailIsValid,
+  passwordLengthIsValid,
+  rutIsValid,
+  phoneIsValid,
+  nameIsValid,
+  genericIsValid,
+   } from '../../util/ValidationUtils';
 
 
 class MasterForm extends Component {
   
-  	state = {
-		currentStage: 0,
-		formData: ''
-	}
+  state = {
+    currentStage: 0,
+    formData: '',
+    missing: false,
+  }
+
+  handleValidation = (event, inputIdentifier, element) => {
+    const updatedForm = {
+      ...this.props.formConfig
+    }
+    const updatedStages = {
+      ...updatedForm.stages
+    }
+    const updatedCurrentStage = {
+      ...updatedStages[this.state.currentStage]
+    }
+    const updatedStageFields = {
+      ...updatedCurrentStage.fields
+    }
+
+    const updatedFieldElements = {
+      ...updatedStageFields[inputIdentifier].elements
+    }
+
+    const elementsArray = [];
+    for (let elem in updatedFieldElements) {
+      elementsArray.push({
+        ...updatedFieldElements[elem]
+      })
+    }
+
+    for (let elem in elementsArray) {
+      console.log(elementsArray[elem].elementConfig.id)
+      if(elementsArray[elem].elementConfig.id === element) {
+
+        elementsArray[elem].subtext = ''
+        this.setState({missing: false})
+
+        const singleField = event.target.value
+
+        switch(element){
+          case('firstName'):
+          case('lastName'):
+          case('personaQueEntrevista'):
+            if (singleField === '' || nameIsValid(singleField)) {
+              elementsArray[elem].subtext = ''
+              this.setState({missing: false})
+            }
+            else {
+              elementsArray[elem].subtext = 'No se permiten números ni caracteres especiales (/, #, $, etc) en el nombre'
+              this.setState({missing: true})
+            }
+            break;
+
+          case('rut'):
+            if (singleField === '' || rutIsValid(singleField)) {
+              elementsArray[elem].subtext = ''
+              this.setState({missing: false})
+            }
+            else {
+              elementsArray[elem].subtext = 'Rut incorrecto'
+              this.setState({missing: true})
+            }
+            break;
+
+          case('email'):
+            if (singleField === '' || emailIsValid(singleField)) {
+              elementsArray[elem].subtext = ''
+              this.setState({missing: false})
+            }
+            else {
+              elementsArray[elem].subtext = 'Correo electrónico incorrecto'
+              this.setState({missing: true})
+            }
+            break;
+
+          case('telefono'):
+            if (singleField === '' || phoneIsValid(singleField)) {
+              elementsArray[elem].subtext = ''
+              this.setState({missing: false})
+            }
+            else {
+              elementsArray[elem].subtext = 'El teléfono es incorrecto'
+              this.setState({missing: true})
+            }
+            break;
+
+          case('password'):
+            if (singleField === '' || passwordLengthIsValid(singleField)) {
+              elementsArray[elem].subtext = ''
+              this.setState({missing: false})
+            }
+            else {
+              elementsArray[elem].subtext = 'La contraseña debe ser entre 6 y 30 caracteres'
+              this.setState({missing: true})
+            }
+            break;
+
+          default:
+            if (singleField === '' || genericIsValid(singleField)) {
+              elementsArray[elem].subtext = ''
+              this.setState({missing: false})
+            }
+            else {
+              elementsArray[elem].subtext = 'El valor ingresado supera la cantidad máxima permitida'
+              this.setState({missing: true})
+            }
+        }
+        }
+
+        updatedForm.stages[this.state.currentStage].fields[inputIdentifier].elements[elem] = elementsArray[elem];
+      }   
+
+      this.setState({form: updatedForm});   
+  }
 
 	// handleChange(event, firstName)
 	handleChange = (event, inputIdentifier, element, elementIndentifier) => {
@@ -434,6 +550,7 @@ class MasterForm extends Component {
 					stageFields={stage.fields}
 					currentStage={this.state.currentStage}
 					totalStages={this.props.formConfig.totalStages}
+          handleValidation={this.handleValidation}
 					handleChange={this.handleChange}
 					addExperiencia={this.addExperiencia}
 					addCurso={this.addCurso}
