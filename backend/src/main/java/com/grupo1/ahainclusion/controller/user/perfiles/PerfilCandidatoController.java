@@ -77,7 +77,7 @@ public class PerfilCandidatoController {
         pCandidato.setLastName(pCandidatoNew.getLastName());
         pCandidato.setRut(pCandidatoNew.getRut());
         pCandidato.setDireccion(pCandidatoNew.getDireccion());
-        pCandidato.setEmail2(pCandidatoNew.getEmail2());
+        pCandidato.setEmail2(pCandidatoNew.getEmail2().toLowerCase());
         pCandidato.setFechaNacimiento(pCandidatoNew.getFechaNacimiento());
         pCandidato.setGenero(pCandidatoNew.getGenero());
         pCandidato.setNacionalidad(pCandidatoNew.getNacionalidad());
