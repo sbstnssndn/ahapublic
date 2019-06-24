@@ -25,7 +25,7 @@ class Login extends Component {
       const value = event.target.value
       const regex = REGEX_MAIL;
 
-      switch(id){
+      switch (id) {
         case('email'):
           if (value === '')
           	break;
