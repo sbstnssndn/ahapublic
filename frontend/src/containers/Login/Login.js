@@ -8,7 +8,7 @@ import Button from 'react-bootstrap/Button';
 
 import { login } from '../../util/APIUtils';
 import { ACCESS_TOKEN } from '../../constants';
-import { REGEX_MAIL } from '../../constants/regexMail';
+import { emailIsValid, passwordLengthIsValid } from '../../util/ValidationUtils';
 
 class Login extends Component {
 
@@ -16,59 +16,43 @@ class Login extends Component {
 		email: '',
 		password: '',
 		mailAlert: '',
-        passAlert: '',
-        allowed: 'enabled',
+		passAlert: '',
+		allowed: 'disabled',
 	}
 
 	handleBlur = (event) => {
       const id = event.target.id
       const value = event.target.value
-      const regex = REGEX_MAIL;
 
       switch (id) {
-        case('email'):
-          if (value === '')
-          	break;
-          const result = regex.test(String(value).toLowerCase())
-          this.setState({
-          	mailAlert: '',
-          	allowed: 'disabled'
-          })
-
-          if (!result) {
-            this.setState({
-            	mailAlert: 'Correo electrónico incorrecto',
-            	allowed: 'disabled'
-            })
-            break;
-          }
+				case('email'):
+					if (value === '' || !emailIsValid(value)) {
+						this.setState({
+							mailAlert: 'Correo electrónico inválido.',
+							allowed: 'disabled'
+						});
+					} else {
+						this.setState({
+							mailAlert: '',
+							allowed: 'enabled'
+						});
+					}
           break;
         case('password'):
-          if (value === '')
-          	break;
-          const len = value.length
-          this.setState({
-          	passAlert: '',
-          	allowed: 'disabled'
-          })
-
-          if (len<6){
-            this.setState({
-            	passAlert: 'La contraseña debe ser al menos 6 caracteres',
+          if (value === '' || !passwordLengthIsValid(value)) {
+						this.setState({
+            	passAlert: 'La contraseña debe tener entre 6 y 30 caracteres.',
             	allowed: 'disabled'
-            })
-            break;
-          }
-
-          if (len>30){
-            this.setState({
-            	passAlert: 'La contraseña no puede superar los 30 caracteres',
-            	allowed: 'disabled'
-            })
-            break;
-          }
-
-          break;
+            });
+					} else {
+						this.setState({
+            	passAlert: '',
+            	allowed: 'enabled'
+            });
+					}
+					break;
+				default:
+					break;
       }
     }
 
@@ -96,12 +80,6 @@ class Login extends Component {
 			});
 	}
 	
-	handlePageChange = this.handlePageChange.bind(this);
-
-  handlePageChange() {
-    window.location = "http://localhost:3000/postulantes/panel"
-  }
-
 	render () {
 
 		return (
