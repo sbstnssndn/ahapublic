@@ -79,7 +79,7 @@ class Login extends Component {
 				}
 			});
 	}
-	
+
 	render () {
 
 		return (
@@ -103,9 +103,9 @@ class Login extends Component {
 															value={this.state.email}
 															onBlur={this.handleBlur}
 															onChange={this.handleChange} />
-															<Form.Text className="text-danger">
-									                        	{this.state.mailAlert}
-									                      	</Form.Text>
+														<Form.Text className="text-danger">
+															{this.state.mailAlert}
+														</Form.Text>
 													</Form.Group>
 													<Form.Group controlId="password">
 														<Form.Label>Contraseña</Form.Label>
@@ -115,9 +115,9 @@ class Login extends Component {
 															value={this.state.password}
 															onBlur={this.handleBlur}
 															onChange={this.handleChange} />
-															<Form.Text className="text-danger">
-									                        	{this.state.passAlert}
-									                      	</Form.Text>
+														<Form.Text className="text-danger">
+															{this.state.passAlert}
+														</Form.Text>
 													</Form.Group>
 													<Button variant="primary" type="submit">
 														Iniciar sesión
