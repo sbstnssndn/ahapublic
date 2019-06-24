@@ -33,7 +33,9 @@ public class RecGenerator {
         for(User u: users)
         {
             Recommendation rcm = new Recommendation();
-            UserSummary userSummary = new UserSummary(u.getId(), u.getPerfilCandidato().getFirstName() +" "+ u.getPerfilCandidato().getLastName(), u.getEmail(), null, "Candidato");
+            UserSummary userSummary = new UserSummary(u.getId(), u.getPerfilCandidato().getFirstName() +" "
+                                                      + u.getPerfilCandidato().getLastName(), u.getEmail(), 
+                                                      null, "Candidato");
             rcm.setUserSummary(userSummary);
 
             PerCalculator perCalculator = new PerCalculator();

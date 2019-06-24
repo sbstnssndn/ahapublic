@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 
 import javax.transaction.Transactional;
 
@@ -232,6 +233,7 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
    
     String url = "https://randomuser.me/api/?inc=gender,id,name,email&results="+n+"&nat=US&seed=foobar";
     JSONArray results = Unirest.get(url).asJson().getBody().getObject().getJSONArray("results");
+    Random rand = new Random(5);
 
     for(int i=0;i<results.length();i++)
     {
@@ -257,13 +259,47 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
       perfilCandidatoRepository.save(pCandidato);
 
       PerfilLaboral pLaboral = new PerfilLaboral();
-      pLaboral.setCredencial(false);
-      pLaboral.setSillaDeRuedas(false);
-      pLaboral.setdAuditiva(50);
-      pLaboral.setdFisica(50);
-      pLaboral.setdIntelectual(50);
-      pLaboral.setdPsiquica(50);
-      pLaboral.setdVisual(50);      
+
+
+
+      pLaboral.setCredencial(rand.nextBoolean());
+      pLaboral.setSillaDeRuedas(rand.nextBoolean());
+      pLaboral.setdAuditiva(rand.nextInt(100));
+      pLaboral.setdFisica(rand.nextInt(100));
+      pLaboral.setdIntelectual(rand.nextInt(100));
+      pLaboral.setdPsiquica(rand.nextInt(100));
+      pLaboral.setdVisual(rand.nextInt(100));
+
+      pLaboral.setActividadesAuditiva(rand.nextInt(4));
+      pLaboral.setActividadesVisual(rand.nextInt(4));
+      pLaboral.setAdecuaciones("Necesito un interprete");
+      pLaboral.setAyudaFormulario(rand.nextInt(4));
+      pLaboral.setBañoAdaptado(rand.nextBoolean());
+      pLaboral.setComunicacionOral(rand.nextInt(4));
+      pLaboral.setCredencial(rand.nextBoolean());
+      // pLaboral.setCursos(cursos);
+      pLaboral.setDesplazoTrayectos(rand.nextInt(4));
+      pLaboral.setDiferentesAlturas(rand.nextInt(4));
+      pLaboral.setDiferentesPisos(rand.nextInt(4));
+      pLaboral.setDisponibilidad(rand.nextInt(4));
+      pLaboral.setExpectativaSueldo(rand.nextInt(4));
+      pLaboral.setLeerEscribir(rand.nextInt(4));
+      pLaboral.setLicencia("Clase A");
+      pLaboral.setNivelEducacional(rand.nextInt(4));
+      pLaboral.setObjetosPequeños(rand.nextInt(4));
+      pLaboral.setPermanecerPie(rand.nextInt(4));
+      pLaboral.setPermanecerSentado(rand.nextInt(4));
+      pLaboral.setResolverProblemas(rand.nextInt(4));
+      pLaboral.setSillaDeRuedas(rand.nextBoolean());
+      pLaboral.setSituacionesConflicto(rand.nextInt(4));
+      pLaboral.setSituacionesNuevas(rand.nextInt(4));
+      pLaboral.setTareasEstresantes(rand.nextInt(4));
+      // pLaboral.setTitulos(titulos);
+      pLaboral.setTrabajoEquipo(rand.nextInt(4));
+      
+      
+
+
       pLaboral.setPerfilCandidato(pCandidato);
 
       perfilLaboralRepository.save(pLaboral);
