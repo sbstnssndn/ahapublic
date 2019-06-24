@@ -3,6 +3,7 @@ package com.grupo1.ahainclusion.recommendation;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.grupo1.ahainclusion.aux.payload.UserSummary;
 import com.grupo1.ahainclusion.model.Oferta;
 import com.grupo1.ahainclusion.model.Role;
 import com.grupo1.ahainclusion.model.User;
@@ -32,13 +33,14 @@ public class RecGenerator {
         for(User u: users)
         {
             Recommendation rcm = new Recommendation();
-            rcm.setUser(u);
-            perc = perc - 3;
+            UserSummary userSummary = new UserSummary(u.getId(), u.getPerfilCandidato().getFirstName() +" "+ u.getPerfilCandidato().getLastName(), u.getEmail(), null, "Candidato");
+            rcm.setUserSummary(userSummary);
+            perc = perc;
             rcm.setPercentage(perc);
 
             recommendations.add(rcm);
 
-            System.out.println("Usuario: " +rcm.getUser().getPerfilCandidato().getFirstName() +" "+"Porcentaje: "+rcm.getPercentage());
+            System.out.println("Usuario " + u.getId() + ": " +rcm.getUserSummary().getName() +" "+"Porcentaje: "+rcm.getPercentage());
         }
         System.out.println("----------------------------");
         
