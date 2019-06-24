@@ -41,6 +41,7 @@ public class PerfilEmpresaController {
 
         User user = userRepository.findById(userId).get();
         perfilEmpresa.setUser(user);
+        perfilEmpresa.setEmail2(perfilEmpresa.getEmail2().toLowerCase());
         perfilEmpresaRepository.save(perfilEmpresa);
         return "Perfil Empresa Guardado";
     }

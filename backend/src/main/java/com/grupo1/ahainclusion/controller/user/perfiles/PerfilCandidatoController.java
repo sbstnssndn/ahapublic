@@ -41,6 +41,7 @@ public class PerfilCandidatoController {
     public @ResponseBody String addNewPerfilCandidato(@PathVariable("userId") Integer userId, @RequestBody PerfilCandidato perfilCandidato) {
 
         User user = userRepository.findById(userId).get();
+        perfilCandidato.setEmail2(perfilCandidato.getEmail2().toLowerCase());
         perfilCandidato.setUser(user);
         perfilCandidatoRepository.save(perfilCandidato);
         return "Perfil Candidato Guardado";
