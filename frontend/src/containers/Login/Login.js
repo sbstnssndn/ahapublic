@@ -39,7 +39,7 @@ class Login extends Component {
 					}
           break;
         case('password'):
-          if (value === '' || !passwordLengthIsValid(value)) {
+          if (value !== '' && !passwordLengthIsValid(value)) {
 						this.setState({
             	passAlert: 'La contraseña debe tener entre 6 y 30 caracteres.',
             	allowed: 'disabled'

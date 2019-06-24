@@ -3,7 +3,7 @@ export const emailIsValid = (email) => {
 }
 
 export const passwordLengthIsValid = (pass) => {
-	if (pass.length < 6 && pass.length > 30)
+	if (pass.length >= 6 && pass.length <= 30)
 		return true;
 
 	return false;
