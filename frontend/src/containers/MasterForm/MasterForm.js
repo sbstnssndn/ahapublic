@@ -9,6 +9,7 @@ import {
   passwordLengthIsValid,
   rutIsValid,
   phoneIsValid,
+  nameIsValid,
   genericIsValid,
    } from '../../util/ValidationUtils';
 
@@ -34,12 +35,11 @@ class MasterForm extends Component {
     const updatedStageFields = {
       ...updatedCurrentStage.fields
     }
-    // updatedFieldElements es un objeto con keys numéricas para cada elemento del grupoFormulario
+
     const updatedFieldElements = {
       ...updatedStageFields[inputIdentifier].elements
     }
 
-    // clonar el array elements
     const elementsArray = [];
     for (let elem in updatedFieldElements) {
       elementsArray.push({
@@ -55,9 +55,21 @@ class MasterForm extends Component {
         this.setState({missing: false})
 
         const singleField = event.target.value
-        let len = singleField.length
 
         switch(element){
+          case('firstName'):
+          case('lastName'):
+          case('personaQueEntrevista'):
+            if (singleField === '' || nameIsValid(singleField)) {
+              elementsArray[elem].subtext = ''
+              this.setState({missing: false})
+            }
+            else {
+              elementsArray[elem].subtext = 'No se permiten números ni caracteres especiales (/, #, $, etc) en el nombre'
+              this.setState({missing: true})
+            }
+            break;
+
           case('rut'):
             if (singleField === '' || rutIsValid(singleField)) {
               elementsArray[elem].subtext = ''
