@@ -3,7 +3,6 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
-//import { Link } from 'react-router-dom';
 import { LinkContainer } from 'react-router-bootstrap';
 
 

@@ -17,7 +17,7 @@ class MasterForm extends Component {
 	}
 
 	// handleChange(event, firstName)
-  	handleChange = (event, inputIdentifier, element, elementIndentifier) => {
+	handleChange = (event, inputIdentifier, element, elementIndentifier) => {
 	 	const updatedForm = {
 			...this.props.formConfig
 		}
@@ -34,7 +34,6 @@ class MasterForm extends Component {
 		const updatedFieldElements = {
 			...updatedStageFields[inputIdentifier].elements
 		}
-
 		// clonar el array elements
 		const elementsArray = [];
 		for (let elem in updatedFieldElements) {
@@ -44,7 +43,7 @@ class MasterForm extends Component {
 		}
 
 		for (let elem in elementsArray) {
-			console.log(elementsArray[elem].elementConfig.id)
+			//console.log(elementsArray[elem].elementConfig.id)
 			if(elementsArray[elem].elementConfig.id === element) {
 				if (elementIndentifier === 'date'){
 					elementsArray[elem].value = event
@@ -251,14 +250,12 @@ class MasterForm extends Component {
 
 		updatedForm.stages[this.state.currentStage].fields[inputIdentifier].elements = newElementsArray;
 
-		
-
 		this.setState({
       form: updatedForm
     });
 	}
 
-	addExperiencia = (inputIdentifier) => {
+	addExperiencia = (inputIdentifier, NumberOfFieldsToAdd) => {
 		const updatedForm = {
 			...this.props.formConfig
 		}
@@ -275,7 +272,6 @@ class MasterForm extends Component {
 		const updatedFieldElements = {
 			...updatedStageFields[inputIdentifier].elements
 		}
-
 		// clonar el array elements
 		const elementsArray = [];
 		for (let elem in updatedFieldElements) {
@@ -284,7 +280,7 @@ class MasterForm extends Component {
 			})
 		}
 
-		let idAppend = updatedForm.stages[this.state.currentStage].fields[inputIdentifier].elements.length/4;
+		let idAppend = updatedForm.stages[this.state.currentStage].fields[inputIdentifier].elements.length/NumberOfFieldsToAdd;
 		let newExperiencia = [
 			{
 				label: 'Empresa',
@@ -361,21 +357,71 @@ class MasterForm extends Component {
 			}
 		]
 
-		console.log(elementsArray)
+		//console.log(elementsArray)
 
 		const newElementsArray = elementsArray.concat(newExperiencia);
 
-		console.log(newElementsArray)
+		//console.log(newElementsArray)
 
 		updatedForm.stages[this.state.currentStage].fields[inputIdentifier].elements = newElementsArray;
-
-		
 
 		this.setState({
       form: updatedForm
     });
 	}
-  
+	
+	deleteExperiencia = (inputIdentifier, idExperiencia, NumberOfFieldsToDelete, ) => {
+		const updatedForm = {
+			...this.props.formConfig
+		}
+		const updatedStages = {
+			...updatedForm.stages
+		}
+		const updatedCurrentStage = {
+			...updatedStages[this.state.currentStage]
+		}
+		const updatedStageFields = {
+			...updatedCurrentStage.fields
+		}
+		// updatedFieldElements es un objeto con keys numéricas para cada elemento del grupoFormulario
+		const updatedFieldElements = {
+			...updatedStageFields[inputIdentifier].elements
+		}
+
+		// clonar el array elements
+		const elementsArray = [];
+		for (let elem in updatedFieldElements) {
+			elementsArray.push({
+				...updatedFieldElements[elem]
+			})
+		}
+
+		// antes de borrar, actualizar los names de los inputs, para que al eliminar el 1 de [0,1,2], el nuevo que se cree, no sea 2, dando [0,2(nuevo),2]
+		// foreach element de elements, actualizar name, id desde 0 a lenght-1
+		console.log("ANTES", elementsArray)
+		console.log(idExperiencia, NumberOfFieldsToDelete)
+
+		elementsArray.splice(idExperiencia, NumberOfFieldsToDelete);
+
+		let contadorId = -1;
+		for (let element=0; element < elementsArray.length; element++) {
+			if (element % NumberOfFieldsToDelete === 0)
+				contadorId++;
+			// ingresar máximo 10 cursos
+			let id = elementsArray[element].elementConfig.id;
+			let name = elementsArray[element].elementConfig.name;
+			elementsArray[element].elementConfig.id = id[id.length-1] + contadorId;
+			elementsArray[element].elementConfig.name = name[name.length-1] + contadorId;			
+		}
+
+		console.log("DESPUES", elementsArray)
+		updatedForm.stages[this.state.currentStage].fields[inputIdentifier].elements = elementsArray;
+
+		this.setState({
+      form: updatedForm
+    });
+	}
+
   render () {
 
 		let stages = (
@@ -391,6 +437,7 @@ class MasterForm extends Component {
 					handleChange={this.handleChange}
 					addExperiencia={this.addExperiencia}
 					addCurso={this.addCurso}
+					deleteExperiencia={this.deleteExperiencia}
 					/>
 				})
 		);

@@ -5,9 +5,8 @@ import Button from 'react-bootstrap/Button';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
-const ExperienciaLaboralForm = (props) => {
+const ExperienciaLaboralForm = ( props ) => {
 
-		let formqty = 0;
 		let experiencias = [];
 		for(let i=0; i<props.elements.length; i=i+4) {
 
@@ -18,8 +17,6 @@ const ExperienciaLaboralForm = (props) => {
 				field3: props.elements[i+2],
 				field4: props.elements[i+3]
 			})
-			formqty++;
-		
 		}
 
 		let mensaje = null;
@@ -29,13 +26,17 @@ const ExperienciaLaboralForm = (props) => {
 			mensaje = null;
 		}
 
+		
+
 		return (
 			<React.Fragment>
+				
+
 				{ mensaje }
 				{ experiencias.map(experiencia => ( 
 					<React.Fragment key={experiencia.id}>
 
-						{console.log(formqty)}
+						
 
 						<Form.Group controlId={experiencia.field1.elementConfig.id}>
 							<Form.Label>{experiencia.field1.label}</Form.Label>
@@ -103,10 +104,11 @@ const ExperienciaLaboralForm = (props) => {
 							</Form.Group>
 
 						</Form.Row>
+						<Button variant="danger" onClick={() => props.deleteExperiencia(props.field, experiencia.id[experiencia.id.length-1], 4)}>Eliminar</Button>
 						<hr />
 					</React.Fragment>
 				)) }
-			<Button onClick={() => props.addExperiencia(props.field)}>Agregar</Button>
+			<Button onClick={() => props.addExperiencia(props.field, 4)}>Agregar</Button>
 			</React.Fragment>
 		)
 	

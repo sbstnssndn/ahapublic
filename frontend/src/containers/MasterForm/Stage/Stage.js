@@ -42,6 +42,7 @@ const Stage = (props) => {
 						elements={field.elements}
 						handleChange={props.handleChange}
 						addExperiencia={props.addExperiencia}
+						deleteExperiencia={props.deleteExperiencia}
 					/>
 			} else if (field.type === 'cursos') {
 				return <CursosForm
