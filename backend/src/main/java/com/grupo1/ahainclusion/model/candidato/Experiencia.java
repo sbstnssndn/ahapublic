@@ -21,22 +21,22 @@ public class Experiencia {
     private Integer id;
 
     // Tipo: Tipo de experiencia
-    @NotNull(message="Debe ingresar tipo de experiencia")
+    @NotNull(message = "Debe ingresar tipo de experiencia")
     private String tipo;
     // Cargo: nombre del cargo
-    @NotNull(message="Debe ingresar nombre del cargo")
+    @NotNull(message = "Debe ingresar nombre del cargo")
     private String cargo;
     // Empresa: Nombre de la empresa
-    @NotNull(message="Debe ingresar nombre de la empresa")
+    @NotNull(message = "Debe ingresar nombre de la empresa")
     private String empresa;
     // Fechas: fecha inicio y fin de la experiencia
-    @JsonFormat(pattern="dd-MM-yyyy")
-    @DateTimeFormat(pattern="dd-MM-yyyy")
-    @NotNull(message="Debe ingresar una fecha de inicio")
+    @JsonFormat(pattern = "dd-MM-yyyy")
+    @DateTimeFormat(pattern = "dd-MM-yyyy")
+    @NotNull(message = "Debe ingresar una fecha de inicio")
     private Date fechaInicio;
-    @JsonFormat(pattern="dd-MM-yyyy")
-    @DateTimeFormat(pattern="dd-MM-yyyy")
-    @NotNull(message="Debe ingresar una fecha de fin")
+    @JsonFormat(pattern = "dd-MM-yyyy")
+    @DateTimeFormat(pattern = "dd-MM-yyyy")
+    @NotNull(message = "Debe ingresar una fecha de fin")
     private Date fechaFin;
 
     // Perfil Laboral padre
@@ -46,6 +46,14 @@ public class Experiencia {
 
     public String getTipo() {
         return tipo;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getCargo() {
