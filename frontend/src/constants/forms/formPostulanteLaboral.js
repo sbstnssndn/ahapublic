@@ -32,6 +32,7 @@ export const formPostulanteLaboral =
 										{ value: '9', displayValue: 'Postgrado' },
 									]
 								},
+								subtext: '',
 								value: ''
 							}
 						]
@@ -48,6 +49,7 @@ export const formPostulanteLaboral =
 									name: 'titulo',
 									id: 'titulo'
 								},
+								subtext: '',
 								value: ''
 							}
 						]
@@ -64,6 +66,7 @@ export const formPostulanteLaboral =
 									name: 'institucion',
 									id: 'institucion'
 								},
+								subtext: '',
 								value: ''
 							}
 						]
@@ -80,6 +83,7 @@ export const formPostulanteLaboral =
 									name: 'egreso',
 									id: 'egreso'
 								},
+								subtext: '',
 								value: ''
 							}
 						]
@@ -114,6 +118,7 @@ export const formPostulanteLaboral =
 									name: 'interesesLaborales',
 									id: 'interesesLaborales'
 								},
+								subtext: '',
 								value: ''
 							}
 						]
@@ -130,6 +135,7 @@ export const formPostulanteLaboral =
 									name: 'expectativaSueldo',
 									id: 'expectativaSueldo'
 								},
+								subtext: '',
 								value: ''
 							}
 						]
@@ -157,6 +163,7 @@ export const formPostulanteLaboral =
 										{ value: 'F', displayValue: 'Clase F' }
 									]
 								},
+								subtext: '',
 								value: ''
 							}
 						]
@@ -176,6 +183,7 @@ export const formPostulanteLaboral =
 										{ value: 'si', displayValue: 'Sí' }
 									]
 								},
+								subtext: '',
 								value: ''
 							}
 						]
@@ -201,6 +209,7 @@ export const formPostulanteLaboral =
 										{ value: 'false', displayValue: 'No' }
 									]
 								},
+								subtext: '',
 								value: ''
 							}
 						]
@@ -220,6 +229,7 @@ export const formPostulanteLaboral =
 										{ value: 'false', displayValue: 'No' }
 									]
 								},
+								subtext: '',
 								value: ''
 							}
 						]
@@ -242,6 +252,7 @@ export const formPostulanteLaboral =
 										{ value: '100', displayValue: '100%' },
 									]
 								},
+								subtext: '',
 								value: ''
 							}
 						]
@@ -264,6 +275,7 @@ export const formPostulanteLaboral =
 										{ value: '100', displayValue: '100%' },
 									]
 								},
+								subtext: '',
 								value: ''
 							}
 						]
@@ -286,6 +298,7 @@ export const formPostulanteLaboral =
 										{ value: '100', displayValue: '100%' },
 									]
 								},
+								subtext: '',
 								value: ''
 							}
 						]
@@ -314,6 +327,7 @@ export const formPostulanteLaboral =
 										{ value: '100', displayValue: '100%' },
 									]
 								},
+								subtext: '',
 								value: ''
 							}
 						]
@@ -336,6 +350,7 @@ export const formPostulanteLaboral =
 										{ value: '100', displayValue: '100%' },
 									]
 								},
+								subtext: '',
 								value: ''
 							}
 						]
@@ -350,6 +365,7 @@ export const formPostulanteLaboral =
 									name: 'adecuaciones',
 									id: 'adecuaciones'
 								},
+								subtext: '',
 								value: ''
 							}
 						]
@@ -377,6 +393,7 @@ export const formPostulanteLaboral =
 										{ value: '3', displayValue: 'La mayor parte del tiempo' }
 									]
 								},
+								subtext: '',
 								value: ''
 							}
 						]
@@ -398,6 +415,7 @@ export const formPostulanteLaboral =
 										{ value: '3', displayValue: 'La mayor parte del tiempo' }
 									]
 								},
+								subtext: '',
 								value: ''
 							}
 						]
@@ -419,6 +437,7 @@ export const formPostulanteLaboral =
 										{ value: '3', displayValue: 'La mayor parte del tiempo' }
 									]
 								},
+								subtext: '',
 								value: ''
 							}
 						]
@@ -440,6 +459,7 @@ export const formPostulanteLaboral =
 										{ value: '3', displayValue: 'La mayor parte del tiempo' }
 									]
 								},
+								subtext: '',
 								value: ''
 							}
 						]
@@ -467,6 +487,7 @@ export const formPostulanteLaboral =
 										{ value: '3', displayValue: 'La mayor parte del tiempo' }
 									]
 								},
+								subtext: '',
 								value: ''
 							}
 						]
@@ -488,6 +509,7 @@ export const formPostulanteLaboral =
 										{ value: '3', displayValue: 'La mayor parte del tiempo' }
 									]
 								},
+								subtext: '',
 								value: ''
 							}
 						]
@@ -509,6 +531,7 @@ export const formPostulanteLaboral =
 										{ value: '3', displayValue: 'La mayor parte del tiempo' }
 									]
 								},
+								subtext: '',
 								value: ''
 							}
 						]
@@ -530,6 +553,7 @@ export const formPostulanteLaboral =
 										{ value: '3', displayValue: 'La mayor parte del tiempo' }
 									]
 								},
+								subtext: '',
 								value: ''
 							}
 						]
@@ -557,6 +581,7 @@ export const formPostulanteLaboral =
 										{ value: '3', displayValue: 'La mayor parte del tiempo' }
 									]
 								},
+								subtext: '',
 								value: ''
 							}
 						]
@@ -578,6 +603,7 @@ export const formPostulanteLaboral =
 										{ value: '3', displayValue: 'La mayor parte del tiempo' }
 									]
 								},
+								subtext: '',
 								value: ''
 							}
 						]
@@ -599,6 +625,7 @@ export const formPostulanteLaboral =
 										{ value: '3', displayValue: 'La mayor parte del tiempo' }
 									]
 								},
+								subtext: '',
 								value: ''
 							}
 						]
@@ -620,6 +647,7 @@ export const formPostulanteLaboral =
 										{ value: '3', displayValue: 'La mayor parte del tiempo' }
 									]
 								},
+								subtext: '',
 								value: ''
 							}
 						]
@@ -647,6 +675,7 @@ export const formPostulanteLaboral =
 										{ value: '3', displayValue: 'La mayor parte del tiempo' }
 									]
 								},
+								subtext: '',
 								value: ''
 							}
 						]
@@ -668,6 +697,7 @@ export const formPostulanteLaboral =
 										{ value: '3', displayValue: 'La mayor parte del tiempo' }
 									]
 								},
+								subtext: '',
 								value: ''
 							}
 						]
@@ -689,6 +719,7 @@ export const formPostulanteLaboral =
 										{ value: '3', displayValue: 'La mayor parte del tiempo' }
 									]
 								},
+								subtext: '',
 								value: ''
 							}
 						]

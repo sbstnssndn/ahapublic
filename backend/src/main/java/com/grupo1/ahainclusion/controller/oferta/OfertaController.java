@@ -1,15 +1,21 @@
 package com.grupo1.ahainclusion.controller.oferta;
 
+import java.util.Optional;
+
+import com.grupo1.ahainclusion.aux.payload.ApiResponse;
 import com.grupo1.ahainclusion.model.Oferta;
 import com.grupo1.ahainclusion.model.User;
 import com.grupo1.ahainclusion.repository.OfertaRepository;
 import com.grupo1.ahainclusion.repository.UserRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -45,5 +51,47 @@ public class OfertaController {
         ofertaRepository.save(oferta);
 
         return "Oferta Guardada";
+    }
+
+    // Actualizar Perfil Empresa
+    @PutMapping(path = "oferta/{id}")
+    //SOLO USUARIOS Empresa o AHA
+    //@PreAuthorize("hasRole('ROLE_AHA') or hasRole('ROLE_EMPRESA')")
+    public @ResponseBody ResponseEntity<Object> update(@PathVariable("id") Integer id, @RequestBody Oferta ofertaNew) {
+
+        
+        Optional<Oferta> ofertaOptional = ofertaRepository.findById(id);
+
+        if (!ofertaOptional.isPresent())
+        return new ResponseEntity(new ApiResponse(false, "Oferta no encontrada"), HttpStatus.NOT_FOUND);
+
+        Oferta oferta = ofertaOptional.get();
+
+        oferta.setActividadesAuditiva(ofertaNew.getActividadesAuditiva());
+        oferta.setActividadesVisual(ofertaNew.getActividadesVisual());
+        oferta.setBañoAdaptado(ofertaNew.isBañoAdaptado());
+        oferta.setComunicacionOral(ofertaNew.getComunicacionOral());
+        oferta.setDescription(ofertaNew.getDescription());
+        oferta.setDesplazoTrayectos(ofertaNew.getDesplazoTrayectos());
+        oferta.setDiferentesAlturas(ofertaNew.getDiferentesAlturas());
+        oferta.setDiferentesPisos(ofertaNew.getDiferentesPisos());
+        // oferta.setExperiencias(ofertaNew.getExperiencias());
+        oferta.setLeerEscribir(ofertaNew.getLeerEscribir());
+        oferta.setLicencia(ofertaNew.getLicencia());
+        oferta.setName(ofertaNew.getName());
+        oferta.setNivelEducacional(ofertaNew.getNivelEducacional());
+        oferta.setObjetosPequeños(ofertaNew.getObjetosPequeños());
+        oferta.setPermanecerPie(ofertaNew.getPermanecerPie());
+        oferta.setPermanecerSentado(ofertaNew.getPermanecerSentado());
+        oferta.setResolverProblemas(ofertaNew.getResolverProblemas());
+        oferta.setSillaDeRuedas(ofertaNew.isSillaDeRuedas());
+        oferta.setSituacionesConflicto(ofertaNew.getSituacionesConflicto());
+        oferta.setSituacionesNuevas(ofertaNew.getSituacionesNuevas());
+        oferta.setTareasEstresantes(ofertaNew.getTareasEstresantes());
+        oferta.setTrabajoEquipo(ofertaNew.getTrabajoEquipo());
+
+        ofertaRepository.save(oferta);
+
+        return new ResponseEntity(new ApiResponse(true, "Oferta Actualizada"), HttpStatus.OK);
     }
 }

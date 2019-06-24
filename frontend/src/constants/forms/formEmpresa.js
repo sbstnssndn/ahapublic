@@ -22,6 +22,7 @@ export const formEmpresa =
 										name: "nombre",
 										id: "nombre"
 									},
+									subtext: '',
 									value: ""
 								}
 							]
@@ -38,6 +39,7 @@ export const formEmpresa =
 										name: "rut",
 										id: "rut"
 									},
+									subtext: '',
 									value: ""
 								}
 							]
@@ -54,6 +56,7 @@ export const formEmpresa =
 										name: "telefono1",
 										id: "telefono1"
 									},
+									subtext: '',
 									value: ""
 								}
 							]
@@ -70,6 +73,7 @@ export const formEmpresa =
 										name: "telefono2",
 										id: "telefono2"
 									},
+									subtext: '',
 									value: ""
 								}
 							]
@@ -86,6 +90,7 @@ export const formEmpresa =
 										name: "correo2",
 										id: "correo2"
 									},
+									subtext: '',
 									value: ""
 								}
 							]

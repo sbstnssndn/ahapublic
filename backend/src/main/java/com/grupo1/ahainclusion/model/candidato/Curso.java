@@ -6,9 +6,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.grupo1.ahainclusion.model.PerfilLaboral;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 public class Curso {
@@ -16,13 +20,21 @@ public class Curso {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
     private Integer id;
     // Name: nombre del curso realizado.
+    @NotNull(message = "Debe ingresar nombre del curso")
     private String name;
     // Institución: nombre de la institución donde se realizo el curso.
+    @NotNull(message = "Debe ingresar nombre de institución")
     private String institucion;
     // Fechas: de inicio y termino del curso.
+    @JsonFormat(pattern = "dd-MM-yyyy")
+    @DateTimeFormat(pattern = "dd-MM-yyyy")
+    @NotNull(message = "Debe ingresar una fecha de inicio")
     private Date fechaInicio;
+    @JsonFormat(pattern = "dd-MM-yyyy")
+    @DateTimeFormat(pattern = "dd-MM-yyyy")
+    @NotNull(message = "Debe ingresar una fecha de fin")
     private Date fechaFin;
-    
+
     // Perfil Laboral padre
     @ManyToOne
     @JsonBackReference
@@ -30,6 +42,14 @@ public class Curso {
 
     public Date getFechaFin() {
         return fechaFin;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public PerfilLaboral getPerfilLaboral() {

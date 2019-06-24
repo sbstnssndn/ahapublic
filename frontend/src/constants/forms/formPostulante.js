@@ -21,6 +21,7 @@ export const formPostulante =
 									name: 'rut',
 									id: 'rut'
 								},
+								subtext: '',
 								value: ''
 							}
 						]
@@ -37,6 +38,7 @@ export const formPostulante =
 									name: 'firstName',
 									id: 'firstName'
 								},
+								subtext: '',
 								value: ''
 							}
 						]
@@ -53,6 +55,7 @@ export const formPostulante =
 									name: 'lastName',
 									id: 'lastName'
 								},
+								subtext: '',
 								value: ''
 							}
 						]
@@ -69,6 +72,7 @@ export const formPostulante =
 									name: 'fechaEntrevista',
 									id: 'fechaEntrevista'
 								},
+								subtext: '',
 								value: ''
 							}
 						]
@@ -85,6 +89,7 @@ export const formPostulante =
 									name: 'personaQueEntrevista',
 									id: 'personaQueEntrevista'
 								},
+								subtext: '',
 								value: ''
 							}
 						]
@@ -111,6 +116,7 @@ export const formPostulante =
 										{ value: 2, displayValue: 'No especifica' }
 									]
 								},
+								subtext: '',
 								value: ''
 							}
 						]
@@ -127,6 +133,7 @@ export const formPostulante =
 									name: 'fechaNacimiento',
 									id: 'fechaNacimiento'
 								},
+								subtext: '',
 								value: ''
 							}
 						]
@@ -171,6 +178,7 @@ export const formPostulante =
 									name: 'email',
 									id: 'email'
 								},
+								subtext: '',
 								value: ''
 							}
 						]
@@ -187,6 +195,7 @@ export const formPostulante =
 									name: 'telefono',
 									id: 'telefono'
 								},
+								subtext: '',
 								value: ''
 							}
 						]
@@ -203,6 +212,7 @@ export const formPostulante =
 									name: 'telefono2',
 									id: 'telefono2'
 								},
+								subtext: '',
 								value: ''
 							}
 						]
@@ -225,6 +235,7 @@ export const formPostulante =
 									name: 'calle',
 									id: 'calle'
 								},
+								subtext: '',
 								value: ''
 							}
 						]
@@ -241,6 +252,7 @@ export const formPostulante =
 									name: 'region',
 									id: 'region'
 								},
+								subtext: '',
 								value: ''
 							}
 						]
@@ -257,6 +269,7 @@ export const formPostulante =
 									name: 'comuna',
 									id: 'comuna'
 								},
+								subtext: '',
 								value: ''
 							}
 						]
