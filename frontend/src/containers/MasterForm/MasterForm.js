@@ -4,7 +4,10 @@ import axios from 'axios';
 import Stepper from './Stepper/Stepper';
 import StageControls from './StageControls/StageControls';
 import Card from 'react-bootstrap/Card';
-import RegexMail from '../../constants/regexMail';
+import { 
+	REGEX_MAIL,
+	REGEX_PHONE
+ } from '../../constants/regex';
 
 
 class MasterForm extends Component {
@@ -55,6 +58,7 @@ class MasterForm extends Component {
 					case('rut'):
 						let temp = ''
 						let rut = singleField
+						this.setState({missing: false})
 
 						if (singleField === '')
 							break;
@@ -123,16 +127,58 @@ class MasterForm extends Component {
 						break;
 
 					case('email'):
-						const regex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+						const regex = REGEX_MAIL
 						const result = regex.test(String(singleField).toLowerCase())
+
+						this.setState({missing: false})
 
 						if (!result){
 							elementsArray[elem].subtext = 'Email incorrecto'
 							this.setState({missing: true})
 							break;
 						}
-						else
-							this.setState({missing: false})
+							
+						break;
+					case('telefono'):
+						if (singleField === '')
+							break;
+
+						if (len !== 9 && len !== 12) {
+							elementsArray[elem].subtext = 'El teléfono es incorrecto'
+							this.setState({missing: true})
+							break;
+						}
+
+						if (len === 9) {
+							const regex = REGEX_PHONE
+							const result = regex.test(String(singleField).toLowerCase())
+
+							if (!result) {
+								elementsArray[elem].subtext = 'El teléfono solo debe contener números'
+								this.setState({missing: true})
+								break;
+							}
+						}
+
+						if (len === 12) {
+							const mas = singleField.charAt(0)
+
+							if (mas !== '+') {
+								elementsArray[elem].subtext = 'El teléfono es incorrecto'
+								this.setState({missing: true})
+								break;
+							}
+
+							const num = singleField.substring(1, len-1)
+							const regex = REGEX_PHONE
+							const result = regex.test(String(num).toLowerCase())
+
+							if (!result) {
+								elementsArray[elem].subtext = 'El teléfono solo debe contener números'
+								this.setState({missing: true})
+								break;
+							}
+						}
 						break;
 					case('password'):
 						if (len<6){
