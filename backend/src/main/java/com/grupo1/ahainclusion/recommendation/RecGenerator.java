@@ -20,7 +20,8 @@ public class RecGenerator {
     @Autowired
     private UserRepository userRepository;
 
-    @Autowired RoleRepository roleRepository;
+    @Autowired 
+    private RoleRepository roleRepository;
 
     public List<Recommendation> generate(Oferta oferta, int n) {
         
@@ -29,14 +30,16 @@ public class RecGenerator {
         Iterable<User> users = userRepository.findByRoles(role);
         List<Recommendation> recommendations = new ArrayList<>();
 
-        Integer perc = 85;
         for(User u: users)
         {
             Recommendation rcm = new Recommendation();
             UserSummary userSummary = new UserSummary(u.getId(), u.getPerfilCandidato().getFirstName() +" "+ u.getPerfilCandidato().getLastName(), u.getEmail(), null, "Candidato");
             rcm.setUserSummary(userSummary);
-            perc = perc;
-            rcm.setPercentage(perc);
+
+            PerCalculator perCalculator = new PerCalculator();
+            
+            Integer percentage = perCalculator.getPercentage(oferta, u);
+            rcm.setPercentage(percentage);
 
             recommendations.add(rcm);
 
