@@ -24,7 +24,7 @@ class Login extends Component {
 
       switch (id) {
 				case('email'):
-					if (value === '' || !emailIsValid(value)) {
+					if (!emailIsValid(value)) {
 						this.setState({
 							mailAlert: 'Correo electrónico inválido.',
 							allowed: 'disabled'
@@ -37,7 +37,7 @@ class Login extends Component {
 					}
           break;
         case('password'):
-          if (value === '' || !passwordLengthIsValid(value)) {
+          if (!passwordLengthIsValid(value)) {
 						this.setState({
             	passAlert: 'La contraseña debe tener entre 6 y 30 caracteres.',
             	allowed: 'disabled'

@@ -4,6 +4,10 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Alert from 'react-bootstrap/Alert';
 import { signup } from '../../util/APIUtils';
+import { 
+  emailIsValid,
+  passwordLengthIsValid,
+	 } from '../../util/ValidationUtils';
 import { LinkContainer } from 'react-router-bootstrap';
 
 class LandingForm extends Component {
@@ -21,8 +25,8 @@ class LandingForm extends Component {
 
 	validateForm = () => {
     return (
-      this.state.email.length > 5 &&
-      this.state.password.length > 5 &&
+      emailIsValid(this.state.email) &&
+      passwordLengthIsValid(this.state.password) &&
       this.state.password === this.state.confirmPassword
     );
   }
