@@ -2,6 +2,7 @@ package com.grupo1.ahainclusion.controller.user;
 
 import java.net.URI;
 import java.util.Collections;
+import java.util.Optional;
 
 import javax.validation.Valid;
 
@@ -24,9 +25,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -104,8 +107,22 @@ public class UserController {
         return userRepository.findById(id).get();
     }
 
+    //Eliminar un usuario por id
+    @DeleteMapping(value = "/{id}")
+    public @ResponseBody ResponseEntity<Object> delete(@PathVariable("id") Integer id) {
+        
+        Optional<User> userOptional = userRepository.findById(id);
+
+        if (!userOptional.isPresent())
+        return new ResponseEntity(new ApiResponse(false, "Usuario no encontrado"), HttpStatus.NOT_FOUND);
+
+        userRepository.deleteById(id);
+
+        return new ResponseEntity(new ApiResponse(true, "Usuario Eliminado"), HttpStatus.OK);
+    }
+
     // Obtener Usuarios
-    @RequestMapping(path = "/all", method = RequestMethod.GET)
+    @GetMapping(path = "/all")
     //SOLO USUARIOS AHA DEBERIAN PODER VER A TODOS LOS USUARIOS DESPUES
     //@PreAuthorize("hasRole('ROLE_AHA'")
     public @ResponseBody Iterable<User> getAllUsers() {

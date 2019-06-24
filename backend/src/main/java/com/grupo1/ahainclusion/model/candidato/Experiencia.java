@@ -6,9 +6,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.grupo1.ahainclusion.model.PerfilLaboral;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 public class Experiencia {
@@ -17,13 +21,22 @@ public class Experiencia {
     private Integer id;
 
     // Tipo: Tipo de experiencia
+    @NotNull(message = "Debe ingresar tipo de experiencia")
     private String tipo;
     // Cargo: nombre del cargo
+    @NotNull(message = "Debe ingresar nombre del cargo")
     private String cargo;
     // Empresa: Nombre de la empresa
+    @NotNull(message = "Debe ingresar nombre de la empresa")
     private String empresa;
     // Fechas: fecha inicio y fin de la experiencia
+    @JsonFormat(pattern = "dd-MM-yyyy")
+    @DateTimeFormat(pattern = "dd-MM-yyyy")
+    @NotNull(message = "Debe ingresar una fecha de inicio")
     private Date fechaInicio;
+    @JsonFormat(pattern = "dd-MM-yyyy")
+    @DateTimeFormat(pattern = "dd-MM-yyyy")
+    @NotNull(message = "Debe ingresar una fecha de fin")
     private Date fechaFin;
 
     // Perfil Laboral padre
@@ -33,6 +46,14 @@ public class Experiencia {
 
     public String getTipo() {
         return tipo;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getCargo() {
