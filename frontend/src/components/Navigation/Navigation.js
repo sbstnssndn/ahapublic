@@ -108,6 +108,7 @@ const Navigation = ( props ) => {
 							</Nav>
 							<Nav className="ml-auto">
 								<NavigationUserOptions
+									onLogin={props.handleLogin}
 									userType={props.userType}
 									isAuthenticated={props.isAuthenticated}
 									handleLogout={props.handleLogout} />

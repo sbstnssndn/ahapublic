@@ -458,7 +458,7 @@ class MasterForm extends Component {
 						/>
 				</Card.Header>
 				<Card.Body>
-					<form onSubmit={(event) => this.handleSubmit(event, "POST")}>
+					<form onSubmit={(event) => this.handleSubmit(event, "POST")} className="needs-validation" noValidate>
 						{ stages }
 						<StageControls
 							totalStages={this.props.formConfig.totalStages}

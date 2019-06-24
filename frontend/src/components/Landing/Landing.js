@@ -18,7 +18,7 @@ const Landing = ( props ) => {
 							<LandingText />
 						</Col>
 						<Col lg={4}>
-							<RegisterForm {...props} />
+							<RegisterForm {...props} onLogin={props.handleLogin} />
 						</Col>
 					</Row>
 				</Container>

@@ -1,9 +1,7 @@
 import React from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import Form from 'react-bootstrap/Form';
-import Nav from 'react-bootstrap/Nav';
-import { LinkContainer } from 'react-router-bootstrap';
+import Login from '../../containers/Login/Login';
 
 class LoginButton extends React.Component {
     constructor(props, context) {
@@ -31,33 +29,19 @@ class LoginButton extends React.Component {
   
           <Modal show={this.state.show} onHide={this.handleClose} centered>
             <Modal.Header closeButton>
-              <Modal.Title>Ingresa a tu cuenta</Modal.Title>
+              <Modal.Title>¿Ya tienes una cuenta?</Modal.Title>
             </Modal.Header>
-            <Modal.Body>
-							<Form>
-								<Form.Group controlId="formBasicEmail" onBlur={this.handleBlur}>
-									<Form.Control type="email" placeholder="Correo" />
-									<Form.Text className="text-muted">
-										Nunca compartiremos tu correo con nadie.
-									</Form.Text>
-								</Form.Group>
 
-									<Form.Group controlId="formBasicPassword">
-											<Form.Control type="password" placeholder="Contraseña" />
-									</Form.Group>
-							</Form>     
+
+            <Modal.Body className="px-0">
+							<Login onLogin={this.props.handleLogin} /> 
             </Modal.Body>
+
+
             <Modal.Footer>
               <Button variant="secondary" onClick={this.handleClose}>
                 Cerrar
               </Button>
-            <LinkContainer to="/postulantes/panel">
-                <Nav.Link>
-                    <Button variant="primary" type="submit" onClick={this.handleClose}>
-                                Iniciar Sesión
-                    </Button>
-                </Nav.Link>
-            </LinkContainer>
             </Modal.Footer>
           </Modal>
         </>
