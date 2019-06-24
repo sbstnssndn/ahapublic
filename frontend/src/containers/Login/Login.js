@@ -21,13 +21,14 @@ class Login extends Component {
 	}
 
 	handleBlur = (event) => {
-		console.log(event.target)
       const id = event.target.id
       const value = event.target.value
       const regex = REGEX_MAIL;
 
       switch(id){
         case('email'):
+          if (value === '')
+          	break;
           const result = regex.test(String(value).toLowerCase())
           this.setState({
           	mailAlert: '',
@@ -43,6 +44,8 @@ class Login extends Component {
           }
           break;
         case('password'):
+          if (value === '')
+          	break;
           const len = value.length
           this.setState({
           	passAlert: '',
