@@ -97,6 +97,28 @@ export const nameIsValid = (name) => {
 	return /^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$/.test(name);
 }
 
+export const moneyIsValid = (money) => {
+	const len = money.length;
+	let count = 0;
+	let temp = '';
+
+	for (let i=len-1; i>=0; i--){
+		if (count === 3) {
+			if (money.charAt(i) !== '.')
+				temp = temp+money.charAt(i);
+
+			count = 0;
+		}
+
+		else {
+			temp = temp+money.charAt(i);
+			count++;
+		}
+	}
+
+	return /^[0-9]*$/.test(temp)
+}
+
 export const genericIsValid = (text) => {
 	if (text.length > 255)
 		return false;
