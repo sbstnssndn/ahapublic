@@ -4,6 +4,7 @@ import axios from 'axios';
 import Stepper from './Stepper/Stepper';
 import StageControls from './StageControls/StageControls';
 import Card from 'react-bootstrap/Card';
+import Alert from 'react-bootstrap/Alert';
 import { 
   emailIsValid,
   passwordLengthIsValid,
@@ -12,6 +13,7 @@ import {
   nameIsValid,
   moneyIsValid,
   genericIsValid,
+  fillValidArray,
    } from '../../util/ValidationUtils';
 
 
@@ -20,8 +22,12 @@ class MasterForm extends Component {
   state = {
     currentStage: 0,
     formData: '',
-    missing: false,
+    missing: [],
+    show: false,
+    errorMessage: "Ups! Hay campos con errores"
   }
+
+  handleDismiss = () => this.setState({ show: false });
 
   handleValidation = (event, inputIdentifier, element) => {
     const updatedForm = {
@@ -48,12 +54,11 @@ class MasterForm extends Component {
       })
     }
 
+    let missing = this.state.missing
+
     for (let elem in elementsArray) {
       console.log(elementsArray[elem].elementConfig.id)
       if(elementsArray[elem].elementConfig.id === element) {
-
-        elementsArray[elem].subtext = ''
-        this.setState({missing: false})
 
         const singleField = event.target.value
 
@@ -63,22 +68,22 @@ class MasterForm extends Component {
           case('personaQueEntrevista'):
             if (singleField === '' || nameIsValid(singleField)) {
               elementsArray[elem].subtext = ''
-              this.setState({missing: false})
+              missing = fillValidArray(missing, element, 'pop')
             }
             else {
               elementsArray[elem].subtext = 'No se permiten números ni caracteres especiales (/, #, $, etc)'
-              this.setState({missing: true})
+              missing = fillValidArray(missing, element, 'push')
             }
             break;
 
           case('rut'):
             if (singleField === '' || rutIsValid(singleField)) {
               elementsArray[elem].subtext = ''
-              this.setState({missing: false})
+              missing = fillValidArray(missing, element, 'pop')
             }
             else {
               elementsArray[elem].subtext = 'Rut incorrecto'
-              this.setState({missing: true})
+              missing = fillValidArray(missing, element, 'push')
             }
             break;
 
@@ -86,11 +91,11 @@ class MasterForm extends Component {
           case('email'):
             if (singleField === '' || emailIsValid(singleField)) {
               elementsArray[elem].subtext = ''
-              this.setState({missing: false})
+              missing = fillValidArray(missing, element, 'pop')
             }
             else {
               elementsArray[elem].subtext = 'Correo electrónico incorrecto'
-              this.setState({missing: true})
+              missing = fillValidArray(missing, element, 'push')
             }
             break;
           
@@ -99,52 +104,57 @@ class MasterForm extends Component {
           case('telefono'):
             if (singleField === '' || phoneIsValid(singleField)) {
               elementsArray[elem].subtext = ''
-              this.setState({missing: false})
+              missing = fillValidArray(missing, element, 'pop')
             }
             else {
               elementsArray[elem].subtext = 'El teléfono es incorrecto'
-              this.setState({missing: true})
+              missing = fillValidArray(missing, element, 'push')
             }
             break;
 
           case('password'):
             if (singleField === '' || passwordLengthIsValid(singleField)) {
               elementsArray[elem].subtext = ''
-              this.setState({missing: false})
+              missing = fillValidArray(missing, element, 'pop')
             }
             else {
               elementsArray[elem].subtext = 'La contraseña debe ser entre 6 y 30 caracteres'
-              this.setState({missing: true})
+              missing = fillValidArray(missing, element, 'push')
             }
             break;
 
           case('expectativaSueldo'):
             if (singleField === '' || moneyIsValid(singleField)) {
               elementsArray[elem].subtext = ''
-              this.setState({missing: false})
+              missing = fillValidArray(missing, element, 'pop')
             }
             else {
               elementsArray[elem].subtext = 'El monto ingresado es incorrecto'
-              this.setState({missing: true})
+              missing = fillValidArray(missing, element, 'push')
             }
             break;
 
           default:
             if (singleField === '' || genericIsValid(singleField)) {
               elementsArray[elem].subtext = ''
-              this.setState({missing: false})
+              missing = fillValidArray(missing, element, 'pop')
             }
             else {
               elementsArray[elem].subtext = 'El valor ingresado supera la cantidad máxima permitida'
-              this.setState({missing: true})
+              missing = fillValidArray(missing, element, 'push')
             }
         }
         }
 
         updatedForm.stages[this.state.currentStage].fields[inputIdentifier].elements[elem] = elementsArray[elem];
-      }   
+      } 
 
-      this.setState({form: updatedForm});   
+      console.log('missing: {'+missing+'}')  
+
+      this.setState({
+        form: updatedForm,
+        missing: missing,
+      });   
   }
 
   // handleChange(event, firstName)
@@ -227,49 +237,58 @@ class MasterForm extends Component {
   handleSubmit = (event, method) => {
     event.preventDefault();
     
-    // extraer los datos de cada form, dentro de cada etapa
-    let payload = Object.create(null);
-      /*for (let index in this.props.formConfig.stages) {
-          for (let formElementIdentifier in this.props.formConfig.stages[index].fields) {
-        // poblar objeto con todos los datos del formulario
-        payload[formElementIdentifier] = this.props.formConfig.stages[index].fields[formElementIdentifier].value;
+    // Si el array missing esta vacio, significa que no hay campos incorrectos
+    // En ese caso, "!this.state.missing.length" devuelve true
+    if (!this.state.missing.length) {
+      // extraer los datos de cada form, dentro de cada etapa
+      let payload = Object.create(null);
+        /*for (let index in this.props.formConfig.stages) {
+            for (let formElementIdentifier in this.props.formConfig.stages[index].fields) {
+          // poblar objeto con todos los datos del formulario
+          payload[formElementIdentifier] = this.props.formConfig.stages[index].fields[formElementIdentifier].value;
+            }
+      }*/
+      console.log(this.props.formConfig);
+      for (let index in this.props.formConfig.stages){
+        for (let formElementIdentifier in this.props.formConfig.stages[index].fields) {
+          for (let index2 in this.props.formConfig.stages[index].fields[formElementIdentifier].elements){
+            payload[formElementIdentifier] = this.props.formConfig.stages[index].fields[formElementIdentifier].elements[index2].value;
           }
-    }*/
-    console.log(this.props.formConfig);
-    for (let index in this.props.formConfig.stages){
-      for (let formElementIdentifier in this.props.formConfig.stages[index].fields) {
-        for (let index2 in this.props.formConfig.stages[index].fields[formElementIdentifier].elements){
-          payload[formElementIdentifier] = this.props.formConfig.stages[index].fields[formElementIdentifier].elements[index2].value;
         }
       }
+      console.log(payload);
+      console.log('metodo: '+method);
+      //window.location.href = "http://localhost:3000/";
+      
+      switch( method.toLowerCase() ) {
+        case 'get':
+          axios.get(this.props.formConfig.endpoint)
+            .then(response => {
+              console.log(response);
+              this.setState({formData: response.data});
+            })
+            .catch(function(error){
+              console.log(error);
+            })
+          break;
+        case 'post':
+          axios.post(this.props.formConfig.endpoint, payload)
+            .then(response => {
+              console.log(response);
+            })
+            .catch(function(error){
+              console.log(error);
+            })
+          break;
+        default:
+          console.log("Debes introducir un método válido");
+          break;
+      }
     }
-    console.log(payload);
-    console.log('metodo: '+method);
-    //window.location.href = "http://localhost:3000/";
-    
-    switch( method.toLowerCase() ) {
-      case 'get':
-        axios.get(this.props.formConfig.endpoint)
-          .then(response => {
-            console.log(response);
-            this.setState({formData: response.data});
-          })
-          .catch(function(error){
-            console.log(error);
-          })
-        break;
-      case 'post':
-        axios.post(this.props.formConfig.endpoint, payload)
-          .then(response => {
-            console.log(response);
-          })
-          .catch(function(error){
-            console.log(error);
-          })
-        break;
-      default:
-        console.log("Debes introducir un método válido");
-        break;
+
+    else {
+      console.log('Submit denegado');
+      this.setState({ show: true })
     }
   }
   
@@ -580,8 +599,18 @@ class MasterForm extends Component {
     }
 
     return (
+
       <Card className="mb-4">
         <Card.Header className="px-2">
+          {/*ALERT*/}
+          <Alert
+              className="mb-0 mt-2"
+              variant="danger"
+              show={this.state.show}
+              onClose={this.handleDismiss}
+              dismissible>
+              { this.state.errorMessage }
+          </Alert>
           <Stepper
               currentStage={this.state.currentStage}
               totalStages={this.props.formConfig.totalStages}

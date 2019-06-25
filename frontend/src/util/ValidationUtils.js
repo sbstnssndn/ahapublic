@@ -125,3 +125,25 @@ export const genericIsValid = (text) => {
 
 	return true;
 }
+
+export const fillValidArray = (missingArray, id, arg) => {
+  let temp = missingArray;
+
+  if (arg === 'push') {
+    if (!temp.includes(id)){
+      temp.push(id);
+      return temp;
+    }
+  }
+
+  if (arg === 'pop') {
+    for(let i=0; i<temp.length; i++) {
+      if (temp[i] === id) {
+        temp.splice(i, 1);
+        return temp;
+      }
+    }
+  }
+
+  return missingArray;
+}

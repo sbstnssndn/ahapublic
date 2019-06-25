@@ -32,16 +32,12 @@ const StageControls = (props) => {
 		);
 	}
 
-	// TODO: implementar touched, togglear si el usuario ingresa algo a algún campo
-	let touched = true;
 	let sendButton = null;
-	if (touched) {
-		sendButton = (
-			<Button variant="success" type="submit">
-				Guardar
-			</Button>
-		)
-	}
+	sendButton = (
+		<Button variant="success" type="submit">
+			Guardar
+		</Button>
+	)
 
   return (
 		<Container fluid>
