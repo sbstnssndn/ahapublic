@@ -229,6 +229,8 @@ class MasterForm extends Component {
   handleSubmit = (event, method) => {
     event.preventDefault();
 
+    // Si el array missing esta vacio, significa que no hay campos incorrectos
+    // En ese caso, "!this.state.missing.length" devuelve true
     if (!this.state.missing.length) {
       // extraer los datos de cada form, dentro de cada etapa
       let payload = Object.create(null);
