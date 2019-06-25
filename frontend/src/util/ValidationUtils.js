@@ -94,7 +94,7 @@ export const phoneIsValid = (phone) => {
 }
 
 export const nameIsValid = (name) => {
-	return /^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$/.test(name);
+	return /^[a-zA-ZÀ-ÿ\u00f1\u00d1]+$/.test(name);
 }
 
 export const moneyIsValid = (money) => {
