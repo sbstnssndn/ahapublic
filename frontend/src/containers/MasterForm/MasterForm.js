@@ -5,6 +5,9 @@ import Stepper from './Stepper/Stepper';
 import StageControls from './StageControls/StageControls';
 import Card from 'react-bootstrap/Card';
 import Alert from 'react-bootstrap/Alert';
+import Toast from 'react-bootstrap/Toast';
+import ToastHeader from 'react-bootstrap/ToastHeader';
+import ToastBody from 'react-bootstrap/ToastBody';
 import { 
   emailIsValid,
   passwordLengthIsValid,
@@ -24,7 +27,6 @@ class MasterForm extends Component {
     formData: '',
     missing: [],
     show: false,
-    errorMessage: "Ups! Hay campos con errores"
   }
 
   handleDismiss = () => this.setState({ show: false });
@@ -55,6 +57,8 @@ class MasterForm extends Component {
     }
 
     let missing = this.state.missing
+
+    this.setState({ show: false })
 
     for (let elem in elementsArray) {
       console.log(elementsArray[elem].elementConfig.id)
@@ -609,7 +613,7 @@ class MasterForm extends Component {
               show={this.state.show}
               onClose={this.handleDismiss}
               dismissible>
-              { this.state.errorMessage }
+              "Ups! Hay campos con errores"
           </Alert>
           <Stepper
               currentStage={this.state.currentStage}
