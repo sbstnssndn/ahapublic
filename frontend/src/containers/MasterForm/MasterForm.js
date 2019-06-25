@@ -10,7 +10,9 @@ import {
   rutIsValid,
   phoneIsValid,
   nameIsValid,
+  moneyIsValid,
   genericIsValid,
+  fillValidArray,
    } from '../../util/ValidationUtils';
 
 
@@ -19,7 +21,7 @@ class MasterForm extends Component {
   state = {
     currentStage: 0,
     formData: '',
-    missing: false,
+    missing: [],
   }
 
   handleValidation = (event, inputIdentifier, element) => {
@@ -47,12 +49,13 @@ class MasterForm extends Component {
       })
     }
 
+    let missing = this.state.missing
+
     for (let elem in elementsArray) {
       console.log(elementsArray[elem].elementConfig.id)
       if(elementsArray[elem].elementConfig.id === element) {
 
-        elementsArray[elem].subtext = ''
-        this.setState({missing: false})
+        //elementsArray[elem].subtext = ''
 
         const singleField = event.target.value
 
@@ -62,74 +65,86 @@ class MasterForm extends Component {
           case('personaQueEntrevista'):
             if (singleField === '' || nameIsValid(singleField)) {
               elementsArray[elem].subtext = ''
-              this.setState({missing: false})
+              missing = fillValidArray(missing, element, 'pop')
             }
             else {
               elementsArray[elem].subtext = 'No se permiten números ni caracteres especiales (/, #, $, etc) en el nombre'
-              this.setState({missing: true})
+              missing = fillValidArray(missing, element, 'push')
             }
             break;
 
           case('rut'):
             if (singleField === '' || rutIsValid(singleField)) {
               elementsArray[elem].subtext = ''
-              this.setState({missing: false})
+              missing = fillValidArray(missing, element, 'pop')
             }
             else {
               elementsArray[elem].subtext = 'Rut incorrecto'
-              this.setState({missing: true})
+              missing = fillValidArray(missing, element, 'push')
             }
             break;
 
+          case('correo2'):
           case('email'):
             if (singleField === '' || emailIsValid(singleField)) {
               elementsArray[elem].subtext = ''
-              this.setState({missing: false})
+              missing.pop('email')
             }
             else {
               elementsArray[elem].subtext = 'Correo electrónico incorrecto'
-              this.setState({missing: true})
+              if (!missing.includes('email'))
+                missing.push('email')
             }
             break;
 
+          case('telefono1'):
+          case('telefono2'):
           case('telefono'):
             if (singleField === '' || phoneIsValid(singleField)) {
               elementsArray[elem].subtext = ''
-              this.setState({missing: false})
+              missing.pop('telefono')
             }
             else {
               elementsArray[elem].subtext = 'El teléfono es incorrecto'
-              this.setState({missing: true})
+              if (!missing.includes('telefono'))
+                missing.push('telefono')
             }
             break;
 
           case('password'):
             if (singleField === '' || passwordLengthIsValid(singleField)) {
               elementsArray[elem].subtext = ''
-              this.setState({missing: false})
+              missing.pop('password')
             }
             else {
               elementsArray[elem].subtext = 'La contraseña debe ser entre 6 y 30 caracteres'
-              this.setState({missing: true})
+              if (!missing.includes('password'))
+                missing.push('password')
             }
             break;
 
           default:
             if (singleField === '' || genericIsValid(singleField)) {
               elementsArray[elem].subtext = ''
-              this.setState({missing: false})
+              missing.pop(element)
             }
             else {
               elementsArray[elem].subtext = 'El valor ingresado supera la cantidad máxima permitida'
-              this.setState({missing: true})
+              if (!missing.includes(element))
+                missing.push(element)
             }
         }
         }
 
         updatedForm.stages[this.state.currentStage].fields[inputIdentifier].elements[elem] = elementsArray[elem];
-      }   
+      }
 
-      this.setState({form: updatedForm});   
+      console.log('missing: '+missing)
+
+      this.setState({
+        form: updatedForm,
+        missing: missing,
+      });   
   }
 
   // handleChange(event, firstName)
@@ -213,42 +228,48 @@ class MasterForm extends Component {
 
   handleSubmit = (event, method) => {
     event.preventDefault();
-    
-    // extraer los datos de cada form, dentro de cada etapa
-    let payload = Object.create(null);
-    for (let index in this.props.formConfig.stages) {
-      for (let formElementIdentifier in this.props.formConfig.stages[index].fields) {
-        // poblar objeto con todos los datos del formulario
-        payload[formElementIdentifier] = this.props.formConfig.stages[index].fields[formElementIdentifier].value;
-      }
+
+    if (!(!this.state.missing.length)){
+      console.log('Submit denegado')
     }
-    console.log(payload)
-    console.log('metodo: '+method)
-    //window.location.href = "http://localhost:3000/";
-    
-    switch( method.toLowerCase() ) {
-      case 'get':
-        axios.get(this.props.formConfig.endpoint)
-          .then(response => {
-            console.log(response);
-            this.setState({formData: response.data});
-          })
-          .catch(function(error){
-            console.log(error);
-          })
-        break;
-      case 'post':
-        axios.post(this.props.formConfig.endpoint, payload)
-          .then(response => {
-            console.log(response);
-          })
-          .catch(function(error){
-            console.log(error);
-          })
-        break;
-      default:
-        console.log("Debes introducir un método válido");
-        break;
+
+    else {
+      // extraer los datos de cada form, dentro de cada etapa
+      let payload = Object.create(null);
+        for (let index in this.props.formConfig.stages) {
+          for (let formElementIdentifier in this.props.formConfig.stages[index].fields) {
+            // poblar objeto con todos los datos del formulario
+            payload[formElementIdentifier] = this.props.formConfig.stages[index].fields[formElementIdentifier].value;
+          }
+        }
+        console.log(payload)
+        console.log('metodo: '+method)
+        //window.location.href = "http://localhost:3000/";
+        
+        switch( method.toLowerCase() ) {
+          case 'get':
+            axios.get(this.props.formConfig.endpoint)
+              .then(response => {
+                console.log(response);
+                this.setState({formData: response.data});
+              })
+              .catch(function(error){
+                console.log(error);
+              })
+            break;
+          case 'post':
+            axios.post(this.props.formConfig.endpoint, payload)
+              .then(response => {
+                console.log(response);
+              })
+              .catch(function(error){
+                console.log(error);
+              })
+            break;
+          default:
+            console.log("Debes introducir un método válido");
+            break;
+    }
     }
   }
   

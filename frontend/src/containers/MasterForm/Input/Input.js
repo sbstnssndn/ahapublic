@@ -20,7 +20,7 @@ const Input = (props) => {
 							value={props.value}
 							className="form-control"
 						/>
-						<small class="form-text text-danger">{props.subtext}</small>
+						<small className="form-text text-danger">{props.subtext}</small>
 					</div>
 				);
 				break;
@@ -34,7 +34,7 @@ const Input = (props) => {
 							value={props.value}
 							className="form-control"
 						/>
-						<small class="form-text text-danger">{props.subtext}</small>
+						<small className="form-text text-danger">{props.subtext}</small>
 					</div>
 				);
 				break;
@@ -110,7 +110,7 @@ const Input = (props) => {
 							value={props.value}
 							className="form-control"
 						/>
-						<small class="form-text text-danger">{props.subtext}</small>
+						<small className="form-text text-danger">{props.subtext}</small>
 					</div>
 				);
 		}
