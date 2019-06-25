@@ -229,11 +229,7 @@ class MasterForm extends Component {
   handleSubmit = (event, method) => {
     event.preventDefault();
 
-    if (!(!this.state.missing.length)){
-      console.log('Submit denegado')
-    }
-
-    else {
+    if (!this.state.missing.length) {
       // extraer los datos de cada form, dentro de cada etapa
       let payload = Object.create(null);
         for (let index in this.props.formConfig.stages) {
@@ -269,7 +265,11 @@ class MasterForm extends Component {
           default:
             console.log("Debes introducir un método válido");
             break;
+        }
     }
+
+    else {
+      console.log('Submit denegado')
     }
   }
   
