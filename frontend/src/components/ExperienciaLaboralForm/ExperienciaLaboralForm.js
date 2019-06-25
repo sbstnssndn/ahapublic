@@ -47,6 +47,7 @@ const ExperienciaLaboralForm = ( props ) => {
 								placeholder={experiencia.field1.elementConfig.placeholder}
 								value={experiencia.field1.value}
 								name={experiencia.field1.elementConfig.name}
+								required
 							/>
 						</Form.Group>
 
@@ -64,6 +65,7 @@ const ExperienciaLaboralForm = ( props ) => {
 									showYearDropdown
 									showMonthDropdown
 									onChange={(event) => props.handleChange(event, props.field, experiencia.field2.elementConfig.id, experiencia.field2.elementConfig.type)}
+									required
 								/>
 							</Form.Group>
 
@@ -80,6 +82,7 @@ const ExperienciaLaboralForm = ( props ) => {
 									showYearDropdown
 									showMonthDropdown
 									onChange={(event) => props.handleChange(event, props.field, experiencia.field3.elementConfig.id, experiencia.field3.elementConfig.type)}
+									required
 								/>
 							</Form.Group>
 
@@ -90,6 +93,7 @@ const ExperienciaLaboralForm = ( props ) => {
 									onChange={(event) => props.handleChange(event, props.field, experiencia.field4.elementConfig.id)}
 									name={experiencia.field4.elementConfig.name}
 									value={experiencia.field4.value}
+									required
 								>
 									{experiencia.field4.elementConfig.options.map(option => (
 										<option

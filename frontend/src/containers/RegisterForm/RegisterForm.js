@@ -4,6 +4,11 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Alert from 'react-bootstrap/Alert';
 import { signup } from '../../util/APIUtils';
+import { 
+  emailIsValid,
+  passwordLengthIsValid,
+	 } from '../../util/ValidationUtils';
+import { LinkContainer } from 'react-router-bootstrap';
 
 class LandingForm extends Component {
 
@@ -20,8 +25,8 @@ class LandingForm extends Component {
 
 	validateForm = () => {
     return (
-      this.state.email.length > 5 &&
-      this.state.password.length > 5 &&
+      emailIsValid(this.state.email) &&
+      passwordLengthIsValid(this.state.password) &&
       this.state.password === this.state.confirmPassword
     );
   }
@@ -72,7 +77,7 @@ class LandingForm extends Component {
 			</React.Fragment>
 		)
 
-		if (this.state.checkboxChecked) {
+		if (this.state.empresa) {
 			formHeader = (
 				<React.Fragment>
 					<h3 className="text-center">Empresas</h3>
@@ -122,6 +127,11 @@ class LandingForm extends Component {
 						<Button variant="outline-light" type="submit" block disabled={!this.validateForm()}>
 							Registrarse
 						</Button>
+						<LinkContainer to="/login">
+							<Button variant="outline-light" block>
+								Iniciar Sesión
+							</Button>
+						</LinkContainer>
 
 						{/* TODO: Cambiar esto por un toast */}
 						<Alert

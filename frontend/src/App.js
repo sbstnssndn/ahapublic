@@ -20,6 +20,9 @@ import {
 import { getCurrentUser } from './util/APIUtils';
 
 import './App.css';
+import Container from 'react-bootstrap/Container';
+import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
 
 class App extends Component {
 
@@ -88,6 +91,7 @@ class App extends Component {
 		return (
 			<React.Fragment>
 				<Navigation
+					onLogin={this.handleLogin}
 					currentUser={this.state.currentUser}
 					isAuthenticated={this.state.isAuthenticated}
 					handleLogout={this.handleLogout}
@@ -109,7 +113,17 @@ class App extends Component {
 						path="/login"
 						exact
 						render={
-							(props) =>  this.state.isAuthenticated ? this.props.history.goBack() : <Login onLogin={this.handleLogin} {...props} />
+							(props) =>  this.state.isAuthenticated
+								? this.props.history.goBack()
+								: <section id="formularios" className="py-4" style={{minHeight: '80vh', paddingTop: '100px'}}>
+										<Container fluid>
+											<Row>
+												<Col sm={{ span: 6, offset: 3 }}>
+													<Login onLogin={this.handleLogin} {...props} />
+												</Col>
+											</Row>
+										</Container>
+									</section>
 						} />
 
 					{/*

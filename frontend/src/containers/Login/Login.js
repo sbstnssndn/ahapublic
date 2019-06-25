@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
@@ -85,53 +83,42 @@ class Login extends Component {
 
 		return (
 			<React.Fragment>
-				<p>{this.props.prueba}</p>
-				<section id="formularios" className="py-4" style={{minHeight: '90vh'}}>
-					<Container style={{paddingTop: '100px'}}>
-						<Row>
-							<Col md>
-								<Row>
-									<Col md={{ span: 6, offset: 3 }}>
-										<Card>
-											<Card.Body>
-												<Card.Title>Iniciar Sesión</Card.Title>
-												<Form onSubmit={this.handleSubmit}>
-													<Form.Group controlId="email">
-														<Form.Label>Correo electrónico</Form.Label>
-														<Form.Control
-															type="email"
-															placeholder="nombre@mail.cl"
-															value={this.state.email}
-															onBlur={this.handleBlur}
-															onChange={this.handleChange} />
-														<Form.Text className="text-danger">
-															{this.state.mailAlert}
-														</Form.Text>
-													</Form.Group>
-													<Form.Group controlId="password">
-														<Form.Label>Contraseña</Form.Label>
-														<Form.Control
-															type="password"
-															placeholder="Ingrese su contraseña..."
-															value={this.state.password}
-															onBlur={this.handleBlur}
-															onChange={this.handleChange} />
-														<Form.Text className="text-danger">
-															{this.state.passAlert}
-														</Form.Text>
-													</Form.Group>
-													<Button variant="primary" type="submit">
-														Iniciar sesión
-													</Button>
-												</Form>
-											</Card.Body>
-										</Card>
-									</Col>
-								</Row>
-							</Col>
-						</Row>
-					</Container>
-				</section>
+				<Container fluid>
+					<Card>
+						<Card.Body>
+							<Card.Title>Iniciar Sesión</Card.Title>
+							<Form onSubmit={this.handleSubmit}>
+								<Form.Group controlId="email">
+									<Form.Label>Correo electrónico</Form.Label>
+									<Form.Control
+										type="email"
+										placeholder="nombre@mail.cl"
+										value={this.state.email}
+										onBlur={this.handleBlur}
+										onChange={this.handleChange} />
+									<Form.Text className="text-danger">
+										{this.state.mailAlert}
+									</Form.Text>
+								</Form.Group>
+								<Form.Group controlId="password">
+									<Form.Label>Contraseña</Form.Label>
+									<Form.Control
+										type="password"
+										placeholder="Ingrese su contraseña..."
+										value={this.state.password}
+										onBlur={this.handleBlur}
+										onChange={this.handleChange} />
+									<Form.Text className="text-danger">
+										{this.state.passAlert}
+									</Form.Text>
+								</Form.Group>
+								<Button variant="primary" type="submit">
+									Iniciar sesión
+								</Button>
+							</Form>
+						</Card.Body>
+					</Card>
+				</Container>
 			</React.Fragment>
 		);
 	}
