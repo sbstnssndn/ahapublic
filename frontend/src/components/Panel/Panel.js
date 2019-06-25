@@ -8,8 +8,8 @@ import Tabs from '../Tabs/Tabs';
 import { formPostulante } from '../../constants/forms/formPostulante';
 import { formPostulanteLaboral } from '../../constants/forms/formPostulanteLaboral';
 import { formEmpresa } from '../../constants/forms/formEmpresa';
+import { formEmpresaLaboral} from '../../constants/forms/formEmpresaLaboral';
 import { formCuentaUsuario } from '../../constants/forms/formCuentaUsuario';
-import { formPreguntas } from '../../constants/forms/formPreguntas';
 import {
 	USER_TYPE_POSTULANTE,
 	USER_TYPE_EMPRESA
@@ -37,13 +37,6 @@ const Panel = ( props ) => {
 						render={(props) => (
 							<MasterForm
 								formConfig={formCuentaUsuario} currentUser={props.currentUser} {...props} />
-						)} />
-					<Route
-						path={`${props.match.path}/preguntas`}
-						exact
-						render={(props) => (
-							<MasterForm
-								formConfig={formPreguntas} currentUser={props.currentUser} {...props} />
 						)} />
 					<Route
 						path={`${props.match.path}`}
@@ -80,11 +73,11 @@ const Panel = ( props ) => {
 									formConfig={formCuentaUsuario} currentUser={props.currentUser} {...props} />
 							)} />
 						<Route
-							path={`${props.match.path}/accesibilidad`}
+							path={`${props.match.path}/nueva-oferta`}
 							exact
 							render={(props) => (
 								<MasterForm
-									formConfig={formPreguntas} currentUser={props.currentUser} {...props} />
+									formConfig={formEmpresaLaboral} currentUser={props.currentUser} {...props} />	
 							)} />
 						<Route
 							path={`${props.match.path}`}
@@ -99,7 +92,7 @@ const Panel = ( props ) => {
 						<div label="Datos empresa" to={`${props.match.url}`} icon="fas fa-address-card"></div>
 						<div label="Ofertas laborales" to={`${props.match.url}/ofertas`} icon="fas fa-briefcase"></div>
 						<div label="Recomendaciones" to={`${props.match.url}/recomendaciones`} icon="fas fa-user"></div>
-						<div label="Mi cuenta" to={`${props.match.url}/cuenta`} icon="fas fa-user"></div>
+						<div label="Nueva oferta" to={`${props.match.url}/nueva-oferta`} icon="fas fa-user"></div>
 					</Tabs>
 				);
 				break;

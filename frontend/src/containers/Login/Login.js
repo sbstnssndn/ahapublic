@@ -24,35 +24,36 @@ class Login extends Component {
       const id = event.target.id
       const value = event.target.value
 
-      switch (id) {
-				case('email'):
-					if (!emailIsValid(value)) {
-						this.setState({
-							mailAlert: 'Correo electrónico inválido.',
-							allowed: 'disabled'
-						});
-					} else {
-						this.setState({
-							mailAlert: '',
-							allowed: 'enabled'
-						});
-					}
-          break;
+      	switch (id) {
+			case('email'):
+				if (!emailIsValid(value)) {
+					this.setState({
+						mailAlert: 'Correo electrónico inválido.',
+						allowed: 'disabled'
+					});
+				} else {
+					this.setState({
+						mailAlert: '',
+						allowed: 'enabled'
+					});
+				}
+          	break;
         case('password'):
-          if (!passwordLengthIsValid(value)) {
-						this.setState({
-            	passAlert: 'La contraseña debe tener entre 6 y 30 caracteres.',
-            	allowed: 'disabled'
-            });
-					} else {
-						this.setState({
-            	passAlert: '',
-            	allowed: 'enabled'
-            });
-					}
-					break;
-				default:
-					break;
+          	if (!passwordLengthIsValid(value)) {
+				this.setState({
+            		passAlert: 'La contraseña debe tener entre 6 y 30 caracteres.',
+            		allowed: 'disabled'
+            	});
+			}
+			else {
+				this.setState({
+            		passAlert: '',
+            		allowed: 'enabled'
+            	});
+			}
+			break;
+		default:
+			break;
       }
     }
 
@@ -66,7 +67,7 @@ class Login extends Component {
 		event.preventDefault();
 
 		const loginRequest = Object.assign({}, this.state);
-
+		console.log("Ingresando");
 		login(loginRequest)
 			.then(response => {
 				localStorage.setItem(ACCESS_TOKEN, response.accessToken);

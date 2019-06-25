@@ -1,3 +1,4 @@
+//Datos personales del usuario postulante
 export const formPostulante = 
 	{
 		title: "Información postulante",

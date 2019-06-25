@@ -1,3 +1,4 @@
+//Para el cambio de email o password
 export const formCuentaUsuario =
     {
         title: "Información cuenta de usuario",

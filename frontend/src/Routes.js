@@ -68,7 +68,7 @@ const Routes = (props) => {
 					)}
 				/>
 				<Route
-					path="/empresas/panel"
+					path="/empresas"
 					exact
 					render={({match}) => (
 						<Empresa
@@ -81,7 +81,7 @@ const Routes = (props) => {
 					)}
 				/>
 				<Route
-					path="/empresas/panel/ofertas-laborales"
+					path="/empresas/ofertas-laborales"
 					exact
 					render={({match}) => (
 						<Empresa
@@ -92,7 +92,7 @@ const Routes = (props) => {
 					)}
 				/>
 				<Route
-					path="/empresas/panel/cuenta-usuario"
+					path="/empresas/cuenta-usuario"
 					exact
 					render={({match}) => (
 						<Empresa
@@ -105,7 +105,7 @@ const Routes = (props) => {
 					)}
 				/>
 				<Route
-					path="/empresas/panel/recomendaciones"
+					path="/empresas/recomendaciones"
 					exact
 					render={({match}) => (
 						<Empresa

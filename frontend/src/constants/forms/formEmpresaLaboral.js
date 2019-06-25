@@ -1,19 +1,67 @@
-export const formPreguntas = 
+//Nueva oferta por parte de usuario empresa - datos de discapacidad a solicitar
+export const formEmpresaLaboral =
     {
-		title: "Preguntas",
-		belongsTo: "postulante",
-		endpoint: "",
-		totalStages: 4,
-		stages: [
-			{
-				id: 0,
-				name: "Preguntas (1/4)",
-				fields: {
-					permanecerPie:{
+        title: "Información Oferta",
+        belongsTo: "empresa",
+        endpoint: "",
+        totalStages: 5,
+        stages: 
+        [
+            {
+                id: 0,
+                name: "Accesibilidad",
+                fields: {
+					sillaDeRuedas: {
 						type: 'normal',
 						elements: [
 							{
-								label: '¿Puedes permanecer de pie?',
+								label: '¿Tienes acceso para silla de ruedas?',
+								elementType: 'select',
+								elementConfig: {
+									name: 'sillaRuedas',
+									id: 'sillaRuedas',
+									options: [
+										{ value: '', displayValue: 'Seleccione...', disabled: true },
+										{ value: 'true', displayValue: 'Si' },
+										{ value: 'false', displayValue: 'No' }
+									]
+								},
+								subtext: '',
+								value: ''
+							}
+						]
+					},
+					bañoAdaptado: {
+						type: 'normal',
+						elements: [
+							{
+								label: '¿Tienes baño adaptado?',
+								elementType: 'select',
+								elementConfig: {
+									name: 'bañoAdaptado',
+									id: 'bañoAdaptado',
+									options: [
+										{ value: '', displayValue: 'Seleccione...', disabled: true },
+										{ value: 'true', displayValue: 'Si' },
+										{ value: 'false', displayValue: 'No' }
+									]
+								},
+								subtext: '',
+								value: ''
+							}
+						]
+					}
+				}
+            },
+            {
+                id: 1,
+                name: "Exigencia física (1/3)",
+                fields: {
+                    permanecerPie: {
+						type: 'normal',
+						elements: [
+							{
+								label: '¿Cuánto requieres que el candidato permanezca de pie?',
 								elementType: 'select',
 								elementConfig: {
 									name: 'permanecerPie',
@@ -30,12 +78,11 @@ export const formPreguntas =
 								value: ''
 							}
 						]
-					},
-					permanecerSentado:{
-						type: 'normal',
-						elements: [
+                    },
+                    permanecerSentado: {
+                        elements: [
 							{
-								label: '¿Puedes permanecer sentado?',
+								label: '¿Cuánto requieres que el candidato permanezca sentado?',
 								elementType: 'select',
 								elementConfig: {
 									name: 'permanecerSentado',
@@ -52,12 +99,11 @@ export const formPreguntas =
 								value: ''
 							}
 						]
-					},
-					desplazoTrayectos: {
-						type: 'normal',
-						elements: [
+                    },
+                    desplazoTrayectos: {
+                        elements: [
 							{
-								label: '¿Puedes desplazarte en trayectos, con o sin ayuda técnica?',
+								label: '¿Cuánto requieres que el candidato pueda desplazarse, con o sin ayuda?',
 								elementType: 'select',
 								elementConfig: {
 									name: 'desplazoTrayectos',
@@ -74,12 +120,11 @@ export const formPreguntas =
 								value: ''
 							}
 						]
-					},
-					diferentesPisos: {
-						type: 'normal',
-						elements: [
+                    },
+                    diferentesPisos: {
+                        elements: [
 							{
-								label: '¿Puedes realizar actividades en diferentes pisos?',
+								label: '¿Cuánto requieres que el candidato pueda desplazarse entre diferentes pisos?',
 								elementType: 'select',
 								elementConfig: {
 									name: 'diferentesPisos',
@@ -96,18 +141,11 @@ export const formPreguntas =
 								value: ''
 							}
 						]
-					},
-				}
-			},
-			{
-				id: 1,
-				name: "Preguntas (2/4)",
-				fields: {
-					diferentesAlturas:{
-						type: 'normal',
-						elements: [
+                    },
+                    diferentesAlturas: {
+                        elements: [
 							{
-								label: '¿Puedes alcanzar o coger objetos en diferentes alturas?',
+								label: '¿Cuánto requieres que el candidato pueda acceder a diferentes alturas?',
 								elementType: 'select',
 								elementConfig: {
 									name: 'diferentesAlturas',
@@ -124,12 +162,18 @@ export const formPreguntas =
 								value: ''
 							}
 						]
-					},
-					objetosPequeños:{
+                    }
+                }
+            },
+            {
+                id: 2,
+                name: "Exigencia física (2/3)",
+                fields: {
+                    objetosPequeños: {
 						type: 'normal',
 						elements: [
 							{
-								label: '¿Puedes usar herramientas u objetos pequeños?',
+								label: '¿Cuánto requieres que el candidato maneje objetos pequeños?',
 								elementType: 'select',
 								elementConfig: {
 									name: 'objetosPequeños',
@@ -146,12 +190,12 @@ export const formPreguntas =
 								value: ''
 							}
 						]
-					},
-					actividadesVisual: {
+                    },
+                    actividadesVisual: {
 						type: 'normal',
 						elements: [
 							{
-								label: '¿Puedes realizar actividades que requieren agudeza visual corta y larga distancia?',
+								label: '¿Cuánto requieres que el candidato pueda realizar actividades de agudeza visual?',
 								elementType: 'select',
 								elementConfig: {
 									name: 'actividadesVisual',
@@ -168,12 +212,12 @@ export const formPreguntas =
 								value: ''
 							}
 						]
-					},
-					actividadesAuditiva: {
-						type: 'normal',
+                    },
+                    actividadesAuditiva: {
+                        type: 'normal',
 						elements: [
 							{
-								label: '¿Puedes realizar actividades que requieren agudeza auditiva?',
+								label: '¿Cuánto requieres que el candidato pueda realizar actividades de agudeza auditiva?',
 								elementType: 'select',
 								elementConfig: {
 									name: 'actividadesAuditiva',
@@ -190,18 +234,12 @@ export const formPreguntas =
 								value: ''
 							}
 						]
-					},
-				}
-			},
-			{
-				id: 2,
-				name: "Preguntas (3/4)",
-				fields: {
-					comunicacionOral:{
-						type: 'normal',
+                    },
+                    comunicacionOral: {
+                        type: 'normal',
 						elements: [
 							{
-								label: '¿Puedes comunicarte de manera oral y fluida?',
+								label: '¿Cuánto requieres que el candidato pueda comunicarse de manera oral?',
 								elementType: 'select',
 								elementConfig: {
 									name: 'comunicacionOral',
@@ -218,12 +256,12 @@ export const formPreguntas =
 								value: ''
 							}
 						]
-					},
-					leerEscribir:{
-						type: 'normal',
+                    },
+                    leerEscribir: {
+                        type: 'normal',
 						elements: [
 							{
-								label: '¿Puedes leer y escribir?',
+								label: '¿Cuánto requieres que el candidato pueda leer y escribir?',
 								elementType: 'select',
 								elementConfig: {
 									name: 'leerEscribir',
@@ -240,12 +278,18 @@ export const formPreguntas =
 								value: ''
 							}
 						]
-					},
-					situacionesNuevas: {
-						type: 'normal',
+                    }
+                }
+            },
+            {
+                id: 3,
+                name: "Exigencia física (3/3)",
+                fields: {
+                    situacionesNuevas: {
+                        type: 'normal',
 						elements: [
 							{
-								label: '¿Te adaptas a situaciones de trabajo nuevas?',
+								label: '¿Cuánto requieres que el candidato pueda acomodarse a situaciones nuevas?',
 								elementType: 'select',
 								elementConfig: {
 									name: 'situacionesNuevas',
@@ -262,12 +306,12 @@ export const formPreguntas =
 								value: ''
 							}
 						]
-					},
-					trabajoEquipo: {
-						type: 'normal',
+                    },
+                    trabajoEquipo: {
+                        type: 'normal',
 						elements: [
 							{
-								label: '¿Te adaptas a trabajo en equipo con varias personas?',
+								label: '¿Cuánto requieres que el candidato pueda acomodarse a trabajo en equipo?',
 								elementType: 'select',
 								elementConfig: {
 									name: 'trabajoEquipo',
@@ -284,18 +328,12 @@ export const formPreguntas =
 								value: ''
 							}
 						]
-					},
-				}
-			},
-			{
-				id: 3,
-				name: "Preguntas (4/4)",
-				fields: {
-					situacionesConflicto:{
-						type: 'normal',
+                    },
+                    situacionesConflicto: {
+                        type: 'normal',
 						elements: [
 							{
-								label: '¿Te adaptas a situaciones tensiones y conflicto?',
+								label: '¿Cuánto requieres que el candidato se adapte a situaciones de conflicto y tensión?',
 								elementType: 'select',
 								elementConfig: {
 									name: 'situacionesConflicto',
@@ -312,12 +350,12 @@ export const formPreguntas =
 								value: ''
 							}
 						]
-					},
-					resolverProblemas:{
-						type: 'normal',
+                    },
+                    resolverProblemas: {
+                        type: 'normal',
 						elements: [
 							{
-								label: '¿Te adaptas para resolver problemas?',
+								label: '¿Cuánto requieres que el candidato pueda resolver problemas?',
 								elementType: 'select',
 								elementConfig: {
 									name: 'resolverProblemas',
@@ -334,12 +372,12 @@ export const formPreguntas =
 								value: ''
 							}
 						]
-					},
-					tareasEstresantes: {
-						type: 'normal',
+                    },
+                    tareasEstresantes: {
+                        type: 'normal',
 						elements: [
 							{
-								label: '¿Te manejas para desarrollar tareas estresantes?',
+								label: '¿Cuánto requieres que el candidato pueda realizar tareas estresantes?',
 								elementType: 'select',
 								elementConfig: {
 									name: 'tareasEstresantes',
@@ -356,9 +394,71 @@ export const formPreguntas =
 								value: ''
 							}
 						]
-					}
-				}
-			}
-		]
-	}
+                    }
+                }
+            },
+            {
+                id: 4,
+                name: "Exigencias laborales",
+                fields: {
+                    licencia: {
+						type: 'normal',
+						elements: [
+							{
+								label: '¿Qué clase de licencia requiere tener el candidato para el cargo?',
+								elementType: 'select',
+								elementConfig: {
+									name: 'licencia',
+									id: 'licencia',
+									options: [
+										{ value: 'No tiene', displayValue: 'No tiene' },
+										{ value: 'A1', displayValue: 'Clase A1' },
+										{ value: 'A2', displayValue: 'Clase A2' },
+										{ value: 'A3', displayValue: 'Clase A3' },
+										{ value: 'A4', displayValue: 'Clase A4' },
+										{ value: 'A5', displayValue: 'Clase A5' },
+										{ value: 'B', displayValue: 'Clase B' },
+										{ value: 'C', displayValue: 'Clase C' },
+										{ value: 'D', displayValue: 'Clase D' },
+										{ value: 'E', displayValue: 'Clase E' },
+										{ value: 'F', displayValue: 'Clase F' }
+									]
+								},
+								subtext: '',
+								value: ''
+							}
+						]
+					},
+                    nivelEducacional: {
+						type: 'normal',
+						elements: [
+							{
+								label: '¿Qué nivel educacional mínimo debe tener el candidato?',
+								elementType: 'select',
+								elementConfig: {
+									name: 'nivelEducacional',
+									id: 'nivelEducacional',
+									options: [
+										{ value: '', displayValue: 'Seleccione...', disabled: true },
+										{ value: '0', displayValue: 'Educación Especial' },
+										{ value: '1', displayValue: 'Ed. Básica Incompleta' },
+										{ value: '2', displayValue: 'Ed. Básica Completa' },
+										{ value: '3', displayValue: 'Ed. Media Incompleta' },
+										{ value: '4', displayValue: 'Ed. Media Completa' },
+										{ value: '5', displayValue: 'Ed. Media Técnica-Profesional Incompleta' },
+										{ value: '6', displayValue: 'Ed. Media Técnica-Profesional Completa' },
+										{ value: '7', displayValue: 'Ed. Superior Profesional Incompleta' },
+										{ value: '8', displayValue: 'Ed. Superior Profesional Completa' },
+										{ value: '9', displayValue: 'Postgrado' },
+									]
+								},
+								subtext: '',
+								value: ''
+							}
+						]
+					},
+                }
+            }
+        ]
+    }
 ;

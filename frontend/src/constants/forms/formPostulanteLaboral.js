@@ -1,3 +1,4 @@
+//Información laboral y datos de discapacidad de postulantes.
 export const formPostulanteLaboral = 
 	{
 		title: "Información postulante",

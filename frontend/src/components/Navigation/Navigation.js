@@ -39,17 +39,27 @@ const Navigation = ( props ) => {
 		case USER_TYPE_EMPRESA:
 			navbarItems = (
 				<React.Fragment>
-					<NavigationItem exact to="/empresas/panel">
+					{/*formEmpresa */}
+					<NavigationItem exact to='/empresa'>
 						Datos empresa
 					</NavigationItem>
-					<NavigationItem exact to="/empresas/panel/ofertas-laborales">
+
+					<NavigationItem exact to='/empresa/ofertas-laborales'>
 						Ofertas laborales
 					</NavigationItem>
-					<NavigationItem exact to="/empresas/panel/recomendaciones">
+
+					{/*formEmpresaLaboral */}
+					<NavigationItem exact to='/empresa/nueva-oferta'>
+						Nueva oferta
+					</NavigationItem>
+
+					{/*recomendaciones */}
+					<NavigationItem exact to='/empresa/recomendaciones'>
 						Recomendaciones
 					</NavigationItem>
-					{/* Esto debería ir en navbarUserOptions */}
-					<NavigationItem exact to="/empresas/panel/cuenta-usuario">
+
+					{/*formCuentaUsuario */}
+					<NavigationItem exact to='/empresa/cuenta-usuario'>
 						Mi cuenta
 					</NavigationItem>
 				</React.Fragment>
@@ -108,6 +118,7 @@ const Navigation = ( props ) => {
 							</Nav>
 							<Nav className="ml-auto">
 								<NavigationUserOptions
+									onLogin={props.handleLogin}
 									userType={props.userType}
 									isAuthenticated={props.isAuthenticated}
 									handleLogout={props.handleLogout} />

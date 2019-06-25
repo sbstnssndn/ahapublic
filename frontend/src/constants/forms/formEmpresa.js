@@ -1,3 +1,4 @@
+//Datos personales del usuario empresa
 export const formEmpresa = 
     {
 			title: "Información empresa",
