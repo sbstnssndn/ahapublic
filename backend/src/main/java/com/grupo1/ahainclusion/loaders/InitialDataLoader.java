@@ -43,6 +43,8 @@ import org.springframework.stereotype.Component;
 public class InitialDataLoader implements ApplicationListener<ContextRefreshedEvent> {
 
   boolean alreadySetup = false;
+  Random rand = new Random(5);
+  String userSeed = "foobar";
 
   @Autowired
   private UserRepository userRepository;
@@ -154,6 +156,28 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
     oferta1.setDescription("Reponedor de productos");
     oferta1.setPerfilEmpresa(pEmpresa1);
 
+    oferta1.setSillaDeRuedas(rand.nextBoolean());
+
+    oferta1.setActividadesAuditiva(rand.nextInt(4));
+    oferta1.setActividadesVisual(rand.nextInt(4));
+    oferta1.setBañoAdaptado(rand.nextBoolean());
+    oferta1.setComunicacionOral(rand.nextInt(4));
+    oferta1.setDesplazoTrayectos(rand.nextInt(4));
+    oferta1.setDiferentesAlturas(rand.nextInt(4));
+    oferta1.setDiferentesPisos(rand.nextInt(4));
+    oferta1.setLeerEscribir(rand.nextInt(4));
+    oferta1.setLicencia("Clase A");
+    oferta1.setNivelEducacional(rand.nextInt(4));
+    oferta1.setObjetosPequeños(rand.nextInt(4));
+    oferta1.setPermanecerPie(rand.nextInt(4));
+    oferta1.setPermanecerSentado(rand.nextInt(4));
+    oferta1.setResolverProblemas(rand.nextInt(4));
+    oferta1.setSillaDeRuedas(rand.nextBoolean());
+    oferta1.setSituacionesConflicto(rand.nextInt(4));
+    oferta1.setSituacionesNuevas(rand.nextInt(4));
+    oferta1.setTareasEstresantes(rand.nextInt(4));
+    oferta1.setTrabajoEquipo(rand.nextInt(4));
+
     oferta2.setName("Guardia");
     oferta2.setDescription("Guardia de seguridad");
     oferta2.setPerfilEmpresa(pEmpresa1);
@@ -231,9 +255,8 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
   private void getRandomUsers(Role role, Integer n) throws JSONException, UnirestException, IOException {
       
    
-    String url = "https://randomuser.me/api/?inc=gender,id,name,email&results="+n+"&nat=US&seed=foobar";
+    String url = "https://randomuser.me/api/?inc=gender,id,name,email&results="+n+"&nat=US&seed="+userSeed;
     JSONArray results = Unirest.get(url).asJson().getBody().getObject().getJSONArray("results");
-    Random rand = new Random(5);
 
     for(int i=0;i<results.length();i++)
     {
