@@ -11,6 +11,7 @@ import {
   phoneIsValid,
   nameIsValid,
   moneyIsValid,
+  egresoIsValid,
   genericIsValid,
   fillValidArray,
    } from '../../util/ValidationUtils';
@@ -50,6 +51,9 @@ class MasterForm extends Component {
     }
 
     let missing = this.state.missing
+
+    const date = new Date()
+    console.log(date)
 
     for (let elem in elementsArray) {
       console.log(elementsArray[elem].elementConfig.id)
@@ -120,6 +124,17 @@ class MasterForm extends Component {
               elementsArray[elem].subtext = 'La contraseña debe ser entre 6 y 30 caracteres'
               if (!missing.includes('password'))
                 missing.push('password')
+            }
+            break;
+
+          case('egreso'):
+            if (singleField === '' || egresoIsValid(singleField)) {
+              elementsArray[elem].subtext = ''
+              fillValidArray(missing, element, 'push')
+            }
+            else {
+              elementsArray[elem].subtext = 'Año incorrecto'
+              fillValidArray(missing, element, 'pop')
             }
             break;
 

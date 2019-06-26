@@ -1,3 +1,5 @@
+import DatePicker from "react-datepicker";
+
 export const emailIsValid = (email) => {
   return /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@(([[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email)
 }
@@ -117,6 +119,19 @@ export const moneyIsValid = (money) => {
 	}
 
 	return /^[0-9]*$/.test(temp)
+}
+
+export const egresoIsValid = (year) => {
+	if (!/^[0-9]*$/.test(year))
+		return false;
+
+	const date = new Date();
+	const egreso = new Date(year+'/01/01');
+
+	if (egreso>date)
+		return false;
+
+	return true;
 }
 
 export const genericIsValid = (text) => {
