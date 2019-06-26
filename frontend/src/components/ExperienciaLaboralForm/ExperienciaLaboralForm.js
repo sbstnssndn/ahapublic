@@ -36,8 +36,6 @@ const ExperienciaLaboralForm = ( props ) => {
 				{ experiencias.map(experiencia => ( 
 					<React.Fragment key={experiencia.id}>
 
-						
-
 						<Form.Group controlId={experiencia.field1.elementConfig.id}>
 							<Form.Label>{experiencia.field1.label}</Form.Label>
 							<Form.Control
