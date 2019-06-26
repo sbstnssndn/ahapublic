@@ -5,16 +5,7 @@ import Stepper from './Stepper/Stepper';
 import StageControls from './StageControls/StageControls';
 import Card from 'react-bootstrap/Card';
 import Alert from 'react-bootstrap/Alert';
-import { 
-  emailIsValid,
-  passwordLengthIsValid,
-  rutIsValid,
-  phoneIsValid,
-  nameIsValid,
-  moneyIsValid,
-  genericIsValid,
-  fillValidArray,
-   } from '../../util/ValidationUtils';
+import { fieldFormValidation } from '../../util/ValidationUtils';
 import { getNewCurso, getNewExperienciaLaboral } from '../../constants/experienciaFormElements';
 
 
@@ -76,101 +67,22 @@ class MasterForm extends Component {
       console.log(clone.elementsArray[elem].elementConfig.id)
       if(clone.elementsArray[elem].elementConfig.id === element) {
 
-        const singleField = event.target.value
+        const resp = fieldFormValidation(missing, element, event.target.value)
 
-        switch(element){
-          case('firstName'):
-          case('lastName'):
-          case('personaQueEntrevista'):
-            if (singleField === '' || nameIsValid(singleField)) {
-              clone.elementsArray[elem].subtext = ''
-              missing = fillValidArray(missing, element, 'pop')
-            }
-            else {
-              clone.elementsArray[elem].subtext = 'No se permiten números ni caracteres especiales (/, #, $, etc)'
-              missing = fillValidArray(missing, element, 'push')
-            }
-            break;
+        missing = resp[0]
+        clone.elementsArray[elem].subtext = resp[1]
+        
+      }
 
-          case('rut'):
-            if (singleField === '' || rutIsValid(singleField)) {
-              clone.elementsArray[elem].subtext = ''
-              missing = fillValidArray(missing, element, 'pop')
-            }
-            else {
-              clone.elementsArray[elem].subtext = 'Rut incorrecto'
-              missing = fillValidArray(missing, element, 'push')
-            }
-            break;
+      clone.updatedForm.stages[this.state.currentStage].fields[inputIdentifier].elements[elem] = clone.elementsArray[elem];
+    } 
 
-          case('correo2'):
-          case('email'):
-            if (singleField === '' || emailIsValid(singleField)) {
-              clone.elementsArray[elem].subtext = ''
-              missing = fillValidArray(missing, element, 'pop')
-            }
-            else {
-              clone.elementsArray[elem].subtext = 'Correo electrónico incorrecto'
-              missing = fillValidArray(missing, element, 'push')
-            }
-            break;
-          
-          case('telefono1'):
-          case('telefono2'):
-          case('telefono'):
-            if (singleField === '' || phoneIsValid(singleField)) {
-              clone.elementsArray[elem].subtext = ''
-              missing = fillValidArray(missing, element, 'pop')
-            }
-            else {
-              clone.elementsArray[elem].subtext = 'El teléfono es incorrecto'
-              missing = fillValidArray(missing, element, 'push')
-            }
-            break;
+    console.log('missing: {'+missing+'}')  
 
-          case('password'):
-            if (singleField === '' || passwordLengthIsValid(singleField)) {
-              clone.elementsArray[elem].subtext = ''
-              missing = fillValidArray(missing, element, 'pop')
-            }
-            else {
-              clone.elementsArray[elem].subtext = 'La contraseña debe ser entre 6 y 30 caracteres'
-              missing = fillValidArray(missing, element, 'push')
-            }
-            break;
-
-          case('expectativaSueldo'):
-            if (singleField === '' || moneyIsValid(singleField)) {
-              clone.elementsArray[elem].subtext = ''
-              missing = fillValidArray(missing, element, 'pop')
-            }
-            else {
-              clone.elementsArray[elem].subtext = 'El monto ingresado es incorrecto'
-              missing = fillValidArray(missing, element, 'push')
-            }
-            break;
-
-          default:
-            if (singleField === '' || genericIsValid(singleField)) {
-              clone.elementsArray[elem].subtext = ''
-              missing = fillValidArray(missing, element, 'pop')
-            }
-            else {
-              clone.elementsArray[elem].subtext = 'El valor ingresado supera la cantidad máxima permitida'
-              missing = fillValidArray(missing, element, 'push')
-            }
-        }
-        }
-
-        clone.updatedForm.stages[this.state.currentStage].fields[inputIdentifier].elements[elem] = clone.elementsArray[elem];
-      } 
-
-      console.log('missing: {'+missing+'}')  
-
-      this.setState({
-        form: clone.updatedForm,
-        missing: missing,
-      });   
+    this.setState({
+      form: clone.updatedForm,
+      missing: missing,
+    });   
   }
 
   // handleChange(event, firstName)
