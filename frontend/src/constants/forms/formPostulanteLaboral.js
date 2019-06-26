@@ -107,6 +107,26 @@ export const formPostulanteLaboral =
 				id: 2,
 				name: "Otros datos laborales",
 				fields: {
+					credencial: {
+						type: 'normal',
+						elements: [
+							{
+								label: '¿Posee credencial?',
+								elementType: 'select',
+								elementConfig: {
+									name: 'credencial',
+									id: 'credencial',
+									options: [
+										{ value: '', displayValue: 'Seleccione...', disabled: true },
+										{ value: 'true', displayValue: 'Si' },
+										{ value: 'false', displayValue: 'No' }
+									]
+								},
+								subtext: '',
+								value: ''
+							}
+						]
+					},
 					interesesLaborales: {
 						type: 'normal',
 						elements: [
@@ -129,12 +149,20 @@ export const formPostulanteLaboral =
 						elements: [
 							{
 								label: 'Pretención de renta (en pesos)',
-								elementType: 'money',
+								elementType: 'select',
 								elementConfig: {
-									type: 'text',
-									placeholder: '600.000',
-									name: 'expectativaSueldo',
-									id: 'expectativaSueldo'
+									name: 'rentaEstimada',
+									id: 'rentaEstimada',
+									options: [
+										{ value: '', displayValue: 'Seleccione...', disabled: true },
+										{ value: '0', displayValue: 'Hasta 301.000' },
+										{ value: '1', displayValue: '301.0001 a 400.000' },
+										{ value: '2', displayValue: '400.001 a 550.000' },
+										{ value: '3', displayValue: '550.001 a 650.000' },
+										{ value: '4', displayValue: '650.001 a 800.000' },
+										{ value: '5', displayValue: '800.001 a 1.000.000' },
+										{ value: '6', displayValue: '1.000.001 o más' }
+									]
 								},
 								subtext: '',
 								value: ''
@@ -193,7 +221,7 @@ export const formPostulanteLaboral =
 			},
 			{
 				id: 3,
-				name: "Perfil Funcional (1/6)",
+				name: "Accesibilidad",
 				fields: {
 					sillaRuedas: {
 						type: 'normal',
@@ -235,11 +263,32 @@ export const formPostulanteLaboral =
 							}
 						]
 					},
+					adecuaciones: {
+						type: 'normal',
+						elements: [
+							{
+								label: 'Indique si requiere de otras adecuaciones',
+								elementType: 'textarea',
+								elementConfig:{
+									name: 'adecuaciones',
+									id: 'adecuaciones'
+								},
+								subtext: '',
+								value: ''
+							}
+						]
+					}
+				}
+			},
+			{
+				id: 4,
+				name: "Discapacidades",
+				fields: {
 					dAuditiva: {
 						type: 'normal',
 						elements: [
 							{
-								label: 'Grado de discapacidad auditiva',
+								label: 'Grado de discapacidad auditiva, en porcentaje',
 								elementType: 'select',
 								elementConfig: {
 									name: 'dAuditiva',
@@ -262,7 +311,7 @@ export const formPostulanteLaboral =
 						type: 'normal',
 						elements: [
 							{
-								label: 'Grado de discapacidad física',
+								label: 'Grado de discapacidad física, en porcentaje',
 								elementType: 'select',
 								elementConfig: {
 									name: 'dFisica',
@@ -285,7 +334,7 @@ export const formPostulanteLaboral =
 						type: 'normal',
 						elements: [
 							{
-								label: 'Grado de discapacidad intelectual',
+								label: 'Grado de discapacidad intelectual, en porcentaje',
 								elementType: 'select',
 								elementConfig: {
 									name: 'dIntelectual',
@@ -304,17 +353,11 @@ export const formPostulanteLaboral =
 							}
 						]
 					},
-				}
-			},
-			{
-				id: 4,
-				name: "Perfil Funcional (2/6)",
-				fields: {
 					dPsiquica: {
 						type: 'normal',
 						elements: [
 							{
-								label: 'Grado de discapacidad psíquica',
+								label: 'Grado de discapacidad psíquica, en porcentaje',
 								elementType: 'select',
 								elementConfig: {
 									name: 'dPsiquica',
@@ -337,7 +380,7 @@ export const formPostulanteLaboral =
 						type: 'normal',
 						elements: [
 							{
-								label: 'Grado de discapacidad visual',
+								label: 'Grado de discapacidad visual, en porcentaje',
 								elementType: 'select',
 								elementConfig: {
 									name: 'dVisual',
@@ -355,27 +398,12 @@ export const formPostulanteLaboral =
 								value: ''
 							}
 						]
-					},
-					adecuaciones: {
-						type: 'normal',
-						elements: [
-							{
-								label: 'Indique si requiere de otras adecuaciones',
-								elementType: 'textarea',
-								elementConfig:{
-									name: 'adecuaciones',
-									id: 'adecuaciones'
-								},
-								subtext: '',
-								value: ''
-							}
-						]
 					}
 				}
 			},
 			{
 				id: 5,
-				name: "Perfil Funcional (3/6)",
+				name: "Perfil Funcional (1/4)",
 				fields: {
 					permanecerPie:{
 						type: 'normal',
@@ -469,7 +497,7 @@ export const formPostulanteLaboral =
 			},
 			{
 				id: 6,
-				name: "Perfil Funcional (4/6)",
+				name: "Perfil Funcional (2/4)",
 				fields: {
 					diferentesAlturas:{
 						type: 'normal',
@@ -563,7 +591,7 @@ export const formPostulanteLaboral =
 			},
 			{
 				id: 7,
-				name: "Perfil Funcional (5/6)",
+				name: "Perfil Funcional (3/4)",
 				fields: {
 					comunicacionOral:{
 						type: 'normal',
@@ -657,7 +685,7 @@ export const formPostulanteLaboral =
 			},
 			{
 				id: 8,
-				name: "Perfil Funcional (6/6)",
+				name: "Perfil Funcional (4/4)",
 				fields: {
 					situacionesConflicto:{
 						type: 'normal',
@@ -718,6 +746,27 @@ export const formPostulanteLaboral =
 										{ value: '1', displayValue: 'Esporádicamente (Hasta un 20% de la jornada laboral)' },
 										{ value: '2', displayValue: 'Entre un 20% y 70% de la jornada laboral' },
 										{ value: '3', displayValue: 'La mayor parte del tiempo' }
+									]
+								},
+								subtext: '',
+								value: ''
+							}
+						]
+					},
+					ayudaFormulario: {
+						type: 'normal',
+						elements: [
+							{
+								label: '¿Requirió de ayuda para completar este formulario?',
+								elementType: 'select',
+								elementConfig: {
+									name: 'ayudaFormulario',
+									id: 'ayudaFormulario',
+									options: [
+										{ value: '', displayValue: 'Seleccione...', disabled: true },
+										{ value: '0', displayValue: 'No' },
+										{ value: '1', displayValue: 'Sí, parcial' },
+										{ value: '2', displayValue: 'Completamente' }
 									]
 								},
 								subtext: '',

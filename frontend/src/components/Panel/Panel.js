@@ -8,7 +8,7 @@ import Tabs from '../Tabs/Tabs';
 import { formPostulante } from '../../constants/forms/formPostulante';
 import { formPostulanteLaboral } from '../../constants/forms/formPostulanteLaboral';
 import { formEmpresa } from '../../constants/forms/formEmpresa';
-import { formEmpresaLaboral} from '../../constants/forms/formEmpresaLaboral';
+import { formNuevaOferta} from '../../constants/forms/formNuevaOferta';
 import { formCuentaUsuario } from '../../constants/forms/formCuentaUsuario';
 import {
 	USER_TYPE_POSTULANTE,
@@ -77,7 +77,7 @@ const Panel = ( props ) => {
 							exact
 							render={(props) => (
 								<MasterForm
-									formConfig={formEmpresaLaboral} currentUser={props.currentUser} {...props} />	
+									formConfig={formNuevaOferta} currentUser={props.currentUser} {...props} />	
 							)} />
 						<Route
 							path={`${props.match.path}`}

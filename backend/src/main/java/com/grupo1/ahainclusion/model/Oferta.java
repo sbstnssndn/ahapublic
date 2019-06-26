@@ -98,19 +98,21 @@ public class Oferta {
 
     // DISPONIBILIDAD
     // --------------
-    // Disponibilidad: 0:Lunes a Viernes
+    // Disponibilidad: 
+    // 0: Lunes a Viernes
     // 1: Sábados, Domingos y festivos
     // 2: Cualquier día
     private Integer disponibilidad;
 
     // EXPECTATIVAS DE SUELDO
-    // ExpectativaSueldo: 0: Hasta 301.000
+    // ExpectativaSueldo: 
+    // 0: Hasta 301.000
     // 1: 301.0001 a 400.000
     // 2: 400.001 a 550.000
     // 3: 550.001 a 650.000
     // 4: 650.001 a 800.000
     // 5: 800.001 a 1.000.000
-    // 6: 1.000.000 o más
+    // 6: 1.000.001 o más
     private Integer rentaEstimada;
 
     // Experiencias laborales

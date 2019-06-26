@@ -1,14 +1,52 @@
 //Nueva oferta por parte de usuario empresa - datos de discapacidad a solicitar
-export const formEmpresaLaboral =
+export const formNuevaOferta =
     {
         title: "Información Oferta",
         belongsTo: "empresa",
         endpoint: "",
-        totalStages: 5,
+        totalStages: 6,
         stages: 
-        [
+        [	
+			{
+				id: 0,
+				name: "Descripción de la oferta",
+				fields: {
+					name: {
+						type: 'normal',
+						elements: [
+							{
+								label: 'Nombre trabajo',
+								elementType: 'input',
+								elementConfig: {
+									type: 'text',
+									placeholder: '12345678-0',
+									name: 'name',
+									id: 'name'
+								},
+								subtext: '',
+								value: ''
+							}
+						]
+					},
+					description: {
+						type: 'normal',
+						elements: [
+							{
+								label: 'Indique una descripción de su oferta',
+								elementType: 'textarea',
+								elementConfig:{
+									name: 'description',
+									id: 'description'
+								},
+								subtext: '',
+								value: ''
+							}
+						]
+					}
+				}
+			},
             {
-                id: 0,
+                id: 1,
                 name: "Accesibilidad",
                 fields: {
 					sillaDeRuedas: {
@@ -54,7 +92,7 @@ export const formEmpresaLaboral =
 				}
             },
             {
-                id: 1,
+                id: 2,
                 name: "Exigencia física (1/3)",
                 fields: {
                     permanecerPie: {
@@ -166,7 +204,7 @@ export const formEmpresaLaboral =
                 }
             },
             {
-                id: 2,
+                id: 3,
                 name: "Exigencia física (2/3)",
                 fields: {
                     objetosPequeños: {
@@ -282,7 +320,7 @@ export const formEmpresaLaboral =
                 }
             },
             {
-                id: 3,
+                id: 4,
                 name: "Exigencia física (3/3)",
                 fields: {
                     situacionesNuevas: {
@@ -398,7 +436,7 @@ export const formEmpresaLaboral =
                 }
             },
             {
-                id: 4,
+                id: 5,
                 name: "Exigencias laborales",
                 fields: {
                     licencia: {
@@ -457,8 +495,54 @@ export const formEmpresaLaboral =
 							}
 						]
 					},
+					disponibilidad: {
+						type: 'normal',
+						elements: [
+							{
+								label: 'Disponibilidad deseada',
+								elementType: 'select',
+								elementConfig: {
+									name: 'disponibilidad',
+									id: 'disponibilidad',
+									options: [
+										{ value: '', displayValue: 'Seleccione...', disabled: true },
+										{ value: '0', displayValue: 'Lunes a Viernes' },
+										{ value: '1', displayValue: 'Sábados, Domingos y festivos' },
+										{ value: '2', displayValue: 'Cualquier día' }
+									]
+								},
+								subtext: '',
+								value: ''
+							}
+						]
+					},
+					rentaEstimada: {
+						type: 'normal',
+						elements: [
+							{
+								label: 'Renta estimada a ofrecer',
+								elementType: 'select',
+								elementConfig: {
+									name: 'rentaEstimada',
+									id: 'rentaEstimada',
+									options: [
+										{ value: '', displayValue: 'Seleccione...', disabled: true },
+										{ value: '0', displayValue: 'Hasta 301.000' },
+										{ value: '1', displayValue: '301.0001 a 400.000' },
+										{ value: '2', displayValue: '400.001 a 550.000' },
+										{ value: '3', displayValue: '550.001 a 650.000' },
+										{ value: '4', displayValue: '650.001 a 800.000' },
+										{ value: '5', displayValue: '800.001 a 1.000.000' },
+										{ value: '6', displayValue: '1.000.001 o más' }
+									]
+								},
+								subtext: '',
+								value: ''
+							}
+						]
+					}
                 }
-            }
+			}
         ]
     }
 ;

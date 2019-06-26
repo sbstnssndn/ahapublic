@@ -9,24 +9,7 @@ export const formPostulante =
 			{
 				id: 0,
 				name: "Identificación",
-				fields: {
-					rut: {
-						type: 'normal',
-						elements: [
-							{
-								label: 'RUT',
-								elementType: 'input',
-								elementConfig: {
-									type: 'text',
-									placeholder: '12345678-0',
-									name: 'rut',
-									id: 'rut'
-								},
-								subtext: '',
-								value: ''
-							}
-						]
-					},
+				fields: {				
 					firstName: {
 						type: 'normal',
 						elements: [
@@ -61,34 +44,17 @@ export const formPostulante =
 							}
 						]
 					},
-					fechaEntrevista: {
+					rut: {
 						type: 'normal',
 						elements: [
 							{
-								label: 'Fecha de entrevista',
-								elementType: 'date',
-								elementConfig: {
-									type: 'text',
-									placeholder: '20/10/2019',
-									name: 'fechaEntrevista',
-									id: 'fechaEntrevista'
-								},
-								subtext: '',
-								value: ''
-							}
-						]
-					},
-					personaQueEntrevista: {
-						type: 'normal',
-						elements: [
-							{
-								label: 'Persona que entrevista',
+								label: 'RUT',
 								elementType: 'input',
 								elementConfig: {
 									type: 'text',
-									placeholder: 'Karina Cisterna',
-									name: 'personaQueEntrevista',
-									id: 'personaQueEntrevista'
+									placeholder: '12345678-0',
+									name: 'rut',
+									id: 'rut'
 								},
 								subtext: '',
 								value: ''
@@ -167,24 +133,7 @@ export const formPostulante =
 				id: 2,
 				name: "Contacto",
 				fields: {
-					email: {
-						type: 'normal',
-						elements: [
-							{
-								label: 'Correo electrónico de contacto',
-								elementType: 'input',
-								elementConfig: {
-									type: 'email',
-									placeholder: 'juan.perez@gmail.com',
-									name: 'email',
-									id: 'email'
-								},
-								subtext: '',
-								value: ''
-							}
-						]
-					},
-					telefono: {
+					telefono1: {
 						type: 'normal',
 						elements: [
 							{
@@ -193,8 +142,8 @@ export const formPostulante =
 								elementConfig: {
 									type: 'text',
 									placeholder: '+56912345678',
-									name: 'telefono',
-									id: 'telefono'
+									name: 'telefono1',
+									id: 'telefono1'
 								},
 								subtext: '',
 								value: ''
@@ -212,6 +161,23 @@ export const formPostulante =
 									placeholder: '+56987654321',
 									name: 'telefono2',
 									id: 'telefono2'
+								},
+								subtext: '',
+								value: ''
+							}
+						]
+					},
+					email2: {
+						type: 'normal',
+						elements: [
+							{
+								label: 'Correo electrónico de contacto',
+								elementType: 'input',
+								elementConfig: {
+									type: 'email2',
+									placeholder: 'juan.perez@gmail.com',
+									name: 'email2',
+									id: 'email2'
 								},
 								subtext: '',
 								value: ''
