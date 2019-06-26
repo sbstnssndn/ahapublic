@@ -196,7 +196,8 @@ class MasterForm extends Component {
         updatedForm.stages[this.state.currentStage].fields[inputIdentifier].elements[elem] = elementsArray[elem];
       }   
       
-    }
+		}
+		
     this.setState({
       form: updatedForm
     });
@@ -512,7 +513,7 @@ class MasterForm extends Component {
 
     const newElementsArray = elementsArray.concat(newExperiencia);
 
-    //console.log(newElementsArray)
+    console.log("newElementsArray", newElementsArray)
 
     updatedForm.stages[this.state.currentStage].fields[inputIdentifier].elements = newElementsArray;
 
@@ -521,7 +522,7 @@ class MasterForm extends Component {
     });
   }
   
-  deleteExperiencia = (inputIdentifier, idExperiencia, NumberOfFieldsToDelete, ) => {
+  deleteExperiencia = (inputIdentifier, idExperiencia, NumberOfFieldsToDelete) => {
     const updatedForm = {
       ...this.props.formConfig
     }
@@ -548,24 +549,32 @@ class MasterForm extends Component {
     }
 
     // antes de borrar, actualizar los names de los inputs, para que al eliminar el 1 de [0,1,2], el nuevo que se cree, no sea 2, dando [0,2(nuevo),2]
-    // foreach element de elements, actualizar name, id desde 0 a lenght-1
-    console.log("ANTES", elementsArray)
-    console.log(idExperiencia, NumberOfFieldsToDelete)
+		// foreach element de elements, actualizar name, id desde 0 a lenght-1
+		
+		console.log("inputIdentifier", inputIdentifier)
+		console.log("idExperiencia", idExperiencia)
+		console.log("NumberOfFieldsToDelete", NumberOfFieldsToDelete)
 
-    elementsArray.splice(idExperiencia, NumberOfFieldsToDelete);
+		elementsArray.splice(idExperiencia, NumberOfFieldsToDelete);
+		console.log("elementsArray", elementsArray)
 
     let contadorId = -1;
     for (let element=0; element < elementsArray.length; element++) {
-      if (element % NumberOfFieldsToDelete === 0)
-        contadorId++;
-      // ingresar máximo 10 cursos
-      let id = elementsArray[element].elementConfig.id;
-      let name = elementsArray[element].elementConfig.name;
-      elementsArray[element].elementConfig.id = id[id.length-1] + contadorId;
-      elementsArray[element].elementConfig.name = name[name.length-1] + contadorId;     
+      if (element % NumberOfFieldsToDelete === 0) {
+				contadorId++;
+			}
+			// ingresar máximo 10 cursos
+			console.log("IF elementsArray[element].elementConfig.id", elementsArray[element].elementConfig.id[elementsArray[element].elementConfig.id.length-1])
+			let id = elementsArray[element].elementConfig.id;
+			let newId = id.substring(0, id.length-1);
+			let name = elementsArray[element].elementConfig.name;
+			let newName = name.substring(0, name.length-1);
+
+			elementsArray[element].elementConfig.id = newId + contadorId;
+			elementsArray[element].elementConfig.name = newName + contadorId;
     }
 
-    console.log("DESPUES", elementsArray)
+    //console.log("DESPUES", elementsArray)
     updatedForm.stages[this.state.currentStage].fields[inputIdentifier].elements = elementsArray;
 
     this.setState({

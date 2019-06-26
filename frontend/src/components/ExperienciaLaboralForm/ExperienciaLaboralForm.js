@@ -43,7 +43,7 @@ const ExperienciaLaboralForm = ( props ) => {
 							<Form.Control
 								as={experiencia.field1.elementType}
 								type={experiencia.field1.elementConfig.type}
-								onChange={(event) => props.handleChange(event, props.field, experiencia.field1.elementConfig.id)}
+								onChange={(event) => props.handleChange(event, props.field, experiencia.field1.elementConfig.id, experiencia.field1.elementConfig.type)}
 								placeholder={experiencia.field1.elementConfig.placeholder}
 								value={experiencia.field1.value}
 								name={experiencia.field1.elementConfig.name}
@@ -90,7 +90,7 @@ const ExperienciaLaboralForm = ( props ) => {
 								<Form.Label>{experiencia.field4.label}</Form.Label>
 								<Form.Control
 									as={experiencia.field4.elementType}
-									onChange={(event) => props.handleChange(event, props.field, experiencia.field4.elementConfig.id)}
+									onChange={(event) => props.handleChange(event, props.field, experiencia.field4.elementConfig.id, experiencia.field4.elementConfig.type)}
 									name={experiencia.field4.elementConfig.name}
 									value={experiencia.field4.value}
 									required
