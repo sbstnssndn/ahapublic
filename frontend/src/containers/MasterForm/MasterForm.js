@@ -5,9 +5,6 @@ import Stepper from './Stepper/Stepper';
 import StageControls from './StageControls/StageControls';
 import Card from 'react-bootstrap/Card';
 import Alert from 'react-bootstrap/Alert';
-import Toast from 'react-bootstrap/Toast';
-import ToastHeader from 'react-bootstrap/ToastHeader';
-import ToastBody from 'react-bootstrap/ToastBody';
 import { 
   emailIsValid,
   passwordLengthIsValid,
@@ -588,7 +585,7 @@ class MasterForm extends Component {
           stageFields={stage.fields}
           currentStage={this.state.currentStage}
           totalStages={this.props.formConfig.totalStages}
-                handleValidation={this.handleValidation}
+          handleValidation={this.handleValidation}
           handleChange={this.handleChange}
           addExperiencia={this.addExperiencia}
           addCurso={this.addCurso}
