@@ -730,7 +730,7 @@ export const formPostulanteLaboral =
 			
 			{
 				id: 9,
-				name: "Otra formación",
+				name: "Cursos u otras formaciones",
 				fields: {
 					cursos: {
 						type: 'cursos',
