@@ -6,6 +6,7 @@ import StageControls from './StageControls/StageControls';
 import Card from 'react-bootstrap/Card';
 import Alert from 'react-bootstrap/Alert';
 import { fieldFormValidation } from '../../util/ValidationUtils';
+import { rutFormat } from '../../util/FormatUtils.js';
 import { getNewTitulo,
   getNewCurso, 
   getNewExperienciaLaboral
@@ -71,6 +72,8 @@ class MasterForm extends Component {
       if(clone.elementsArray[elem].elementConfig.id === element) {
 
         const resp = fieldFormValidation(missing, element, event.target.value)
+
+        const test = rutFormat(event.target.value)
 
         missing = resp[0]
         clone.elementsArray[elem].subtext = resp[1]

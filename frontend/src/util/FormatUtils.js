@@ -1,20 +1,37 @@
-import { rutIsValid } from './ValidationUtils'
+export const numberFormat = (number) => {
+  let temp = '';
+  let count = 0;
+
+  for (let i=number.length-1; i>=0; i++) {
+    temp = number.charAt(i) + temp;
+
+    if (count === 3){
+      temp = '.' + temp;
+      count = 0;
+    }
+    else
+      count++;
+  }
+
+  return temp;
+}
+
 
 export const rutFormat = (rut) => {
 
-	console.log(rut)
+  const test = '19702948k'
 
-	const dv = rut.charAt(rut.length-1);
-	let cRut = rut.substring(0, rut.length-2);
-	let fRut = '';
+  const dv = test.charAt(test.length-1);
+  let nRut = test.substring(0, test.length-2);
+  let fRut = '';
 
-	if (rut.length <= 1 || dv === null || cRut === null)
-		return rut;
+  if (test.length <= 1 || !dv || !nRut)
+    return rut;
 
-	while (cRut.length > 3) {
-		fRut = '.' + cRut.substring(cRut.length-3) + fRut;
-		cRut = cRut.substring(0, cRut.length-3)
-	}
+  fRut = numberFormat(nRut);
 
-	return cRut+fRut+'-'+dv;
+  fRut = fRut+'-'+dv;
+  console.log(fRut)
+
+  return rut;
 }
