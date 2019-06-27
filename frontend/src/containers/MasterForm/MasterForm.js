@@ -242,11 +242,12 @@ class MasterForm extends Component {
     });
 	}
   
-  deleteExperiencia = (inputIdentifier, idExperiencia, NumberOfFieldsToDelete) => {
+  deleteForm = (inputIdentifier, idForm, NumberOfFieldsToDelete) => {
 		const clone = {...this.cloneStateElementsArray(inputIdentifier)}
 		// eliminar los elements del form que corresponden
-		// desde el índice de la experiencia, eliminar X número de campos
-		clone.elementsArray.splice(idExperiencia, NumberOfFieldsToDelete);
+    // desde el id de la experiencia, trabajo o curso, 
+    //eliminar NumberOfFieldsToDelete número de campos
+		clone.elementsArray.splice(idForm, NumberOfFieldsToDelete);
 
     let contadorId = -1;
     for (let element=0; element < clone.elementsArray.length; element++) {
@@ -287,7 +288,7 @@ class MasterForm extends Component {
           addTitulo={this.addTitulo}
           addExperiencia={this.addExperiencia}
           addCurso={this.addCurso}
-          deleteExperiencia={this.deleteExperiencia}
+          deleteForm={this.deleteForm}
           />
         })
     );

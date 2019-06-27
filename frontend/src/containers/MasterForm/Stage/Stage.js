@@ -46,7 +46,7 @@ const Stage = (props) => {
 						elements={field.elements}
 						handleChange={props.handleChange}
 						addExperiencia={props.addExperiencia}
-						deleteExperiencia={props.deleteExperiencia}
+						deleteForm={props.deleteForm}
 					/>
 			}
 			else if (field.type === 'cursos') {
@@ -57,6 +57,7 @@ const Stage = (props) => {
 						elements={field.elements}
 						handleChange={props.handleChange}
 						addCurso={props.addCurso}
+						deleteForm={props.deleteForm}
 					/>
 			}
 			else if (field.type === "titulos"){
@@ -67,6 +68,7 @@ const Stage = (props) => {
 						elements={field.elements}
 						handleChange={props.handleChange}
 						addTitulo={props.addTitulo}
+						deleteForm={props.deleteForm}
 				/> 
 			}
 			else {

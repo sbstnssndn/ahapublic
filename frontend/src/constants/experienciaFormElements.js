@@ -1,6 +1,6 @@
 export const getNewTitulo = (idAppend) => [
 	{
-		label: 'Nombre',
+		label: 'Nombre de título',
 		elementType: 'input',
 		elementConfig: {
 			type: 'text',
@@ -11,7 +11,7 @@ export const getNewTitulo = (idAppend) => [
 		value: ''
 	},
 	{
-		label: 'Institución donde se realizó',
+		label: 'Nombre de institución',
 		elementType: 'input',
 		elementConfig: {
 			type: 'text',

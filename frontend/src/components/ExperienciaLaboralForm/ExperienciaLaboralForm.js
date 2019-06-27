@@ -106,7 +106,7 @@ const ExperienciaLaboralForm = ( props ) => {
 							</Form.Group>
 
 						</Form.Row>
-						<Button variant="danger" onClick={() => props.deleteExperiencia(props.field, experiencia.id[experiencia.id.length-1], 4)}>Eliminar</Button>
+						<Button variant="danger" onClick={() => props.deleteForm(props.field, experiencia.id[experiencia.id.length-1], 4)}>Eliminar</Button>
 						<hr />
 					</React.Fragment>
 				)) }

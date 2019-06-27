@@ -77,6 +77,7 @@ const TituloForm = ( props ) => {
                                 </Form.Group>
 
                             </Form.Row>
+                            <Button variant="danger" onClick={() => props.deleteForm(props.field, titulo.id[titulo.id.length-1], 3)}>Eliminar</Button>
                             <hr/>
                         </React.Fragment>
                     )
