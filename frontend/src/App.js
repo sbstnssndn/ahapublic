@@ -97,18 +97,28 @@ class App extends Component {
 					handleLogout={this.handleLogout}
 					match={this.props.match} />
 				<Switch>
+					
 					<PrivateRoute
 						authenticated={this.state.isAuthenticated}
 						path='/postulante'
 						component={Panel}
 						wasInitialized={this.state.wasInitialized}
 						currentUser={this.state.currentUser} />
+					
+					<PrivateRoute
+						authenticated={this.state.isAuthenticated}
+						path='/empresa'
+						component={Panel}
+						wasInitialized={this.state.wasInitialized}
+						currentUser={this.state.currentUser} />
+					
 					<Route
 						exact
 						path='/'
 						render={
 							(props) => this.state.isAuthenticated ? <Redirect to={tipoPanel} /> : <Landing {...props} />
 						} />
+					
 					<Route
 						path="/login"
 						exact
