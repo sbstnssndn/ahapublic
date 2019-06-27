@@ -1,6 +1,14 @@
-import DatePicker from "react-datepicker";
+export const genericIsValid = (text) => {
+  if (text.length > 255)
+    return false;
+
+  return true;
+}
 
 export const emailIsValid = (email) => {
+  if (email.length > 255)
+    return false;
+
   return /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@(([[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email)
 }
 
@@ -12,6 +20,9 @@ export const passwordLengthIsValid = (pass) => {
 }
 
 export const rutIsValid = (run) => {
+  if (run.length > 13)
+    return false;
+
   let len = run.length;
   let temp = '';
 
@@ -96,10 +107,16 @@ export const phoneIsValid = (phone) => {
 }
 
 export const nameIsValid = (name) => {
+  if (name.length > 255)
+    return false
+
   return /^[a-zA-ZÀ-ÿ\u00f1\u00d1]+ $/.test(name);
 }
 
 export const moneyIsValid = (money) => {
+  if (money.length > 255)
+    return false
+
   const len = money.length;
   let count = 0;
   let temp = '';
@@ -121,14 +138,10 @@ export const moneyIsValid = (money) => {
   return /^[0-9]*$/.test(temp)
 }
 
-export const genericIsValid = (text) => {
-  if (text.length > 255)
-    return false;
-
-  return true;
-}
-
 export const egresoIsValid = (year) => {
+  if (year.length > 4)
+    return false
+
   if (!/^[0-9]*$/.test(year))
     return false;
 
