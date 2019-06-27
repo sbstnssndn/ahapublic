@@ -1,3 +1,39 @@
+export const getNewTitulo = (idAppend) => [
+	{
+		label: 'Nombre',
+		elementType: 'input',
+		elementConfig: {
+			type: 'text',
+			placeholder: 'Ingeniería en informática',
+			name: 'name' + idAppend,
+			id: 'name' + idAppend
+		},
+		value: ''
+	},
+	{
+		label: 'Institución donde se realizó',
+		elementType: 'input',
+		elementConfig: {
+			type: 'text',
+			placeholder: 'Universidad de Santiago de Chile',
+			name: 'institucion' + idAppend,
+			id: 'institucion' + idAppend
+		},
+		value: ''
+	},
+	{
+		label: 'Egreso',
+		elementType: 'input',
+		elementConfig: {
+			type: 'text',
+			placeholder: '2019',
+			name: 'año' + idAppend,
+			id: 'año' + idAppend
+		},
+		value: ''
+	}
+]
+
 export const getNewCurso = (idAppend) => [
 	{
 		label: 'Curso de capacitación',

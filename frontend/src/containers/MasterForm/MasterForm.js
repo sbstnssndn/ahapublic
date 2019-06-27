@@ -6,7 +6,10 @@ import StageControls from './StageControls/StageControls';
 import Card from 'react-bootstrap/Card';
 import Alert from 'react-bootstrap/Alert';
 import { fieldFormValidation } from '../../util/ValidationUtils';
-import { getNewCurso, getNewExperienciaLaboral } from '../../constants/experienciaFormElements';
+import { getNewTitulo,
+  getNewCurso, 
+  getNewExperienciaLaboral
+ } from '../../constants/experienciaFormElements';
 
 
 class MasterForm extends Component {
@@ -195,6 +198,21 @@ class MasterForm extends Component {
       });
   }
   
+  addTitulo = (inputIdentifier) => {
+    const clone = {...this.cloneStateElementsArray(inputIdentifier)}
+
+    let idAppend = clone.updatedForm.stages[this.state.currentStage].fields[inputIdentifier].elements.length/3;
+    let newTitulo = getNewTitulo(idAppend);
+
+    const newElementsArray = clone.elementsArray.concat(newTitulo);
+
+    clone.updatedForm.stages[this.state.currentStage].fields[inputIdentifier].elements = newElementsArray;
+
+    this.setState({
+      form: clone.updatedForm
+    });
+  }
+
   addCurso = (inputIdentifier) => {
     const clone = {...this.cloneStateElementsArray(inputIdentifier)}
 
@@ -266,6 +284,7 @@ class MasterForm extends Component {
           totalStages={this.props.formConfig.totalStages}
           handleValidation={this.handleValidation}
           handleChange={this.handleChange}
+          addTitulo={this.addTitulo}
           addExperiencia={this.addExperiencia}
           addCurso={this.addCurso}
           deleteExperiencia={this.deleteExperiencia}

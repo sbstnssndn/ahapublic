@@ -18,5 +18,5 @@ export const sketchPostulante = {
     email2 = "",
 
     // 4 - Ubicación
-    direccion = ""
+    direccion = {}
 };

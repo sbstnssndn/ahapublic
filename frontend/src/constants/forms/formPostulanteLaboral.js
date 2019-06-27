@@ -38,56 +38,9 @@ export const formPostulanteLaboral =
 							}
 						]
 					},
-					titulo: {
-						type: 'normal',
-						elements: [
-							{
-								label: 'Título cursado u obtenido',
-								elementType: 'input',
-								elementConfig: {
-									type: 'text',
-									placeholder: 'Pedagogía en Lenguaje',
-									name: 'titulo',
-									id: 'titulo'
-								},
-								subtext: '',
-								value: ''
-							}
-						]
-					},
-					institucion: {
-						type: 'normal',
-						elements: [
-							{
-								label: 'Institución educacional',
-								elementType: 'input',
-								elementConfig: {
-									type: 'text',
-									placeholder: 'Universidad de Santiago de Chile',
-									name: 'institucion',
-									id: 'institucion'
-								},
-								subtext: '',
-								value: ''
-							}
-						]
-					},
-					egreso: {
-						type: 'normal',
-						elements: [
-							{
-								label: 'Año de egreso',
-								elementType: 'input',
-								elementConfig: {
-									type: 'text',
-									placeholder: '2010',
-									name: 'egreso',
-									id: 'egreso'
-								},
-								subtext: '',
-								value: ''
-							}
-						]
+					titulos: {
+						type: 'titulos',
+						elements: []
 					}
 				}
 			},
