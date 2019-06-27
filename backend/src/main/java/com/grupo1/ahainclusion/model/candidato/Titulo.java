@@ -23,6 +23,9 @@ public class Titulo {
     // Institucion: nombre de institucion donde se cursó.
     @NotNull(message = "Debe ingresar el nombre de la institución")
     private String institucion;
+    // Año: año de egreso
+    @NotNull(message = "Debe ingresar el año de egreso")
+    private Integer año;
 
     // Perfil Laboral padre
     @ManyToOne
