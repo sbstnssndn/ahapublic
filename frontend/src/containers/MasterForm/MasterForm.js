@@ -249,7 +249,7 @@ class MasterForm extends Component {
 		const clone = {...this.cloneStateElementsArray(inputIdentifier)}
 		// eliminar los elements del form que corresponden
     // desde el id de la experiencia, trabajo o curso, 
-    //eliminar NumberOfFieldsToDelete número de campos
+    // eliminar NumberOfFieldsToDelete número de campos
 		clone.elementsArray.splice(idForm, NumberOfFieldsToDelete);
 
     let contadorId = -1;

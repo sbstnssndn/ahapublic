@@ -8,57 +8,7 @@ export const formPostulanteLaboral =
 		stages: [
 			{
 				id: 0,
-				name: "Educación",
-				fields: {
-					nivelEducacional: {
-						type: 'normal',
-						elements: [
-							{
-								label: 'Nivel educacional',
-								elementType: 'select',
-								elementConfig: {
-									name: 'nivelEducacional',
-									id: 'nivelEducacional',
-									options: [
-										{ value: '', displayValue: 'Seleccione...', disabled: true },
-										{ value: '0', displayValue: 'Educación Especial' },
-										{ value: '1', displayValue: 'Ed. Básica Incompleta' },
-										{ value: '2', displayValue: 'Ed. Básica Completa' },
-										{ value: '3', displayValue: 'Ed. Media Incompleta' },
-										{ value: '4', displayValue: 'Ed. Media Completa' },
-										{ value: '5', displayValue: 'Ed. Media Técnica-Profesional Incompleta' },
-										{ value: '6', displayValue: 'Ed. Media Técnica-Profesional Completa' },
-										{ value: '7', displayValue: 'Ed. Superior Profesional Incompleta' },
-										{ value: '8', displayValue: 'Ed. Superior Profesional Completa' },
-										{ value: '9', displayValue: 'Postgrado' },
-									]
-								},
-								subtext: '',
-								value: ''
-							}
-						]
-					},
-					titulos: {
-						type: 'titulos',
-						elements: []
-					}
-				}
-			},
-			{
-				id: 1,
-				name: "Experiencia laboral",
-				fields: {
-					experiencias: {
-						type: 'multi',
-						elements: [
-
-						]
-					}
-				}
-			},
-			{
-				id: 2,
-				name: "Otros datos laborales",
+				name: "Datos laborales",
 				fields: {
 					credencial: {
 						type: 'normal',
@@ -173,7 +123,7 @@ export const formPostulanteLaboral =
 				}
 			},
 			{
-				id: 3,
+				id: 1,
 				name: "Accesibilidad",
 				fields: {
 					sillaRuedas: {
@@ -234,7 +184,7 @@ export const formPostulanteLaboral =
 				}
 			},
 			{
-				id: 4,
+				id: 2,
 				name: "Discapacidades",
 				fields: {
 					dAuditiva: {
@@ -355,7 +305,7 @@ export const formPostulanteLaboral =
 				}
 			},
 			{
-				id: 5,
+				id: 3,
 				name: "Perfil Funcional (1/4)",
 				fields: {
 					permanecerPie:{
@@ -449,7 +399,7 @@ export const formPostulanteLaboral =
 				}
 			},
 			{
-				id: 6,
+				id: 4,
 				name: "Perfil Funcional (2/4)",
 				fields: {
 					diferentesAlturas:{
@@ -543,7 +493,7 @@ export const formPostulanteLaboral =
 				}
 			},
 			{
-				id: 7,
+				id: 5,
 				name: "Perfil Funcional (3/4)",
 				fields: {
 					comunicacionOral:{
@@ -637,7 +587,7 @@ export const formPostulanteLaboral =
 				}
 			},
 			{
-				id: 8,
+				id: 6,
 				name: "Perfil Funcional (4/4)",
 				fields: {
 					situacionesConflicto:{
@@ -730,14 +680,61 @@ export const formPostulanteLaboral =
 				}
 			},
 			{
+				id: 7,
+				name: "Educación",
+				fields: {
+					nivelEducacional: {
+						type: 'normal',
+						elements: [
+							{
+								label: 'Nivel educacional',
+								elementType: 'select',
+								elementConfig: {
+									name: 'nivelEducacional',
+									id: 'nivelEducacional',
+									options: [
+										{ value: '', displayValue: 'Seleccione...', disabled: true },
+										{ value: '0', displayValue: 'Educación Especial' },
+										{ value: '1', displayValue: 'Ed. Básica Incompleta' },
+										{ value: '2', displayValue: 'Ed. Básica Completa' },
+										{ value: '3', displayValue: 'Ed. Media Incompleta' },
+										{ value: '4', displayValue: 'Ed. Media Completa' },
+										{ value: '5', displayValue: 'Ed. Media Técnica-Profesional Incompleta' },
+										{ value: '6', displayValue: 'Ed. Media Técnica-Profesional Completa' },
+										{ value: '7', displayValue: 'Ed. Superior Profesional Incompleta' },
+										{ value: '8', displayValue: 'Ed. Superior Profesional Completa' },
+										{ value: '9', displayValue: 'Postgrado' },
+									]
+								},
+								subtext: '',
+								value: ''
+							}
+						]
+					},
+					titulos: {
+						type: 'titulos',
+						elements: []
+					}
+				}
+			},
+			{
+				id: 8,
+				name: "Experiencia laboral",
+				fields: {
+					experiencias: {
+						type: 'multi',
+						elements: []
+					}
+				}
+			},
+			
+			{
 				id: 9,
-				name: "Otra formación",
+				name: "Cursos u otras formaciones",
 				fields: {
 					cursos: {
 						type: 'cursos',
-						elements: [
-
-						]
+						elements: []
 					}, // fields
 				}
 			}
