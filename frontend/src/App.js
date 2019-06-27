@@ -2,11 +2,11 @@ import React from 'react';
 import Routes from "./Routes";
 import './App.css';
 
-import formPreguntas from './formularios/formPreguntas.js';
-import formPostulanteLaboralNew from './formularios/formPostulanteLaboralNew.js';
-import formPostulante from './formularios/formPostulante.js';
-import formEmpresa from './formularios/formEmpresa.js';
-import formCuentaUsuario from './formularios/formCuentaUsuario.js';
+import formPreguntas from './constants/formularios/formPreguntas.js';
+import formPostulanteLaboralNew from './constants/formularios/formPostulanteLaboralNew.js';
+import formPostulante from './constants/formularios/formPostulante.js';
+import formEmpresa from './constants/formularios/formEmpresa.js';
+import formCuentaUsuario from './constants/formularios/formCuentaUsuario.js';
 
 function App() {
 
