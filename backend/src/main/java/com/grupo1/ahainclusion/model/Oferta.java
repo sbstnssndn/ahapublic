@@ -114,7 +114,7 @@ public class Oferta {
     private Integer rentaEstimada;
 
     // Experiencias laborales
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(orphanRemoval=true)
     @JoinColumn(name = "oferta_id")
     @JsonManagedReference
     private Collection<ExperienciaExigida> experiencias;
