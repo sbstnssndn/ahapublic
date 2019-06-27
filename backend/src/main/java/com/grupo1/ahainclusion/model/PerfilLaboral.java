@@ -108,19 +108,19 @@ public class PerfilLaboral {
     private Integer nivelEducacional; // 0: Ed. Especial ..... 9:Postgrado
 
     // Titulos/carreras terminadas
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval=true)
     @JoinColumn(name = "perfil_laboral_perfil_candidato_user_id")
     @JsonManagedReference
     private Collection<Titulo> titulos;
 
     // Cursos realizados
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval=true)
     @JoinColumn(name = "perfil_laboral_perfil_candidato_user_id")
     @JsonManagedReference
     private Collection<Curso> cursos;
 
     // Experiencias laborales
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval=true)
     @JoinColumn(name = "perfil_laboral_perfil_candidato_user_id")
     @JsonManagedReference
     private Collection<Experiencia> experiencias;

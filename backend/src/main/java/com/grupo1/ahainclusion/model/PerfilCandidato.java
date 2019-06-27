@@ -38,11 +38,11 @@ public class PerfilCandidato {
     private String telefono1;
     private String telefono2;
     private String email2;
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval=true)
     private Direccion direccion;
 
     @JsonManagedReference
-    @OneToOne(mappedBy = "perfilCandidato", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "perfilCandidato", cascade = CascadeType.ALL, orphanRemoval=true)
     private PerfilLaboral perfilLaboral;
 
     public String getFirstName() {

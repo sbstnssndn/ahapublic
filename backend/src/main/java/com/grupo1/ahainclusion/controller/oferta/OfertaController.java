@@ -75,7 +75,6 @@ public class OfertaController {
         oferta.setDesplazoTrayectos(ofertaNew.getDesplazoTrayectos());
         oferta.setDiferentesAlturas(ofertaNew.getDiferentesAlturas());
         oferta.setDiferentesPisos(ofertaNew.getDiferentesPisos());
-        oferta.setExperiencias(ofertaNew.getExperiencias());
         oferta.setLeerEscribir(ofertaNew.getLeerEscribir());
         oferta.setLicencia(ofertaNew.getLicencia());
         oferta.setName(ofertaNew.getName());
@@ -89,6 +88,10 @@ public class OfertaController {
         oferta.setSituacionesNuevas(ofertaNew.getSituacionesNuevas());
         oferta.setTareasEstresantes(ofertaNew.getTareasEstresantes());
         oferta.setTrabajoEquipo(ofertaNew.getTrabajoEquipo());
+
+        oferta.getExperiencias().clear();
+        oferta.getExperiencias().addAll(ofertaNew.getExperiencias());
+
 
         ofertaRepository.save(oferta);
 
