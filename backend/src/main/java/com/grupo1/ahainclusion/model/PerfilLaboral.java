@@ -93,9 +93,10 @@ public class PerfilLaboral {
     // DATOS LABORALES
     // --------------------------
 
-    // LICENCIA DE CONDUCIR
+    // CONDUCCIÓN
     // --------------------
     private String licencia;
+    private boolean autoPropio;
 
     // AYUDA PARA LLENAR FORMULARIO
     // ----------------------------
@@ -143,6 +144,14 @@ public class PerfilLaboral {
 
     public String getName() {
         return name;
+    }
+
+    public boolean isAutoPropio() {
+        return autoPropio;
+    }
+
+    public void setAutoPropio(boolean autoPropio) {
+        this.autoPropio = autoPropio;
     }
 
     public PerfilCandidato getPerfilCandidato() {

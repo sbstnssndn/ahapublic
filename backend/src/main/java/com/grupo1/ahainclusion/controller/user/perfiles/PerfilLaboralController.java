@@ -78,6 +78,7 @@ public class PerfilLaboralController {
         pLaboral.setActividadesAuditiva(pLaboralNew.getActividadesAuditiva());
         pLaboral.setActividadesVisual(pLaboralNew.getActividadesAuditiva());
         pLaboral.setAdecuaciones(pLaboralNew.getAdecuaciones());
+        pLaboral.setAutoPropio(pLaboralNew.isAutoPropio());
         pLaboral.setAyudaFormulario(pLaboralNew.getAyudaFormulario());
         pLaboral.setBañoAdaptado(pLaboralNew.isBañoAdaptado());
         pLaboral.setComunicacionOral(pLaboralNew.getComunicacionOral());
