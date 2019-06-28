@@ -21,7 +21,7 @@ const NavigationUserOptions = ( props ) => {
 			);
 		}
 	} else {
-		userOptions = <LoginButton onLogin={props.handleLogin} />;
+		userOptions = <LoginButton onLogin={props.onLogin} />;
 	}
 	
 	return (

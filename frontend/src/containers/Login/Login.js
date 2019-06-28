@@ -35,7 +35,7 @@ class Login extends Component {
 						allowed: 'enabled'
 					});
 				}
-          	break;
+				break;
         case('password'):
           	if (!passwordLengthIsValid(value)) {
 				this.setState({
