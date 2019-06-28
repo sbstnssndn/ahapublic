@@ -11,7 +11,7 @@ import { getNewTitulo,
   getNewCurso, 
   getNewExperienciaLaboral
  } from '../../constants/experienciaFormElements';
-
+ import { generateSubForm } from '../../util/common';
 
 class MasterForm extends Component {
   
@@ -242,6 +242,24 @@ class MasterForm extends Component {
       form: clone.updatedForm
     });
 	}
+
+	addSubForm = (inputIdentifier, subForm) => {
+		//console.log(subForm);
+		const clone = {...this.cloneStateElementsArray(inputIdentifier)}
+		const subFormSize = subForm.length;
+		const stateFormSize = clone.updatedForm.stages[this.state.currentStage].fields[inputIdentifier].elements.length;
+		const newElementId = stateFormSize/subFormSize;
+		
+		let updatedSubForm = generateSubForm(newElementId, subForm);
+		//console.log(updatedSubForm);
+		
+    const newElementsArray = clone.elementsArray.concat(updatedSubForm);
+    clone.updatedForm.stages[this.state.currentStage].fields[inputIdentifier].elements = newElementsArray;
+
+    this.setState({
+      form: clone.updatedForm
+    });
+	}
   
   deleteForm = (inputIdentifier, idForm, NumberOfFieldsToDelete) => {
 		const clone = {...this.cloneStateElementsArray(inputIdentifier)}
@@ -255,7 +273,7 @@ class MasterForm extends Component {
       if (element % NumberOfFieldsToDelete === 0) {
 				contadorId++;
 			}
-			// ingresar máximo 10 cursos
+			
 			let id = clone.elementsArray[element].elementConfig.id;
 			let newId = id.replace(/\d+/g, '');
 			let name = clone.elementsArray[element].elementConfig.name;
@@ -288,7 +306,8 @@ class MasterForm extends Component {
           handleChange={this.handleChange}
           addTitulo={this.addTitulo}
           addExperiencia={this.addExperiencia}
-          addCurso={this.addCurso}
+					addCurso={this.addCurso}
+					//addSubForm={this.addSubForm}
           deleteForm={this.deleteForm}
           />
         })

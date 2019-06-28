@@ -19,7 +19,7 @@ export const formNuevaOferta =
 								elementType: 'input',
 								elementConfig: {
 									type: 'text',
-									placeholder: '12345678-0',
+									placeholder: 'Vendedor',
 									name: 'name',
 									id: 'name'
 								},
@@ -118,6 +118,7 @@ export const formNuevaOferta =
 						]
                     },
                     permanecerSentado: {
+						type: 'normal',
                         elements: [
 							{
 								label: '¿Cuánto requieres que el candidato permanezca sentado?',
@@ -139,6 +140,7 @@ export const formNuevaOferta =
 						]
                     },
                     desplazoTrayectos: {
+						type: 'normal',
                         elements: [
 							{
 								label: '¿Cuánto requieres que el candidato pueda desplazarse, con o sin ayuda?',
@@ -160,6 +162,7 @@ export const formNuevaOferta =
 						]
                     },
                     diferentesPisos: {
+						type: 'normal',
                         elements: [
 							{
 								label: '¿Cuánto requieres que el candidato pueda desplazarse entre diferentes pisos?',
@@ -181,6 +184,7 @@ export const formNuevaOferta =
 						]
                     },
                     diferentesAlturas: {
+						type: 'normal',
                         elements: [
 							{
 								label: '¿Cuánto requieres que el candidato pueda acceder a diferentes alturas?',

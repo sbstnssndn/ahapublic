@@ -18,12 +18,16 @@ class LoginButton extends React.Component {
   
     handleShow = () => {
       this.setState({ show: true });
-    }
+		}
+		
+		handleRedirect = () => {
+			window.location.href = "http://localhost:3000/login";
+		}
   
     render() {
       return (
         <>
-          <Button variant="primary" onClick={this.handleShow}>
+          <Button variant="primary" onClick={this.handleRedirect}>
             Iniciar Sesión
           </Button>
   
@@ -34,7 +38,7 @@ class LoginButton extends React.Component {
 
 
             <Modal.Body className="px-0">
-							<Login onLogin={this.props.handleLogin} /> 
+							<Login onLogin={this.props.onLogin} />
             </Modal.Body>
 
 

@@ -44,6 +44,7 @@ const Navigation = ( props ) => {
 						Datos empresa
 					</NavigationItem>
 
+					{/*
 					<NavigationItem exact to='/empresa/ofertas-laborales'>
 						Ofertas laborales
 					</NavigationItem>
@@ -59,9 +60,9 @@ const Navigation = ( props ) => {
 					</NavigationItem>
 
 					{/*formCuentaUsuario */}
-					<NavigationItem exact to='/empresa/cuenta-usuario'>
+					{/*<NavigationItem exact to='/empresa/cuenta-usuario'>
 						Mi cuenta
-					</NavigationItem>
+					</NavigationItem>*/}
 				</React.Fragment>
 			)
 			break;
@@ -118,7 +119,7 @@ const Navigation = ( props ) => {
 							</Nav>
 							<Nav className="ml-auto">
 								<NavigationUserOptions
-									onLogin={props.handleLogin}
+									onLogin={props.onLogin}
 									userType={props.userType}
 									isAuthenticated={props.isAuthenticated}
 									handleLogout={props.handleLogout} />
