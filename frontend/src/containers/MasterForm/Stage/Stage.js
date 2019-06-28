@@ -30,6 +30,7 @@ const Stage = (props) => {
 						label={element.label}
 						elementType={element.elementType}
 						elementConfig={element.elementConfig}
+						displayValue={element.value}
 						value={element.value}
 						subtext={element.subtext}
 						handleValidation={(event) => props.handleValidation(event, field.id, element.elementConfig.id)}

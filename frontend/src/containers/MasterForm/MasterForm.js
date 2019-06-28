@@ -15,6 +15,10 @@ import {
   genericIsValid,
   fillValidArray,
    } from '../../util/ValidationUtils';
+import { 
+  rutFormat,
+  numberFormat,
+ } from '../../util/FormatUtils.js';
 
 
 class MasterForm extends Component {
@@ -194,6 +198,10 @@ class MasterForm extends Component {
       if(elementsArray[elem].elementConfig.id === element) {
         if (elementIndentifier === 'date'){
           elementsArray[elem].value = event
+        }
+        if (elementIndentifier === 'rut'){
+          elementsArray[elem].value = event.target.value;
+          elementsArray[elem].displayValue = rutFormat(event.target.value);
         }
         else {
           elementsArray[elem].value = event.target.value;

@@ -1,17 +1,7 @@
 const regiones = [
   {
-    region: "",
-    comunas: []
-  },
-  {
-    region: "Metropolitana de Santiago",
-    comunas: [
-      "Cerrillos", "Cerro Navia", "Conchalí","El Bosque","Estación Central","Huechuraba","Independencia","La Cisterna","La Florida","La Granja","La Pintana",  "La Reina","Las Condes","Lo Barnechea","Lo Espejo",
-      "Lo Prado","Macul","Maipú","Ñuñoa","Pedro Aguirre Cerda","Peñalolén","Providencia","Pudahuel","Quilicura","Quinta Normal",
-      "Recoleta","Renca","Santiago","San Joaquín","San Miguel","San Ramón","Vitacura","Puente Alto","Pirque","San José de Maipo",
-      "Colina","Lampa","Tiltil","San Bernardo","Buin","Calera de Tango","Paine","Melipilla","Alhué","Curacaví","María Pinto",
-      "San Pedro","Talagante","El Monte","Isla de Maipo","Padre Hurtado","Peñaflor"
-    ]
+    region: "Arica y Parinacota",
+    comunas: ["Arica", "Camarones", "Putre", "General Lagos"]
   },
   {
     region: "Tarapacá",
@@ -48,6 +38,16 @@ const regiones = [
     ]
   },
   {
+    region: "Metropolitana de Santiago",
+    comunas: [
+      "Cerrillos", "Cerro Navia", "Conchalí","El Bosque","Estación Central","Huechuraba","Independencia","La Cisterna","La Florida","La Granja","La Pintana",  "La Reina","Las Condes","Lo Barnechea","Lo Espejo",
+      "Lo Prado","Macul","Maipú","Ñuñoa","Pedro Aguirre Cerda","Peñalolén","Providencia","Pudahuel","Quilicura","Quinta Normal",
+      "Recoleta","Renca","Santiago","San Joaquín","San Miguel","San Ramón","Vitacura","Puente Alto","Pirque","San José de Maipo",
+      "Colina","Lampa","Tiltil","San Bernardo","Buin","Calera de Tango","Paine","Melipilla","Alhué","Curacaví","María Pinto",
+      "San Pedro","Talagante","El Monte","Isla de Maipo","Padre Hurtado","Peñaflor"
+    ]
+  },
+  {
     region: "Libertador Gral. Bernardo O’Higgins",
     comunas: ["Rancagua","Codegua","Coinco","Coltauco","Doñihue","Graneros","Las Cabras","Machalí","Malloa",
       "San Francisco de Mostazal","Olivar","Peumo","Pichidegua","Quinta de Tilcoco","Rengo","Requínoa","San Vicente de Tagua Tagua","Pichilemu",
@@ -62,6 +62,14 @@ const regiones = [
       "San Rafael","Cauquenes","Chanco","Pelluhue","Curicó","Hualañé","Licantén","Molina","Rauco","Romeral",
       "Sagrada Familia","Teno","Vichuquén","Linares","Colbún","Longaví","Parral","Retiro","San Javier de Loncomilla",
       "Villa Alegre","Yerbas Buenas"
+    ]
+  },
+  {
+    region: "Ñuble",
+    comunas: [
+      "Cobquecura","Coelemu","Ninhue","Portezuelo","Quirihue","Ránquil","Treguaco","Bulnes","Chillán Viejo",
+      "Chillán","El Carmen","Pemuco","Pinto","Quillón","San Ignacio","Yungay",
+      "Coihueco","Ñiquén","San Carlos","San Fabián","San Nicolás"
     ]
   },
   {
@@ -112,18 +120,4 @@ const regiones = [
       "Primavera","Timaukel","Natales","Torres del Paine"
     ]
   },
-
-  {
-    region: "Arica y Parinacota",
-    comunas: ["Arica", "Camarones", "Putre", "General Lagos"]
-  },
-
-  {
-    region: "Ñuble",
-    comunas: [
-      "Cobquecura","Coelemu","Ninhue","Portezuelo","Quirihue","Ránquil","Treguaco","Bulnes","Chillán Viejo",
-      "Chillán","El Carmen","Pemuco","Pinto","Quillón","San Ignacio","Yungay",
-      "Coihueco","Ñiquén","San Carlos","San Fabián","San Nicolás"
-    ]
-  }
 ];
