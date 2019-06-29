@@ -7,10 +7,6 @@ import Card from 'react-bootstrap/Card';
 import Alert from 'react-bootstrap/Alert';
 import { fieldFormValidation } from '../../util/ValidationUtils';
 //import { rutFormat } from '../../util/FormatUtils.js';
-import { getNewTitulo,
-  getNewCurso, 
-  getNewExperienciaLaboral
- } from '../../constants/experienciaFormElements';
  import { generateSubForm } from '../../util/common';
 
 class MasterForm extends Component {
@@ -198,7 +194,7 @@ class MasterForm extends Component {
         currentStage: currentStage
       });
   }
-  
+  /*
   addTitulo = (inputIdentifier) => {
     const clone = {...this.cloneStateElementsArray(inputIdentifier)}
 
@@ -242,7 +238,7 @@ class MasterForm extends Component {
       form: clone.updatedForm
     });
 	}
-
+	*/
 	addSubForm = (inputIdentifier, subForm) => {
 		//console.log(subForm);
 		const clone = {...this.cloneStateElementsArray(inputIdentifier)}
@@ -254,7 +250,8 @@ class MasterForm extends Component {
 		//console.log(updatedSubForm);
 		
     const newElementsArray = clone.elementsArray.concat(updatedSubForm);
-    clone.updatedForm.stages[this.state.currentStage].fields[inputIdentifier].elements = newElementsArray;
+		clone.updatedForm.stages[this.state.currentStage].fields[inputIdentifier].elements = newElementsArray;
+		console.log(clone.updatedForm.stages[this.state.currentStage].fields[inputIdentifier].elements);
 
     this.setState({
       form: clone.updatedForm
@@ -307,7 +304,7 @@ class MasterForm extends Component {
           addTitulo={this.addTitulo}
           addExperiencia={this.addExperiencia}
 					addCurso={this.addCurso}
-					//addSubForm={this.addSubForm}
+					addSubForm={this.addSubForm}
           deleteForm={this.deleteForm}
           />
         })

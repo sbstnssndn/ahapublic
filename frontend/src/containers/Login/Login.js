@@ -64,7 +64,8 @@ class Login extends Component {
 	handleSubmit = (event) => {
 		event.preventDefault();
 
-		const loginRequest = Object.assign({}, this.state);
+		const stateCopy = { ...this.state }
+		const loginRequest = { email: stateCopy.email, password: stateCopy.password };
 		console.log("Ingresando");
 		login(loginRequest)
 			.then(response => {

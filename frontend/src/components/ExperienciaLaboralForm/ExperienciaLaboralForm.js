@@ -3,7 +3,7 @@ import Form from 'react-bootstrap/Form';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import DatePicker from "react-datepicker";
-import {NEW_EXPERIENCIA_LABORAL} from '../../constants/experienciaFormElements';
+import { NEW_EXPERIENCIA_LABORAL } from '../../constants/subforms';
 import "react-datepicker/dist/react-datepicker.css";
 
 const ExperienciaLaboralForm = ( props ) => {
@@ -111,7 +111,7 @@ const ExperienciaLaboralForm = ( props ) => {
 						<hr />
 					</React.Fragment>
 				)) }
-			<Button onClick={() => props.addExperiencia(props.field, NEW_EXPERIENCIA_LABORAL)}>Agregar</Button>
+			<Button onClick={() => props.addSubForm(props.field, NEW_EXPERIENCIA_LABORAL)}>Agregar</Button>
 			</React.Fragment>
 		)
 	

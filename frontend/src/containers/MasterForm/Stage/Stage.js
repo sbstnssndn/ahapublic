@@ -2,7 +2,7 @@ import React from 'react';
 import Input from './../Input/Input';
 import ExperienciaLaboralForm from '../../../components/ExperienciaLaboralForm/ExperienciaLaboralForm';
 import CursosForm from '../../../components/CursosForm/CursosForm';
-import TituloForm from '../../../components/TitulosForm/TituloForm';
+import TitulosForm from '../../../components/TitulosForm/TitulosForm';
 
 const Stage = (props) => {
   // Si el paso actual no es el id de esta etapa, no mostrar
@@ -47,7 +47,7 @@ const Stage = (props) => {
 						handleChange={props.handleChange}
 						addExperiencia={props.addExperiencia}
 						deleteForm={props.deleteForm}
-						//addSubForm={props.addSubForm}
+						addSubForm={props.addSubForm}
 					/>
 			}
 			else if (field.type === 'cursos') {
@@ -59,11 +59,11 @@ const Stage = (props) => {
 						handleChange={props.handleChange}
 						addCurso={props.addCurso}
 						deleteForm={props.deleteForm}
-						//addSubForm={props.addSubForm}
+						addSubForm={props.addSubForm}
 					/>
 			}
 			else if (field.type === "titulos"){
-				return <TituloForm
+				return <TitulosForm
 						key={field.id}
 						field={field.id}
 						type={field.type}
@@ -71,7 +71,7 @@ const Stage = (props) => {
 						handleChange={props.handleChange}
 						addTitulo={props.addTitulo}
 						deleteForm={props.deleteForm}
-						//addSubForm={props.addSubForm}
+						addSubForm={props.addSubForm}
 				/> 
 			}
 			else {
