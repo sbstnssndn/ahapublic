@@ -111,6 +111,13 @@ class App extends Component {
 						component={Panel}
 						wasInitialized={this.state.wasInitialized}
 						currentUser={this.state.currentUser} />
+
+					<PrivateRoute
+						authenticated={this.state.isAuthenticated}
+						path='/aha'
+						component={Panel}
+						wasInitialized={this.state.wasInitialized}
+						currentUser={this.state.currentUser} />
 					
 					<Route
 						exact
