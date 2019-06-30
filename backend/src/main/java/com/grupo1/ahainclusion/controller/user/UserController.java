@@ -9,6 +9,7 @@ import javax.validation.Valid;
 import com.grupo1.ahainclusion.auth.CurrentUser;
 import com.grupo1.ahainclusion.auth.UserPrincipal;
 import com.grupo1.ahainclusion.aux.payload.ApiResponse;
+import com.grupo1.ahainclusion.aux.payload.PasswordUpdate;
 import com.grupo1.ahainclusion.aux.payload.SignUpRequest;
 import com.grupo1.ahainclusion.aux.payload.UserSummary;
 import com.grupo1.ahainclusion.model.Role;
@@ -23,6 +24,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -48,6 +51,9 @@ public class UserController {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    AuthenticationManager authenticationManager;
 
 
     // Obtener usuario logeado
@@ -119,6 +125,28 @@ public class UserController {
         userRepository.deleteById(id);
 
         return new ResponseEntity(new ApiResponse(true, "Usuario Eliminado"), HttpStatus.OK);
+    }
+
+    @PutMapping(path="/{id}/changePassword")
+    public ResponseEntity<?> changePassword(@PathVariable("id") Integer id, @Valid @RequestBody PasswordUpdate pUpdate) {
+        
+        Optional<User> userOptional = userRepository.findById(id);
+
+        if (!userOptional.isPresent())
+        return new ResponseEntity(new ApiResponse(false, "Usuario no encontrado"), HttpStatus.NOT_FOUND);
+
+        User user = userOptional.get();
+
+        boolean matches = passwordEncoder.matches(pUpdate.getOldPassword(), user.getPassword());
+
+        if(matches)
+        {
+            user.setPassword(passwordEncoder.encode(pUpdate.getNewPassword()));
+            userRepository.save(user);
+            return new ResponseEntity(new ApiResponse(true, "Contraseña actualizada"), HttpStatus.OK);
+        }
+
+        return new ResponseEntity(new ApiResponse(false, "Contraseña anterior inválida"), HttpStatus.FORBIDDEN);
     }
 
     // Obtener Usuarios
