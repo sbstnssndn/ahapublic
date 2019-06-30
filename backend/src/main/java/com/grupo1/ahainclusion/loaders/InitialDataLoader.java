@@ -11,6 +11,7 @@ import java.util.Random;
 import javax.transaction.Transactional;
 
 import com.grupo1.ahainclusion.model.Oferta;
+import com.grupo1.ahainclusion.model.PerfilAHA;
 import com.grupo1.ahainclusion.model.PerfilCandidato;
 import com.grupo1.ahainclusion.model.PerfilLaboral;
 import com.grupo1.ahainclusion.model.PerfilEmpresa;
@@ -104,6 +105,7 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
 
     Role candidatoRole = roleRepository.findByName("ROLE_CANDIDATO");
     Role empresaRole = roleRepository.findByName("ROLE_EMPRESA");
+    Role ahaRole = roleRepository.findByName("ROLE_AHA");
 
     // SE AGREGAN USUARIOS CANDIDATOS RANDOM
     try {
@@ -111,6 +113,35 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
     } catch (JSONException | UnirestException | IOException e) {
       e.printStackTrace();
     }
+
+    // SE AGREGAN USUARIOS AHA
+    User aha1 = new User();
+    aha1.setEmail("karina@ahainclusion.com");
+    aha1.setPassword(passwordEncoder.encode("aha1234"));
+    aha1.setEnabled(true);
+    aha1.setRoles(Arrays.asList(ahaRole));
+    userRepository.save(aha1);
+    PerfilAHA pAHA1 = new PerfilAHA();
+    pAHA1.setFirstName("Karina");
+    pAHA1.setLastName("Cisterna");
+    pAHA1.setRut("XX.XXX.XXX-X");
+    pAHA1.setUser(aha1);
+    perfilAHARepository.save(pAHA1);
+
+    User aha2 = new User();
+    aha2.setEmail("sebastian@ahainclusion.com");
+    aha2.setPassword(passwordEncoder.encode("aha1234"));
+    aha2.setEnabled(true);
+    aha2.setRoles(Arrays.asList(ahaRole));
+    userRepository.save(aha2);
+    PerfilAHA pAHA2 = new PerfilAHA();
+    pAHA2.setFirstName("Sebastian");
+    pAHA2.setLastName("Espinoza");
+    pAHA2.setRut("XX.XXX.XXX-X");
+    pAHA2.setUser(aha2);
+    perfilAHARepository.save(pAHA2);
+
+
 
     // SE AGREGAN USUARIOS EMPRESA + PERFILES DE ACCESIBILIDAD
     User empresa1 = new User();
