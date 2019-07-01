@@ -14,9 +14,9 @@ class Perfiles extends Component {
 	}
 
 	componentDidMount () {
-		axios.get("http://localhost:8080/api/user/all")
+		
+		axios.get("http://localhost:8080/api/user/"+this.props.typeUsers+"/all")
         	.then(response => {
-            console.log(response);
 				this.setState({
 					users: response.data
 			  	});
@@ -24,6 +24,21 @@ class Perfiles extends Component {
             .catch(function(error){
             	console.log(error);
 			})
+		
+	}
+
+	nombre(user){
+		if(this.props.typeUsers === "candidato"){
+			return ( 
+				<label> 
+					{user.perfilCandidato.firstName+" "}
+					{user.perfilCandidato.lastName}
+				</label> 
+			);
+		}
+		else if(this.props.typeUsers === "empresa"){
+			return ( <label> {user.perfilEmpresa.nameEmpresa} </label>);
+		}
 	}
 
 	render () {
@@ -31,27 +46,26 @@ class Perfiles extends Component {
 			<React.Fragment>
 				<Card className="mb-4">
 					<Card.Header className="px-2">
-						{this.props.typeUsers}
+						{this.props.title}
 					</Card.Header>
-					
-					
-						{this.state.users.map(user => {
-							return (
-								<Card.Body>
-									<Form.Group controlId={user.id}>
-										<Card.Title>{user.email}</Card.Title>
-										<Row>
-											<Col>
-												<Button variant="primary" type="submit">
-													Editar
-												</Button>
-											</Col>
-										</Row>
-									</Form.Group>
-								</Card.Body>
-							)
-						})}
-					
+									
+					{this.state.users.map(user => {
+						return (
+							<Card.Body key={user.id}>
+								<Form.Group>
+									<Card.Title>{this.nombre(user)} - {user.email}</Card.Title>
+									<Row>
+										<Col>
+											<Button variant="primary" type="submit">
+												Editar
+											</Button>
+										</Col>
+									</Row>
+								</Form.Group>
+							</Card.Body>
+						)
+					})}
+
 				</Card>
 			</React.Fragment>
 		);
