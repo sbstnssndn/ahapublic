@@ -70,15 +70,15 @@ const Navigation = ( props ) => {
 			navbarItems = (
 				<React.Fragment>
 
-					<NavigationItem exact to='aha/postulantes'>
+					<NavigationItem exact to='/aha/postulantes'>
 						Postulantes
 					</NavigationItem>
 
-					<NavigationItem exact to='aha/empresas'>
+					<NavigationItem exact to='/aha/empresas'>
 						Empresas
 					</NavigationItem>
 
-					<NavigationItem exact to='aha/cuenta'>
+					<NavigationItem exact to='/aha/cuenta'>
 						Mi cuenta
 					</NavigationItem>
 
