@@ -112,14 +112,14 @@ const Panel = ( props ) => {
 						path={`${props.match.path}/postulantes`}
 						exact
 						render={(props) => (							
-							<Perfiles typeUsers="postulantes"/>
+							<Perfiles typeUsers="Postulantes"/>
 						)} />
 					
 					<Route
 						path={`${props.match.path}/empresas`}
 						exact
 						render={(props) => (
-							<Perfiles typeUsers="empresas"/>
+							<Perfiles typeUsers="Empresas"/>
 						)} />
 
 					<Route
