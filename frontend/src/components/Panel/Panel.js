@@ -6,6 +6,7 @@ import {
 import MasterForm from '../../containers/MasterForm/MasterForm';
 import Recomendaciones from '../../containers/Recomendaciones/Recomendaciones';
 import Perfiles from '../Perfiles/Perfiles.js';
+import ListarOFertas from '../ListarOfertas/ListarOFertas';
 import Tabs from '../Tabs/Tabs';
 import { formPostulante } from '../../constants/forms/formPostulante';
 import { formPostulanteLaboral } from '../../constants/forms/formPostulanteLaboral';

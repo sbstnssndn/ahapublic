@@ -4,7 +4,6 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-
 import axios from 'axios';
 
 class Perfiles extends Component {
@@ -41,6 +40,35 @@ class Perfiles extends Component {
 		}
 	}
 
+	botones(user){
+		let prueba = 1;
+		if(this.props.typeUsers === "candidato"){
+			return ( 
+				<Col>
+					<Button variant="primary" type="submit">
+						Editar Perfil Laboral
+					</Button>
+				</Col>
+			);
+		}
+		else if(this.props.typeUsers === "empresa"){
+			return ( 
+				<Row>
+					<Col xs="4">
+						<Button variant="primary" type="submit">
+							Editar Perfil Empresa
+						</Button>
+					</Col>
+					<Col xs="2">
+						<Button variant="success" type="submit">
+							Ofertas
+						</Button>
+					</Col>
+				</Row>
+			);
+		}
+	}
+
 	render () {
 		return (
 			<React.Fragment>
@@ -53,14 +81,8 @@ class Perfiles extends Component {
 						return (
 							<Card.Body key={user.id}>
 								<Form.Group>
-									<Card.Title>{this.nombre(user)} - {user.email}</Card.Title>
-									<Row>
-										<Col>
-											<Button variant="primary" type="submit">
-												Editar
-											</Button>
-										</Col>
-									</Row>
+									<Card.Title>{this.nombre(user)} - {user.email}</Card.Title>	
+									{this.botones(user)}							
 								</Form.Group>
 							</Card.Body>
 						)
