@@ -5,7 +5,7 @@ import {
 
 import MasterForm from '../../containers/MasterForm/MasterForm';
 import Recomendaciones from '../../containers/Recomendaciones/Recomendaciones';
-import Perfiles from './Perfiles/Perfiles.js';
+import Perfiles from '../Perfiles/Perfiles.js';
 import Tabs from '../Tabs/Tabs';
 import { formPostulante } from '../../constants/forms/formPostulante';
 import { formPostulanteLaboral } from '../../constants/forms/formPostulanteLaboral';
@@ -14,7 +14,8 @@ import { formNuevaOferta} from '../../constants/forms/formNuevaOferta';
 import { formCuentaUsuario } from '../../constants/forms/formCuentaUsuario';
 import {
 	USER_TYPE_POSTULANTE,
-	USER_TYPE_EMPRESA
+	USER_TYPE_EMPRESA,
+	USER_TYPE_AHA
 } from '../../constants';
 
 const Panel = ( props ) => {
