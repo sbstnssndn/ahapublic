@@ -149,14 +149,41 @@ public class UserController {
         return new ResponseEntity(new ApiResponse(false, "Contraseña anterior inválida"), HttpStatus.FORBIDDEN);
     }
 
-    // Obtener Usuarios
-    @GetMapping(path = "/all")
+    // Obtener todos los Usuarios
+    @GetMapping(value = "/all")
     //SOLO USUARIOS AHA DEBERIAN PODER VER A TODOS LOS USUARIOS DESPUES
     //@PreAuthorize("hasRole('ROLE_AHA'")
     public @ResponseBody Iterable<User> getAllUsers() {
+        
         return userRepository.findAll();
     }
 
+    // Obtener Usuarios por rol
+    @GetMapping(value = "/{role}/all")
+    //SOLO USUARIOS AHA DEBERIAN PODER VER A TODOS LOS USUARIOS DESPUES
+    //@PreAuthorize("hasRole('ROLE_AHA'")
+    public @ResponseBody Iterable<User> getAllUsers(@PathVariable("role") String role) {
+        role = role.toLowerCase();
+        if(role.equals("candidato"))
+        {
+            Role roleCandidato = roleRepository.findByName("ROLE_CANDIDATO");
+            return userRepository.findByRoles(roleCandidato);
+        }
+
+        if(role.equals("empresa"))
+        {
+            Role roleEmpresa = roleRepository.findByName("ROLE_EMPRESA");
+            return userRepository.findByRoles(roleEmpresa);
+        }
+
+        if(role.equals("aha"))
+        {
+            Role roleAHA = roleRepository.findByName("ROLE_AHA");
+            return userRepository.findByRoles(roleAHA);
+        }
+
+        return null;
+    }
 
 
 
