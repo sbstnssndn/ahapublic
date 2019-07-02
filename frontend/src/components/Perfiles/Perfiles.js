@@ -5,6 +5,7 @@ import Row from 'react-bootstrap/Row';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import axios from 'axios';
+import { Route } from "react-router-dom";
 
 class Perfiles extends Component {
 
@@ -28,20 +29,59 @@ class Perfiles extends Component {
 
 	nombre(user){
 		if(this.props.typeUsers === "candidato"){
-			return ( 
-				<label> 
-					{user.perfilCandidato.firstName+" "}
-					{user.perfilCandidato.lastName}
-				</label> 
-			);
+			if(user.perfilCandidato != null){
+				if(user.perfilCandidato.firstName != null && user.perfilCandidato.lastName != null){
+					return ( 
+						<label> 
+							{user.perfilCandidato.firstName+" "}
+							{user.perfilCandidato.lastName}
+						</label> 
+					);
+				}
+				else{
+					return ( 
+						<label> 
+							Aún no define nombre
+						</label> 
+					);
+				}
+			}
+			else{
+				return ( 
+					<label> 
+						Aún no define perfil
+					</label> 
+				);
+			}
 		}
 		else if(this.props.typeUsers === "empresa"){
-			return ( <label> {user.perfilEmpresa.nameEmpresa} </label>);
+			if(user.perfilEmpresa != null){
+				if(user.perfilEmpresa.nameEmpresa != null){
+					return ( 
+						<label> 
+							{user.perfilEmpresa.nameEmpresa} 
+						</label>
+					);
+				}
+				else{
+					return ( 
+						<label> 
+							Aún no define nombre
+						</label> 
+					);
+				}
+			}
+			else{
+				return ( 
+					<label> 
+						Aún no define perfil
+					</label> 
+				);
+			}
 		}
 	}
 
 	botones(user){
-		let prueba = 1;
 		if(this.props.typeUsers === "candidato"){
 			return ( 
 				<Col>

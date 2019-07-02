@@ -7,7 +7,8 @@ import Card from 'react-bootstrap/Card';
 import Alert from 'react-bootstrap/Alert';
 import { fieldFormValidation } from '../../util/ValidationUtils';
 //import { rutFormat } from '../../util/FormatUtils.js';
- import { generateSubForm } from '../../util/common';
+import { generateSubForm } from '../../util/common';
+//import '../../custom.css'
 
 class MasterForm extends Component {
   
