@@ -9,11 +9,37 @@
 }
 
 .btn-secondary, .btn-secondary:visited {
-	background-color: #F7E6E2 ;
-	border-color: #F7E6E2 ;
+	background-color: #707070 ;
+	border-color: #7a7372 ;
 }
 
 .btn-secondary:hover, .btn-secondary:active {
 	background-color: #006C84 ;
 	border-color: #006C84;
-} 
+}
+
+.card-form {
+    background-color: #6EB5C0;
+}
+
+.page-link {
+	background-color: #adadad;
+	border-color: #adadad;
+	color: white;
+}
+
+.page-item.active .page-link {
+	background-color: #006C84;
+	border-color: #006C84;
+	color: white;
+}
+
+.btn-success {
+    color: #fff;
+    background-color: #adadad;
+    border-color: #adadad;
+}
+
+.fa-check-square {
+    color: #6EB5C0;
+}
