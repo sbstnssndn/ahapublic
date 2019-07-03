@@ -35,7 +35,8 @@ public class OfertaController {
     public @ResponseBody Iterable<Oferta> getAll(@PathVariable("userId") Integer userId) {
 
         User user = userRepository.findById(userId).get();
-        return user.getPerfilEmpresa().getOfertas();
+        if(user.getPerfilEmpresa()!=null) return user.getPerfilEmpresa().getOfertas();
+        return null;
     }
 
     //Obtener una oferta por id
