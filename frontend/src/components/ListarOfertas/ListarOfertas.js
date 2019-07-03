@@ -6,24 +6,56 @@ import Form from 'react-bootstrap/Form';
 class ListarOfertas extends Component {
 
 	state = {
-		ofertas: []
+		ofertas: [],
+		error: false
 	}
 
 	componentDidMount () {
 		
 		let id = this.props.match.params.id;
-		console.log(id);
 
 		axios.get('http://localhost:8080/api/user/'+id+'/oferta')
-		.then(response => {
-			console.log(response.data);
+		.then(response => {		
 			this.setState({
 				ofertas: response.data
 			});
 		}).catch(error => {
-			console.log(error);
+			this.setState({
+				error: true
+			});
+			console.log(this.state.error);
 		});
 		
+	}
+
+	sinOfertas () {
+		if(this.state.error === true){
+			return (
+				<h2> Error al consultar ofertas </h2>
+			);
+		}
+		else if(this.state.ofertas.length === 0){
+			return (
+				<h2> Este usuario no posee ofertas </h2>
+			);
+		}
+	}
+
+	printOfertas() {
+		if(this.state.ofertas.length !== 0){
+			return (
+				this.state.ofertas.map(oferta => {
+					return (
+						<Card.Body key={oferta.id}>
+							<Form.Group>
+								<Card.Title>{oferta.name}</Card.Title>
+								<Card.Body>Descripción: {oferta.description}</Card.Body>
+							</Form.Group>
+						</Card.Body>
+					)
+				})
+			)
+		}
 	}
 
 	render () {
@@ -33,17 +65,8 @@ class ListarOfertas extends Component {
 					<Card.Header className="px-2">
 						Ofertas
 					</Card.Header>
-					
-					{this.state.ofertas.map(oferta => {
-						return (
-							<Card.Body key={oferta.id}>
-								<Form.Group>
-									<Card.Title>{oferta.name}</Card.Title>
-									<Card.Body>Descripción: {oferta.description}</Card.Body>
-								</Form.Group>
-							</Card.Body>
-						)
-					})}
+					{this.sinOfertas()}
+					{this.printOfertas()}
 				</Card>
 			</React.Fragment>
 		);
