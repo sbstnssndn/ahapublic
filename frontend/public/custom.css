@@ -28,6 +28,10 @@
 	color: white;
 }
 
+.page-link:hover {
+	color: black;
+}
+
 .page-item.active .page-link {
 	background-color: #006C84;
 	border-color: #006C84;
@@ -38,6 +42,12 @@
     color: #fff;
     background-color: #adadad;
     border-color: #adadad;
+}
+
+.btn-success:hover {
+    color: black;
+    background-color: #eeeeee;
+    border-color: #eeeeee;
 }
 
 .fa-check-square {
