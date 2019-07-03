@@ -24,7 +24,7 @@ public class Experiencia {
     @NotNull(message = "Debe ingresar nombre del cargo")
     private String cargo;
     // Tipo: Tipo de experiencia
-    @NotNull(message = "Debe ingresar tipo de experiencia")
+    @NotNull(message = "Debe ingresar area de experiencia")
     private Integer area;
     // Empresa: Nombre de la empresa
     @NotNull(message = "Debe ingresar nombre de la empresa")
