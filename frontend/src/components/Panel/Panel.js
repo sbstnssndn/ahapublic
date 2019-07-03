@@ -6,7 +6,7 @@ import {
 import MasterForm from '../../containers/MasterForm/MasterForm';
 import Recomendaciones from '../../containers/Recomendaciones/Recomendaciones';
 import Perfiles from '../Perfiles/Perfiles.js';
-import ListarOFertas from '../ListarOfertas/ListarOFertas';
+import ListarOfertas from '../ListarOfertas/ListarOfertas';
 import Tabs from '../Tabs/Tabs';
 import { formPostulante } from '../../constants/forms/formPostulante';
 import { formPostulanteLaboral } from '../../constants/forms/formPostulanteLaboral';
@@ -49,6 +49,7 @@ const Panel = ( props ) => {
 							<MasterForm
 								formConfig={formPostulante} currentUser={props.currentUser} {...props} />
 						)} />
+					
 				</>
 			);
 			tabs = (
@@ -110,7 +111,7 @@ const Panel = ( props ) => {
 			routes = (
 				<>
 					<Route
-						path={`${props.match.path}/postulantes`}
+						path={`${props.match.path}`}
 						exact
 						render={(props) => (							
 							<Perfiles typeUsers="candidato" title="Postulantes"/>
@@ -130,12 +131,17 @@ const Panel = ( props ) => {
 							<MasterForm
 								formConfig={formCuentaUsuario} currentUser={props.currentUser} {...props} />
 						)} />
-			
+					<Route
+						path={`${props.match.path}/empresas/:id/ofertas`}
+						exact
+						render={(props) => (
+							<ListarOfertas {...props}/>
+						)} />
 				</>
 			);
 			tabs = (
 				<Tabs routes={routes}>
-					<div label="Postulantes" to={`${props.match.url}/postulantes`} icon="fas fa-user"></div>
+					<div label="Postulantes" to={`${props.match.url}`} icon="fas fa-user"></div>
 					<div label="Empresas" to={`${props.match.url}/empresas`} icon="fas fa-user"></div>
 					<div label="Mi cuenta" to={`${props.match.url}/cuenta`} icon="fas fa-user"></div>
 				</Tabs>

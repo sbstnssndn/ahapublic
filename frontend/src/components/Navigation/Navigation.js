@@ -70,7 +70,7 @@ const Navigation = ( props ) => {
 			navbarItems = (
 				<React.Fragment>
 
-					<NavigationItem exact to='/aha/postulantes'>
+					<NavigationItem exact to='/aha'>
 						Postulantes
 					</NavigationItem>
 
