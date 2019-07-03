@@ -89,8 +89,8 @@ export const NEW_EXPERIENCIA_LABORAL = [
 		elementConfig: {
 			type: 'text',
 			placeholder: 'AHA Inclusión',
-			name: 'empresaExperienciaLaboral',
-			id: 'empresaExperienciaLaboral'
+			name: 'empresa',
+			id: 'empresa'
 		},
 		value: ''
 	},
@@ -100,8 +100,8 @@ export const NEW_EXPERIENCIA_LABORAL = [
 		elementConfig: {
 			type: 'date',
 			placeholder: new Date(),
-			name: 'expFechaInicio',
-			id: 'expFechaInicio'
+			name: 'fechaInicio',
+			id: 'fechaInicio'
 		},
 		value: new Date()
 	},
@@ -111,17 +111,28 @@ export const NEW_EXPERIENCIA_LABORAL = [
 		elementConfig: {
 			type: 'date',
 			placeholder: new Date(),
-			name: 'expFechaTermino' ,
-			id: 'expFechaTermino'
+			name: 'fechaFin' ,
+			id: 'fechaFin'
 		},
 		value: new Date()
 	},
 	{
-		label: 'Indica tu cargo',
+		label: 'Cargo',
+		elementType: 'input',
+		elementConfig: {
+			type: 'text',
+			placeholder: 'Venta',
+			name: 'cargo',
+			id: 'cargo',
+		},
+		value: ''
+	},
+	{
+		label: 'Indica el área de la empresa',
 		elementType: 'select',
 		elementConfig: {
-			name: 'expArea',
-			id: 'expArea',
+			name: 'areaEmpresa',
+			id: 'areaEmpresa',
 			options: [
 				{ value: '', displayValue: 'Seleccione...', disabled: true },
 				{ value: '00', displayValue: 'Administración, contabilidad o finanzas' },

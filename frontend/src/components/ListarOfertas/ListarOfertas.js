@@ -23,7 +23,6 @@ class ListarOfertas extends Component {
 			this.setState({
 				error: true
 			});
-			console.log(this.state.error);
 		});
 		
 	}
