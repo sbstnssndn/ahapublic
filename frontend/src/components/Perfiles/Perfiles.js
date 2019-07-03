@@ -5,7 +5,12 @@ import Row from 'react-bootstrap/Row';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import axios from 'axios';
-import { Route } from "react-router-dom";
+import ListarOfertas from '../ListarOfertas/ListarOfertas';
+
+import {
+	Link,
+	Route
+} from "react-router-dom";
 
 class Perfiles extends Component {
 
@@ -93,16 +98,32 @@ class Perfiles extends Component {
 		}
 		else if(this.props.typeUsers === "empresa"){
 			return ( 
+
 				<Row>
+					<Route
+						path={`/aha/empresas/:id/ofertas`}
+						exact
+						render={(props) => (
+						<ListarOfertas id={user.id}/>
+					)} />
 					<Col xs="4">
 						<Button variant="primary" type="submit">
 							Editar Perfil Empresa
 						</Button>
 					</Col>
+					{/*
 					<Col xs="2">
 						<Button variant="success" type="submit">
 							Ofertas
 						</Button>
+					</Col>
+					*/}
+					<Col>
+						<Link to={`/aha/empresas/${user.id}/ofertas`} >
+							<Button variant="success" type="submit">
+								Ofertas
+							</Button>
+						</Link>						
 					</Col>
 				</Row>
 			);
