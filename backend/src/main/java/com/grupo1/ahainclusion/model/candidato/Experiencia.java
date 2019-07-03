@@ -20,12 +20,12 @@ public class Experiencia {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
     private Integer id;
 
-    // Tipo: Tipo de experiencia
-    @NotNull(message = "Debe ingresar tipo de experiencia")
-    private String tipo;
     // Cargo: nombre del cargo
     @NotNull(message = "Debe ingresar nombre del cargo")
     private String cargo;
+    // Tipo: Tipo de experiencia
+    @NotNull(message = "Debe ingresar tipo de experiencia")
+    private Integer area;
     // Empresa: Nombre de la empresa
     @NotNull(message = "Debe ingresar nombre de la empresa")
     private String empresa;
@@ -44,12 +44,16 @@ public class Experiencia {
     @JsonBackReference
     private PerfilLaboral perfilLaboral;
 
-    public String getTipo() {
-        return tipo;
-    }
-
     public Integer getId() {
         return id;
+    }
+
+    public Integer getArea() {
+        return area;
+    }
+
+    public void setArea(Integer area) {
+        this.area = area;
     }
 
     public void setId(Integer id) {
@@ -94,10 +98,6 @@ public class Experiencia {
 
     public void setEmpresa(String empresa) {
         this.empresa = empresa;
-    }
-
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
     }
 
 
