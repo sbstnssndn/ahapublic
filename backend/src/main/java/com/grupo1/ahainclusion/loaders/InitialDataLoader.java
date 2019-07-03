@@ -270,31 +270,31 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
     //Experiencias exigidas por las ofertas
 
     ExperienciaExigida expExigida = new ExperienciaExigida();
-    expExigida.setTipo("Finanzas");
+    expExigida.setArea(3);
     expExigida.setDuracion(2);
     expExigida.setOferta(oferta1);
     experienciaExigidaRepository.save(expExigida);
 
     ExperienciaExigida expExigida2 = new ExperienciaExigida();
-    expExigida2.setTipo("Informática");
+    expExigida2.setArea(6);
     expExigida2.setDuracion(1);
     expExigida2.setOferta(oferta1);
     experienciaExigidaRepository.save(expExigida2);
 
     ExperienciaExigida expExigida3 = new ExperienciaExigida();
-    expExigida3.setTipo("Gastronomía");
+    expExigida3.setArea(2);
     expExigida3.setDuracion(2);
     expExigida3.setOferta(oferta2);
     experienciaExigidaRepository.save(expExigida3);
 
     ExperienciaExigida expExigida4 = new ExperienciaExigida();
-    expExigida4.setTipo("Docencia");
+    expExigida4.setArea(1);
     expExigida4.setDuracion(3);
     expExigida4.setOferta(oferta3);
     experienciaExigidaRepository.save(expExigida4);
 
     ExperienciaExigida expExigida5 = new ExperienciaExigida();
-    expExigida5.setTipo("Obras Civiles");
+    expExigida5.setArea(4);
     expExigida5.setDuracion(1);
     expExigida5.setOferta(oferta3);
     experienciaExigidaRepository.save(expExigida5);
