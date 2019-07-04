@@ -17,7 +17,7 @@ const Input = (props) => {
 							onChange={props.handleChange}
 							onBlur={props.handleValidation}
 							{...props.elementConfig}
-							displayValue={props.value}
+							displayvalue={props.value}
 							value={props.value}
 							className="form-control"
 						/>

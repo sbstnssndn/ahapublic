@@ -19,6 +19,7 @@ import {
   rutFormat,
   numberFormat,
  } from '../../util/FormatUtils.js';
+import { getComunas } from '../../util/common.js';
 
 
 class MasterForm extends Component {
@@ -27,6 +28,47 @@ class MasterForm extends Component {
     currentStage: 0,
     formData: '',
     missing: [],
+  }
+
+  changeComuna = (value, inputIdentifier) => {
+    const updatedForm = {
+      ...this.props.formConfig
+    }
+    const updatedStages = {
+      ...updatedForm.stages
+    }
+    const updatedCurrentStage = {
+      ...updatedStages[this.state.currentStage]
+    }
+    const updatedStageFields = {
+      ...updatedCurrentStage.fields
+    }
+    // updatedFieldElements es un objeto con keys numéricas para cada elemento del grupoFormulario
+    let updatedFieldElements = {
+      ...updatedStageFields[inputIdentifier]
+    }
+
+    updatedFieldElements = getComunas(value)
+
+    return {updatedForm}
+
+    // clonar el array elements
+    /*const elementsArray = [];
+    for (let elem in updatedFieldElements) {
+      elementsArray.push({
+        ...updatedFieldElements[elem]
+      })
+    }
+
+    let stagesFieldsArray = []
+    for (let elem in updatedStageFields) {
+      stagesFieldsArray.push({
+        ...updatedStageFields[elem]
+      })
+    }
+
+    /*console.log('Array: ')
+    console.log(stagesFieldsArray)*/
   }
 
   handleValidation = (event, inputIdentifier, element) => {
@@ -56,8 +98,7 @@ class MasterForm extends Component {
 
     let missing = this.state.missing
 
-    const date = new Date()
-    console.log(date)
+    console.log(updatedFieldElements)
 
     for (let elem in elementsArray) {
       console.log(elementsArray[elem].elementConfig.id)
@@ -194,18 +235,21 @@ class MasterForm extends Component {
     }
 
     for (let elem in elementsArray) {
-      console.log(elementsArray[elem].elementConfig.id)
+      console.log(elementsArray[elem])
       if(elementsArray[elem].elementConfig.id === element) {
         if (elementIndentifier === 'date'){
           elementsArray[elem].value = event
         }
-        if (elementIndentifier === 'rut'){
-          elementsArray[elem].value = event.target.value;
-          elementsArray[elem].displayValue = rutFormat(event.target.value);
-        }
         else {
           elementsArray[elem].value = event.target.value;
         }
+
+        if (element === 'region'){
+          const updatedForm2 = this.changeComuna(event.target.value, 'comuna')
+          console.log('updatedForm2:')
+          console.log(updatedForm2)
+        }
+
         updatedForm.stages[this.state.currentStage].fields[inputIdentifier].elements[elem] = elementsArray[elem];
       }   
       
