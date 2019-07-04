@@ -3,20 +3,21 @@ import Form from 'react-bootstrap/Form';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import DatePicker from "react-datepicker";
-import {NEW_EXPERIENCIA_LABORAL} from '../../constants/experienciaFormElements';
+import { NEW_EXPERIENCIA_LABORAL } from '../../constants/subforms';
 import "react-datepicker/dist/react-datepicker.css";
 
 const ExperienciaLaboralForm = ( props ) => {
 
 		let experiencias = [];
-		for(let i=0; i<props.elements.length; i=i+4) {
+		for(let i=0; i<props.elements.length; i=i+5) {
 
 			experiencias.push({
 				id: props.field + "_" + i,
 				field1: props.elements[i],
 				field2: props.elements[i+1],
 				field3: props.elements[i+2],
-				field4: props.elements[i+3]
+				field4: props.elements[i+3],
+				field5: props.elements[i+4]
 			})
 		}
 
@@ -84,17 +85,31 @@ const ExperienciaLaboralForm = ( props ) => {
 									required
 								/>
 							</Form.Group>
-
-							<Form.Group as={Col} controlId={experiencia.field4.elementConfig.id}>
+						</Form.Row>
+						<Form.Row>
+							<Form.Group controlId={experiencia.field4.elementConfig.id}>
 								<Form.Label>{experiencia.field4.label}</Form.Label>
 								<Form.Control
 									as={experiencia.field4.elementType}
+									type={experiencia.field4.elementConfig.type}
 									onChange={(event) => props.handleChange(event, props.field, experiencia.field4.elementConfig.id, experiencia.field4.elementConfig.type)}
-									name={experiencia.field4.elementConfig.name}
+									placeholder={experiencia.field4.elementConfig.placeholder}
 									value={experiencia.field4.value}
+									name={experiencia.field4.elementConfig.name}
+									required
+								/>
+							</Form.Group>
+
+							<Form.Group as={Col} controlId={experiencia.field5.elementConfig.id}>
+								<Form.Label>{experiencia.field5.label}</Form.Label>
+								<Form.Control
+									as={experiencia.field5.elementType}
+									onChange={(event) => props.handleChange(event, props.field, experiencia.field5.elementConfig.id, experiencia.field5.elementConfig.type)}
+									name={experiencia.field5.elementConfig.name}
+									value={experiencia.field5.value}
 									required
 								>
-									{experiencia.field4.elementConfig.options.map(option => (
+									{experiencia.field5.elementConfig.options.map(option => (
 										<option
 											key={option.value}
 											value={option.value}
@@ -107,11 +122,11 @@ const ExperienciaLaboralForm = ( props ) => {
 							</Form.Group>
 
 						</Form.Row>
-						<Button variant="danger" onClick={() => props.deleteForm(props.field, experiencia.id[experiencia.id.length-1], 4)}>Eliminar</Button>
+						<Button variant="danger" onClick={() => props.deleteForm(props.field, experiencia.id[experiencia.id.length-1], 5)}>Eliminar</Button>
 						<hr />
 					</React.Fragment>
 				)) }
-			<Button onClick={() => props.addExperiencia(props.field, NEW_EXPERIENCIA_LABORAL)}>Agregar</Button>
+			<Button onClick={() => props.addSubForm(props.field, NEW_EXPERIENCIA_LABORAL)}>Agregar</Button>
 			</React.Fragment>
 		)
 	

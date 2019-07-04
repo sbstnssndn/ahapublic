@@ -11,6 +11,7 @@ import java.util.Random;
 import javax.transaction.Transactional;
 
 import com.grupo1.ahainclusion.model.Oferta;
+import com.grupo1.ahainclusion.model.PerfilAHA;
 import com.grupo1.ahainclusion.model.PerfilCandidato;
 import com.grupo1.ahainclusion.model.PerfilLaboral;
 import com.grupo1.ahainclusion.model.PerfilEmpresa;
@@ -104,6 +105,7 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
 
     Role candidatoRole = roleRepository.findByName("ROLE_CANDIDATO");
     Role empresaRole = roleRepository.findByName("ROLE_EMPRESA");
+    Role ahaRole = roleRepository.findByName("ROLE_AHA");
 
     // SE AGREGAN USUARIOS CANDIDATOS RANDOM
     try {
@@ -111,6 +113,35 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
     } catch (JSONException | UnirestException | IOException e) {
       e.printStackTrace();
     }
+
+    // SE AGREGAN USUARIOS AHA
+    User aha1 = new User();
+    aha1.setEmail("karina@ahainclusion.com");
+    aha1.setPassword(passwordEncoder.encode("aha1234"));
+    aha1.setEnabled(true);
+    aha1.setRoles(Arrays.asList(ahaRole));
+    userRepository.save(aha1);
+    PerfilAHA pAHA1 = new PerfilAHA();
+    pAHA1.setFirstName("Karina");
+    pAHA1.setLastName("Cisterna");
+    pAHA1.setRut("XX.XXX.XXX-X");
+    pAHA1.setUser(aha1);
+    perfilAHARepository.save(pAHA1);
+
+    User aha2 = new User();
+    aha2.setEmail("sebastian@ahainclusion.com");
+    aha2.setPassword(passwordEncoder.encode("aha1234"));
+    aha2.setEnabled(true);
+    aha2.setRoles(Arrays.asList(ahaRole));
+    userRepository.save(aha2);
+    PerfilAHA pAHA2 = new PerfilAHA();
+    pAHA2.setFirstName("Sebastian");
+    pAHA2.setLastName("Espinoza");
+    pAHA2.setRut("XX.XXX.XXX-X");
+    pAHA2.setUser(aha2);
+    perfilAHARepository.save(pAHA2);
+
+
 
     // SE AGREGAN USUARIOS EMPRESA + PERFILES DE ACCESIBILIDAD
     User empresa1 = new User();
@@ -239,31 +270,31 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
     //Experiencias exigidas por las ofertas
 
     ExperienciaExigida expExigida = new ExperienciaExigida();
-    expExigida.setTipo("Finanzas");
+    expExigida.setArea(3);
     expExigida.setDuracion(2);
     expExigida.setOferta(oferta1);
     experienciaExigidaRepository.save(expExigida);
 
     ExperienciaExigida expExigida2 = new ExperienciaExigida();
-    expExigida2.setTipo("Informática");
+    expExigida2.setArea(6);
     expExigida2.setDuracion(1);
     expExigida2.setOferta(oferta1);
     experienciaExigidaRepository.save(expExigida2);
 
     ExperienciaExigida expExigida3 = new ExperienciaExigida();
-    expExigida3.setTipo("Gastronomía");
+    expExigida3.setArea(2);
     expExigida3.setDuracion(2);
     expExigida3.setOferta(oferta2);
     experienciaExigidaRepository.save(expExigida3);
 
     ExperienciaExigida expExigida4 = new ExperienciaExigida();
-    expExigida4.setTipo("Docencia");
+    expExigida4.setArea(1);
     expExigida4.setDuracion(3);
     expExigida4.setOferta(oferta3);
     experienciaExigidaRepository.save(expExigida4);
 
     ExperienciaExigida expExigida5 = new ExperienciaExigida();
-    expExigida5.setTipo("Obras Civiles");
+    expExigida5.setArea(4);
     expExigida5.setDuracion(1);
     expExigida5.setOferta(oferta3);
     experienciaExigidaRepository.save(expExigida5);

@@ -3,6 +3,7 @@ import Form from 'react-bootstrap/Form';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import DatePicker from "react-datepicker";
+import { NEW_CURSO } from '../../constants/subforms';
 import "react-datepicker/dist/react-datepicker.css";
 
 const CursosForm = (props) => {
@@ -100,7 +101,7 @@ const CursosForm = (props) => {
 					<hr />
 				</React.Fragment>
 			)) }
-		<Button onClick={() => props.addCurso(props.field)}>Agregar</Button>
+		<Button onClick={() => props.addSubForm(props.field, NEW_CURSO)}>Agregar</Button>
 		</React.Fragment>
 	)
 	
