@@ -448,5 +448,5 @@ export const getComunas = (value) => {
       newComuna.elements[0].elementConfig.options = [{ value: '', displayValue: 'Seleccione...', disabled: true }]
   }
 
-  return {newComuna}
+  return newComuna
 }
