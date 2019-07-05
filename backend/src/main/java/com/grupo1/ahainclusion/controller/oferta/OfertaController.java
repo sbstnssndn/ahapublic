@@ -45,6 +45,29 @@ public class OfertaController {
         return ofertaRepository.findAll();
     }
 
+    // Obtener usuario de una oferta
+    @GetMapping(value = "oferta/{id}/user")
+    public @ResponseBody User getUserFromOferta(@PathVariable("id") Integer id) {
+        
+        Optional<Oferta> ofertaOptional = ofertaRepository.findById(id);
+
+        if (!ofertaOptional.isPresent())
+        return null;
+
+        Oferta oferta = ofertaOptional.get();
+        Integer userId = oferta.getPerfilEmpresa().getId();
+
+        Optional<User> userOptional = userRepository.findById(userId);
+
+        if (!userOptional.isPresent())
+        return null;
+
+        User user = userOptional.get();
+
+        return user;
+    }
+
+
     //Obtener una oferta por id
     @GetMapping(value = "oferta/{id}")
     public @ResponseBody Oferta get(@PathVariable("id") Integer id) {
