@@ -46,7 +46,7 @@ public class OfertaController {
     }
 
     // Obtener usuario de una oferta
-    @GetMapping(value = "oferta/{id}")
+    @GetMapping(value = "oferta/{id}/user")
     public @ResponseBody User getUserFromOferta(@PathVariable("id") Integer id) {
         
         Optional<Oferta> ofertaOptional = ofertaRepository.findById(id);
