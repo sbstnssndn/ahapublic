@@ -2,6 +2,15 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import Card from 'react-bootstrap/Card';
 import Form from 'react-bootstrap/Form';
+import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
+import Button from 'react-bootstrap/Button';
+import Empresa from '../Empresa/Empresa';
+
+import {
+	Link,
+	Route
+} from "react-router-dom";
 
 class ListarOfertas extends Component {
 
@@ -15,7 +24,7 @@ class ListarOfertas extends Component {
 		let id = this.props.match.params.id;
 
 		axios.get('http://localhost:8080/api/user/'+id+'/oferta')
-		.then(response => {		
+		.then(response => {
 			this.setState({
 				ofertas: response.data
 			});
@@ -40,6 +49,33 @@ class ListarOfertas extends Component {
 		}
 	}
 
+	botones(oferta){
+		
+		if(oferta != null){
+
+			let id = this.props.match.params.id;
+
+            return (
+                <Row>
+					<Route
+						path={`/aha/empresas/:id`}
+						exact
+						render={(props) => (
+						<Empresa />
+					)} />
+
+					<Col>
+						<Link to={`/aha/empresas/${id}`} >
+							<Button variant="success" type="submit">
+								Ver empresa
+							</Button>
+						</Link>						
+					</Col>
+                </Row>
+            );
+        }
+	}
+
 	printOfertas() {
 		if(this.state.ofertas.length !== 0){
 			return (
@@ -49,6 +85,7 @@ class ListarOfertas extends Component {
 							<Form.Group>
 								<Card.Title>{oferta.name}</Card.Title>
 								<Card.Body>Descripción: {oferta.description}</Card.Body>
+								{this.botones(oferta)}
 							</Form.Group>
 							<hr/>
 						</Card.Body>
