@@ -250,7 +250,7 @@ export default
                   name: 'region',
                   id: 'region',
                   options: [
-                    { value: '', displayValue: 'Seleccione...', disabled: true },
+                    { value: '', displayValue: ''},
                     { value: 0, displayValue: 'Arica y Parinacota' },
                     { value: 1, displayValue: 'Tarapacá' },
                     { value: 2, displayValue: 'Antofagasta' },
@@ -283,7 +283,7 @@ export default
                 elementConfig: {
                   name: 'comuna',
                   id: 'comuna',
-                  options: [{ value: '', displayValue: 'Seleccione...', disabled: true }]
+                  options: [{ value: '', displayValue: ''}]
                 },
                 subtext: '',
                 value: '',
