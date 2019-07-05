@@ -32,11 +32,17 @@ public class OfertaController {
 
     // Obtener Ofertas de usuario
     @GetMapping(value = "user/{userId}/oferta")
-    public @ResponseBody Iterable<Oferta> getAll(@PathVariable("userId") Integer userId) {
+    public @ResponseBody Iterable<Oferta> getAllFromUser(@PathVariable("userId") Integer userId) {
 
         User user = userRepository.findById(userId).get();
         if(user.getPerfilEmpresa()!=null) return user.getPerfilEmpresa().getOfertas();
         return null;
+    }
+
+    // Obtener todas las ofertas
+    @GetMapping(value = "/oferta/all")
+    public @ResponseBody Iterable<Oferta> getAll() {
+        return ofertaRepository.findAll();
     }
 
     //Obtener una oferta por id
