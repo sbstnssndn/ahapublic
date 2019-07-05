@@ -50,6 +50,7 @@ class ListarOfertas extends Component {
 								<Card.Title>{oferta.name}</Card.Title>
 								<Card.Body>Descripción: {oferta.description}</Card.Body>
 							</Form.Group>
+							<hr/>
 						</Card.Body>
 					)
 				})

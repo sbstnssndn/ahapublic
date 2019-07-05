@@ -78,6 +78,10 @@ const Navigation = ( props ) => {
 						Empresas
 					</NavigationItem>
 
+					<NavigationItem exact to='/aha/ofertas'>
+						Ofertas
+					</NavigationItem>
+
 					<NavigationItem exact to='/aha/cuenta'>
 						Mi cuenta
 					</NavigationItem>
@@ -94,23 +98,12 @@ const Navigation = ( props ) => {
 						</Nav.Link>
 					</LinkContainer>
 					
-					<LinkContainer to="/postulante">
+					<LinkContainer to="/login">
 						<Nav.Link>
-							<span className="nav-link">Postulante</span>
+							<span className="nav-link">Inicio de sesión</span>
 						</Nav.Link>
 					</LinkContainer>
-					
-					<LinkContainer to="/empresa">
-						<Nav.Link>
-							<span className="nav-link">Empresa</span>
-						</Nav.Link>
-					</LinkContainer>
-					
-					<LinkContainer to="/postulantes/preguntas">
-						<Nav.Link>
-							<span className="nav-link">Preguntas</span>
-						</Nav.Link>
-					</LinkContainer>
+
 				</React.Fragment>
 			)
 			break;
