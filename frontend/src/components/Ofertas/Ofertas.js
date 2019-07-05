@@ -65,6 +65,7 @@ class Ofertas extends Component {
                                 <Card.Body> Descripción: {oferta.description}</Card.Body>
                                 {this.botones(oferta, id_empresa)}
                             </Form.Group>
+                            <hr/>
                         </Card.Body>
                     )
                 })
