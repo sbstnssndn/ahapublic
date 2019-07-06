@@ -86,6 +86,10 @@ const Navigation = ( props ) => {
 						Mi cuenta
 					</NavigationItem>
 
+					<NavigationItem exact to='/aha/prueba'>
+						Prueba
+					</NavigationItem>
+					
 				</React.Fragment>
 			)
 			break;
