@@ -30,29 +30,6 @@ class MasterForm extends Component {
     missing: [],
   }
 
-  changeComuna = (value, inputIdentifier) => {
-    const updatedForm = {
-      ...this.props.formConfig
-    }
-    const updatedStages = {
-      ...updatedForm.stages
-    }
-    const updatedCurrentStage = {
-      ...updatedStages[this.state.currentStage]
-    }
-    const updatedStageFields = {
-      ...updatedCurrentStage.fields
-    }
-    // updatedFieldElements es un objeto con keys numéricas para cada elemento del grupoFormulario
-    let updatedFieldElements = {
-      ...updatedStageFields[inputIdentifier]
-    }
-
-    updatedFieldElements = getComunas(value)
-
-    return updatedFieldElements
-  }
-
   handleValidation = (event, inputIdentifier, element) => {
     const updatedForm = {
       ...this.props.formConfig
@@ -220,7 +197,7 @@ class MasterForm extends Component {
       console.log(elementsArray[elem].elementConfig.id)
       if(elementsArray[elem].elementConfig.id === element) {
         if (element === 'region'){
-          updatedForm.stages[this.state.currentStage].fields['comuna'] =  this.changeComuna(event.target.value, 'comuna')
+          updatedForm.stages[this.state.currentStage].fields['comuna'] =  getComunas(event.target.value)
         }
 
         if (elementIndentifier === 'date'){
