@@ -33,6 +33,26 @@ public class PerCalculator {
             score = score + 1;
         if(pLaboral.getLeerEscribir() >= oferta.getLeerEscribir())
             score = score + 1;
+        if(pLaboral.getLicencia().equals(oferta.getLicencia()))
+            score = score + 1;
+        if(pLaboral.getNivelEducacional() >= oferta.getNivelEducacional())
+            score = score + 1;
+        if(pLaboral.getObjetosPequeños() >= oferta.getObjetosPequeños())
+            score = score + 1;
+        if(pLaboral.getPermanecerPie() >= oferta.getPermanecerPie())
+            score = score + 1;
+        if(pLaboral.getPermanecerSentado() >= oferta.getPermanecerSentado())
+            score = score + 1;
+        if(pLaboral.getResolverProblemas() >= oferta.getResolverProblemas())
+            score = score + 1;
+        if(pLaboral.getSituacionesConflicto() >= oferta.getSituacionesConflicto())
+            score = score + 1;
+        if(pLaboral.getSituacionesNuevas() >= oferta.getSituacionesNuevas())
+            score = score + 1;
+        if(pLaboral.getTareasEstresantes() >= oferta.getTareasEstresantes())
+            score = score + 1;
+        if(pLaboral.getTrabajoEquipo() >= oferta.getTrabajoEquipo())
+            score = score + 1;
 
         // System.out.println(score);
         Double percentage = (score/9)*100;
