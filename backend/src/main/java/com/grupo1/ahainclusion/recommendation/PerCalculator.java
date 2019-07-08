@@ -68,22 +68,21 @@ public class PerCalculator {
         return out;
     }
 
-    public Integer getYears(Collection<Experiencia> experiencias) {
+    public Integer getYears(Collection<Experiencia> exps) {
         Integer years = 0;
 
         
-        for (Experiencia exp : experiencias) {
+        for (Experiencia exp : exps) {
             Date date1 = exp.getFechaInicio();
             Date date2 = exp.getFechaFin();
 
             DateTime dateTime1 = new DateTime(date1);
             DateTime dateTime2 = new DateTime(date2);
 
-            int days = Days.daysBetween(dateTime1, dateTime2).getDays();
+            double days = Days.daysBetween(dateTime1, dateTime2).getDays();
 
             System.out.println("---------------------");
             System.out.println(days);
-            System.out.println("---------------------");
             
         }
 
