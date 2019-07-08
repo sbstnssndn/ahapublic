@@ -21,7 +21,7 @@ public class PerCalculator {
 
         PerfilLaboral pLaboral = user.getPerfilCandidato().getPerfilLaboral();
 
-        Double score = 0.0;
+        Integer score = 0;
 
         if(pLaboral.getActividadesAuditiva() >= oferta.getActividadesAuditiva())
             score = score + 1;
@@ -63,10 +63,12 @@ public class PerCalculator {
             score = score + 1;
 
         if(check(pLaboral.getExperiencias(), oferta.getExperiencias())==true)
-            score = score + 1;
+            score = score + 5;
 
-        // System.out.println(score);
-        Double percentage = (score/20)*100;
+        System.out.println(score);
+        // Double percentage = ((score*1.0)/20.0)*100.0;
+        double percentage = ((score*1.0)/24)*100;
+        System.out.println(percentage);
         Integer out = (int) (Math.round(percentage));
         // System.out.println(percentage);
         // System.out.println(out);
@@ -84,9 +86,9 @@ public class PerCalculator {
         Integer days = Days.daysBetween(dateTime1, dateTime2).getDays();
 
         Integer years = days/360;
-        System.out.println("---------------------");
-        System.out.println(days);
-        System.out.println(years);
+        // System.out.println("---------------------");
+        // System.out.println(days);
+        // System.out.println(years);
 
         return years;
     }
