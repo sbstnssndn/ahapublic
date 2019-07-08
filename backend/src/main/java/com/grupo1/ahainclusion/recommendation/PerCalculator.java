@@ -65,10 +65,7 @@ public class PerCalculator {
         if(check(pLaboral.getExperiencias(), oferta.getExperiencias())==true)
             score = score + 5;
 
-        System.out.println(score);
-        // Double percentage = ((score*1.0)/20.0)*100.0;
         double percentage = ((score*1.0)/24)*100;
-        System.out.println(percentage);
         Integer out = (int) (Math.round(percentage));
         // System.out.println(percentage);
         // System.out.println(out);
