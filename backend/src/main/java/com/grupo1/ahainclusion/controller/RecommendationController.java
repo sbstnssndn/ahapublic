@@ -34,7 +34,7 @@ public class RecommendationController {
         List<Recommendation> recommendations = new ArrayList<>();
 
         Oferta oferta = ofertaRepository.findById(ofertaId).get();
-        recommendations = recgen.generate(oferta, 5);
+        recommendations = recgen.generate(oferta, 10);
 
         return recommendations;
     }
