@@ -1,6 +1,8 @@
 package com.grupo1.ahainclusion.loaders;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -18,6 +20,7 @@ import com.grupo1.ahainclusion.model.PerfilEmpresa;
 import com.grupo1.ahainclusion.model.Privilege;
 import com.grupo1.ahainclusion.model.Role;
 import com.grupo1.ahainclusion.model.User;
+import com.grupo1.ahainclusion.model.candidato.Experiencia;
 import com.grupo1.ahainclusion.model.oferta.ExperienciaExigida;
 import com.grupo1.ahainclusion.repository.ExperienciaExigidaRepository;
 import com.grupo1.ahainclusion.repository.OfertaRepository;
@@ -76,8 +79,6 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
 
   @Autowired
   private ExperienciaExigidaRepository experienciaExigidaRepository;
-  
-  
 
   @Override
   @Transactional
@@ -85,6 +86,7 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
 
     if (alreadySetup)
       return;
+
     // Se crean los privilegios.
     Privilege privilege1 = createPrivilegeIfNotFound("PRIVILEGIO_1");
     Privilege privilege2 = createPrivilegeIfNotFound("PRIVILEGIO_2");
@@ -110,7 +112,7 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
     // SE AGREGAN USUARIOS CANDIDATOS RANDOM
     try {
       getRandomUsers(candidatoRole, 40);
-    } catch (JSONException | UnirestException | IOException e) {
+    } catch (JSONException | UnirestException | IOException | ParseException e) {
       e.printStackTrace();
     }
 
@@ -141,8 +143,6 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
     pAHA2.setUser(aha2);
     perfilAHARepository.save(pAHA2);
 
-
-
     // SE AGREGAN USUARIOS EMPRESA + PERFILES DE ACCESIBILIDAD
     User empresa1 = new User();
     empresa1.setEmail("contacto@lider.cl");
@@ -160,20 +160,17 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
     empresa2.setEnabled(true);
     userRepository.save(empresa2);
 
-
     PerfilEmpresa pEmpresa1 = new PerfilEmpresa();
     pEmpresa1.setNameEmpresa("Líder");
-    //pEmpresa1.setRutEmpresa("");
+    // pEmpresa1.setRutEmpresa("");
     pEmpresa1.setUser(empresa1);
     perfilEmpresaRepository.save(pEmpresa1);
-  
 
     PerfilEmpresa pEmpresa2 = new PerfilEmpresa();
     pEmpresa2.setNameEmpresa("Ripley");
-    //pEmpresa2.setRutEmpresa("");
+    // pEmpresa2.setRutEmpresa("");
     pEmpresa2.setUser(empresa2);
     perfilEmpresaRepository.save(pEmpresa2);
-
 
     // SE AGREGAN OFERTAS
 
@@ -181,7 +178,7 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
     Oferta oferta2 = new Oferta();
     Oferta oferta3 = new Oferta();
 
-    //Detalles ofertas   
+    // Detalles ofertas
 
     oferta1.setName("Reponedor");
     oferta1.setDescription("Reponedor de productos");
@@ -267,7 +264,7 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
     ofertaRepository.save(oferta2);
     ofertaRepository.save(oferta3);
 
-    //Experiencias exigidas por las ofertas
+    // Experiencias exigidas por las ofertas
 
     ExperienciaExigida expExigida = new ExperienciaExigida();
     expExigida.setArea(3);
@@ -299,7 +296,6 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
     expExigida5.setOferta(oferta3);
     experienciaExigidaRepository.save(expExigida5);
 
-
     alreadySetup = true;
   }
 
@@ -329,11 +325,14 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
   }
 
   @Transactional
-  private void getRandomUsers(Role role, Integer n) throws JSONException, UnirestException, IOException {
+  private void getRandomUsers(Role role, Integer n)
+      throws JSONException, UnirestException, IOException, ParseException {
       
    
     String url = "https://randomuser.me/api/?inc=gender,id,name,email&results="+n+"&nat=US&seed="+userSeed;
     JSONArray results = Unirest.get(url).asJson().getBody().getObject().getJSONArray("results");
+
+    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 
     for(int i=0;i<results.length();i++)
     {
@@ -360,6 +359,12 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
 
       PerfilLaboral pLaboral = new PerfilLaboral();
 
+      Experiencia experiencia1 = new Experiencia();
+      experiencia1.setArea(rand.nextInt(26));
+      experiencia1.setCargo("Nombre del cargo");
+      experiencia1.setEmpresa("empreas random");
+      experiencia1.setFechaInicio(sdf.parse("15/06/2001"));
+      experiencia1.setFechaFin(sdf.parse("15/07/2002"));
 
 
       pLaboral.setCredencial(rand.nextBoolean());
@@ -396,6 +401,12 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
       pLaboral.setTareasEstresantes(rand.nextInt(4));
       // pLaboral.setTitulos(titulos);
       pLaboral.setTrabajoEquipo(rand.nextInt(4));
+
+      pLaboral.setExperiencias(Arrays.asList(experiencia1));
+
+      
+
+      
       
       
 
