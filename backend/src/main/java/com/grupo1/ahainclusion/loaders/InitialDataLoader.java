@@ -18,6 +18,7 @@ import com.grupo1.ahainclusion.model.PerfilEmpresa;
 import com.grupo1.ahainclusion.model.Privilege;
 import com.grupo1.ahainclusion.model.Role;
 import com.grupo1.ahainclusion.model.User;
+import com.grupo1.ahainclusion.model.candidato.Experiencia;
 import com.grupo1.ahainclusion.model.oferta.ExperienciaExigida;
 import com.grupo1.ahainclusion.repository.ExperienciaExigidaRepository;
 import com.grupo1.ahainclusion.repository.OfertaRepository;
@@ -396,6 +397,9 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
       pLaboral.setTareasEstresantes(rand.nextInt(4));
       // pLaboral.setTitulos(titulos);
       pLaboral.setTrabajoEquipo(rand.nextInt(4));
+
+      Experiencia experiencia = new Experiencia();
+      experiencia.setArea(rand.nextInt());
       
       
 

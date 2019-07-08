@@ -45,7 +45,8 @@ public class RecGenerator {
 
             recommendations.add(rcm);
 
-            System.out.println("Usuario " + u.getId() + ": " +rcm.getUserSummary().getName() +" "+"Porcentaje: "+rcm.getPercentage());
+            // System.out.println("Usuario " + u.getId() + ": " +rcm.getUserSummary().getName() +" "+"Porcentaje: "+rcm.getPercentage());
+            perCalculator.getYears(u.getPerfilCandidato().getPerfilLaboral().getExperiencias());
         }
         System.out.println("----------------------------");
         

@@ -1,9 +1,15 @@
 package com.grupo1.ahainclusion.recommendation;
 
+import java.util.Collection;
+import java.util.Date;
+
 import com.grupo1.ahainclusion.model.Oferta;
 import com.grupo1.ahainclusion.model.PerfilLaboral;
 import com.grupo1.ahainclusion.model.User;
+import com.grupo1.ahainclusion.model.candidato.Experiencia;
 
+import org.joda.time.DateTime;
+import org.joda.time.Days;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -62,5 +68,26 @@ public class PerCalculator {
         return out;
     }
 
+    public Integer getYears(Collection<Experiencia> experiencias) {
+        Integer years = 0;
+
+        
+        for (Experiencia exp : experiencias) {
+            Date date1 = exp.getFechaInicio();
+            Date date2 = exp.getFechaFin();
+
+            DateTime dateTime1 = new DateTime(date1);
+            DateTime dateTime2 = new DateTime(date2);
+
+            int days = Days.daysBetween(dateTime1, dateTime2).getDays();
+
+            System.out.println("---------------------");
+            System.out.println(days);
+            System.out.println("---------------------");
+            
+        }
+
+        return 0;
+    }
 
 }
