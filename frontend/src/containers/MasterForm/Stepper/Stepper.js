@@ -40,17 +40,17 @@ const Stepper = (props) => {
   return (
 		<Container fluid>
 			<Row>
-				<Col xs={5} className="px-0">
-					<p className="mb-0 text-center pt-2">
-						{props.stageTitles[props.currentStage]}
-					</p>
-				</Col>
-				<Col xs={7} className="px-0">
+				<Col xs className="px-0">
 					<Container fluid>
 						<Row className="justify-content-center">
 							<Pagination className="my-0">
-								{items}
+								{items}				
 							</Pagination>
+						</Row>
+						<Row className="justify-content-md-center">
+							<p className="mb-0 pt-2">
+								{props.stageTitles[props.currentStage]}
+							</p>
 						</Row>
 					</Container>
 				</Col>
