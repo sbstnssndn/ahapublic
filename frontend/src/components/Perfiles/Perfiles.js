@@ -111,19 +111,12 @@ class Perfiles extends Component {
 							Editar Perfil Empresa
 						</Button>
 					</Col>
-					{/*
-					<Col xs="2">
-						<Button variant="success" type="submit">
-							Ofertas
-						</Button>
-					</Col>
-					*/}
 					<Col>
 						<Link to={`/aha/empresas/${user.id}/ofertas`} >
 							<Button variant="success" type="submit">
 								Ofertas
 							</Button>
-						</Link>						
+						</Link>
 					</Col>
 				</Row>
 			);
@@ -145,6 +138,7 @@ class Perfiles extends Component {
 									<Card.Title>{this.nombre(user)} - {user.email}</Card.Title>	
 									{this.botones(user)}							
 								</Form.Group>
+								<hr/>
 							</Card.Body>
 						)
 					})}

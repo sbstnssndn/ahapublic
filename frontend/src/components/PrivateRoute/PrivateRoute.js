@@ -8,8 +8,8 @@ import {
 const PrivateRoute = ({ component: Component, authenticated, wasInitialized, ...rest }) => (
     <Route
       {...rest}
-      render={props =>
-        authenticated ? (
+			render={props =>
+				authenticated ? (
           <Component {...rest} {...props} />
         ) : !wasInitialized ? (
           ""
@@ -20,8 +20,7 @@ const PrivateRoute = ({ component: Component, authenticated, wasInitialized, ...
               state: { from: props.location }
             }}
           />
-        )
-      }
+        )}
     />
 );
   

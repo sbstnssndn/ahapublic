@@ -7,6 +7,9 @@ import MasterForm from '../../containers/MasterForm/MasterForm';
 import Recomendaciones from '../../containers/Recomendaciones/Recomendaciones';
 import Perfiles from '../Perfiles/Perfiles.js';
 import ListarOfertas from '../ListarOfertas/ListarOfertas';
+import Ofertas from '../Ofertas/Ofertas';
+import Empresa from '../Empresa/Empresa';
+import Prueba from '../Prueba/Prueba';
 import Tabs from '../Tabs/Tabs';
 import { formPostulante } from '../../constants/forms/formPostulante';
 import { formPostulanteLaboral } from '../../constants/forms/formPostulanteLaboral';
@@ -24,6 +27,8 @@ const Panel = ( props ) => {
 	let routes = null;
 	let tabs = null;
 
+	let currentUser = props.currentUser;
+
 	switch (props.currentUser.role) {
 		case USER_TYPE_POSTULANTE:
 			routes = (
@@ -33,21 +38,21 @@ const Panel = ( props ) => {
 						exact
 						render={(props) => (
 							<MasterForm
-								formConfig={formPostulanteLaboral} currentUser={props.currentUser} {...props} />
+								formConfig={formPostulanteLaboral} currentUser={currentUser} {...props} />
 						)} />
 					<Route
 						path={`${props.match.path}/cuenta`}
 						exact
 						render={(props) => (
 							<MasterForm
-								formConfig={formCuentaUsuario} currentUser={props.currentUser} {...props} />
+								formConfig={formCuentaUsuario} currentUser={currentUser} {...props} />
 						)} />
 					<Route
 						path={`${props.match.path}`}
 						exact
 						render={(props) => (
 							<MasterForm
-								formConfig={formPostulante} currentUser={props.currentUser} {...props} />
+								formConfig={formPostulante} currentUser={currentUser} {...props} />
 						)} />
 					
 				</>
@@ -131,11 +136,36 @@ const Panel = ( props ) => {
 							<MasterForm
 								formConfig={formCuentaUsuario} currentUser={props.currentUser} {...props} />
 						)} />
+
+					<Route
+						path={`${props.match.path}/prueba`}
+						exact
+						render={(props) => (
+							<Prueba />
+						)} />
+
+					{/*Ofertas de una empresa */}
 					<Route
 						path={`${props.match.path}/empresas/:id/ofertas`}
 						exact
 						render={(props) => (
 							<ListarOfertas {...props}/>
+						)} />
+
+					{/*Todas las ofertas */}
+					<Route
+						path={`${props.match.path}/ofertas`}
+						exact
+						render={(props) => (
+							<Ofertas {...props}/>
+						)} />
+
+					{/*Ver una empresa */}
+					<Route
+						path={`${props.match.path}/empresas/:id`}
+						exact
+						render={(props) => (
+							<Empresa {...props}/>
 						)} />
 				</>
 			);
@@ -143,6 +173,7 @@ const Panel = ( props ) => {
 				<Tabs routes={routes}>
 					<div label="Postulantes" to={`${props.match.url}`} icon="fas fa-user"></div>
 					<div label="Empresas" to={`${props.match.url}/empresas`} icon="fas fa-user"></div>
+					<div label="Ofertas" to={`${props.match.url}/ofertas`} icon="fas fa-address-card"></div>					
 					<div label="Mi cuenta" to={`${props.match.url}/cuenta`} icon="fas fa-user"></div>
 				</Tabs>
 			);
@@ -150,7 +181,7 @@ const Panel = ( props ) => {
 		default:
 			routes = <p>Error al cargar contenido.</p>;
 	}
-
+	console.log("Panel props ", props)
 	return (
 		<section id="formularios" className="py-4" style={{minHeight: '80vh'}}>
 			{ tabs }

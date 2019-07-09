@@ -7,16 +7,16 @@ import Card from 'react-bootstrap/Card';
 import Alert from 'react-bootstrap/Alert';
 import { fieldFormValidation } from '../../util/ValidationUtils';
 //import { rutFormat } from '../../util/FormatUtils.js';
-import { generateSubForm } from '../../util/common';
+import { generateSubForm, getComunas } from '../../util/common';
 //import '../../custom.css'
 
 class MasterForm extends Component {
   
   state = {
     currentStage: 0,
-    formData: '',
+    formData: null,
     missing: [],
-    show: false,
+		show: false
 	}
 	
 	cloneStateElementsArray = (inputIdentifier) => {
@@ -55,7 +55,9 @@ class MasterForm extends Component {
 		}
 	}
 
-  handleDismiss = () => this.setState({ show: false });
+  handleDismiss = () => {
+		this.setState({ show: false });
+	}
 
   handleValidation = (event, inputIdentifier, element) => {
     const clone = {...this.cloneStateElementsArray(inputIdentifier)}
@@ -72,7 +74,6 @@ class MasterForm extends Component {
 
         missing = resp[0]
         clone.elementsArray[elem].subtext = resp[1]
-        
       }
 
       clone.updatedForm.stages[this.state.currentStage].fields[inputIdentifier].elements[elem] = clone.elementsArray[elem];
@@ -93,6 +94,10 @@ class MasterForm extends Component {
     for (let elem in clone.elementsArray) {
       //console.log(elementsArray[elem].elementConfig.id)
       if(clone.elementsArray[elem].elementConfig.id === element) {
+        if (element === 'region'){
+          clone.updatedForm.stages[this.state.currentStage].fields['comuna'] =  getComunas(event.target.value)
+        }
+
         if (elementIndentifier === 'date'){
           clone.elementsArray[elem].value = event
         }
@@ -106,10 +111,6 @@ class MasterForm extends Component {
     this.setState({
       form: clone.updatedForm
     });
-  }
-
-  componentDidMount() {
-    
   }
 
   handleSubmit = (event, method) => {
@@ -187,13 +188,13 @@ class MasterForm extends Component {
   }
 
   _prev = () => {
-      let currentStage = this.state.currentStage;
-      let firstStage = 0;
+		let currentStage = this.state.currentStage;
+		let firstStage = 0;
 
-      currentStage = currentStage <= firstStage ? firstStage : currentStage - 1;
-      this.setState({
-        currentStage: currentStage
-      });
+		currentStage = currentStage <= firstStage ? firstStage : currentStage - 1;
+		this.setState({
+			currentStage: currentStage
+		});
   }
   /*
   addTitulo = (inputIdentifier) => {
@@ -286,10 +287,45 @@ class MasterForm extends Component {
     this.setState({
       form: clone.updatedForm
     });
+	}
+	
+	fetchData = () => {
+		const updatedForm = {
+      ...this.props.formConfig
+    }
+    const updatedStages = {
+      ...updatedForm.stages
+    }
+    const updatedCurrentStage = {
+      ...updatedStages[this.state.currentStage]
+    }
+    const updatedStageFields = {
+      ...updatedCurrentStage.fields
+		}
+
+		let formData = { email: this.props.currentUser.email, password: "", newPassword: "" }
+
+		for (let field in updatedStageFields) {
+			let currentField = {...updatedStageFields[field]};
+			let currentFieldElements = {...currentField.elements}
+			for (let element in currentFieldElements) {
+				if (formData[field] != null) {
+					currentFieldElements[element].value = formData[field];
+					console.log(field, formData[field])
+				}
+			}
+		}
+		this.setState({
+			form: updatedForm
+		})
+	}
+
+	componentDidMount() {
+		this.fetchData();
   }
 
   render () {
-
+		console.log("MasterForm props: ", this.props)
     let stages = (
       this.props.formConfig.stages.map(stage => {
         return <Stage
@@ -302,9 +338,6 @@ class MasterForm extends Component {
           totalStages={this.props.formConfig.totalStages}
           handleValidation={this.handleValidation}
           handleChange={this.handleChange}
-          addTitulo={this.addTitulo}
-          addExperiencia={this.addExperiencia}
-					addCurso={this.addCurso}
 					addSubForm={this.addSubForm}
           deleteForm={this.deleteForm}
           />
@@ -320,21 +353,20 @@ class MasterForm extends Component {
 
       <Card className="mb-4">
         <Card.Header className="px-2">
-          {/*ALERT*/}
           <Alert
-              className="mb-0 mt-2"
-              variant="danger"
-              show={this.state.show}
-              onClose={this.handleDismiss}
-              dismissible>
-              "Ups! Hay campos con errores"
+						className="mb-0 mt-2"
+						variant="danger"
+						show={this.state.show}
+						onClose={this.handleDismiss}
+						dismissible>
+						"Hay campos con errores."
           </Alert>
           <Stepper
-              currentStage={this.state.currentStage}
-              totalStages={this.props.formConfig.totalStages}
-              stageTitles={stageTitlesArray}
-              goto={this._goto}
-            />
+						currentStage={this.state.currentStage}
+						totalStages={this.props.formConfig.totalStages}
+						stageTitles={stageTitlesArray}
+						goto={this._goto}
+					/>
         </Card.Header>
         <Card.Body>
           <form onSubmit={(event) => this.handleSubmit(event, "POST")}>
