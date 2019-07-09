@@ -3,7 +3,6 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
-import styles from './StageControls.module.css';
 //import Tooltip from 'react-bootstrap/Tooltip';
 //import { LinkContainer } from 'react-router-bootstrap';
 
@@ -33,16 +32,12 @@ const StageControls = (props) => {
 		);
 	}
 
-	// TODO: implementar touched, togglear si el usuario ingresa algo a algún campo
-	let touched = true;
 	let sendButton = null;
-	if (touched) {
-		sendButton = (
-			<Button variant="success" type="submit">
-				Guardar
-			</Button>
-		)
-	}
+	sendButton = (
+		<Button variant="success" type="submit">
+			Guardar
+		</Button>
+	)
 
   return (
 		<Container fluid>
