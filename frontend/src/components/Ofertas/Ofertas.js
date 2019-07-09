@@ -39,7 +39,7 @@ class Ofertas extends Component {
 							<Button variant="success" type="submit">
 								Ver empresa
 							</Button>
-						</Link>						
+						</Link>
 					</Col>
 
                     <Col>
@@ -47,7 +47,7 @@ class Ofertas extends Component {
 							<Button variant="success" type="submit">
 								Ver detalle
 							</Button>
-						</Link>						
+						</Link>
 					</Col>
 
                 </Row>
