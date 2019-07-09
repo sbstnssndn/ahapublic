@@ -7,7 +7,8 @@ import Card from 'react-bootstrap/Card';
 import Alert from 'react-bootstrap/Alert';
 import { fieldFormValidation } from '../../util/ValidationUtils';
 //import { rutFormat } from '../../util/FormatUtils.js';
- import { generateSubForm } from '../../util/common';
+import { generateSubForm, getComunas } from '../../util/common';
+//import '../../custom.css'
 
 class MasterForm extends Component {
   
@@ -73,7 +74,6 @@ class MasterForm extends Component {
 
         missing = resp[0]
         clone.elementsArray[elem].subtext = resp[1]
-        
       }
 
       clone.updatedForm.stages[this.state.currentStage].fields[inputIdentifier].elements[elem] = clone.elementsArray[elem];
@@ -94,6 +94,10 @@ class MasterForm extends Component {
     for (let elem in clone.elementsArray) {
       //console.log(elementsArray[elem].elementConfig.id)
       if(clone.elementsArray[elem].elementConfig.id === element) {
+        if (element === 'region'){
+          clone.updatedForm.stages[this.state.currentStage].fields['comuna'] =  getComunas(event.target.value)
+        }
+
         if (elementIndentifier === 'date'){
           clone.elementsArray[elem].value = event
         }

@@ -44,7 +44,7 @@ const Navigation = ( props ) => {
 						Datos empresa
 					</NavigationItem>
 
-					{/*
+					{/* por implementar
 					<NavigationItem exact to='/empresa/ofertas-laborales'>
 						Ofertas laborales
 					</NavigationItem>
@@ -67,6 +67,31 @@ const Navigation = ( props ) => {
 			)
 			break;
 		case USER_TYPE_AHA:
+			navbarItems = (
+				<React.Fragment>
+
+					<NavigationItem exact to='/aha'>
+						Postulantes
+					</NavigationItem>
+
+					<NavigationItem exact to='/aha/empresas'>
+						Empresas
+					</NavigationItem>
+
+					<NavigationItem exact to='/aha/ofertas'>
+						Ofertas
+					</NavigationItem>
+
+					<NavigationItem exact to='/aha/cuenta'>
+						Mi cuenta
+					</NavigationItem>
+
+					<NavigationItem exact to='/aha/prueba'>
+						Prueba
+					</NavigationItem>
+					
+				</React.Fragment>
+			)
 			break;
 		default:
 			navbarItems = (
@@ -77,23 +102,12 @@ const Navigation = ( props ) => {
 						</Nav.Link>
 					</LinkContainer>
 					
-					<LinkContainer to="/postulante">
+					<LinkContainer to="/login">
 						<Nav.Link>
-							<span className="nav-link">Postulante</span>
+							<span className="nav-link">Inicio de sesión</span>
 						</Nav.Link>
 					</LinkContainer>
-					
-					<LinkContainer to="/empresa">
-						<Nav.Link>
-							<span className="nav-link">Empresa</span>
-						</Nav.Link>
-					</LinkContainer>
-					
-					<LinkContainer to="/postulantes/preguntas">
-						<Nav.Link>
-							<span className="nav-link">Preguntas</span>
-						</Nav.Link>
-					</LinkContainer>
+
 				</React.Fragment>
 			)
 			break;

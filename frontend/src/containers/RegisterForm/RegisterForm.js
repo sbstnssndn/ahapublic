@@ -87,7 +87,7 @@ class LandingForm extends Component {
 		}
 
 		return (
-			<Card bg="primary" className="card-form">
+			<Card className="card-form">
 				<Card.Body>
 					{ formHeader }
 					<Form onSubmit={this.handleSubmit}>
