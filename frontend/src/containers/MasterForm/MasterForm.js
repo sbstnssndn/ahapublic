@@ -112,6 +112,9 @@ class MasterForm extends Component {
     this.setState({
       form: clone.updatedForm
     });
+
+    console.log('form:')
+    console.log(this.state.form)
   }
 
   handleSubmit = (event, method) => {
@@ -296,13 +299,12 @@ class MasterForm extends Component {
     await axios.get(endpoint)
       .then(response => {
         formData = response.data;
+        console.log('response: ')
+        console.log(response.data)
       })
       .catch(function(error){
         console.log(error);
       })
-
-    console.log('formData')
-    console.log(formData)
 
     this.formatData(formData)
   }
@@ -320,6 +322,8 @@ class MasterForm extends Component {
     const updatedStageFields = {
       ...updatedCurrentStage.fields
 		}
+
+    console.log(updatedStageFields)
 
     for (let field in updatedStageFields) {
 			let currentField = {...updatedStageFields[field]};
@@ -360,7 +364,7 @@ class MasterForm extends Component {
   }
 
   render () {
-		console.log("MasterForm props: ", this.props)
+		//console.log("MasterForm props: ", this.props)
     let stages = (
       this.props.formConfig.stages.map(stage => {
         return <Stage

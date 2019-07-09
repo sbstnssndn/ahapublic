@@ -157,6 +157,9 @@ export const egresoIsValid = (year) => {
 export const fillValidArray = (missingArray, id, arg) => {
   let temp = missingArray;
 
+  if (!temp)
+    return missingArray;
+
   if (arg === 'push') {
     if (!temp.includes(id)){
       temp.push(id);
