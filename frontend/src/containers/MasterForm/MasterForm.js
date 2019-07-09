@@ -73,14 +73,14 @@ class MasterForm extends Component {
 
         const resp = fieldFormValidation(missing, element, event.target.value)
 
-        missing = resp[0]
-        clone.elementsArray[elem].subtext = resp[1]
+        missing = resp.missing
+        clone.elementsArray[elem].subtext = resp.subtext
       }
 
       clone.updatedForm.stages[this.state.currentStage].fields[inputIdentifier].elements[elem] = clone.elementsArray[elem];
     } 
 
-    //console.log('missing: {'+missing+'}')  
+    console.log('missing: {'+missing+'}')
 
     this.setState({
       form: clone.updatedForm,
