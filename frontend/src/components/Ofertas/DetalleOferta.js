@@ -235,6 +235,8 @@ class DetalleOferta extends Component {
 						Oferta: {this.state.oferta.name}
 					</Card.Header>
                     <Card.Body>
+                    
+                        {this.botones()} <br></br>
 						
                         <Form.Group>    
                             <Card.Subtitle> Descripción </Card.Subtitle> 
@@ -284,7 +286,6 @@ class DetalleOferta extends Component {
                             <Card.Subtitle> Experiencia requerida </Card.Subtitle>
                             {this.experiencias()}
                         </Form.Group>
-
 					</Card.Body>
 				</Card>
 			</React.Fragment>

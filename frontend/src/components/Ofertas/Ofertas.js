@@ -34,13 +34,6 @@ class Ofertas extends Component {
         if(oferta != null){
             return (
                 <Row>
-					<Route
-						path={`/aha/empresas/:id`}
-						exact
-						render={(props) => (
-						<Empresa />
-					)} />
-
 					<Col>
 						<Link to={`/aha/empresas/${id_empresa}`} >
 							<Button variant="success" type="submit">
@@ -64,21 +57,25 @@ class Ofertas extends Component {
 
     printOfertas(perfilEmpresa, id_empresa) {
 
-        if(perfilEmpresa.ofertas){
-            return(
-                perfilEmpresa.ofertas.map(oferta => {
-                    return (
-                        <Card.Body key={oferta.id}>
-                            <Form.Group>
-                                <Card.Title>{oferta.name}</Card.Title>
-                                <Card.Body> Descripción: {oferta.description}</Card.Body>
-                                {this.botones(oferta, id_empresa)}
-                            </Form.Group>
-                            <hr/>
-                        </Card.Body>
-                    )
-                })
-            )
+        //Verifica que exista perfil de empresa
+        if(perfilEmpresa != null){
+            //Verifica que la empresa posea ofertas
+            if(perfilEmpresa.ofertas){
+                return(
+                    perfilEmpresa.ofertas.map(oferta => {
+                        return (
+                            <Card.Body key={oferta.id}>
+                                <Form.Group>
+                                    <Card.Title>{oferta.name}</Card.Title>
+                                    <Card.Body> Descripción: {oferta.description}</Card.Body>
+                                    {this.botones(oferta, id_empresa)}
+                                </Form.Group>
+                                <hr/>
+                            </Card.Body>
+                        )
+                    })
+                )
+            }
         }
     }
 
