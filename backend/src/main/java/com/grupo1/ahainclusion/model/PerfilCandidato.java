@@ -15,6 +15,8 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.grupo1.ahainclusion.model.candidato.Direccion;
 
+import org.apache.commons.text.WordUtils;
+
 
 @Entity
 @Table(name="perfil_candidato")
@@ -142,10 +144,12 @@ public class PerfilCandidato {
     }
 
     public void setLastName(String lastName) {
+        lastName = WordUtils.capitalizeFully(lastName);
         this.lastName = lastName;
     }
 
     public void setFirstName(String firstName) {
+        firstName = WordUtils.capitalizeFully(firstName);
         this.firstName = firstName;
     }
 
