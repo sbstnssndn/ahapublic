@@ -21,6 +21,8 @@ const Panel = ( props ) => {
 	let routes = null;
 	let tabs = null;
 
+	let currentUser = props.currentUser;
+
 	switch (props.currentUser.role) {
 		case USER_TYPE_POSTULANTE:
 			routes = (
@@ -30,21 +32,21 @@ const Panel = ( props ) => {
 						exact
 						render={(props) => (
 							<MasterForm
-								formConfig={formPostulanteLaboral} currentUser={props.currentUser} {...props} />
+								formConfig={formPostulanteLaboral} currentUser={currentUser} {...props} />
 						)} />
 					<Route
 						path={`${props.match.path}/cuenta`}
 						exact
 						render={(props) => (
 							<MasterForm
-								formConfig={formCuentaUsuario} currentUser={props.currentUser} {...props} />
+								formConfig={formCuentaUsuario} currentUser={currentUser} {...props} />
 						)} />
 					<Route
 						path={`${props.match.path}`}
 						exact
 						render={(props) => (
 							<MasterForm
-								formConfig={formPostulante} currentUser={props.currentUser} {...props} />
+								formConfig={formPostulante} currentUser={currentUser} {...props} />
 						)} />
 				</>
 			);
@@ -80,7 +82,7 @@ const Panel = ( props ) => {
 							exact
 							render={(props) => (
 								<MasterForm
-									formConfig={formNuevaOferta} currentUser={props.currentUser} {...props} />	
+									formConfig={formNuevaOferta} currentUser={currentUser} {...props} />	
 							)} />
 						
 						{/* /empresa */}
@@ -89,7 +91,7 @@ const Panel = ( props ) => {
 							exact
 							render={(props) => (
 								<MasterForm
-									formConfig={formEmpresa} currentUser={props.currentUser} {...props} />
+									formConfig={formEmpresa} currentUser={currentUser} {...props} />
 							)} />
 					</>
 				);
@@ -105,7 +107,7 @@ const Panel = ( props ) => {
 		default:
 			routes = <p>Error al cargar contenido.</p>;
 	}
-
+	console.log("Panel props ", props)
 	return (
 		<section id="formularios" className="py-4" style={{minHeight: '80vh'}}>
 			{ tabs }
