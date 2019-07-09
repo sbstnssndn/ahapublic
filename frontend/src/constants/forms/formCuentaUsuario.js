@@ -1,6 +1,7 @@
 //Para el cambio de email o password
 export const formCuentaUsuario =
   {
+    id: 0,
     title: "Información cuenta de usuario",
     belongsTo: "user",
     endpoint: "http://localhost:8080/api/user",

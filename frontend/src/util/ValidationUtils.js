@@ -110,7 +110,7 @@ export const nameIsValid = (name) => {
   if (name.length > 255)
     return false
 
-  return /^[a-zA-ZÀ-ÿ\u00f1\u00d1]+ $/.test(name);
+  return /^( *[a-zA-ZÀ-ÿ\u00f1\u00d1]+ *)+$/.test(name);
 }
 
 export const moneyIsValid = (money) => {

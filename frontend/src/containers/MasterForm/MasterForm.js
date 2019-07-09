@@ -16,7 +16,8 @@ class MasterForm extends Component {
     currentStage: 0,
     formData: null,
     missing: [],
-		show: false
+		show: false,
+    endpoint: '',
 	}
 	
 	cloneStateElementsArray = (inputIdentifier) => {
@@ -79,7 +80,7 @@ class MasterForm extends Component {
       clone.updatedForm.stages[this.state.currentStage].fields[inputIdentifier].elements[elem] = clone.elementsArray[elem];
     } 
 
-    console.log('missing: {'+missing+'}')  
+    //console.log('missing: {'+missing+'}')  
 
     this.setState({
       form: clone.updatedForm,
@@ -141,7 +142,7 @@ class MasterForm extends Component {
       
       switch( method.toLowerCase() ) {
         case 'get':
-          axios.get(this.props.formConfig.endpoint)
+          axios.get(this.state.endpoint)
             .then(response => {
               console.log(response);
               this.setState({formData: response.data});
@@ -151,7 +152,7 @@ class MasterForm extends Component {
             })
           break;
         case 'post':
-          axios.post(this.props.formConfig.endpoint, payload)
+          axios.post(this.state.endpoint, payload)
             .then(response => {
               console.log(response);
             })
@@ -322,6 +323,27 @@ class MasterForm extends Component {
 
 	componentDidMount() {
 		this.fetchData();
+
+    let currentEndpoint = this.props.formConfig.endpoint+('/')+this.props.currentUser.id+('/')
+    switch(this.props.formConfig.id) {
+      //case(0): //formCuentaUsuario, probablemente a futuro
+      //  break;
+      case(1): //formEmpresa
+        currentEndpoint = currentEndpoint + 'perfilEmpresa'
+        break;
+      //case(2): //formNuevaOferta
+      //  break;
+      case(3): //formPostulante
+        currentEndpoint = currentEndpoint + 'perfilCandidato'
+        break;
+      case(4): //formPostulanteLaboral
+        currentEndpoint = currentEndpoint + 'perfilLaboral'
+        break;
+      default:
+        break;
+    }
+
+    this.setState({endpoint: currentEndpoint})
   }
 
   render () {

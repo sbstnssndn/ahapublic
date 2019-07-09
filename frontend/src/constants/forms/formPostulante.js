@@ -1,9 +1,10 @@
 //Datos personales del usuario postulante
 export const formPostulante = 
   {
+    id: 3,
     title: "Información postulante",
     belongsTo: "postulante",
-    endpoint: "http://localhost:8080/api/postulante/:id/datos-personales",
+    endpoint: "http://localhost:8080/api/user",
     totalStages: 4,
     stages: [
       {
