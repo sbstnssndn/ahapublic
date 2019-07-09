@@ -8,6 +8,7 @@ import Recomendaciones from '../../containers/Recomendaciones/Recomendaciones';
 import Perfiles from '../Perfiles/Perfiles.js';
 import ListarOfertas from '../ListarOfertas/ListarOfertas';
 import Ofertas from '../Ofertas/Ofertas';
+import DetalleOferta from '../Ofertas/DetalleOferta';
 import Empresa from '../Empresa/Empresa';
 import Prueba from '../Prueba/Prueba';
 import Tabs from '../Tabs/Tabs';
@@ -167,6 +168,15 @@ const Panel = ( props ) => {
 						render={(props) => (
 							<Empresa {...props}/>
 						)} />
+
+					{/*Detalle de oferta */}
+					<Route
+						path={`${props.match.path}/oferta/:id/detalle`}
+						exact
+						render={(props) => (
+							<DetalleOferta {...props}/>
+						)} />
+					
 				</>
 			);
 			tabs = (
