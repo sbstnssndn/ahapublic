@@ -48,6 +48,15 @@ class Ofertas extends Component {
 							</Button>
 						</Link>						
 					</Col>
+
+                    <Col>
+						<Link to={`/aha/oferta/${oferta.id}/detalle`} >
+							<Button variant="success" type="submit">
+								Ver detalle
+							</Button>
+						</Link>						
+					</Col>
+
                 </Row>
             );
         }
