@@ -289,8 +289,25 @@ class MasterForm extends Component {
       form: clone.updatedForm
     });
 	}
+
+  fetchData = async (endpoint) => {
+    let formData = null;
+
+    await axios.get(endpoint)
+      .then(response => {
+        formData = response.data;
+      })
+      .catch(function(error){
+        console.log(error);
+      })
+
+    console.log('formData')
+    console.log(formData)
+
+    this.formatData(formData)
+  }
 	
-	fetchData = () => {
+	formatData = (formData) => {
 		const updatedForm = {
       ...this.props.formConfig
     }
@@ -304,9 +321,7 @@ class MasterForm extends Component {
       ...updatedCurrentStage.fields
 		}
 
-		let formData = { email: this.props.currentUser.email, password: "", newPassword: "" }
-
-		for (let field in updatedStageFields) {
+    for (let field in updatedStageFields) {
 			let currentField = {...updatedStageFields[field]};
 			let currentFieldElements = {...currentField.elements}
 			for (let element in currentFieldElements) {
@@ -322,8 +337,6 @@ class MasterForm extends Component {
 	}
 
 	componentDidMount() {
-		this.fetchData();
-
     let currentEndpoint = this.props.formConfig.endpoint+('/')+this.props.currentUser.id+('/')
     switch(this.props.formConfig.id) {
       //case(0): //formCuentaUsuario, probablemente a futuro
@@ -343,7 +356,7 @@ class MasterForm extends Component {
         break;
     }
 
-    this.setState({endpoint: currentEndpoint})
+    this.fetchData (currentEndpoint);
   }
 
   render () {

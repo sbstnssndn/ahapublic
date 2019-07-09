@@ -275,5 +275,5 @@ export const fieldFormValidation = (missingArray, element, singleField) => {
       }
   }
   
-  return [missing, subtext]
+  return {missing, subtext}
 }
