@@ -100,12 +100,14 @@ class Ofertas extends Component {
         );
     }
 
-    recomendaciones(oferta) {
+    recomendaciones(id_oferta) {
         return (
             <td>
+                <Link to={`/aha/oferta/${id_oferta}/recomendaciones`}>
                     <Button variant="primary" type="submit">
                         Rec.
                     </Button>
+                </Link>
             </td>
         )
     }
@@ -131,7 +133,7 @@ class Ofertas extends Component {
 										<td> {oferta.name} </td>
                                         <td> {oferta.description} </td>
 										{this.detalle(oferta.id)}
-                                        {this.recomendaciones(oferta)}
+                                        {this.recomendaciones(oferta.id)}
 									</tr>
 								)
 							})}
