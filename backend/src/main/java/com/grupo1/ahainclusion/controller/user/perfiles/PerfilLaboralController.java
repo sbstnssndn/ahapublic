@@ -8,6 +8,11 @@ import com.grupo1.ahainclusion.aux.payload.ApiResponse;
 import com.grupo1.ahainclusion.model.PerfilCandidato;
 import com.grupo1.ahainclusion.model.PerfilLaboral;
 import com.grupo1.ahainclusion.model.User;
+import com.grupo1.ahainclusion.model.candidato.Curso;
+import com.grupo1.ahainclusion.model.candidato.Experiencia;
+import com.grupo1.ahainclusion.model.candidato.Titulo;
+import com.grupo1.ahainclusion.repository.CursoRepository;
+import com.grupo1.ahainclusion.repository.ExperienciaRepository;
 import com.grupo1.ahainclusion.repository.PerfilLaboralRepository;
 import com.grupo1.ahainclusion.repository.UserRepository;
 
@@ -33,6 +38,9 @@ public class PerfilLaboralController {
 
     @Autowired
     private PerfilLaboralRepository perfilLaboralRepository;
+
+    @Autowired
+    private ExperienciaRepository experienciaRepository;
 
 
     // Agregar Perfil Laboral
@@ -94,16 +102,32 @@ public class PerfilLaboralController {
         pLaboral.setNivelEducacional(pLaboralNew.getNivelEducacional());
         pLaboral.setObjetosPequeños(pLaboralNew.getObjetosPequeños());
 
+
         if(pLaboralNew.getCursos()!=null) {
             pLaboral.getCursos().clear();
+
+            for(Curso c: pLaboralNew.getCursos()) {
+                c.setPerfilLaboral(pLaboral);
+            }
+
             pLaboral.getCursos().addAll(pLaboralNew.getCursos());
         }
         if(pLaboralNew.getExperiencias()!=null) {
             pLaboral.getExperiencias().clear();
+
+            for(Experiencia e: pLaboralNew.getExperiencias()) {
+                e.setPerfilLaboral(pLaboral);
+            }
+
             pLaboral.getExperiencias().addAll(pLaboralNew.getExperiencias());
         }
         if(pLaboralNew.getTitulos()!=null) {
             pLaboral.getTitulos().clear();
+
+            for(Titulo t: pLaboralNew.getTitulos()) {
+                t.setPerfilLaboral(pLaboral);
+            }
+
             pLaboral.getTitulos().addAll(pLaboralNew.getTitulos());
         }
 
