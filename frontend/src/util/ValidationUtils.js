@@ -20,6 +20,9 @@ export const passwordLengthIsValid = (pass) => {
 }
 
 export const rutIsValid = (run) => {
+  if (run === null)
+    return false;
+
   if (run.length > 13)
     return false;
 
@@ -84,6 +87,9 @@ export const rutIsValid = (run) => {
 }
 
 export const phoneIsValid = (phone) => {
+  if (phone === null)
+    return false;
+
   const len = phone.length;
 
   if (len !== 9 && len !== 12) {
@@ -107,6 +113,9 @@ export const phoneIsValid = (phone) => {
 }
 
 export const nameIsValid = (name) => {
+  if (name === null)
+    return false;
+
   if (name.length > 255)
     return false
 
@@ -114,6 +123,9 @@ export const nameIsValid = (name) => {
 }
 
 export const moneyIsValid = (money) => {
+  if (money === null)
+    return false;
+
   if (money.length > 255)
     return false
 
@@ -139,8 +151,11 @@ export const moneyIsValid = (money) => {
 }
 
 export const egresoIsValid = (year) => {
+  if (year === null)
+    return false;
+
   if (year.length > 4)
-    return false
+    return false;
 
   if (!/^[0-9]*$/.test(year))
     return false;
@@ -156,6 +171,9 @@ export const egresoIsValid = (year) => {
 
 export const fillValidArray = (missingArray, id, arg) => {
   let temp = missingArray;
+
+  if (temp == null)
+    return missingArray;
 
   if (arg === 'push') {
     if (!temp.includes(id)){

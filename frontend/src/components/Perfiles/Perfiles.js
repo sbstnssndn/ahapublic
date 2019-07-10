@@ -1,12 +1,8 @@
 import React, { Component } from 'react';
 import Card from 'react-bootstrap/Card';
-import Col from 'react-bootstrap/Col';
-import Row from 'react-bootstrap/Row';
-import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import axios from 'axios';
-import ListarOfertas from '../ListarOfertas/ListarOfertas';
-import styles from './App.module.css';
+import styles from '../Paginacion/App.module.css';
 
 
 import {
@@ -141,7 +137,7 @@ class Perfiles extends Component {
 
 	boton(user){
 		if(this.props.typeUsers === "candidato"){
-			return ( 
+			return (
 				<td>
 					<Button variant="primary" type="submit">
 						Ver Perfil

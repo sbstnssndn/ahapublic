@@ -73,7 +73,7 @@ public class PerfilEmpresaController {
 
         PerfilEmpresa pEmpresa = pEmpresaOptional.get();
 
-        pEmpresa.setEmail2(pEmpresaNew.getEmail2().toLowerCase());
+        pEmpresa.setEmail2(pEmpresaNew.getEmail2());
         pEmpresa.setNameEmpresa(pEmpresaNew.getNameEmpresa());
         //pEmpresa.setOfertas(pEmpresaNew.getOfertas());
         pEmpresa.setRutEmpresa(pEmpresaNew.getRutEmpresa());

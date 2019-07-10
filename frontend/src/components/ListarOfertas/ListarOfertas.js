@@ -6,12 +6,14 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Button from 'react-bootstrap/Button';
 import Empresa from '../Empresa/Empresa';
+import styles from '../Paginacion/App.module.css';
 
 import {
 	Link,
 	Route
 } from "react-router-dom";
 
+//Lista ofertas de una empresa
 class ListarOfertas extends Component {
 
 	state = {

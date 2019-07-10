@@ -10,7 +10,6 @@ import ListarOfertas from '../ListarOfertas/ListarOfertas';
 import Ofertas from '../Ofertas/Ofertas';
 import DetalleOferta from '../Ofertas/DetalleOferta';
 import Empresa from '../Empresa/Empresa';
-import Prueba from '../Prueba/Prueba';
 import Tabs from '../Tabs/Tabs';
 import { formPostulante } from '../../constants/forms/formPostulante';
 import { formPostulanteLaboral } from '../../constants/forms/formPostulanteLaboral';
@@ -138,13 +137,6 @@ const Panel = ( props ) => {
 								formConfig={formCuentaUsuario} currentUser={props.currentUser} {...props} />
 						)} />
 
-					<Route
-						path={`${props.match.path}/prueba`}
-						exact
-						render={(props) => (
-							<Prueba />
-						)} />
-
 					{/*Ofertas de una empresa */}
 					<Route
 						path={`${props.match.path}/empresas/:id/ofertas`}
@@ -191,7 +183,7 @@ const Panel = ( props ) => {
 		default:
 			routes = <p>Error al cargar contenido.</p>;
 	}
-	console.log("Panel props ", props)
+	{/*console.log("Panel props ", props)*/}
 	return (
 		<section id="formularios" className="py-4" style={{minHeight: '80vh'}}>
 			{ tabs }
