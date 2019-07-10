@@ -117,6 +117,7 @@ export const formPostulante =
                   name: 'nacionalidad',
                   id: 'nacionalidad',
                   options: [
+										{ value: '', displayValue: 'Seleccione...', disabled: true },
                     { value: 'Chile', displayValue: 'Chile' },
                     { value: 'Argentina', displayValue: 'Argentina' },
                     { value: 'Venezuela', displayValue: 'Venezuela' },
@@ -219,7 +220,7 @@ export const formPostulante =
                   name: 'region',
                   id: 'region',
                   options: [
-                    { value: '', displayValue: ''},
+                    { value: '', displayValue: 'Seleccione...', disabled: true },
                     { value: 0, displayValue: 'Arica y Parinacota' },
                     { value: 1, displayValue: 'Tarapacá' },
                     { value: 2, displayValue: 'Antofagasta' },
@@ -252,7 +253,9 @@ export const formPostulante =
                 elementConfig: {
                   name: 'comuna',
                   id: 'comuna',
-                  options: [{ value: '', displayValue: ''}]
+                  options: [
+										{ value: '', displayValue: 'Seleccione...', disabled: true }
+									]
                 },
                 subtext: '',
                 value: '',

@@ -26,7 +26,7 @@ const Panel = ( props ) => {
 
 	let routes = null;
 	let tabs = null;
-	
+
 	let currentUser = {...props.currentUser};
 
 	switch (currentUser.role) {
@@ -191,7 +191,7 @@ const Panel = ( props ) => {
 		default:
 			routes = <p>Error al cargar contenido.</p>;
 	}
-	{/*console.log("Panel props ", props)*/}
+	
 	return (
 		<section id="formularios" className="py-4" style={{minHeight: '80vh'}}>
 			{ tabs }

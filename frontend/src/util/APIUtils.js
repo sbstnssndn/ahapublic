@@ -3,7 +3,7 @@ import { API_BASE_URL, ACCESS_TOKEN } from '../constants';
 
 const request = (options) => {
 	const headers = new Headers({
-			'Content-Type': 'application/json',
+			'Content-Type': 'application/json'
 	})
 	
 	// primero debe settearse la propiedad accessToken en el localstorage, se hace en Login.js
@@ -141,5 +141,22 @@ export const updatePerfilEmpresa = (id, perfilEmpresa) => {
 			url: API_BASE_URL + `/user/${id}/perfilEmpresa`,
 			method: 'PUT',
 			body: JSON.stringify(perfilEmpresa)
+	});
+}
+
+export const createOferta = (id, oferta) => {
+	let datos = JSON.stringify(oferta);
+	console.log("HOLA: ", datos)
+	return request({
+			url: API_BASE_URL + `/user/${id}/oferta`,
+			method: 'POST',
+			body: JSON.stringify(oferta)
+	});
+}
+
+export const getPerfilEmpresa = (id) => {
+	return request({
+			url: API_BASE_URL + `/user/${id}/perfilEmpresa`,
+			method: 'GET'
 	});
 }

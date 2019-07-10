@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import Card from 'react-bootstrap/Card';
-import Button from 'react-bootstrap/Button';
+//import Button from 'react-bootstrap/Button';
 import axios from 'axios';
-import styles from '../Paginacion/App.module.css';
-import { Link } from "react-router-dom";
+//import styles from '../Paginacion/App.module.css';
+//import { Link } from "react-router-dom";
 
 class Recomendaciones extends Component {
 

@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import Card from 'react-bootstrap/Card';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
+//import Row from 'react-bootstrap/Row';
+//import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import { Link } from "react-router-dom";
 import styles from '../Paginacion/App.module.css';

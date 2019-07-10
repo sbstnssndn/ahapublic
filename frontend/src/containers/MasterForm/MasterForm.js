@@ -19,6 +19,8 @@ import {
 	updatePerfilCandidato,
 	updatePerfilLaboral,
 	updatePerfilEmpresa,
+	createOferta,
+	getPerfilEmpresa
 } from '../../util/APIUtils';
 //import '../../custom.css'
 
@@ -135,89 +137,97 @@ class MasterForm extends Component {
 		event.preventDefault();   
     // Si el array missing esta vacio, significa que no hay campos incorrectos
     // En ese caso, "!this.state.missing.length" devuelve true
-    if (!this.state.missing.length) {
-      // extraer los datos de cada form, dentro de cada etapa
-      let payload = Object.create(null);
-        /*for (let index in this.props.formConfig.stages) {
-            for (let formElementIdentifier in this.props.formConfig.stages[index].fields) {
-          // poblar objeto con todos los datos del formulario
-          payload[formElementIdentifier] = this.props.formConfig.stages[index].fields[formElementIdentifier].value;
-            }
-      }*/
-      //console.log(this.props.formConfig);
-      for (let index in this.props.formConfig.stages){
-        for (let formElementIdentifier in this.props.formConfig.stages[index].fields) {
-          for (let index2 in this.props.formConfig.stages[index].fields[formElementIdentifier].elements){
-            payload[formElementIdentifier] = this.props.formConfig.stages[index].fields[formElementIdentifier].elements[index2].value;
-          }
-        }
-      }
-      console.log(payload);
-      console.log('metodo: '+method);
-      //window.location.href = "http://localhost:3000/";
+    if (this.state.missing.length === 0) {
+
+			/* submit de todos los elementos del formulario */
+			const updatedForm = {
+				...this.props.formConfig
+			}
+			const updatedStages = {
+				...updatedForm.stages
+			}
+
+			let datos = {};
+			let direccion = {};
+			for (let stage in updatedStages) {
+				const updatedStageFields = {...updatedStages[stage].fields};
+				
+				for (let field in updatedStageFields) {
+					//console.log("FIELD: ", field)
+					const fieldObj = {...updatedStageFields[field]};
+					const elements = {...fieldObj.elements};
+					for (let element in elements) {
+						//console.log(elements[element])
+						let id = elements[element].elementConfig.id;
+						let value = elements[element].value;
+						if (id === "calle" || id === "comuna" || id === "region") {
+							direccion[ `${[id]}` ] = elements[element].value;
+							continue;
+						}
+						datos[`${[id]}`] = value;
+					}
+				}
+			}
+			if (Object.keys(direccion).lenght !== 0) {
+				datos["direccion"] = {...direccion};
+			}
+			console.log("DATOS: ", datos)
+
+			/* TODO: enviar los datos al endpoint correcto */
+			let currentUser = {...this.props.currentUser}
+			console.log("USER: ", currentUser)
+			switch (this.props.formConfig.title) {
+				case FORM_CUENTA_USUARIO:
+					console.log("ENDPOINT CUENTA USUARIO");
+					console.log(this.props.match)
+					break;
+				case FORM_POSTULANTE:
+					updatePerfilCandidato(currentUser.id, datos)
+					.then(response => {
+						console.log("RESPONSE updatePerfilCandidato: ", response);
+					}).catch(error => {
+						console.log("ERROR updatePerfilCandidato: ", error);
+					});
+					break;
+				case FORM_POSTULANTE_LABORAL:
+					updatePerfilLaboral(currentUser.id, datos)
+					.then(response => {
+						console.log("RESPONSE updatePerfilLaboral: ", response);
+					}).catch(error => {
+						console.log("ERROR updatePerfilLaboral: ", error);
+					});
+					break;
+				case FORM_EMPRESA:
+					updatePerfilEmpresa(currentUser.id, datos)
+					.then(response => {
+						console.log("RESPONSE updatePerfilEmpresa: ", response);
+					}).catch(error => {
+						console.log("ERROR updatePerfilEmpresa: ", error);
+					});
+					break;
+				case FORM_NUEVA_OFERTA:
+					getPerfilEmpresa(currentUser.id)
+						.then(response => {
+							datos["perfilEmpresa"] = response;
+							console.log(datos)
+							
+							createOferta(currentUser.id, datos)
+							.then(response => {
+								console.log("RESPONSE createOferta: ", response);
+							}).catch(error => {
+								console.log("ERROR createOferta: ", error);
+							});
+						}).catch(error => {
+							console.log(error)
+						});
+					break;
+				default:
+					break;
+			}
+     
     } else {
       console.log('Submit denegado');
       this.setState({ show: true })
-		}
-		
-		/* submit de todos los elementos del formulario */
-		const updatedForm = {
-      ...this.props.formConfig
-    }
-    const updatedStages = {
-      ...updatedForm.stages
-		}
-
-		let datos = {};
-		for (let stage in updatedStages) {
-			const updatedStageFields = {...updatedStages[stage].fields};
-			
-			for (let field in updatedStageFields) {
-				console.log("FIELD: ", field)
-				const fieldObj = {...updatedStageFields[field]};
-				const elements = {...fieldObj.elements}
-				for (let element in elements) {
-					console.log(elements[element])
-					datos[ `${[elements[element].elementConfig.id]}` ] = elements[element].value
-				}
-			}
-		}
-		console.log("DATOS: ", datos)
-
-		/* TODO: enviar los datos al endpoint correcto */
-		let currentUser = {...this.props.currentUser}
-		console.log("USER: ", currentUser)
-		switch (this.state.form.title) {
-			case FORM_CUENTA_USUARIO:
-				console.log("ENDPOINT CUENTA USUARIO");
-				console.log(this.props.match)
-				break;
-			case FORM_POSTULANTE:
-				updatePerfilCandidato(currentUser.id, datos)
-				.then(response => {
-					console.log("RESPONSE updatePerfilCandidato: ", response);
-				}).catch(error => {
-					console.log("ERROR updatePerfilCandidato: ", error);
-				});
-				break;
-			case FORM_POSTULANTE_LABORAL:
-				updatePerfilLaboral(currentUser.id, datos)
-				.then(response => {
-					console.log("RESPONSE updatePerfilLaboral: ", response);
-				}).catch(error => {
-					console.log("ERROR updatePerfilLaboral: ", error);
-				});
-				break;
-			case FORM_EMPRESA:
-				updatePerfilEmpresa(currentUser.id, datos)
-				.then(response => {
-					console.log("RESPONSE updatePerfilEmpresa: ", response);
-				}).catch(error => {
-					console.log("ERROR updatePerfilEmpresa: ", error);
-				});
-				break;
-			default:
-				break;
 		}
   }
   
@@ -396,7 +406,7 @@ class MasterForm extends Component {
 	}
 
 	componentDidMount() {
-    let currentEndpoint = this.props.formConfig.endpoint+('/')+1+('/')//this.props.currentUser.id+('/')
+    let currentEndpoint = this.props.formConfig.endpoint+('/')+this.props.currentUser.id+('/')//this.props.currentUser.id+('/')
     switch(this.props.formConfig.id) {
       //case(0): //formCuentaUsuario, probablemente a futuro
       //  break;
