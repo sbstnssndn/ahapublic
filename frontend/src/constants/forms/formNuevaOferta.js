@@ -70,15 +70,15 @@ export const formNuevaOferta =
 						}
 					]
 				},
-				bañoAdaptado: {
+				banhoAdaptado: {
 					type: 'normal',
 					elements: [
 						{
 							label: '¿Tienes baño adaptado?',
 							elementType: 'select',
 							elementConfig: {
-								name: 'bañoAdaptado',
-								id: 'bañoAdaptado',
+								name: 'banhoAdaptado',
+								id: 'banhoAdaptado',
 								options: [
 									{ value: '', displayValue: 'Seleccione...', disabled: true },
 									{ value: 'true', displayValue: 'Si' },
@@ -212,15 +212,15 @@ export const formNuevaOferta =
 							id: 3,
 							name: "Exigencia física (2/3)",
 							fields: {
-									objetosPequeños: {
+									objetosPequenhos: {
 					type: 'normal',
 					elements: [
 						{
 							label: '¿Cuánto requieres que el candidato maneje objetos pequeños?',
 							elementType: 'select',
 							elementConfig: {
-								name: 'objetosPequeños',
-								id: 'objetosPequeños',
+								name: 'objetosPequenhos',
+								id: 'objetosPequenhos',
 								options: [
 									{ value: '', displayValue: 'Seleccione...', disabled: true },
 									{ value: '0', displayValue: 'No, o muy poco tiempo' },
