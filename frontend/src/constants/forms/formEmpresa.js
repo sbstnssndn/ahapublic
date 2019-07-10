@@ -14,11 +14,11 @@ export const formEmpresa =
           id: 0,
           name: "Datos empresa",
           fields: {
-            ubicacion: {
+            nameEmpresa: {
               type: "normal",
               elements: [
                 {
-                  label: "Nombre Empresa",
+                  label: "Nombre empresa",
                   elementType: "input",
                   elementConfig: {
                     type: "text",
@@ -31,11 +31,11 @@ export const formEmpresa =
                 }
               ]
             },
-            rut: {
+            rutEmpresa: {
               type: "normal",
               elements: [
                 {
-                  label: "Rut Empresa",
+                  label: "RUT empresa",
                   elementType: "input",
                   elementConfig: {
                     type: "text",
@@ -52,7 +52,7 @@ export const formEmpresa =
               type: "normal",
               elements: [
                 {
-                  label: "Telefono",
+                  label: "Teléfono",
                   elementType: "input",
                   elementConfig: {
                     type: "text",
@@ -69,7 +69,7 @@ export const formEmpresa =
               type: "normal",
               elements: [
                 {
-                  label: "Telefono Alternativo",
+                  label: "Teléfono alternativo",
                   elementType: "input",
                   elementConfig: {
                     type: "text",
@@ -82,11 +82,11 @@ export const formEmpresa =
                 }
               ]
             },
-            correo2: {
+            email2: {
               type: "normal",
               elements: [
                 {
-                  label: "Correo Alternativo",
+                  label: "Correo alternativo",
                   elementType: "input",
                   elementConfig: {
                     type: "text",

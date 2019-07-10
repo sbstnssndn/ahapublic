@@ -30,7 +30,7 @@ class Tab extends Component {
 				<h2>
 					<i className={icon}></i>
 				</h2>
-				<h5>{ label }</h5>
+				<h6>{ label }</h6>
 			</Link>		
     );
   }

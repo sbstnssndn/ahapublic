@@ -168,7 +168,7 @@ class MasterForm extends Component {
 				}
 			}
 			console.log("DIRECCION: ", direccion, Object.keys(direccion).length)
-			if (Object.keys(direccion).lenght > 0) {
+			if (Object.keys(direccion).length > 0) {
 				datos["direccion"] = {...direccion};
 			}
 			
@@ -405,7 +405,7 @@ class MasterForm extends Component {
 			switch(this.props.formConfig.id) {
 				//case(0): //formCuentaUsuario, probablemente a futuro
 				//  break;
-				case 1: //formEmpresa
+				case(1): //formEmpresa
 					currentEndpoint = currentEndpoint + 'perfilEmpresa'
 					console.log(currentEndpoint)
 					break;
@@ -427,7 +427,7 @@ class MasterForm extends Component {
   }
 
   render () {
-		console.log("MasterForm props: ", this.props)
+		//console.log("MasterForm props: ", this.props)
     let stages = (
       this.props.formConfig.stages.map(stage => {
         return <Stage
