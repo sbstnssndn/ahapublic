@@ -36,6 +36,14 @@ public class Titulo {
         return name;
     }
 
+    public Integer getAño() {
+        return año;
+    }
+
+    public void setAño(Integer año) {
+        this.año = año;
+    }
+
     public Integer getId() {
         return id;
     }
