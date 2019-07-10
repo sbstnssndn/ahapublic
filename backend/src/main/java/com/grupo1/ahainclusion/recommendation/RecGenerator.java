@@ -37,7 +37,7 @@ public class RecGenerator {
         //Check por si n es mayor que la cantidad de candidatos del sistema
         if(IterableUtils.size(users)<=n)
             n = IterableUtils.size(users);
-        
+        System.out.println("n: "+n);
 
 
         for(User u: users)

@@ -377,7 +377,6 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
       experiencia1.setFechaFin(sdf.parse("15/07/2002"));
 
 
-      pLaboral.setCredencial(rand.nextBoolean());
       pLaboral.setSillaDeRuedas(rand.nextBoolean());
       pLaboral.setdAuditiva(rand.nextInt(100));
       pLaboral.setdFisica(rand.nextInt(100));
@@ -391,7 +390,7 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
       pLaboral.setAyudaFormulario(rand.nextInt(4));
       pLaboral.setBanhoAdaptado(rand.nextBoolean());
       pLaboral.setComunicacionOral(rand.nextInt(4));
-      pLaboral.setCredencial(rand.nextBoolean());
+      pLaboral.setCredencial(true);
       // pLaboral.setCursos(cursos);
       pLaboral.setDesplazoTrayectos(rand.nextInt(4));
       pLaboral.setDiferentesAlturas(rand.nextInt(4));
