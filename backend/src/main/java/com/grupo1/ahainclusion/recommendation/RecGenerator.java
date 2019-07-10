@@ -1,10 +1,14 @@
 package com.grupo1.ahainclusion.recommendation;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Objects;
 
+import com.grupo1.ahainclusion.aux.NullChecker;
 import com.grupo1.ahainclusion.aux.payload.UserSummary;
 import com.grupo1.ahainclusion.model.Oferta;
 import com.grupo1.ahainclusion.model.Role;
@@ -27,6 +31,9 @@ public class RecGenerator {
     @Autowired 
     private RoleRepository roleRepository;
 
+    @Autowired
+    private NullChecker nullChecker;
+
     public List<Recommendation> generate(Oferta oferta, int n) {
         
         // System.out.println("----------------------------");
@@ -42,6 +49,10 @@ public class RecGenerator {
 
         for(User u: users)
         {
+            System.out.println(nullChecker.check(u.getPerfilCandidato()));
+            System.out.println("atributos nulos: "+ nullChecker.check(u.getPerfilCandidato()).size() );
+            System.out.println(nullChecker.check(u.getPerfilCandidato().getPerfilLaboral()));
+            System.out.println("atributos nulos: "+ nullChecker.check(u.getPerfilCandidato().getPerfilLaboral()).size() );
             Recommendation rcm = new Recommendation();
             UserSummary userSummary = new UserSummary(u.getId(), u.getPerfilCandidato().getFirstName() +" "
                                                       + u.getPerfilCandidato().getLastName(), u.getEmail(), 
@@ -64,6 +75,4 @@ public class RecGenerator {
 
         return recommendations.subList(0, n);
     }
-
-
 }
