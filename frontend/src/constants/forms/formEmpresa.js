@@ -1,8 +1,10 @@
+import { FORM_EMPRESA } from '../index';
+
 //Datos personales del usuario empresa
 export const formEmpresa = 
     {
       id: 1,
-      title: "Información empresa",
+      title: FORM_EMPRESA,
       belongsTo: "empresa",
       endpoint: "",
       totalStages: 1,

@@ -8,6 +8,17 @@ import Alert from 'react-bootstrap/Alert';
 import { fieldFormValidation } from '../../util/ValidationUtils';
 //import { rutFormat } from '../../util/FormatUtils.js';
 import { generateSubForm, getComunas } from '../../util/common';
+import  {
+	FORM_CUENTA_USUARIO,
+	FORM_EMPRESA,
+	FORM_NUEVA_OFERTA,
+	FORM_POSTULANTE,
+	FORM_POSTULANTE_LABORAL
+} from '../../constants';
+import {
+	updatePerfilCandidato,
+	updatePerfilLaboral
+} from '../../util/APIUtils';
 //import '../../custom.css'
 
 class MasterForm extends Component {
@@ -17,7 +28,10 @@ class MasterForm extends Component {
     formData: null,
     missing: [],
 		show: false,
-    endpoint: '',
+		endpoint: '',
+		alert: { show: false, message: null },
+		currentUser: null,
+		userLoaded: false
 	}
 	
 	cloneStateElementsArray = (inputIdentifier) => {
@@ -57,7 +71,8 @@ class MasterForm extends Component {
 	}
 
   handleDismiss = () => {
-		this.setState({ show: false });
+		this.setState({ show: false, alert: { show: false } });
+		console.log("Alert.show: ", this.state.alert.show)
 	}
 
   handleValidation = (event, inputIdentifier, element) => {
@@ -118,8 +133,7 @@ class MasterForm extends Component {
   }
 
   handleSubmit = (event, method) => {
-    event.preventDefault();
-    
+		event.preventDefault();   
     // Si el array missing esta vacio, significa que no hay campos incorrectos
     // En ese caso, "!this.state.missing.length" devuelve true
     if (!this.state.missing.length) {
@@ -142,37 +156,58 @@ class MasterForm extends Component {
       console.log(payload);
       console.log('metodo: '+method);
       //window.location.href = "http://localhost:3000/";
-      
-      switch( method.toLowerCase() ) {
-        case 'get':
-          axios.get(this.state.endpoint)
-            .then(response => {
-              console.log(response);
-              this.setState({formData: response.data});
-            })
-            .catch(function(error){
-              console.log(error);
-            })
-          break;
-        case 'post':
-          axios.post(this.state.endpoint, payload)
-            .then(response => {
-              console.log(response);
-            })
-            .catch(function(error){
-              console.log(error);
-            })
-          break;
-        default:
-          console.log("Debes introducir un método válido");
-          break;
-      }
-    }
-
-    else {
+    } else {
       console.log('Submit denegado');
       this.setState({ show: true })
+		}
+		
+		/* submit de todos los elementos del formulario */
+		const updatedForm = {
+      ...this.props.formConfig
     }
+    const updatedStages = {
+      ...updatedForm.stages
+		}
+
+		let datos = {};
+		for (let stage in updatedStages) {
+			const updatedStageFields = {...updatedStages[stage].fields};
+			
+			for (let field in updatedStageFields) {
+				console.log("FIELD: ", field)
+				const fieldObj = {...updatedStageFields[field]};
+				const elements = {...fieldObj.elements}
+				for (let element in elements) {
+					console.log(elements[element])
+					datos[ `${[elements[element].elementConfig.id]}` ] = elements[element].value
+				}
+			}
+		}
+		console.log("DATOS: ", datos)
+
+		/* TODO: enviar los datos al endpoint correcto */
+		switch (this.state.form.title) {
+			case FORM_CUENTA_USUARIO:
+				console.log("ENDPOINT CUENTA USUARIO");
+				console.log(this.props.match)
+				break;
+			case FORM_POSTULANTE:
+				updatePerfilCandidato(this.state.currentUser.id, datos)
+				.then(response => {
+					console.log("RESPONSE updatePerfilCandidato: ", response);
+				}).catch(error => {
+					console.log("ERROR updatePerfilCandidato: ", error);
+				});
+			case FORM_POSTULANTE_LABORAL:
+					updatePerfilLaboral(this.state.currentUser.id, datos)
+					.then(response => {
+						console.log("RESPONSE updatePerfilLaboral: ", response);
+					}).catch(error => {
+						console.log("ERROR updatePerfilLaboral: ", error);
+					});
+			default:
+				break;
+		}
   }
   
   _goto = (stage) => {
@@ -341,6 +376,13 @@ class MasterForm extends Component {
 	}
 
 	componentDidMount() {
+		if (this.props.currentUser != null) {
+			this.setState({
+				currentUser: {...this.props.currentUser},
+				userLoaded: true
+			})
+		}
+		
     let currentEndpoint = this.props.formConfig.endpoint+('/')+this.props.currentUser.id+('/')
     switch(this.props.formConfig.id) {
       //case(0): //formCuentaUsuario, probablemente a futuro

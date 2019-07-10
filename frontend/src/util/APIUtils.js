@@ -110,3 +110,28 @@ export const signup = (signupRequest) => {
 			body: JSON.stringify(signupRequest)
 	});
 }
+
+/* */
+export const updateCuenta = (id, accountData) => {
+	return request({
+			url: API_BASE_URL + `/user/${id}/add`,
+			method: 'PUT',
+			body: JSON.stringify(accountData)
+	});
+}
+
+export const updatePerfilCandidato = (id, perfilCandidato) => {
+	return request({
+			url: API_BASE_URL + `/user/${id}/perfilCandidato`,
+			method: 'PUT',
+			body: JSON.stringify(perfilCandidato)
+	});
+}
+
+export const updatePerfilLaboral = (id, updatePerfilLaboral) => {
+	return request({
+			url: API_BASE_URL + `/user/${id}/perfilLaboral`,
+			method: 'PUT',
+			body: JSON.stringify(updatePerfilLaboral)
+	});
+}

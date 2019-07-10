@@ -1,8 +1,9 @@
+import { FORM_POSTULANTE_LABORAL } from '../index';
 //Información laboral y datos de discapacidad de postulantes.
 export const formPostulanteLaboral = 
   {
     id: 4,
-    title: "Información postulante",
+    title: FORM_POSTULANTE_LABORAL,
     belongsTo: "postulante",
     endpoint: "http://localhost:8080/api/user",
     totalStages: 10,

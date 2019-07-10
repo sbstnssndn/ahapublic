@@ -1,8 +1,9 @@
+import { FORM_POSTULANTE} from '../index';
 //Datos personales del usuario postulante
 export const formPostulante = 
   {
     id: 3,
-    title: "Información postulante",
+    title: FORM_POSTULANTE,
     belongsTo: "postulante",
     endpoint: "http://localhost:8080/api/user",
     totalStages: 4,
