@@ -199,6 +199,7 @@ class MasterForm extends Component {
 				}).catch(error => {
 					console.log("ERROR updatePerfilCandidato: ", error);
 				});
+				break;
 			case FORM_POSTULANTE_LABORAL:
 				updatePerfilLaboral(currentUser.id, datos)
 				.then(response => {
@@ -206,6 +207,7 @@ class MasterForm extends Component {
 				}).catch(error => {
 					console.log("ERROR updatePerfilLaboral: ", error);
 				});
+				break;
 			case FORM_EMPRESA:
 				updatePerfilEmpresa(currentUser.id, datos)
 				.then(response => {
@@ -213,6 +215,7 @@ class MasterForm extends Component {
 				}).catch(error => {
 					console.log("ERROR updatePerfilEmpresa: ", error);
 				});
+				break;
 			default:
 				break;
 		}
