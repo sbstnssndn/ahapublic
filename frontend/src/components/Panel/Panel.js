@@ -9,8 +9,10 @@ import Perfiles from '../Perfiles/Perfiles.js';
 import ListarOfertas from '../ListarOfertas/ListarOfertas';
 import Ofertas from '../Ofertas/Ofertas';
 import DetalleOferta from '../Ofertas/DetalleOferta';
+import Postulante from '../Postulante/Postulante';
 import Empresa from '../Empresa/Empresa';
 import Tabs from '../Tabs/Tabs';
+
 import { formPostulante } from '../../constants/forms/formPostulante';
 import { formPostulanteLaboral } from '../../constants/forms/formPostulanteLaboral';
 import { formEmpresa } from '../../constants/forms/formEmpresa';
@@ -21,6 +23,7 @@ import {
 	USER_TYPE_EMPRESA,
 	USER_TYPE_AHA
 } from '../../constants';
+
 
 const Panel = ( props ) => {
 
@@ -151,6 +154,13 @@ const Panel = ( props ) => {
 						exact
 						render={(props) => (
 							<Ofertas {...props}/>
+						)} />
+					{/*Ver un postulante y detalle de perfil laboral */}
+					<Route
+						path={`${props.match.path}/postulante/:id`}
+						exact
+						render={(props) => (
+							<Postulante {...props}/>
 						)} />
 
 					{/*Ver una empresa */}
