@@ -131,11 +131,11 @@ class MasterForm extends Component {
     });
 
     //console.log('form:')
-    console.log(this.state.form)
+    //console.log(this.state.form)
 	}
 	
 	experienciasPayload = (elements) => {
-		console.log("experienciasPayload() ", elements)
+		//console.log("experienciasPayload() ", elements)
 		let elementObj = null;
 		//let elementsArray = [];
 		for (let element = 0; element < elements.length; element=element+5) {
@@ -290,51 +290,7 @@ class MasterForm extends Component {
 			currentStage: currentStage
 		});
   }
-  /*
-  addTitulo = (inputIdentifier) => {
-    const clone = {...this.cloneStateElementsArray(inputIdentifier)}
 
-    let idAppend = clone.updatedForm.stages[this.state.currentStage].fields[inputIdentifier].elements.length/3;
-    let newTitulo = getNewTitulo(idAppend);
-
-    const newElementsArray = clone.elementsArray.concat(newTitulo);
-
-    clone.updatedForm.stages[this.state.currentStage].fields[inputIdentifier].elements = newElementsArray;
-
-    this.setState({
-      form: clone.updatedForm
-    });
-  }
-
-  addCurso = (inputIdentifier) => {
-    const clone = {...this.cloneStateElementsArray(inputIdentifier)}
-
-    let idAppend = clone.updatedForm.stages[this.state.currentStage].fields[inputIdentifier].elements.length/4;
-    let newCurso = getNewCurso(idAppend);
-
-    const newElementsArray = clone.elementsArray.concat(newCurso);
-
-    clone.updatedForm.stages[this.state.currentStage].fields[inputIdentifier].elements = newElementsArray;
-
-    this.setState({
-      form: clone.updatedForm
-    });
-  }
-
-  addExperiencia = (inputIdentifier, NumberOfFieldsToAdd) => {
-    const clone = {...this.cloneStateElementsArray(inputIdentifier)}
-
-    let idAppend = clone.updatedForm.stages[this.state.currentStage].fields[inputIdentifier].elements.length/NumberOfFieldsToAdd;
-		let newExperiencia = getNewExperienciaLaboral(idAppend);
-		
-    const newElementsArray = clone.elementsArray.concat(newExperiencia);
-    clone.updatedForm.stages[this.state.currentStage].fields[inputIdentifier].elements = newElementsArray;
-
-    this.setState({
-      form: clone.updatedForm
-    });
-	}
-	*/
 	addSubForm = (inputIdentifier, subForm) => {
 		//console.log(subForm);
 		const clone = {...this.cloneStateElementsArray(inputIdentifier)}
@@ -401,7 +357,7 @@ class MasterForm extends Component {
   }
 	
 	formatData = (formData, currentStage) => {
-		const updatedForm = {
+    const updatedForm = {
       ...this.state.form
     }
     const updatedStages = {
@@ -412,38 +368,42 @@ class MasterForm extends Component {
     }
     const updatedStageFields = {
       ...updatedCurrentStage.fields
-		}
+    }
+
+    const formDataDireccion = {
+      ...formData['direccion']
+    }
 
     for (let field in updatedStageFields) {
-			let currentField = {...updatedStageFields[field]};
-			let currentFieldElements = {...currentField.elements}
-			for (let element in currentFieldElements) {
-        const id = currentFieldElements[element].elementConfig.id;
-        //console.log('formData[field]')
-        //console.log(formData[field], id)
-				if (formData[field]) {
-          if (id === 'fechaNacimiento')
+      let currentField = {...updatedStageFields[field]};
+      let currentFieldElements = {...currentField.elements}
+      for (let element in currentFieldElements) {
+        if (formData[field]) {
+          if (field.substring(0,5) === 'fecha')
             currentFieldElements[element].value = new Date(formData[field]);
 
-          else if (formData[field].id)
-            currentFieldElements[element].value = formData[field].id;
-
           else
-					  currentFieldElements[element].value = formData[field];
-					//console.log(field, formData[field])
-				}
-			}
-		}
-		this.setState({
-			form: updatedForm
-		})
-	}
+            currentFieldElements[element].value = formData[field];
+        }
+
+        else if (formDataDireccion[field]) {
+          if (field === 'comuna')
+            updatedForm.stages[currentStage].fields['comuna'] =  getComunas(formDataDireccion['region'].toString())
+
+          currentFieldElements[element].value = formDataDireccion[field];
+        }
+      }
+    }
+    this.setState({
+      form: updatedForm
+    })
+  }
 
 	componentDidMount() {
 		this.setState({
 			form: this.props.formConfig
 		})
-/*
+
 		if(this.state.form != null) {
 			let currentEndpoint = this.props.formConfig.endpoint+('/')+this.props.currentUser.id+('/')//this.props.currentUser.id+('/')
 			switch(this.props.formConfig.id) {
@@ -451,7 +411,6 @@ class MasterForm extends Component {
 				//  break;
 				case(1): //formEmpresa
 					currentEndpoint = currentEndpoint + 'perfilEmpresa'
-					console.log(currentEndpoint)
 					break;
 				//case(2): //formNuevaOferta
 				//  break;
@@ -467,7 +426,6 @@ class MasterForm extends Component {
 
 			this.fetchData (currentEndpoint);
 		}
-    */
   }
 
   render () {
