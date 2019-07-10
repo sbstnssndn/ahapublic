@@ -94,13 +94,18 @@ public class PerfilLaboralController {
         pLaboral.setNivelEducacional(pLaboralNew.getNivelEducacional());
         pLaboral.setObjetosPequeños(pLaboralNew.getObjetosPequeños());
 
-        pLaboral.getCursos().clear();
-        pLaboral.getExperiencias().clear();
-        pLaboral.getTitulos().clear();
-
-        pLaboral.getCursos().addAll(pLaboralNew.getCursos());
-        pLaboral.getExperiencias().addAll(pLaboralNew.getExperiencias());
-        pLaboral.getTitulos().addAll(pLaboralNew.getTitulos());
+        if(pLaboralNew.getCursos()!=null) {
+            pLaboral.getCursos().clear();
+            pLaboral.getCursos().addAll(pLaboralNew.getCursos());
+        }
+        if(pLaboralNew.getExperiencias()!=null) {
+            pLaboral.getExperiencias().clear();
+            pLaboral.getExperiencias().addAll(pLaboralNew.getExperiencias());
+        }
+        if(pLaboralNew.getTitulos()!=null) {
+            pLaboral.getTitulos().clear();
+            pLaboral.getTitulos().addAll(pLaboralNew.getTitulos());
+        }
 
         perfilLaboralRepository.save(pLaboral);
 
