@@ -68,7 +68,7 @@ class MasterForm extends Component {
     this.setState({ show: false })
 
     for (let elem in clone.elementsArray) {
-      console.log(clone.elementsArray[elem].elementConfig.id)
+      //console.log(clone.elementsArray[elem].elementConfig.id)
       if(clone.elementsArray[elem].elementConfig.id === element) {
 
         const resp = fieldFormValidation(missing, element, event.target.value)
@@ -80,7 +80,7 @@ class MasterForm extends Component {
       clone.updatedForm.stages[this.state.currentStage].fields[inputIdentifier].elements[elem] = clone.elementsArray[elem];
     } 
 
-    console.log('missing: {'+missing+'}')
+    //console.log('missing: {'+missing+'}')
 
     this.setState({
       form: clone.updatedForm,
@@ -113,8 +113,8 @@ class MasterForm extends Component {
       form: clone.updatedForm
     });
 
-    console.log('form:')
-    console.log(this.state.form)
+    //console.log('form:')
+    //console.log(this.state.form)
   }
 
   handleSubmit = (event, method) => {
@@ -131,7 +131,7 @@ class MasterForm extends Component {
           payload[formElementIdentifier] = this.props.formConfig.stages[index].fields[formElementIdentifier].value;
             }
       }*/
-      console.log(this.props.formConfig);
+      //console.log(this.props.formConfig);
       for (let index in this.props.formConfig.stages){
         for (let formElementIdentifier in this.props.formConfig.stages[index].fields) {
           for (let index2 in this.props.formConfig.stages[index].fields[formElementIdentifier].elements){
@@ -306,10 +306,11 @@ class MasterForm extends Component {
         console.log(error);
       })
 
-    this.formatData(formData)
+    for (let i=0; i<this.props.formConfig.totalStages; i++)
+      this.formatData(formData, i)
   }
 	
-	formatData = (formData) => {
+	formatData = (formData, currentStage) => {
 		const updatedForm = {
       ...this.props.formConfig
     }
@@ -317,21 +318,29 @@ class MasterForm extends Component {
       ...updatedForm.stages
     }
     const updatedCurrentStage = {
-      ...updatedStages[this.state.currentStage]
+      ...updatedStages[currentStage]
     }
     const updatedStageFields = {
       ...updatedCurrentStage.fields
 		}
 
-    console.log(updatedStageFields)
-
     for (let field in updatedStageFields) {
 			let currentField = {...updatedStageFields[field]};
 			let currentFieldElements = {...currentField.elements}
 			for (let element in currentFieldElements) {
-				if (formData[field] != null) {
-					currentFieldElements[element].value = formData[field];
-					console.log(field, formData[field])
+        const id = currentFieldElements[element].elementConfig.id;
+        //console.log('formData[field]')
+        //console.log(formData[field], id)
+				if (formData[field]) {
+          if (id === 'fechaNacimiento')
+            currentFieldElements[element].value = new Date(formData[field]);
+
+          else if (formData[field].id)
+            currentFieldElements[element].value = formData[field].id;
+
+          else
+					  currentFieldElements[element].value = formData[field];
+					//console.log(field, formData[field])
 				}
 			}
 		}
@@ -341,7 +350,7 @@ class MasterForm extends Component {
 	}
 
 	componentDidMount() {
-    let currentEndpoint = this.props.formConfig.endpoint+('/')+this.props.currentUser.id+('/')
+    let currentEndpoint = this.props.formConfig.endpoint+('/')+1+('/')//this.props.currentUser.id+('/')
     switch(this.props.formConfig.id) {
       //case(0): //formCuentaUsuario, probablemente a futuro
       //  break;
