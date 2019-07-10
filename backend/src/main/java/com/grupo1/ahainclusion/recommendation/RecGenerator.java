@@ -31,7 +31,7 @@ public class RecGenerator {
         
         // System.out.println("----------------------------");
         Role role = roleRepository.findByName("ROLE_CANDIDATO");
-        Iterable<User> users = userRepository.findByRoles(role);
+        Iterable<User> users = userRepository.findByRolesAndEnabled(role, true);
         List<Recommendation> recommendations = new ArrayList<>();
 
         //Check por si n es mayor que la cantidad de candidatos del sistema
