@@ -13,5 +13,7 @@ public interface UserRepository extends CrudRepository<User, Integer> {
 	boolean existsByEmail(String email);
 
 	Iterable<User> findByRoles(Role role);
+	
+	Iterable<User> findByRolesAndEnabled(Role role, Boolean enabled);
 
 }
