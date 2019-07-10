@@ -39,20 +39,25 @@ public class ExperienciaExigidaController {
 
 
     // Agregar una experiencia exigida
-    @PostMapping(path="(/oferta/{ofertaId}/experiencia")
+    @PostMapping(path="/oferta/{ofertaId}/experienciaExigida")
     //SOLO USUARIOS EMPRESA O AHA
     //@PreAuthorize("hasRole('ROLE_EMPRESA') or hasRole('ROLE_AHA')")
-    public @ResponseBody String add(@PathVariable("ofertaId") Integer ofertaId, @RequestBody ExperienciaExigida expExigida) {
+    public @ResponseBody ResponseEntity<Object> add(@PathVariable("ofertaId") Integer ofertaId, @RequestBody ExperienciaExigida expExigida) {
 
-        Oferta oferta = ofertaRepository.findById(ofertaId).get();
+
+        Optional<Oferta> ofertaOptional = ofertaRepository.findById(ofertaId);
+        if (!ofertaOptional.isPresent())
+        return new ResponseEntity(new ApiResponse(false, "Oferta no encontrada"), HttpStatus.NOT_FOUND);
+
+        Oferta oferta = ofertaOptional.get();
         expExigida.setOferta(oferta);
         experienciaExigidaRepository.save(expExigida);
 
-        return "Experiencia agregada a la oferta";
+        return new ResponseEntity(new ApiResponse(true, "Experiencia exigida Agregada a la oferta"), HttpStatus.OK);
     }
 
     // Obtener Experiencias exigidas
-    @GetMapping(path = "/oferta/{ofertaId}/experiencia")
+    @GetMapping(path = "/oferta/{ofertaId}/experienciaExigida")
     //SOLO USUARIOS CANDIDATO O AHA
     //@PreAuthorize("hasRole('ROLE_CANDIDATO') or hasRole('ROLE_AHA')")
     public @ResponseBody Iterable<ExperienciaExigida> getFromOferta(@PathVariable("ofertaId") Integer ofertaId) {
