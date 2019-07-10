@@ -9,6 +9,9 @@ import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
+import org.apache.commons.text.WordUtils;
+
+
 @Entity
 public class PerfilAHA {
     @Id
@@ -48,10 +51,12 @@ public class PerfilAHA {
     }
 
     public void setLastName(String lastName) {
+        lastName = WordUtils.capitalizeFully(lastName);
         this.lastName = lastName;
     }
 
     public void setFirstName(String firstName) {
+        firstName = WordUtils.capitalizeFully(firstName);
         this.firstName = firstName;
     }
 

@@ -12,9 +12,16 @@ import com.grupo1.ahainclusion.aux.payload.ApiResponse;
 import com.grupo1.ahainclusion.aux.payload.PasswordUpdate;
 import com.grupo1.ahainclusion.aux.payload.SignUpRequest;
 import com.grupo1.ahainclusion.aux.payload.UserSummary;
+import com.grupo1.ahainclusion.model.PerfilAHA;
+import com.grupo1.ahainclusion.model.PerfilCandidato;
+import com.grupo1.ahainclusion.model.PerfilEmpresa;
+import com.grupo1.ahainclusion.model.PerfilLaboral;
 import com.grupo1.ahainclusion.model.Role;
 import com.grupo1.ahainclusion.model.User;
 import com.grupo1.ahainclusion.repository.CursoRepository;
+import com.grupo1.ahainclusion.repository.PerfilAHARepository;
+import com.grupo1.ahainclusion.repository.PerfilCandidatoRepository;
+import com.grupo1.ahainclusion.repository.PerfilEmpresaRepository;
 import com.grupo1.ahainclusion.repository.PerfilLaboralRepository;
 import com.grupo1.ahainclusion.repository.RoleRepository;
 import com.grupo1.ahainclusion.repository.TituloRepository;
@@ -54,6 +61,18 @@ public class UserController {
 
     @Autowired
     AuthenticationManager authenticationManager;
+
+    @Autowired
+    private PerfilCandidatoRepository perfilCandidatoRepository;
+
+    @Autowired
+    private PerfilLaboralRepository perfilLaboralRepository;
+
+    @Autowired
+    private PerfilEmpresaRepository perfilEmpresaRepository;
+
+    @Autowired
+    private PerfilAHARepository perfilAHARepository;
 
 
     // Obtener usuario logeado
@@ -99,6 +118,26 @@ public class UserController {
         user.setRoles(Collections.singleton(userRole));
 
         User result = userRepository.save(user);
+
+        if (isCandidato) {
+            PerfilCandidato pCandidato = new PerfilCandidato();
+            pCandidato.setUser(user);
+            perfilCandidatoRepository.save(pCandidato);
+            PerfilLaboral pLaboral = new PerfilLaboral();
+            pLaboral.setPerfilCandidato(pCandidato);
+            perfilLaboralRepository.save(pLaboral);
+        }
+        if (isEmpresa) {
+            PerfilEmpresa pEmpresa = new PerfilEmpresa();
+            pEmpresa.setUser(user);
+            perfilEmpresaRepository.save(pEmpresa);
+        }
+        if (isAHA) {
+            PerfilAHA pAHA = new PerfilAHA();
+            pAHA.setUser(user);
+            perfilAHARepository.save(pAHA);
+
+        }
 
         URI location = ServletUriComponentsBuilder.fromCurrentContextPath().path("/user/{id}")
                 .buildAndExpand(result.getId()).toUri();
