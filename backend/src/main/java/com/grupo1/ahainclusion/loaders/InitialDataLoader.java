@@ -20,6 +20,7 @@ import com.grupo1.ahainclusion.model.PerfilEmpresa;
 import com.grupo1.ahainclusion.model.Privilege;
 import com.grupo1.ahainclusion.model.Role;
 import com.grupo1.ahainclusion.model.User;
+import com.grupo1.ahainclusion.model.candidato.Direccion;
 import com.grupo1.ahainclusion.model.candidato.Experiencia;
 import com.grupo1.ahainclusion.model.oferta.ExperienciaExigida;
 import com.grupo1.ahainclusion.repository.ExperienciaExigidaRepository;
@@ -354,6 +355,15 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
       pCandidato.setFirstName(firstName);
       pCandidato.setLastName(lastName);
       //pCandidato.setRut("");
+
+      Direccion dir = new Direccion();
+      dir.setCalle("Avda. Central 1349");
+      dir.setRegion(6);
+      dir.setComuna(48);
+
+      pCandidato.setDireccion(dir);
+
+
       pCandidato.setUser(usr);
       perfilCandidatoRepository.save(pCandidato);
 
