@@ -100,7 +100,7 @@ public class PerfilLaboralController {
         pLaboral.setLicencia(pLaboralNew.getLicencia());
         pLaboral.setName(pLaboralNew.getName());
         pLaboral.setNivelEducacional(pLaboralNew.getNivelEducacional());
-        pLaboral.setObjetosPequeños(pLaboralNew.getObjetosPequeños());
+        pLaboral.setObjetosPequenhos(pLaboralNew.getObjetosPequenhos());
 
 
         if(pLaboralNew.getCursos()!=null) {

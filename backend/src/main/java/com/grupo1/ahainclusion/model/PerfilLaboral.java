@@ -68,7 +68,7 @@ public class PerfilLaboral {
     // Puedes alcanzar o coger objetos en diferentes alturas?
     private Integer diferentesAlturas;
     // Puedes usar herramientas u objetos pequeños?
-    private Integer objetosPequeños;
+    private Integer objetosPequenhos;
     // Puedes realizar actividades que requieren agudeza visual corta y larga
     // distancia?
     private Integer actividadesVisual;
@@ -144,6 +144,14 @@ public class PerfilLaboral {
 
     public String getName() {
         return name;
+    }
+
+    public Integer getObjetosPequenhos() {
+        return objetosPequenhos;
+    }
+
+    public void setObjetosPequenhos(Integer objetosPequenhos) {
+        this.objetosPequenhos = objetosPequenhos;
     }
 
     public boolean isBanhoAdaptado() {
@@ -312,14 +320,6 @@ public class PerfilLaboral {
 
     public void setActividadesVisual(Integer actividadesVisual) {
         this.actividadesVisual = actividadesVisual;
-    }
-
-    public Integer getObjetosPequeños() {
-        return objetosPequeños;
-    }
-
-    public void setObjetosPequeños(Integer objetosPequeños) {
-        this.objetosPequeños = objetosPequeños;
     }
 
     public Integer getDiferentesAlturas() {

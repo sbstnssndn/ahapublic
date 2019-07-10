@@ -60,7 +60,7 @@ public class Oferta {
     // Cuanto requieres que el candidato pueda acceder a diferentes alturas?
     private Integer diferentesAlturas;
     // Cuanto requieres que el candidato maneje objetos pequeños?
-    private Integer objetosPequeños;
+    private Integer objetosPequenhos;
     // Cuanto requieres que el candidato pueda realizar actividades de agudeza
     // visual?
     private Integer actividadesVisual;
@@ -122,6 +122,14 @@ public class Oferta {
 
     public String getDescription() {
         return description;
+    }
+
+    public Integer getObjetosPequenhos() {
+        return objetosPequenhos;
+    }
+
+    public void setObjetosPequenhos(Integer objetosPequenhos) {
+        this.objetosPequenhos = objetosPequenhos;
     }
 
     public boolean isBanhoAdaptado() {
@@ -242,14 +250,6 @@ public class Oferta {
 
     public void setActividadesVisual(Integer actividadesVisual) {
         this.actividadesVisual = actividadesVisual;
-    }
-
-    public Integer getObjetosPequeños() {
-        return objetosPequeños;
-    }
-
-    public void setObjetosPequeños(Integer objetosPequeños) {
-        this.objetosPequeños = objetosPequeños;
     }
 
     public Integer getDiferentesAlturas() {
