@@ -125,7 +125,7 @@ class ListarOfertas extends Component {
 
 	printOfertas() {
 		if(this.state.charged){
-			if(this.state.total != 0){
+			if(this.state.total !== 0){
 				return (
 					<React.Fragment>
 						<table className={styles.table}>
