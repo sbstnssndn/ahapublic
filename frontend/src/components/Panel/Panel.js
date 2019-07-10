@@ -10,7 +10,6 @@ import ListarOfertas from '../ListarOfertas/ListarOfertas';
 import Ofertas from '../Ofertas/Ofertas';
 import DetalleOferta from '../Ofertas/DetalleOferta';
 import Empresa from '../Empresa/Empresa';
-import Prueba from '../Prueba/Prueba';
 import Tabs from '../Tabs/Tabs';
 import { formPostulante } from '../../constants/forms/formPostulante';
 import { formPostulanteLaboral } from '../../constants/forms/formPostulanteLaboral';
@@ -136,13 +135,6 @@ const Panel = ( props ) => {
 						render={(props) => (
 							<MasterForm
 								formConfig={formCuentaUsuario} currentUser={props.currentUser} {...props} />
-						)} />
-
-					<Route
-						path={`${props.match.path}/prueba`}
-						exact
-						render={(props) => (
-							<Prueba />
 						)} />
 
 					{/*Ofertas de una empresa */}
