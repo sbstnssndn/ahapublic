@@ -43,16 +43,20 @@ public class ExperienciaController {
     @PostMapping(path="user/{userId}/experiencia")
     //SOLO USUARIOS CANDIDATO O AHA
     //@PreAuthorize("hasRole('ROLE_CANDIDATO') or hasRole('ROLE_AHA')")
-    public @ResponseBody String addExperienciaToUser (@PathVariable("userId") Integer userId,
+    public @ResponseBody ResponseEntity<Object> addExperienciaToUser (@PathVariable("userId") Integer userId,
                                                       @RequestBody Experiencia experiencia) {
 
 
-        User user = userRepository.findById(userId).get();
+        Optional<User> userOptional = userRepository.findById(userId);
+        if (!userOptional.isPresent())
+        return new ResponseEntity(new ApiResponse(false, "Usuario no encontrado"), HttpStatus.NOT_FOUND);
+
+        User user = userOptional.get();
         PerfilLaboral pLaboral = user.getPerfilCandidato().getPerfilLaboral();
         experiencia.setPerfilLaboral(pLaboral);
         experienciaRepository.save(experiencia);
 
-        return "Experiencia Guardado en usuario: " + user.getPerfilCandidato().getFirstName();
+        return new ResponseEntity(new ApiResponse(true, "Experiencia Agregada"), HttpStatus.OK);
     }
 
     // Obtener Experiencias del usuario
