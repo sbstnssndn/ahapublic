@@ -84,8 +84,10 @@ public class PerfilCandidatoController {
         pCandidato.setNacionalidad(pCandidatoNew.getNacionalidad());
         pCandidato.setTelefono1(pCandidatoNew.getTelefono1());
         pCandidato.setTelefono2(pCandidatoNew.getTelefono2());
-        
-        pCandidato.setPerfilLaboral(pCandidatoNew.getPerfilLaboral());
+
+
+        if(pCandidatoNew.getPerfilLaboral()!=null)
+            pCandidato.setPerfilLaboral(pCandidatoNew.getPerfilLaboral());
 
         perfilCandidatoRepository.save(pCandidato);
 
