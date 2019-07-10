@@ -23,6 +23,11 @@ public class PerCalculator {
 
         Integer score = 0;
 
+        // Si no tiene credencial se descarta el candidato
+        if(pLaboral.isCredencial()==false) {
+            return 0;
+        }
+
         Integer actividadesAuditiva = 1;
         Integer actividadesVisual = 1;
         Integer comunicacionOral = 1;
