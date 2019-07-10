@@ -189,7 +189,7 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
 
     oferta1.setActividadesAuditiva(rand.nextInt(4));
     oferta1.setActividadesVisual(rand.nextInt(4));
-    oferta1.setBañoAdaptado(rand.nextBoolean());
+    oferta1.setBanhoAdaptado(rand.nextBoolean());
     oferta1.setComunicacionOral(rand.nextInt(4));
     oferta1.setDesplazoTrayectos(rand.nextInt(4));
     oferta1.setDiferentesAlturas(rand.nextInt(4));
@@ -215,7 +215,7 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
 
     oferta2.setActividadesAuditiva(rand.nextInt(4));
     oferta2.setActividadesVisual(rand.nextInt(4));
-    oferta2.setBañoAdaptado(rand.nextBoolean());
+    oferta2.setBanhoAdaptado(rand.nextBoolean());
     oferta2.setComunicacionOral(rand.nextInt(4));
     oferta2.setDesplazoTrayectos(rand.nextInt(4));
     oferta2.setDiferentesAlturas(rand.nextInt(4));
@@ -241,7 +241,7 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
 
     oferta3.setActividadesAuditiva(rand.nextInt(4));
     oferta3.setActividadesVisual(rand.nextInt(4));
-    oferta3.setBañoAdaptado(rand.nextBoolean());
+    oferta3.setBanhoAdaptado(rand.nextBoolean());
     oferta3.setComunicacionOral(rand.nextInt(4));
     oferta3.setDesplazoTrayectos(rand.nextInt(4));
     oferta3.setDiferentesAlturas(rand.nextInt(4));
@@ -389,7 +389,7 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
       pLaboral.setActividadesVisual(rand.nextInt(4));
       pLaboral.setAdecuaciones("Necesito un interprete");
       pLaboral.setAyudaFormulario(rand.nextInt(4));
-      pLaboral.setBañoAdaptado(rand.nextBoolean());
+      pLaboral.setBanhoAdaptado(rand.nextBoolean());
       pLaboral.setComunicacionOral(rand.nextInt(4));
       pLaboral.setCredencial(rand.nextBoolean());
       // pLaboral.setCursos(cursos);

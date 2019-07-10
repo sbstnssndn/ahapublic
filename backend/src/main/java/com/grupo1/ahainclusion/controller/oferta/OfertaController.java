@@ -99,7 +99,7 @@ public class OfertaController {
 
         oferta.setActividadesAuditiva(ofertaNew.getActividadesAuditiva());
         oferta.setActividadesVisual(ofertaNew.getActividadesVisual());
-        oferta.setBañoAdaptado(ofertaNew.isBañoAdaptado());
+        oferta.setBanhoAdaptado(ofertaNew.isBanhoAdaptado());
         oferta.setComunicacionOral(ofertaNew.getComunicacionOral());
         oferta.setDescription(ofertaNew.getDescription());
         oferta.setDesplazoTrayectos(ofertaNew.getDesplazoTrayectos());
