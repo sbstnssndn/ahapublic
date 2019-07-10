@@ -31,7 +31,6 @@ const request = (options) => {
 		})
 		.then(json => {
 			if (!ok) {
-				console.log(json)
 				return Promise.reject(json);
 			}
 			return json;

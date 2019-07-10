@@ -6,7 +6,7 @@ export const formEmpresa =
       id: 1,
       title: FORM_EMPRESA,
       belongsTo: "empresa",
-      endpoint: "",
+      endpoint: "http://localhost:8080/api/user",
       totalStages: 1,
       stages:
       [

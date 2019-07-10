@@ -20,7 +20,6 @@ import {
 	updatePerfilLaboral,
 	updatePerfilEmpresa,
 	createOferta,
-	getPerfilEmpresa
 } from '../../util/APIUtils';
 //import '../../custom.css'
 
@@ -168,10 +167,11 @@ class MasterForm extends Component {
 					}
 				}
 			}
-			if (Object.keys(direccion).lenght !== 0) {
+			console.log("DIRECCION: ", direccion, Object.keys(direccion).length)
+			if (Object.keys(direccion).lenght > 0) {
 				datos["direccion"] = {...direccion};
 			}
-			console.log("DATOS: ", datos)
+			
 
 			/* TODO: enviar los datos al endpoint correcto */
 			let currentUser = {...this.props.currentUser}
@@ -206,19 +206,13 @@ class MasterForm extends Component {
 					});
 					break;
 				case FORM_NUEVA_OFERTA:
-					getPerfilEmpresa(currentUser.id)
+						
+						console.log("DATOS: ", datos)
+						createOferta(currentUser.id, datos)
 						.then(response => {
-							datos["perfilEmpresa"] = response;
-							console.log(datos)
-							
-							createOferta(currentUser.id, datos)
-							.then(response => {
-								console.log("RESPONSE createOferta: ", response);
-							}).catch(error => {
-								console.log("ERROR createOferta: ", error);
-							});
+							console.log("RESPONSE createOferta: ", response);
 						}).catch(error => {
-							console.log(error)
+							console.log("ERROR createOferta: ", error);
 						});
 					break;
 				default:
@@ -406,26 +400,30 @@ class MasterForm extends Component {
 	}
 
 	componentDidMount() {
-    let currentEndpoint = this.props.formConfig.endpoint+('/')+this.props.currentUser.id+('/')//this.props.currentUser.id+('/')
-    switch(this.props.formConfig.id) {
-      //case(0): //formCuentaUsuario, probablemente a futuro
-      //  break;
-      case(1): //formEmpresa
-        currentEndpoint = currentEndpoint + 'perfilEmpresa'
-        break;
-      //case(2): //formNuevaOferta
-      //  break;
-      case(3): //formPostulante
-        currentEndpoint = currentEndpoint + 'perfilCandidato'
-        break;
-      case(4): //formPostulanteLaboral
-        currentEndpoint = currentEndpoint + 'perfilLaboral'
-        break;
-      default:
-        break;
-    }
+		if(this.props.formConfig != null) {
+			let currentEndpoint = this.props.formConfig.endpoint+('/')+this.props.currentUser.id+('/')//this.props.currentUser.id+('/')
+			switch(this.props.formConfig.id) {
+				//case(0): //formCuentaUsuario, probablemente a futuro
+				//  break;
+				case 1: //formEmpresa
+					currentEndpoint = currentEndpoint + 'perfilEmpresa'
+					console.log(currentEndpoint)
+					break;
+				//case(2): //formNuevaOferta
+				//  break;
+				case(3): //formPostulante
+					currentEndpoint = currentEndpoint + 'perfilCandidato'
+					break;
+				case(4): //formPostulanteLaboral
+					currentEndpoint = currentEndpoint + 'perfilLaboral'
+					break;
+				default:
+					break;
+			}
 
-    this.fetchData (currentEndpoint);
+			this.fetchData (currentEndpoint);
+		}
+    
   }
 
   render () {

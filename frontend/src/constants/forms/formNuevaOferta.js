@@ -5,7 +5,7 @@ export const formNuevaOferta =
 		id: 2,
 		title: FORM_NUEVA_OFERTA,
 		belongsTo: "empresa",
-		endpoint: "",
+		endpoint: "http://localhost:8080/api/user",
 		totalStages: 7,
 		stages: [ 
 		{
@@ -61,8 +61,8 @@ export const formNuevaOferta =
 								id: 'sillaDeRuedas',
 								options: [
 									{ value: '', displayValue: 'Seleccione...', disabled: true },
-									{ value: 'true', displayValue: 'Si' },
-									{ value: 'false', displayValue: 'No' }
+									{ value: true, displayValue: 'Si' },
+									{ value: false, displayValue: 'No' }
 								]
 							},
 							subtext: '',
@@ -81,8 +81,8 @@ export const formNuevaOferta =
 								id: 'banhoAdaptado',
 								options: [
 									{ value: '', displayValue: 'Seleccione...', disabled: true },
-									{ value: 'true', displayValue: 'Si' },
-									{ value: 'false', displayValue: 'No' }
+									{ value: true, displayValue: 'Si' },
+									{ value: false, displayValue: 'No' }
 								]
 							},
 							subtext: '',
@@ -107,10 +107,10 @@ export const formNuevaOferta =
 								id: 'permanecerPie',
 								options: [
 									{ value: '', displayValue: 'Seleccione...', disabled: true },
-									{ value: '0', displayValue: 'No, o muy poco tiempo' },
-									{ value: '1', displayValue: 'Esporádicamente (Hasta un 20% de la jornada laboral)' },
-									{ value: '2', displayValue: 'Entre un 20% y 70% de la jornada laboral' },
-									{ value: '3', displayValue: 'La mayor parte del tiempo' }
+									{ value: 0, displayValue: 'No, o muy poco tiempo' },
+									{ value: 1, displayValue: 'Esporádicamente (Hasta un 20% de la jornada laboral)' },
+									{ value: 2, displayValue: 'Entre un 20% y 70% de la jornada laboral' },
+									{ value: 3, displayValue: 'La mayor parte del tiempo' }
 								]
 							},
 							subtext: '',
@@ -129,10 +129,10 @@ export const formNuevaOferta =
 								id: 'permanecerSentado',
 								options: [
 									{ value: '', displayValue: 'Seleccione...', disabled: true },
-									{ value: '0', displayValue: 'No, o muy poco tiempo' },
-									{ value: '1', displayValue: 'Esporádicamente (Hasta un 20% de la jornada laboral)' },
-									{ value: '2', displayValue: 'Entre un 20% y 70% de la jornada laboral' },
-									{ value: '3', displayValue: 'La mayor parte del tiempo' }
+									{ value: 0, displayValue: 'No, o muy poco tiempo' },
+									{ value: 1, displayValue: 'Esporádicamente (Hasta un 20% de la jornada laboral)' },
+									{ value: 2, displayValue: 'Entre un 20% y 70% de la jornada laboral' },
+									{ value: 3, displayValue: 'La mayor parte del tiempo' }
 								]
 							},
 							subtext: '',
@@ -151,10 +151,10 @@ export const formNuevaOferta =
 								id: 'desplazoTrayectos',
 								options: [
 									{ value: '', displayValue: 'Seleccione...', disabled: true },
-									{ value: '0', displayValue: 'No, o muy poco tiempo' },
-									{ value: '1', displayValue: 'Esporádicamente (Hasta un 20% de la jornada laboral)' },
-									{ value: '2', displayValue: 'Entre un 20% y 70% de la jornada laboral' },
-									{ value: '3', displayValue: 'La mayor parte del tiempo' }
+									{ value: 0, displayValue: 'No, o muy poco tiempo' },
+									{ value: 1, displayValue: 'Esporádicamente (Hasta un 20% de la jornada laboral)' },
+									{ value: 2, displayValue: 'Entre un 20% y 70% de la jornada laboral' },
+									{ value: 3, displayValue: 'La mayor parte del tiempo' }
 								]
 							},
 							subtext: '',
@@ -173,10 +173,10 @@ export const formNuevaOferta =
 								id: 'diferentesPisos',
 								options: [
 									{ value: '', displayValue: 'Seleccione...', disabled: true },
-									{ value: '0', displayValue: 'No, o muy poco tiempo' },
-									{ value: '1', displayValue: 'Esporádicamente (Hasta un 20% de la jornada laboral)' },
-									{ value: '2', displayValue: 'Entre un 20% y 70% de la jornada laboral' },
-									{ value: '3', displayValue: 'La mayor parte del tiempo' }
+									{ value: 0, displayValue: 'No, o muy poco tiempo' },
+									{ value: 1, displayValue: 'Esporádicamente (Hasta un 20% de la jornada laboral)' },
+									{ value: 2, displayValue: 'Entre un 20% y 70% de la jornada laboral' },
+									{ value: 3, displayValue: 'La mayor parte del tiempo' }
 								]
 							},
 							subtext: '',
@@ -195,10 +195,10 @@ export const formNuevaOferta =
 								id: 'diferentesAlturas',
 								options: [
 									{ value: '', displayValue: 'Seleccione...', disabled: true },
-									{ value: '0', displayValue: 'No, o muy poco tiempo' },
-									{ value: '1', displayValue: 'Esporádicamente (Hasta un 20% de la jornada laboral)' },
-									{ value: '2', displayValue: 'Entre un 20% y 70% de la jornada laboral' },
-									{ value: '3', displayValue: 'La mayor parte del tiempo' }
+									{ value: 0, displayValue: 'No, o muy poco tiempo' },
+									{ value: 1, displayValue: 'Esporádicamente (Hasta un 20% de la jornada laboral)' },
+									{ value: 2, displayValue: 'Entre un 20% y 70% de la jornada laboral' },
+									{ value: 3, displayValue: 'La mayor parte del tiempo' }
 								]
 							},
 							subtext: '',
@@ -223,10 +223,10 @@ export const formNuevaOferta =
 								id: 'objetosPequenhos',
 								options: [
 									{ value: '', displayValue: 'Seleccione...', disabled: true },
-									{ value: '0', displayValue: 'No, o muy poco tiempo' },
-									{ value: '1', displayValue: 'Esporádicamente (Hasta un 20% de la jornada laboral)' },
-									{ value: '2', displayValue: 'Entre un 20% y 70% de la jornada laboral' },
-									{ value: '3', displayValue: 'La mayor parte del tiempo' }
+									{ value: 0, displayValue: 'No, o muy poco tiempo' },
+									{ value: 1, displayValue: 'Esporádicamente (Hasta un 20% de la jornada laboral)' },
+									{ value: 2, displayValue: 'Entre un 20% y 70% de la jornada laboral' },
+									{ value: 3, displayValue: 'La mayor parte del tiempo' }
 								]
 							},
 							subtext: '',
@@ -245,10 +245,10 @@ export const formNuevaOferta =
 								id: 'actividadesVisual',
 								options: [
 									{ value: '', displayValue: 'Seleccione...', disabled: true },
-									{ value: '0', displayValue: 'No, o muy poco tiempo' },
-									{ value: '1', displayValue: 'Esporádicamente (Hasta un 20% de la jornada laboral)' },
-									{ value: '2', displayValue: 'Entre un 20% y 70% de la jornada laboral' },
-									{ value: '3', displayValue: 'La mayor parte del tiempo' }
+									{ value: 0, displayValue: 'No, o muy poco tiempo' },
+									{ value: 1, displayValue: 'Esporádicamente (Hasta un 20% de la jornada laboral)' },
+									{ value: 2, displayValue: 'Entre un 20% y 70% de la jornada laboral' },
+									{ value: 3, displayValue: 'La mayor parte del tiempo' }
 								]
 							},
 							subtext: '',
@@ -267,10 +267,10 @@ export const formNuevaOferta =
 								id: 'actividadesAuditiva',
 								options: [
 									{ value: '', displayValue: 'Seleccione...', disabled: true },
-									{ value: '0', displayValue: 'No, o muy poco tiempo' },
-									{ value: '1', displayValue: 'Esporádicamente (Hasta un 20% de la jornada laboral)' },
-									{ value: '2', displayValue: 'Entre un 20% y 70% de la jornada laboral' },
-									{ value: '3', displayValue: 'La mayor parte del tiempo' }
+									{ value: 0, displayValue: 'No, o muy poco tiempo' },
+									{ value: 1, displayValue: 'Esporádicamente (Hasta un 20% de la jornada laboral)' },
+									{ value: 2, displayValue: 'Entre un 20% y 70% de la jornada laboral' },
+									{ value: 3, displayValue: 'La mayor parte del tiempo' }
 								]
 							},
 							subtext: '',
@@ -289,10 +289,10 @@ export const formNuevaOferta =
 								id: 'comunicacionOral',
 								options: [
 									{ value: '', displayValue: 'Seleccione...', disabled: true },
-									{ value: '0', displayValue: 'No, o muy poco tiempo' },
-									{ value: '1', displayValue: 'Esporádicamente (Hasta un 20% de la jornada laboral)' },
-									{ value: '2', displayValue: 'Entre un 20% y 70% de la jornada laboral' },
-									{ value: '3', displayValue: 'La mayor parte del tiempo' }
+									{ value: 0, displayValue: 'No, o muy poco tiempo' },
+									{ value: 1, displayValue: 'Esporádicamente (Hasta un 20% de la jornada laboral)' },
+									{ value: 2, displayValue: 'Entre un 20% y 70% de la jornada laboral' },
+									{ value: 3, displayValue: 'La mayor parte del tiempo' }
 								]
 							},
 							subtext: '',
@@ -311,10 +311,10 @@ export const formNuevaOferta =
 								id: 'leerEscribir',
 								options: [
 									{ value: '', displayValue: 'Seleccione...', disabled: true },
-									{ value: '0', displayValue: 'No, o muy poco tiempo' },
-									{ value: '1', displayValue: 'Esporádicamente (Hasta un 20% de la jornada laboral)' },
-									{ value: '2', displayValue: 'Entre un 20% y 70% de la jornada laboral' },
-									{ value: '3', displayValue: 'La mayor parte del tiempo' }
+									{ value: 0, displayValue: 'No, o muy poco tiempo' },
+									{ value: 1, displayValue: 'Esporádicamente (Hasta un 20% de la jornada laboral)' },
+									{ value: 2, displayValue: 'Entre un 20% y 70% de la jornada laboral' },
+									{ value: 3, displayValue: 'La mayor parte del tiempo' }
 								]
 							},
 							subtext: '',
@@ -339,10 +339,10 @@ export const formNuevaOferta =
 								id: 'situacionesNuevas',
 								options: [
 									{ value: '', displayValue: 'Seleccione...', disabled: true },
-									{ value: '0', displayValue: 'No, o muy poco tiempo' },
-									{ value: '1', displayValue: 'Esporádicamente (Hasta un 20% de la jornada laboral)' },
-									{ value: '2', displayValue: 'Entre un 20% y 70% de la jornada laboral' },
-									{ value: '3', displayValue: 'La mayor parte del tiempo' }
+									{ value: 0, displayValue: 'No, o muy poco tiempo' },
+									{ value: 1, displayValue: 'Esporádicamente (Hasta un 20% de la jornada laboral)' },
+									{ value: 2, displayValue: 'Entre un 20% y 70% de la jornada laboral' },
+									{ value: 3, displayValue: 'La mayor parte del tiempo' }
 								]
 							},
 							subtext: '',
@@ -361,10 +361,10 @@ export const formNuevaOferta =
 								id: 'trabajoEquipo',
 								options: [
 									{ value: '', displayValue: 'Seleccione...', disabled: true },
-									{ value: '0', displayValue: 'No, o muy poco tiempo' },
-									{ value: '1', displayValue: 'Esporádicamente (Hasta un 20% de la jornada laboral)' },
-									{ value: '2', displayValue: 'Entre un 20% y 70% de la jornada laboral' },
-									{ value: '3', displayValue: 'La mayor parte del tiempo' }
+									{ value: 0, displayValue: 'No, o muy poco tiempo' },
+									{ value: 1, displayValue: 'Esporádicamente (Hasta un 20% de la jornada laboral)' },
+									{ value: 2, displayValue: 'Entre un 20% y 70% de la jornada laboral' },
+									{ value: 3, displayValue: 'La mayor parte del tiempo' }
 								]
 							},
 							subtext: '',
@@ -383,10 +383,10 @@ export const formNuevaOferta =
 								id: 'situacionesConflicto',
 								options: [
 									{ value: '', displayValue: 'Seleccione...', disabled: true },
-									{ value: '0', displayValue: 'No, o muy poco tiempo' },
-									{ value: '1', displayValue: 'Esporádicamente (Hasta un 20% de la jornada laboral)' },
-									{ value: '2', displayValue: 'Entre un 20% y 70% de la jornada laboral' },
-									{ value: '3', displayValue: 'La mayor parte del tiempo' }
+									{ value: 0, displayValue: 'No, o muy poco tiempo' },
+									{ value: 1, displayValue: 'Esporádicamente (Hasta un 20% de la jornada laboral)' },
+									{ value: 2, displayValue: 'Entre un 20% y 70% de la jornada laboral' },
+									{ value: 3, displayValue: 'La mayor parte del tiempo' }
 								]
 							},
 							subtext: '',
@@ -405,10 +405,10 @@ export const formNuevaOferta =
 								id: 'resolverProblemas',
 								options: [
 									{ value: '', displayValue: 'Seleccione...', disabled: true },
-									{ value: '0', displayValue: 'No, o muy poco tiempo' },
-									{ value: '1', displayValue: 'Esporádicamente (Hasta un 20% de la jornada laboral)' },
-									{ value: '2', displayValue: 'Entre un 20% y 70% de la jornada laboral' },
-									{ value: '3', displayValue: 'La mayor parte del tiempo' }
+									{ value: 0, displayValue: 'No, o muy poco tiempo' },
+									{ value: 1, displayValue: 'Esporádicamente (Hasta un 20% de la jornada laboral)' },
+									{ value: 2, displayValue: 'Entre un 20% y 70% de la jornada laboral' },
+									{ value: 3, displayValue: 'La mayor parte del tiempo' }
 								]
 							},
 							subtext: '',
@@ -427,10 +427,10 @@ export const formNuevaOferta =
 								id: 'tareasEstresantes',
 								options: [
 									{ value: '', displayValue: 'Seleccione...', disabled: true },
-									{ value: '0', displayValue: 'No, o muy poco tiempo' },
-									{ value: '1', displayValue: 'Esporádicamente (Hasta un 20% de la jornada laboral)' },
-									{ value: '2', displayValue: 'Entre un 20% y 70% de la jornada laboral' },
-									{ value: '3', displayValue: 'La mayor parte del tiempo' }
+									{ value: 0, displayValue: 'No, o muy poco tiempo' },
+									{ value: 1, displayValue: 'Esporádicamente (Hasta un 20% de la jornada laboral)' },
+									{ value: 2, displayValue: 'Entre un 20% y 70% de la jornada laboral' },
+									{ value: 3, displayValue: 'La mayor parte del tiempo' }
 								]
 							},
 							subtext: '',
@@ -472,7 +472,7 @@ export const formNuevaOferta =
 						}
 					]
 				},
-									nivelEducacional: {
+				nivelEducacional: {
 					type: 'normal',
 					elements: [
 						{
@@ -483,16 +483,16 @@ export const formNuevaOferta =
 								id: 'nivelEducacional',
 								options: [
 									{ value: '', displayValue: 'Seleccione...', disabled: true },
-									{ value: '0', displayValue: 'Educación Especial' },
-									{ value: '1', displayValue: 'Ed. Básica Incompleta' },
-									{ value: '2', displayValue: 'Ed. Básica Completa' },
-									{ value: '3', displayValue: 'Ed. Media Incompleta' },
-									{ value: '4', displayValue: 'Ed. Media Completa' },
-									{ value: '5', displayValue: 'Ed. Media Técnica-Profesional Incompleta' },
-									{ value: '6', displayValue: 'Ed. Media Técnica-Profesional Completa' },
-									{ value: '7', displayValue: 'Ed. Superior Profesional Incompleta' },
-									{ value: '8', displayValue: 'Ed. Superior Profesional Completa' },
-									{ value: '9', displayValue: 'Postgrado' },
+									{ value: 0, displayValue: 'Educación Especial' },
+									{ value: 1, displayValue: 'Ed. Básica Incompleta' },
+									{ value: 2, displayValue: 'Ed. Básica Completa' },
+									{ value: 3, displayValue: 'Ed. Media Incompleta' },
+									{ value: 4, displayValue: 'Ed. Media Completa' },
+									{ value: 5, displayValue: 'Ed. Media Técnica-Profesional Incompleta' },
+									{ value: 6, displayValue: 'Ed. Media Técnica-Profesional Completa' },
+									{ value: 7, displayValue: 'Ed. Superior Profesional Incompleta' },
+									{ value: 8, displayValue: 'Ed. Superior Profesional Completa' },
+									{ value: 9, displayValue: 'Postgrado' },
 								]
 							},
 							subtext: '',
@@ -511,9 +511,9 @@ export const formNuevaOferta =
 								id: 'disponibilidad',
 								options: [
 									{ value: '', displayValue: 'Seleccione...', disabled: true },
-									{ value: '0', displayValue: 'Lunes a Viernes' },
-									{ value: '1', displayValue: 'Sábados, Domingos y festivos' },
-									{ value: '2', displayValue: 'Cualquier día' }
+									{ value: 0, displayValue: 'Lunes a Viernes' },
+									{ value: 1, displayValue: 'Sábados, Domingos y festivos' },
+									{ value: 2, displayValue: 'Cualquier día' }
 								]
 							},
 							subtext: '',
@@ -532,13 +532,13 @@ export const formNuevaOferta =
 								id: 'rentaEstimada',
 								options: [
 									{ value: '', displayValue: 'Seleccione...', disabled: true },
-									{ value: '0', displayValue: 'Hasta 301.000' },
-									{ value: '1', displayValue: '301.0001 a 400.000' },
-									{ value: '2', displayValue: '400.001 a 550.000' },
-									{ value: '3', displayValue: '550.001 a 650.000' },
-									{ value: '4', displayValue: '650.001 a 800.000' },
-									{ value: '5', displayValue: '800.001 a 1.000.000' },
-									{ value: '6', displayValue: '1.000.001 o más' }
+									{ value: 0, displayValue: 'Hasta 301.000' },
+									{ value: 1, displayValue: '301.0001 a 400.000' },
+									{ value: 2, displayValue: '400.001 a 550.000' },
+									{ value: 3, displayValue: '550.001 a 650.000' },
+									{ value: 3, displayValue: '650.001 a 800.000' },
+									{ value: 5, displayValue: '800.001 a 1.000.000' },
+									{ value: 6, displayValue: '1.000.001 o más' }
 								]
 							},
 							subtext: '',
