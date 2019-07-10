@@ -25,7 +25,7 @@ public class Titulo {
     private String institucion;
     // Año: año de egreso
     @NotNull(message = "Debe ingresar el año de egreso")
-    private Integer año;
+    private Integer anho;
 
     // Perfil Laboral padre
     @ManyToOne
@@ -36,12 +36,12 @@ public class Titulo {
         return name;
     }
 
-    public Integer getAño() {
-        return año;
+    public Integer getAnho() {
+        return anho;
     }
 
-    public void setAño(Integer año) {
-        this.año = año;
+    public void setAnho(Integer anho) {
+        this.anho = anho;
     }
 
     public Integer getId() {

@@ -88,7 +88,7 @@ public class PerfilLaboralController {
         pLaboral.setAdecuaciones(pLaboralNew.getAdecuaciones());
         pLaboral.setAutoPropio(pLaboralNew.isAutoPropio());
         pLaboral.setAyudaFormulario(pLaboralNew.getAyudaFormulario());
-        pLaboral.setBañoAdaptado(pLaboralNew.isBañoAdaptado());
+        pLaboral.setBanhoAdaptado(pLaboralNew.isBanhoAdaptado());
         pLaboral.setComunicacionOral(pLaboralNew.getComunicacionOral());
         pLaboral.setCredencial(pLaboralNew.isCredencial());
         pLaboral.setDesplazoTrayectos(pLaboralNew.getDesplazoTrayectos());
@@ -100,7 +100,7 @@ public class PerfilLaboralController {
         pLaboral.setLicencia(pLaboralNew.getLicencia());
         pLaboral.setName(pLaboralNew.getName());
         pLaboral.setNivelEducacional(pLaboralNew.getNivelEducacional());
-        pLaboral.setObjetosPequeños(pLaboralNew.getObjetosPequeños());
+        pLaboral.setObjetosPequenhos(pLaboralNew.getObjetosPequenhos());
 
 
         if(pLaboralNew.getCursos()!=null) {
