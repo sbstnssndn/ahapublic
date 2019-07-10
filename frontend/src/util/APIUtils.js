@@ -135,3 +135,11 @@ export const updatePerfilLaboral = (id, updatePerfilLaboral) => {
 			body: JSON.stringify(updatePerfilLaboral)
 	});
 }
+
+export const updatePerfilEmpresa = (id, perfilEmpresa) => {
+	return request({
+			url: API_BASE_URL + `/user/${id}/perfilEmpresa`,
+			method: 'PUT',
+			body: JSON.stringify(perfilEmpresa)
+	});
+}

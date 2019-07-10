@@ -17,7 +17,8 @@ import  {
 } from '../../constants';
 import {
 	updatePerfilCandidato,
-	updatePerfilLaboral
+	updatePerfilLaboral,
+	updatePerfilEmpresa,
 } from '../../util/APIUtils';
 //import '../../custom.css'
 
@@ -30,8 +31,6 @@ class MasterForm extends Component {
 		show: false,
 		endpoint: '',
 		alert: { show: false, message: null },
-		currentUser: null,
-		userLoaded: false
 	}
 	
 	cloneStateElementsArray = (inputIdentifier) => {
@@ -186,25 +185,34 @@ class MasterForm extends Component {
 		console.log("DATOS: ", datos)
 
 		/* TODO: enviar los datos al endpoint correcto */
+		let currentUser = {...this.props.currentUser}
+		console.log("USER: ", currentUser)
 		switch (this.state.form.title) {
 			case FORM_CUENTA_USUARIO:
 				console.log("ENDPOINT CUENTA USUARIO");
 				console.log(this.props.match)
 				break;
 			case FORM_POSTULANTE:
-				updatePerfilCandidato(this.state.currentUser.id, datos)
+				updatePerfilCandidato(currentUser.id, datos)
 				.then(response => {
 					console.log("RESPONSE updatePerfilCandidato: ", response);
 				}).catch(error => {
 					console.log("ERROR updatePerfilCandidato: ", error);
 				});
 			case FORM_POSTULANTE_LABORAL:
-					updatePerfilLaboral(this.state.currentUser.id, datos)
-					.then(response => {
-						console.log("RESPONSE updatePerfilLaboral: ", response);
-					}).catch(error => {
-						console.log("ERROR updatePerfilLaboral: ", error);
-					});
+				updatePerfilLaboral(currentUser.id, datos)
+				.then(response => {
+					console.log("RESPONSE updatePerfilLaboral: ", response);
+				}).catch(error => {
+					console.log("ERROR updatePerfilLaboral: ", error);
+				});
+			case FORM_EMPRESA:
+				updatePerfilEmpresa(currentUser.id, datos)
+				.then(response => {
+					console.log("RESPONSE updatePerfilEmpresa: ", response);
+				}).catch(error => {
+					console.log("ERROR updatePerfilEmpresa: ", error);
+				});
 			default:
 				break;
 		}
@@ -408,7 +416,7 @@ class MasterForm extends Component {
   }
 
   render () {
-		//console.log("MasterForm props: ", this.props)
+		console.log("MasterForm props: ", this.props)
     let stages = (
       this.props.formConfig.stages.map(stage => {
         return <Stage

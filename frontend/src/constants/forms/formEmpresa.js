@@ -23,8 +23,8 @@ export const formEmpresa =
                   elementConfig: {
                     type: "text",
                     placeholder: "Lider S.A",
-                    name: "nombre",
-                    id: "nombre"
+                    name: "nameEmpresa",
+                    id: "nameEmpresa"
                   },
                   subtext: '',
                   value: ""
@@ -40,8 +40,8 @@ export const formEmpresa =
                   elementConfig: {
                     type: "text",
                     placeholder: "7546345-2",
-                    name: "rut",
-                    id: "rut"
+                    name: "rutEmpresa",
+                    id: "rutEmpresa"
                   },
                   subtext: '',
                   value: ""
@@ -91,8 +91,8 @@ export const formEmpresa =
                   elementConfig: {
                     type: "text",
                     placeholder: "contacto@lider.cl",
-                    name: "correo2",
-                    id: "correo2"
+                    name: "email2",
+                    id: "email2"
                   },
                   subtext: '',
                   value: ""
