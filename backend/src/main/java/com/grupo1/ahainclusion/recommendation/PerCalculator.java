@@ -23,52 +23,96 @@ public class PerCalculator {
 
         Integer score = 0;
 
+        Integer actividadesAuditiva = 1;
+        Integer actividadesVisual = 1;
+        Integer comunicacionOral = 1;
+        Integer desplazoTrayectos = 1;
+        Integer diferentesAlturas = 1;
+        Integer diferentesPisos = 1;
+        Integer disponibilidad = 1;
+        Integer expectativaSueldo = 1;
+        Integer leerEscribir = 1;
+        Integer licencia = 1;
+        Integer nivelEducacional = 1;
+        Integer objetosPequenhos = 1;
+        Integer permanecerPie = 1;
+        Integer permanecerSentado = 1;
+        Integer resolverProblemas = 1;
+        Integer situacionesConflicto = 1;
+        Integer situacionesNuevas = 1;
+        Integer tareasEstresantes = 1;
+        Integer trabajoEquipo = 1;
+
+        Integer experiencia = 5;
+
+        Integer maxScore =  actividadesAuditiva +
+                            actividadesVisual +
+                            comunicacionOral +
+                            desplazoTrayectos +
+                            diferentesAlturas +
+                            diferentesPisos +
+                            disponibilidad +
+                            expectativaSueldo +
+                            leerEscribir +
+                            licencia +
+                            nivelEducacional +
+                            objetosPequenhos +
+                            permanecerPie +
+                            permanecerSentado +
+                            resolverProblemas +
+                            situacionesConflicto +
+                            situacionesNuevas +
+                            tareasEstresantes +
+                            trabajoEquipo +
+                            experiencia;
+
         if(pLaboral.getActividadesAuditiva() >= oferta.getActividadesAuditiva())
-            score = score + 1;
+            score = score + actividadesAuditiva;
         if(pLaboral.getActividadesVisual() >= oferta.getActividadesVisual())
-            score = score + 1;
+            score = score + actividadesVisual;
         if(pLaboral.getComunicacionOral() >= oferta.getComunicacionOral())
-            score = score + 1;
+            score = score + comunicacionOral;
         if(pLaboral.getDesplazoTrayectos() >= oferta.getDesplazoTrayectos())
-            score = score + 1;
+            score = score + desplazoTrayectos;
         if(pLaboral.getDiferentesAlturas() >= oferta.getDiferentesAlturas())
-            score = score + 1;
+            score = score + diferentesAlturas;
         if(pLaboral.getDiferentesPisos() >= oferta.getDiferentesPisos())
-            score = score + 1;
+            score = score + diferentesPisos;
         if(pLaboral.getDisponibilidad() >= oferta.getDisponibilidad())
-            score = score + 1;
+            score = score + disponibilidad;
         if(pLaboral.getExpectativaSueldo() >= oferta.getRentaEstimada())
-            score = score + 1;
+            score = score + expectativaSueldo;
         if(pLaboral.getLeerEscribir() >= oferta.getLeerEscribir())
-            score = score + 1;
+            score = score + leerEscribir;
         if(pLaboral.getLicencia().equals(oferta.getLicencia()))
-            score = score + 1;
+            score = score + licencia;
         if(pLaboral.getNivelEducacional() >= oferta.getNivelEducacional())
-            score = score + 1;
+            score = score + nivelEducacional;
         if(pLaboral.getObjetosPequenhos() >= oferta.getObjetosPequenhos())
-            score = score + 1;
+            score = score + objetosPequenhos;
         if(pLaboral.getPermanecerPie() >= oferta.getPermanecerPie())
-            score = score + 1;
+            score = score + permanecerPie;
         if(pLaboral.getPermanecerSentado() >= oferta.getPermanecerSentado())
-            score = score + 1;
+            score = score + permanecerSentado;
         if(pLaboral.getResolverProblemas() >= oferta.getResolverProblemas())
-            score = score + 1;
+            score = score + resolverProblemas;
         if(pLaboral.getSituacionesConflicto() >= oferta.getSituacionesConflicto())
-            score = score + 1;
+            score = score + situacionesConflicto;
         if(pLaboral.getSituacionesNuevas() >= oferta.getSituacionesNuevas())
-            score = score + 1;
+            score = score + situacionesNuevas;
         if(pLaboral.getTareasEstresantes() >= oferta.getTareasEstresantes())
-            score = score + 1;
+            score = score + tareasEstresantes;
         if(pLaboral.getTrabajoEquipo() >= oferta.getTrabajoEquipo())
-            score = score + 1;
+            score = score + trabajoEquipo;
 
         if(check(pLaboral.getExperiencias(), oferta.getExperiencias())==true)
-            score = score + 5;
+            score = score + experiencia;
 
-        double percentage = ((score*1.0)/24)*100;
+        double percentage = ((score*1.0)/maxScore)*100;
         Integer out = (int) (Math.round(percentage));
-        // System.out.println(percentage);
-        // System.out.println(out);
+        System.out.println("percentage: "+percentage);
+        System.out.println("maxScore: "+maxScore);
+        System.out.println("out: "+out);
         return out;
     }
 
