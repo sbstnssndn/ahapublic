@@ -42,7 +42,7 @@ public class Oferta {
     // tienes acceso para silla de ruedas?
     private boolean sillaDeRuedas;
     // Tienes baño adaptado?
-    private boolean bañoAdaptado;
+    private boolean banhoAdaptado;
 
     // ---------------------
     // DATOS DE EXIGENCIA FISICA
@@ -95,17 +95,16 @@ public class Oferta {
     // Que nivel educacional mínimo debe tener el candidato?
     private Integer nivelEducacional; // 0: Ed. Especial ..... 9:Postgrado
 
-
     // DISPONIBILIDAD
     // --------------
-    // Disponibilidad: 
+    // Disponibilidad:
     // 0: Lunes a Viernes
     // 1: Sábados, Domingos y festivos
     // 2: Cualquier día
     private Integer disponibilidad;
 
     // EXPECTATIVAS DE SUELDO
-    // ExpectativaSueldo: 
+    // ExpectativaSueldo:
     // 0: Hasta 301.000
     // 1: 301.0001 a 400.000
     // 2: 400.001 a 550.000
@@ -116,13 +115,21 @@ public class Oferta {
     private Integer rentaEstimada;
 
     // Experiencias laborales
-    @OneToMany(orphanRemoval=true)
+    @OneToMany(orphanRemoval = true)
     @JoinColumn(name = "oferta_id")
     @JsonManagedReference
     private Collection<ExperienciaExigida> experiencias;
 
     public String getDescription() {
         return description;
+    }
+
+    public boolean isBanhoAdaptado() {
+        return banhoAdaptado;
+    }
+
+    public void setBanhoAdaptado(boolean banhoAdaptado) {
+        this.banhoAdaptado = banhoAdaptado;
     }
 
     public Integer getRentaEstimada() {
@@ -283,14 +290,6 @@ public class Oferta {
 
     public void setPermanecerPie(Integer permanecerPie) {
         this.permanecerPie = permanecerPie;
-    }
-
-    public boolean isBañoAdaptado() {
-        return bañoAdaptado;
-    }
-
-    public void setBañoAdaptado(boolean bañoAdaptado) {
-        this.bañoAdaptado = bañoAdaptado;
     }
 
     public boolean isSillaDeRuedas() {
