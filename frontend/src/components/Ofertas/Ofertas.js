@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import Card from 'react-bootstrap/Card';
-import Form from 'react-bootstrap/Form';
-import Empresa from '../Empresa/Empresa';
-import DetalleOferta from './DetalleOferta';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
@@ -31,8 +28,7 @@ class Ofertas extends Component {
             .then(response => {
                 this.setState({
                     ofertas: response.data,
-                    total: response.data.length,
-                    pages: Math.trunc(response.data.length  / this.state.ofertasByPage + 1)
+                    total: response.data.length
                 });
                 this.paginar();
 				this.setState({
@@ -45,6 +41,19 @@ class Ofertas extends Component {
     }
 
     paginar() {
+
+        //Cuantas paginas hacer
+		if(this.state.total%10 === 0){
+			this.setState({
+				pages: Math.trunc(this.state.total  / this.state.ofertasByPage)
+			});
+		}
+		else{
+			this.setState({
+				pages: Math.trunc(this.state.total  / this.state.ofertasByPage) + 1
+			})
+		}
+
         let ofertasAux = [];
 
         for(let i = 0; i < this.state.pages ; i++){
@@ -77,34 +86,6 @@ class Ofertas extends Component {
             currentPage: number,
             ofertasPage: aux
         });
-    }
-    
-    botones(oferta) {
-
-        let id_empresa = 0;
-
-        if(oferta != null){
-            return (
-                <Row>
-					<Col>
-						<Link to={`/aha/empresas/${id_empresa}`} >
-							<Button variant="success" type="submit">
-								Ver empresa
-							</Button>
-						</Link>
-					</Col>
-
-                    <Col>
-						<Link to={`/aha/oferta/${oferta.id}/detalle`} >
-							<Button variant="success" type="submit">
-								Ver detalle
-							</Button>
-						</Link>
-					</Col>
-
-                </Row>
-            );
-        }
     }
 
     detalle(id_oferta) {

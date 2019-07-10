@@ -3,12 +3,7 @@ import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import axios from 'axios';
 import styles from '../Paginacion/App.module.css';
-
-
-import {
-	Link,
-	Route
-} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 class Perfiles extends Component {
 
@@ -205,7 +200,7 @@ class Perfiles extends Component {
 				<React.Fragment>
 					<Card className="mb-4">
 						<Card.Header className="px-2">
-							{this.props.title}: {this.state.total}
+							{this.props.title}
 						</Card.Header>
 					</Card>
 					<div className={styles.app}>
