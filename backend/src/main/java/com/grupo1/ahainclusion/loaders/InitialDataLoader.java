@@ -348,13 +348,19 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
       usr.setPassword("hola123");
       usr.setPassword(passwordEncoder.encode(usr.getPassword()));
       usr.setRoles(Arrays.asList(role));
-      usr.setEnabled(true);
+      usr.setEnabled(rand.nextBoolean());
       userRepository.save(usr);
 
       PerfilCandidato pCandidato = new PerfilCandidato();
       pCandidato.setFirstName(firstName);
       pCandidato.setLastName(lastName);
-      //pCandidato.setRut("");
+      pCandidato.setRut("18.357.330-6");
+      pCandidato.setFechaNacimiento(sdf.parse("04/06/1989"));
+      pCandidato.setNacionalidad("Chile");
+      pCandidato.setGenero(2);
+      pCandidato.setEmail2(email+".alt");
+      pCandidato.setTelefono1("56940953465");
+      pCandidato.setTelefono2("56224569077");
 
       Direccion dir = new Direccion();
       dir.setCalle("Avda. Central 1349");
