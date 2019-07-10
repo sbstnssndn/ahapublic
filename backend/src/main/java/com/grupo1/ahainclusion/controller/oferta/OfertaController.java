@@ -4,8 +4,10 @@ import java.util.Optional;
 
 import com.grupo1.ahainclusion.aux.payload.ApiResponse;
 import com.grupo1.ahainclusion.model.Oferta;
+import com.grupo1.ahainclusion.model.PerfilEmpresa;
 import com.grupo1.ahainclusion.model.User;
 import com.grupo1.ahainclusion.repository.OfertaRepository;
+import com.grupo1.ahainclusion.repository.PerfilEmpresaRepository;
 import com.grupo1.ahainclusion.repository.UserRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +31,9 @@ public class OfertaController {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private PerfilEmpresaRepository perfilEmpresaRepository;
 
     // Obtener Ofertas de usuario
     @GetMapping(value = "user/{userId}/oferta")
@@ -76,14 +81,21 @@ public class OfertaController {
 
     // Agregar Oferta
     @PostMapping(value = "user/{userId}/oferta")
-    public @ResponseBody String addNewOferta(@RequestBody Oferta oferta) {
+    public @ResponseBody ResponseEntity<Object> addNewOferta(@PathVariable("userId") Integer userId, @RequestBody Oferta oferta) {
 
+        Optional<PerfilEmpresa> pEmpresaOptional = perfilEmpresaRepository.findById(userId);
+
+        if (!pEmpresaOptional.isPresent())
+        return new ResponseEntity(new ApiResponse(false, "Usuario Empresa no encontrado"), HttpStatus.NOT_FOUND);
+
+        PerfilEmpresa pEmpresa = pEmpresaOptional.get();
+        oferta.setPerfilEmpresa(pEmpresa);
         ofertaRepository.save(oferta);
 
-        return "Oferta Guardada";
+        return new ResponseEntity(new ApiResponse(true, "Oferta Guardada"), HttpStatus.OK);
     }
 
-    // Actualizar Perfil Empresa
+    // Actualizar oferta
     @PutMapping(path = "oferta/{id}")
     //SOLO USUARIOS Empresa o AHA
     //@PreAuthorize("hasRole('ROLE_AHA') or hasRole('ROLE_EMPRESA')")
