@@ -704,9 +704,9 @@ export const formPostulanteLaboral =
                     { value: 4, displayValue: 'Ed. Media Completa' },
                     { value: 5, displayValue: 'Ed. Media Técnica-Profesional Incompleta' },
                     { value: 6, displayValue: 'Ed. Media Técnica-Profesional Completa' },
-                    { value: '7', displayValue: 'Ed. Superior Profesional Incompleta' },
-                    { value: '8', displayValue: 'Ed. Superior Profesional Completa' },
-                    { value: '9', displayValue: 'Postgrado' },
+                    { value: 7, displayValue: 'Ed. Superior Profesional Incompleta' },
+                    { value: 8, displayValue: 'Ed. Superior Profesional Completa' },
+                    { value: 9, displayValue: 'Postgrado' },
                   ]
                 },
                 subtext: '',
@@ -725,7 +725,7 @@ export const formPostulanteLaboral =
         name: "Experiencia laboral",
         fields: {
           experiencias: {
-            type: 'multi',
+            type: 'experiencias',
             elements: []
           }
         }

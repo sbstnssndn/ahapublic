@@ -159,3 +159,12 @@ export const getPerfilEmpresa = (id) => {
 			method: 'GET'
 	});
 }
+
+export const addExperiencia = (id, experiencia) => {
+	console.log(JSON.stringify(experiencia))
+	return request({
+			url: API_BASE_URL + `/user/${id}/experiencia`,
+			method: 'POST',
+			body: JSON.stringify(experiencia)
+	});
+}

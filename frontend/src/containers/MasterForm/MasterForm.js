@@ -20,6 +20,7 @@ import {
 	updatePerfilLaboral,
 	updatePerfilEmpresa,
 	createOferta,
+	addExperiencia,
 } from '../../util/APIUtils';
 //import '../../custom.css'
 
@@ -131,7 +132,24 @@ class MasterForm extends Component {
 
     //console.log('form:')
     console.log(this.state.form)
-  }
+	}
+	
+	experienciasPayload = (elements) => {
+		console.log("experienciasPayload() ", elements)
+		let elementObj = null;
+		//let elementsArray = [];
+		for (let element = 0; element < elements.length; element=element+5) {
+			elementObj = {
+				empresa: elements[element].value,
+				fechaInicio: elements[element+1].value,
+				fechaFin: elements[element+2].value,
+				cargo: elements[element+3].value,
+				area: elements[element+4].value
+			}
+			//elementsArray.push(elementObj)
+		}
+		return elementObj;
+	}
 
   handleSubmit = (event, method) => {
 		event.preventDefault();   
@@ -149,13 +167,31 @@ class MasterForm extends Component {
 
 			let datos = {};
 			let direccion = {};
+			
 			for (let stage in updatedStages) {
 				const updatedStageFields = {...updatedStages[stage].fields};
 				
 				for (let field in updatedStageFields) {
 					//console.log("FIELD: ", field)
 					const fieldObj = {...updatedStageFields[field]};
-					const elements = {...fieldObj.elements};
+					const elements = [...fieldObj.elements];
+					//console.log("ELEMS: ", elements)
+					if (fieldObj.type === "experiencias") {
+						if (elements.length >= 5) {
+							let elementObj = this.experienciasPayload(elements);
+							//elementObj["perfilLaboral"] = null;
+							console.log("updatedElementsArr: ", elementObj);
+							
+							addExperiencia(this.props.currentUser.id, elementObj)
+							.then(response => {
+								console.log("RESPONSE addExperiencia: ", response);
+							}).catch(error => {
+								console.log("ERROR addExperiencia: ", error);
+							});
+							continue;
+						}
+					}
+
 					for (let element in elements) {
 						//console.log(elements[element])
 						let id = elements[element].elementConfig.id;
@@ -164,8 +200,8 @@ class MasterForm extends Component {
 							direccion[ `${[id]}` ] = value;
 							continue;
 						}
-						console.log(id, typeof(elements[element].value))
-						datos[`${[id]}`] = elements[element].value;
+						//console.log(id, typeof(elements[element].value))
+						datos[`${[id]}`] = value;
 					}
 				}
 			}
@@ -407,7 +443,7 @@ class MasterForm extends Component {
 		this.setState({
 			form: this.props.formConfig
 		})
-
+/*
 		if(this.state.form != null) {
 			let currentEndpoint = this.props.formConfig.endpoint+('/')+this.props.currentUser.id+('/')//this.props.currentUser.id+('/')
 			switch(this.props.formConfig.id) {
@@ -431,7 +467,7 @@ class MasterForm extends Component {
 
 			this.fetchData (currentEndpoint);
 		}
-    
+    */
   }
 
   render () {
