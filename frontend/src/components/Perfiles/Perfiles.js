@@ -29,13 +29,12 @@ class Perfiles extends Component {
         	.then(response => {
 				this.setState({
 					users: response.data,
-                	total: response.data.length,
-                	pages: Math.trunc(response.data.length  / this.state.usersByPage + 1)
+                	total: response.data.length
 				});
 				this.paginar();
 				this.setState({
 					charged: true
-				})
+				});
             })
             .catch(function(error){
             	console.log(error);
@@ -45,6 +44,21 @@ class Perfiles extends Component {
 
 	paginar() {
 
+		//Cuantas paginas hacer
+		//Para 10 perfiles, requiere 1 sola hoja y no 2
+		if(this.state.total%10 === 0){
+			this.setState({
+				pages: Math.trunc(this.state.total  / this.state.usersByPage)
+			});
+		}
+		//Para 19 perfiles, requiere ya 2 hojas
+		//Para 2, solo 1 hoja
+		else{
+			this.setState({
+				pages: Math.trunc(this.state.total  / this.state.usersByPage) + 1
+			})
+		}
+		
         let usersAux = [];
 
         for(let i = 0; i < this.state.pages ; i++){
@@ -67,8 +81,6 @@ class Perfiles extends Component {
             users: usersAux,
             usersPage: usersAux[0]
         });
-        console.log("TODOS", this.state.users);
-        console.log("Actuales", this.state.usersPage);
     }
 
 	nombre(user){
@@ -193,7 +205,7 @@ class Perfiles extends Component {
 				<React.Fragment>
 					<Card className="mb-4">
 						<Card.Header className="px-2">
-							{this.props.title}
+							{this.props.title}: {this.state.total}
 						</Card.Header>
 					</Card>
 					<div className={styles.app}>
