@@ -10,16 +10,28 @@ public class Direccion {
     @Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
     private Integer id;
-    private String region;
-    private String comuna;
+    private Integer region;
+    private Integer comuna;
     private String calle;
-
-    public String getRegion() {
-        return region;
-    }
 
     public Integer getId() {
         return id;
+    }
+
+    public Integer getComuna() {
+        return comuna;
+    }
+
+    public void setComuna(Integer comuna) {
+        this.comuna = comuna;
+    }
+
+    public Integer getRegion() {
+        return region;
+    }
+
+    public void setRegion(Integer region) {
+        this.region = region;
     }
 
     public void setId(Integer id) {
@@ -32,17 +44,5 @@ public class Direccion {
 
     public void setCalle(String calle) {
         this.calle = calle;
-    }
-
-    public String getComuna() {
-        return comuna;
-    }
-
-    public void setComuna(String comuna) {
-        this.comuna = comuna;
-    }
-
-    public void setRegion(String region) {
-        this.region = region;
     }
 }
