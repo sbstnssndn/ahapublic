@@ -23,15 +23,16 @@ export const formPostulanteLaboral =
                   id: 'credencial',
                   options: [
                     { value: '', displayValue: 'Seleccione...', disabled: true },
-                    { value: 'true', displayValue: 'Si' },
-                    { value: 'false', displayValue: 'No' }
+                    { value: true, displayValue: 'Si' },
+                    { value: false, displayValue: 'No' }
                   ]
                 },
                 subtext: '',
                 value: ''
               }
             ]
-          },
+					},
+					/*
           interesesLaborales: {
             type: 'normal',
             elements: [
@@ -48,7 +49,7 @@ export const formPostulanteLaboral =
                 value: ''
               }
             ]
-          },
+          },*/
           expectativaSueldo: {
             type: 'normal',
             elements: [
@@ -60,13 +61,13 @@ export const formPostulanteLaboral =
                   id: 'rentaEstimada',
                   options: [
                     { value: '', displayValue: 'Seleccione...', disabled: true },
-                    { value: '0', displayValue: 'Hasta 301.000' },
-                    { value: '1', displayValue: '301.0001 a 400.000' },
-                    { value: '2', displayValue: '400.001 a 550.000' },
-                    { value: '3', displayValue: '550.001 a 650.000' },
-                    { value: '4', displayValue: '650.001 a 800.000' },
-                    { value: '5', displayValue: '800.001 a 1.000.000' },
-                    { value: '6', displayValue: '1.000.001 o más' }
+                    { value: 0, displayValue: 'Hasta 301.000' },
+                    { value: 1, displayValue: '301.0001 a 400.000' },
+                    { value: 2, displayValue: '400.001 a 550.000' },
+                    { value: 3, displayValue: '550.001 a 650.000' },
+                    { value: 4, displayValue: '650.001 a 800.000' },
+                    { value: 5, displayValue: '800.001 a 1.000.000' },
+                    { value: 6, displayValue: '1.000.001 o más' }
                   ]
                 },
                 subtext: '',
@@ -113,8 +114,8 @@ export const formPostulanteLaboral =
                   id: 'autoPropio',
                   options: [
                     { value: '', displayValue: 'Seleccione...', disabled: true },
-                    { value: 'no', displayValue: 'No' },
-                    { value: 'si', displayValue: 'Sí' }
+                    { value: false, displayValue: 'No' },
+                    { value: true, displayValue: 'Sí' }
                   ]
                 },
                 subtext: '',
@@ -128,19 +129,19 @@ export const formPostulanteLaboral =
         id: 1,
         name: "Accesibilidad",
         fields: {
-          sillaRuedas: {
+          sillaDeRuedas: {
             type: 'normal',
             elements: [
               {
                 label: '¿Utiliza silla de ruedas?',
                 elementType: 'select',
                 elementConfig: {
-                  name: 'sillaRuedas',
-                  id: 'sillaRuedas',
+                  name: 'sillaDeRuedas',
+                  id: 'sillaDeRuedas',
                   options: [
                     { value: '', displayValue: 'Seleccione...', disabled: true },
-                    { value: 'true', displayValue: 'Si' },
-                    { value: 'false', displayValue: 'No' }
+                    { value: true, displayValue: 'Si' },
+                    { value: false, displayValue: 'No' }
                   ]
                 },
                 subtext: '',
@@ -148,19 +149,19 @@ export const formPostulanteLaboral =
               }
             ]
           },
-          bañoAdaptado: {
+          banhoAdaptado: {
             type: 'normal',
             elements: [
               {
                 label: '¿Requiere baño adaptado?',
                 elementType: 'select',
                 elementConfig: {
-                  name: 'bañoAdaptado',
-                  id: 'bañoAdaptado',
+                  name: 'banhoAdaptado',
+                  id: 'banhoAdaptado',
                   options: [
                     { value: '', displayValue: 'Seleccione...', disabled: true },
-                    { value: 'true', displayValue: 'Si' },
-                    { value: 'false', displayValue: 'No' }
+                    { value: true, displayValue: 'Si' },
+                    { value: false, displayValue: 'No' }
                   ]
                 },
                 subtext: '',
@@ -200,11 +201,11 @@ export const formPostulanteLaboral =
                   id: 'dAuditiva',
                   options: [
                     { value: '', displayValue: 'Seleccione...', disabled: true },
-                    { value: '0', displayValue: '0%' },
-                    { value: '25', displayValue: '25%' },
-                    { value: '50', displayValue: '50%' },
-                    { value: '75', displayValue: '75%' },
-                    { value: '100', displayValue: '100%' },
+                    { value: 0, displayValue: '0%' },
+                    { value: 25, displayValue: '25%' },
+                    { value: 50, displayValue: '50%' },
+                    { value: 75, displayValue: '75%' },
+                    { value: 100, displayValue: '100%' },
                   ]
                 },
                 subtext: '',
@@ -223,11 +224,11 @@ export const formPostulanteLaboral =
                   id: 'dFisica',
                   options: [
                     { value: '', displayValue: 'Seleccione...', disabled: true },
-                    { value: '0', displayValue: '0%' },
-                    { value: '25', displayValue: '25%' },
-                    { value: '50', displayValue: '50%' },
-                    { value: '75', displayValue: '75%' },
-                    { value: '100', displayValue: '100%' },
+                    { value: 0, displayValue: '0%' },
+                    { value: 25, displayValue: '25%' },
+                    { value: 50, displayValue: '50%' },
+                    { value: 75, displayValue: '75%' },
+                    { value: 100, displayValue: '100%' },
                   ]
                 },
                 subtext: '',
@@ -246,11 +247,11 @@ export const formPostulanteLaboral =
                   id: 'dIntelectual',
                   options: [
                     { value: '', displayValue: 'Seleccione...', disabled: true },
-                    { value: '0', displayValue: '0%' },
-                    { value: '25', displayValue: '25%' },
-                    { value: '50', displayValue: '50%' },
-                    { value: '75', displayValue: '75%' },
-                    { value: '100', displayValue: '100%' },
+                    { value: 0, displayValue: '0%' },
+                    { value: 25, displayValue: '25%' },
+                    { value: 50, displayValue: '50%' },
+                    { value: 75, displayValue: '75%' },
+                    { value: 100, displayValue: '100%' },
                   ]
                 },
                 subtext: '',
@@ -269,11 +270,11 @@ export const formPostulanteLaboral =
                   id: 'dPsiquica',
                   options: [
                     { value: '', displayValue: 'Seleccione...', disabled: true },
-                    { value: '0', displayValue: '0%' },
-                    { value: '25', displayValue: '25%' },
-                    { value: '50', displayValue: '50%' },
-                    { value: '75', displayValue: '75%' },
-                    { value: '100', displayValue: '100%' },
+                    { value: 0, displayValue: '0%' },
+                    { value: 25, displayValue: '25%' },
+                    { value: 50, displayValue: '50%' },
+                    { value: 75, displayValue: '75%' },
+                    { value: 100, displayValue: '100%' },
                   ]
                 },
                 subtext: '',
@@ -292,11 +293,11 @@ export const formPostulanteLaboral =
                   id: 'dVisual',
                   options: [
                     { value: '', displayValue: 'Seleccione...', disabled: true },
-                    { value: '0', displayValue: '0%' },
-                    { value: '25', displayValue: '25%' },
-                    { value: '50', displayValue: '50%' },
-                    { value: '75', displayValue: '75%' },
-                    { value: '100', displayValue: '100%' },
+                    { value: 0, displayValue: '0%' },
+                    { value: 25, displayValue: '25%' },
+                    { value: 50, displayValue: '50%' },
+                    { value: 75, displayValue: '75%' },
+                    { value: 100, displayValue: '100%' },
                   ]
                 },
                 subtext: '',
@@ -321,10 +322,10 @@ export const formPostulanteLaboral =
                   id: 'permanecerPie',
                   options: [
                     { value: '', displayValue: 'Seleccione...', disabled: true },
-                    { value: '0', displayValue: 'No, o muy poco tiempo' },
-                    { value: '1', displayValue: 'Esporádicamente (Hasta un 20% de la jornada laboral)' },
-                    { value: '2', displayValue: 'Entre un 20% y 70% de la jornada laboral' },
-                    { value: '3', displayValue: 'La mayor parte del tiempo' }
+                    { value: 0, displayValue: 'No, o muy poco tiempo' },
+                    { value: 1, displayValue: 'Esporádicamente (Hasta un 20% de la jornada laboral)' },
+                    { value: 2, displayValue: 'Entre un 20% y 70% de la jornada laboral' },
+                    { value: 3, displayValue: 'La mayor parte del tiempo' }
                   ]
                 },
                 subtext: '',
@@ -343,10 +344,10 @@ export const formPostulanteLaboral =
                   id: 'permanecerSentado',
                   options: [
                     { value: '', displayValue: 'Seleccione...', disabled: true },
-                    { value: '0', displayValue: 'No, o muy poco tiempo' },
-                    { value: '1', displayValue: 'Esporádicamente (Hasta un 20% de la jornada laboral)' },
-                    { value: '2', displayValue: 'Entre un 20% y 70% de la jornada laboral' },
-                    { value: '3', displayValue: 'La mayor parte del tiempo' }
+                    { value: 0, displayValue: 'No, o muy poco tiempo' },
+                    { value: 1, displayValue: 'Esporádicamente (Hasta un 20% de la jornada laboral)' },
+                    { value: 2, displayValue: 'Entre un 20% y 70% de la jornada laboral' },
+                    { value: 3, displayValue: 'La mayor parte del tiempo' }
                   ]
                 },
                 subtext: '',
@@ -365,10 +366,10 @@ export const formPostulanteLaboral =
                   id: 'desplazoTrayectos',
                   options: [
                     { value: '', displayValue: 'Seleccione...', disabled: true },
-                    { value: '0', displayValue: 'No, o muy poco tiempo' },
-                    { value: '1', displayValue: 'Esporádicamente (Hasta un 20% de la jornada laboral)' },
-                    { value: '2', displayValue: 'Entre un 20% y 70% de la jornada laboral' },
-                    { value: '3', displayValue: 'La mayor parte del tiempo' }
+                    { value: 0, displayValue: 'No, o muy poco tiempo' },
+                    { value: 1, displayValue: 'Esporádicamente (Hasta un 20% de la jornada laboral)' },
+                    { value: 2, displayValue: 'Entre un 20% y 70% de la jornada laboral' },
+                    { value: 3, displayValue: 'La mayor parte del tiempo' }
                   ]
                 },
                 subtext: '',
@@ -387,10 +388,10 @@ export const formPostulanteLaboral =
                   id: 'diferentesPisos',
                   options: [
                     { value: '', displayValue: 'Seleccione...', disabled: true },
-                    { value: '0', displayValue: 'No, o muy poco tiempo' },
-                    { value: '1', displayValue: 'Esporádicamente (Hasta un 20% de la jornada laboral)' },
-                    { value: '2', displayValue: 'Entre un 20% y 70% de la jornada laboral' },
-                    { value: '3', displayValue: 'La mayor parte del tiempo' }
+                    { value: 0, displayValue: 'No, o muy poco tiempo' },
+                    { value: 1, displayValue: 'Esporádicamente (Hasta un 20% de la jornada laboral)' },
+                    { value: 2, displayValue: 'Entre un 20% y 70% de la jornada laboral' },
+                    { value: 3, displayValue: 'La mayor parte del tiempo' }
                   ]
                 },
                 subtext: '',
@@ -415,10 +416,10 @@ export const formPostulanteLaboral =
                   id: 'diferentesAlturas',
                   options: [
                     { value: '', displayValue: 'Seleccione...', disabled: true },
-                    { value: '0', displayValue: 'No, o muy poco tiempo' },
-                    { value: '1', displayValue: 'Esporádicamente (Hasta un 20% de la jornada laboral)' },
-                    { value: '2', displayValue: 'Entre un 20% y 70% de la jornada laboral' },
-                    { value: '3', displayValue: 'La mayor parte del tiempo' }
+                    { value: 0, displayValue: 'No, o muy poco tiempo' },
+                    { value: 1, displayValue: 'Esporádicamente (Hasta un 20% de la jornada laboral)' },
+                    { value: 2, displayValue: 'Entre un 20% y 70% de la jornada laboral' },
+                    { value: 3, displayValue: 'La mayor parte del tiempo' }
                   ]
                 },
                 subtext: '',
@@ -437,10 +438,10 @@ export const formPostulanteLaboral =
                   id: 'objetosPequeños',
                   options: [
                     { value: '', displayValue: 'Seleccione...', disabled: true },
-                    { value: '0', displayValue: 'No, o muy poco tiempo' },
-                    { value: '1', displayValue: 'Esporádicamente (Hasta un 20% de la jornada laboral)' },
-                    { value: '2', displayValue: 'Entre un 20% y 70% de la jornada laboral' },
-                    { value: '3', displayValue: 'La mayor parte del tiempo' }
+                    { value: 0, displayValue: 'No, o muy poco tiempo' },
+                    { value: 1, displayValue: 'Esporádicamente (Hasta un 20% de la jornada laboral)' },
+                    { value: 2, displayValue: 'Entre un 20% y 70% de la jornada laboral' },
+                    { value: 3, displayValue: 'La mayor parte del tiempo' }
                   ]
                 },
                 subtext: '',
@@ -459,10 +460,10 @@ export const formPostulanteLaboral =
                   id: 'actividadesVisual',
                   options: [
                     { value: '', displayValue: 'Seleccione...', disabled: true },
-                    { value: '0', displayValue: 'No, o muy poco tiempo' },
-                    { value: '1', displayValue: 'Esporádicamente (Hasta un 20% de la jornada laboral)' },
-                    { value: '2', displayValue: 'Entre un 20% y 70% de la jornada laboral' },
-                    { value: '3', displayValue: 'La mayor parte del tiempo' }
+                    { value: 0, displayValue: 'No, o muy poco tiempo' },
+                    { value: 1, displayValue: 'Esporádicamente (Hasta un 20% de la jornada laboral)' },
+                    { value: 2, displayValue: 'Entre un 20% y 70% de la jornada laboral' },
+                    { value: 3, displayValue: 'La mayor parte del tiempo' }
                   ]
                 },
                 subtext: '',
@@ -481,10 +482,10 @@ export const formPostulanteLaboral =
                   id: 'actividadesAuditiva',
                   options: [
                     { value: '', displayValue: 'Seleccione...', disabled: true },
-                    { value: '0', displayValue: 'No, o muy poco tiempo' },
-                    { value: '1', displayValue: 'Esporádicamente (Hasta un 20% de la jornada laboral)' },
-                    { value: '2', displayValue: 'Entre un 20% y 70% de la jornada laboral' },
-                    { value: '3', displayValue: 'La mayor parte del tiempo' }
+                    { value: 0, displayValue: 'No, o muy poco tiempo' },
+                    { value: 1, displayValue: 'Esporádicamente (Hasta un 20% de la jornada laboral)' },
+                    { value: 2, displayValue: 'Entre un 20% y 70% de la jornada laboral' },
+                    { value: 3, displayValue: 'La mayor parte del tiempo' }
                   ]
                 },
                 subtext: '',
@@ -509,10 +510,10 @@ export const formPostulanteLaboral =
                   id: 'comunicacionOral',
                   options: [
                     { value: '', displayValue: 'Seleccione...', disabled: true },
-                    { value: '0', displayValue: 'No, o muy poco tiempo' },
-                    { value: '1', displayValue: 'Esporádicamente (Hasta un 20% de la jornada laboral)' },
-                    { value: '2', displayValue: 'Entre un 20% y 70% de la jornada laboral' },
-                    { value: '3', displayValue: 'La mayor parte del tiempo' }
+                    { value: 0, displayValue: 'No, o muy poco tiempo' },
+                    { value: 1, displayValue: 'Esporádicamente (Hasta un 20% de la jornada laboral)' },
+                    { value: 2, displayValue: 'Entre un 20% y 70% de la jornada laboral' },
+                    { value: 3, displayValue: 'La mayor parte del tiempo' }
                   ]
                 },
                 subtext: '',
@@ -531,10 +532,10 @@ export const formPostulanteLaboral =
                   id: 'leerEscribir',
                   options: [
                     { value: '', displayValue: 'Seleccione...', disabled: true },
-                    { value: '0', displayValue: 'No, o muy poco tiempo' },
-                    { value: '1', displayValue: 'Esporádicamente (Hasta un 20% de la jornada laboral)' },
-                    { value: '2', displayValue: 'Entre un 20% y 70% de la jornada laboral' },
-                    { value: '3', displayValue: 'La mayor parte del tiempo' }
+                    { value: 0, displayValue: 'No, o muy poco tiempo' },
+                    { value: 1, displayValue: 'Esporádicamente (Hasta un 20% de la jornada laboral)' },
+                    { value: 2, displayValue: 'Entre un 20% y 70% de la jornada laboral' },
+                    { value: 3, displayValue: 'La mayor parte del tiempo' }
                   ]
                 },
                 subtext: '',
@@ -553,10 +554,10 @@ export const formPostulanteLaboral =
                   id: 'situacionesNuevas',
                   options: [
                     { value: '', displayValue: 'Seleccione...', disabled: true },
-                    { value: '0', displayValue: 'No, o muy poco tiempo' },
-                    { value: '1', displayValue: 'Esporádicamente (Hasta un 20% de la jornada laboral)' },
-                    { value: '2', displayValue: 'Entre un 20% y 70% de la jornada laboral' },
-                    { value: '3', displayValue: 'La mayor parte del tiempo' }
+                    { value: 0, displayValue: 'No, o muy poco tiempo' },
+                    { value: 1, displayValue: 'Esporádicamente (Hasta un 20% de la jornada laboral)' },
+                    { value: 2, displayValue: 'Entre un 20% y 70% de la jornada laboral' },
+                    { value: 3, displayValue: 'La mayor parte del tiempo' }
                   ]
                 },
                 subtext: '',
@@ -575,10 +576,10 @@ export const formPostulanteLaboral =
                   id: 'trabajoEquipo',
                   options: [
                     { value: '', displayValue: 'Seleccione...', disabled: true },
-                    { value: '0', displayValue: 'No, o muy poco tiempo' },
-                    { value: '1', displayValue: 'Esporádicamente (Hasta un 20% de la jornada laboral)' },
-                    { value: '2', displayValue: 'Entre un 20% y 70% de la jornada laboral' },
-                    { value: '3', displayValue: 'La mayor parte del tiempo' }
+                    { value: 0, displayValue: 'No, o muy poco tiempo' },
+                    { value: 1, displayValue: 'Esporádicamente (Hasta un 20% de la jornada laboral)' },
+                    { value: 2, displayValue: 'Entre un 20% y 70% de la jornada laboral' },
+                    { value: 3, displayValue: 'La mayor parte del tiempo' }
                   ]
                 },
                 subtext: '',
@@ -603,10 +604,10 @@ export const formPostulanteLaboral =
                   id: 'situacionesConflicto',
                   options: [
                     { value: '', displayValue: 'Seleccione...', disabled: true },
-                    { value: '0', displayValue: 'No, o muy poco tiempo' },
-                    { value: '1', displayValue: 'Esporádicamente (Hasta un 20% de la jornada laboral)' },
-                    { value: '2', displayValue: 'Entre un 20% y 70% de la jornada laboral' },
-                    { value: '3', displayValue: 'La mayor parte del tiempo' }
+                    { value: 0, displayValue: 'No, o muy poco tiempo' },
+                    { value: 1, displayValue: 'Esporádicamente (Hasta un 20% de la jornada laboral)' },
+                    { value: 2, displayValue: 'Entre un 20% y 70% de la jornada laboral' },
+                    { value: 3, displayValue: 'La mayor parte del tiempo' }
                   ]
                 },
                 subtext: '',
@@ -625,10 +626,10 @@ export const formPostulanteLaboral =
                   id: 'resolverProblemas',
                   options: [
                     { value: '', displayValue: 'Seleccione...', disabled: true },
-                    { value: '0', displayValue: 'No, o muy poco tiempo' },
-                    { value: '1', displayValue: 'Esporádicamente (Hasta un 20% de la jornada laboral)' },
-                    { value: '2', displayValue: 'Entre un 20% y 70% de la jornada laboral' },
-                    { value: '3', displayValue: 'La mayor parte del tiempo' }
+                    { value: 0, displayValue: 'No, o muy poco tiempo' },
+                    { value: 1, displayValue: 'Esporádicamente (Hasta un 20% de la jornada laboral)' },
+                    { value: 2, displayValue: 'Entre un 20% y 70% de la jornada laboral' },
+                    { value: 3, displayValue: 'La mayor parte del tiempo' }
                   ]
                 },
                 subtext: '',
@@ -647,10 +648,10 @@ export const formPostulanteLaboral =
                   id: 'tareasEstresantes',
                   options: [
                     { value: '', displayValue: 'Seleccione...', disabled: true },
-                    { value: '0', displayValue: 'No, o muy poco tiempo' },
-                    { value: '1', displayValue: 'Esporádicamente (Hasta un 20% de la jornada laboral)' },
-                    { value: '2', displayValue: 'Entre un 20% y 70% de la jornada laboral' },
-                    { value: '3', displayValue: 'La mayor parte del tiempo' }
+                    { value: 0, displayValue: 'No, o muy poco tiempo' },
+                    { value: 1, displayValue: 'Esporádicamente (Hasta un 20% de la jornada laboral)' },
+                    { value: 2, displayValue: 'Entre un 20% y 70% de la jornada laboral' },
+                    { value: 3, displayValue: 'La mayor parte del tiempo' }
                   ]
                 },
                 subtext: '',
@@ -669,9 +670,9 @@ export const formPostulanteLaboral =
                   id: 'ayudaFormulario',
                   options: [
                     { value: '', displayValue: 'Seleccione...', disabled: true },
-                    { value: '0', displayValue: 'No' },
-                    { value: '1', displayValue: 'Sí, parcial' },
-                    { value: '2', displayValue: 'Completamente' }
+                    { value: 0, displayValue: 'No' },
+                    { value: 1, displayValue: 'Sí, parcial' },
+                    { value: 2, displayValue: 'Completamente' }
                   ]
                 },
                 subtext: '',
@@ -696,13 +697,13 @@ export const formPostulanteLaboral =
                   id: 'nivelEducacional',
                   options: [
                     { value: '', displayValue: 'Seleccione...', disabled: true },
-                    { value: '0', displayValue: 'Educación Especial' },
-                    { value: '1', displayValue: 'Ed. Básica Incompleta' },
-                    { value: '2', displayValue: 'Ed. Básica Completa' },
-                    { value: '3', displayValue: 'Ed. Media Incompleta' },
-                    { value: '4', displayValue: 'Ed. Media Completa' },
-                    { value: '5', displayValue: 'Ed. Media Técnica-Profesional Incompleta' },
-                    { value: '6', displayValue: 'Ed. Media Técnica-Profesional Completa' },
+                    { value: 0, displayValue: 'Educación Especial' },
+                    { value: 1, displayValue: 'Ed. Básica Incompleta' },
+                    { value: 2, displayValue: 'Ed. Básica Completa' },
+                    { value: 3, displayValue: 'Ed. Media Incompleta' },
+                    { value: 4, displayValue: 'Ed. Media Completa' },
+                    { value: 5, displayValue: 'Ed. Media Técnica-Profesional Incompleta' },
+                    { value: 6, displayValue: 'Ed. Media Técnica-Profesional Completa' },
                     { value: '7', displayValue: 'Ed. Superior Profesional Incompleta' },
                     { value: '8', displayValue: 'Ed. Superior Profesional Completa' },
                     { value: '9', displayValue: 'Postgrado' },

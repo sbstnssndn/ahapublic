@@ -32,11 +32,12 @@ class MasterForm extends Component {
 		show: false,
 		endpoint: '',
 		alert: { show: false, message: null },
+		form: ''
 	}
 	
 	cloneStateElementsArray = (inputIdentifier) => {
 		const updatedForm = {
-      ...this.props.formConfig
+      ...this.state.form
     }
     const updatedStages = {
       ...updatedForm.stages
@@ -129,7 +130,7 @@ class MasterForm extends Component {
     });
 
     //console.log('form:')
-    //console.log(this.state.form)
+    console.log(this.state.form)
   }
 
   handleSubmit = (event, method) => {
@@ -140,7 +141,7 @@ class MasterForm extends Component {
 
 			/* submit de todos los elementos del formulario */
 			const updatedForm = {
-				...this.props.formConfig
+				...this.state.form
 			}
 			const updatedStages = {
 				...updatedForm.stages
@@ -160,14 +161,15 @@ class MasterForm extends Component {
 						let id = elements[element].elementConfig.id;
 						let value = elements[element].value;
 						if (id === "calle" || id === "comuna" || id === "region") {
-							direccion[ `${[id]}` ] = elements[element].value;
+							direccion[ `${[id]}` ] = value;
 							continue;
 						}
-						datos[`${[id]}`] = value;
+						console.log(id, typeof(elements[element].value))
+						datos[`${[id]}`] = elements[element].value;
 					}
 				}
 			}
-			console.log("DIRECCION: ", direccion, Object.keys(direccion).length)
+			
 			if (Object.keys(direccion).length > 0) {
 				datos["direccion"] = {...direccion};
 			}
@@ -176,7 +178,7 @@ class MasterForm extends Component {
 			/* TODO: enviar los datos al endpoint correcto */
 			let currentUser = {...this.props.currentUser}
 			console.log("USER: ", currentUser)
-			switch (this.props.formConfig.title) {
+			switch (this.state.form.title) {
 				case FORM_CUENTA_USUARIO:
 					console.log("ENDPOINT CUENTA USUARIO");
 					console.log(this.props.match)
@@ -190,6 +192,8 @@ class MasterForm extends Component {
 					});
 					break;
 				case FORM_POSTULANTE_LABORAL:
+					console.log(datos)
+					console.log("ID: ", currentUser.id)
 					updatePerfilLaboral(currentUser.id, datos)
 					.then(response => {
 						console.log("RESPONSE updatePerfilLaboral: ", response);
@@ -233,7 +237,7 @@ class MasterForm extends Component {
 
   _next = () => {
     let currentStage = this.state.currentStage;
-    let lastStage = this.props.formConfig.totalStages - 1;
+    let lastStage = this.state.form.totalStages - 1;
 
     currentStage = currentStage >= lastStage - 1 ? lastStage : currentStage + 1;
     this.setState({
@@ -356,13 +360,13 @@ class MasterForm extends Component {
         console.log(error);
       })
 
-    for (let i=0; i<this.props.formConfig.totalStages; i++)
+    for (let i=0; i<this.state.form.totalStages; i++)
       this.formatData(formData, i)
   }
 	
 	formatData = (formData, currentStage) => {
 		const updatedForm = {
-      ...this.props.formConfig
+      ...this.state.form
     }
     const updatedStages = {
       ...updatedForm.stages
@@ -400,7 +404,11 @@ class MasterForm extends Component {
 	}
 
 	componentDidMount() {
-		if(this.props.formConfig != null) {
+		this.setState({
+			form: this.props.formConfig
+		})
+
+		if(this.state.form != null) {
 			let currentEndpoint = this.props.formConfig.endpoint+('/')+this.props.currentUser.id+('/')//this.props.currentUser.id+('/')
 			switch(this.props.formConfig.id) {
 				//case(0): //formCuentaUsuario, probablemente a futuro
