@@ -4,7 +4,7 @@ import {
 } from "react-router-dom";
 
 import MasterForm from '../../containers/MasterForm/MasterForm';
-import Recomendaciones from '../../containers/Recomendaciones/Recomendaciones';
+import Recomendaciones from '../Recomendaciones/Recomendaciones';
 import Perfiles from '../Perfiles/Perfiles.js';
 import ListarOfertas from '../ListarOfertas/ListarOfertas';
 import Ofertas from '../Ofertas/Ofertas';
@@ -167,6 +167,14 @@ const Panel = ( props ) => {
 						exact
 						render={(props) => (
 							<DetalleOferta {...props}/>
+						)} />
+
+					{/*Recomendaciones de oferta */}
+					<Route
+						path={`${props.match.path}/oferta/:id/recomendaciones`}
+						exact
+						render={(props) => (
+							<Recomendaciones {...props}/>
 						)} />
 					
 				</>

@@ -1,11 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import Card from 'react-bootstrap/Card';
-import Form from 'react-bootstrap/Form';
-import Col from 'react-bootstrap/Col';
-import Row from 'react-bootstrap/Row';
 import Button from 'react-bootstrap/Button';
-import Empresa from '../Empresa/Empresa';
 import styles from '../Paginacion/App.module.css';
 import { Link } from "react-router-dom";
 
