@@ -38,14 +38,18 @@ public class TituloController {
     @PostMapping("user/{userId}/titulo")
     //SOLO USUARIOS CANDIDATO O AHA
     //@PreAuthorize("hasRole('ROLE_CANDIDATO') or hasRole('ROLE_AHA')")
-    public @ResponseBody String addTituloToUser (@PathVariable("userId") Integer userId,
+    public @ResponseBody ResponseEntity<Object> addTituloToUser (@PathVariable("userId") Integer userId,
                                                  @RequestBody Titulo titulo) {
 
-        User user = userRepository.findById(userId).get();
+        Optional<User> userOptional = userRepository.findById(userId);
+        if (!userOptional.isPresent())
+        return new ResponseEntity(new ApiResponse(false, "Usuario no encontrado"), HttpStatus.NOT_FOUND);
+
+        User user = userOptional.get();
         titulo.setPerfilLaboral(user.getPerfilCandidato().getPerfilLaboral());
         tituloRepository.save(titulo);
 
-        return "Titulo Guardado en usuario: " + user.getPerfilCandidato().getFirstName();
+        return new ResponseEntity(new ApiResponse(true, "Titulo Agregado"), HttpStatus.OK);
     }
 
     // Obtener Titulos

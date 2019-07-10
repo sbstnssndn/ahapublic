@@ -16,6 +16,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
+import org.apache.commons.collections4.IterableUtils;
+
 @Service
 public class RecGenerator {
     
@@ -32,6 +34,12 @@ public class RecGenerator {
         Iterable<User> users = userRepository.findByRoles(role);
         List<Recommendation> recommendations = new ArrayList<>();
 
+        //Check por si n es mayor que la cantidad de candidatos del sistema
+        if(IterableUtils.size(users)<=n)
+            n = IterableUtils.size(users);
+        System.out.println("n: "+n);
+
+
         for(User u: users)
         {
             Recommendation rcm = new Recommendation();
@@ -47,9 +55,7 @@ public class RecGenerator {
 
             recommendations.add(rcm);
 
-            // System.out.println("Usuario " + u.getId() + ": " +rcm.getUserSummary().getName() +" "+"Porcentaje: "+rcm.getPercentage());
         }
-        // System.out.println("----------------------------");
 
 
         Comparator<Recommendation> compareByPerc = (Recommendation r1, Recommendation r2) -> r1.getPercentage().compareTo(r2.getPercentage());

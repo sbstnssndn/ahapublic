@@ -111,44 +111,55 @@ class ListarOfertas extends Component {
         );
     }
 
-    recomendaciones(oferta) {
+    recomendaciones(id_oferta) {
         return (
             <td>
+                <Link to={`/aha/oferta/${id_oferta}/recomendaciones`}>
                     <Button variant="primary" type="submit">
                         Rec.
                     </Button>
+                </Link>
             </td>
         )
     }
 
 	printOfertas() {
 		if(this.state.charged){
-            return (
-                <React.Fragment>
-					<table className={styles.table}>
-                        <thead>
-							<tr>
-								<th>Nombre </th>
-								<th>Descripción</th>
-                                <th>Detalle</th>
-                                <th>Recomendaciones</th>
-							</tr>
-						</thead>
-                        <tbody>
-							{this.state.ofertasPage.ofertas.map(oferta => {
-								return (
-									<tr key={oferta.id}>
-										<td> {oferta.name} </td>
-                                        <td> {oferta.description} </td>
-										{this.detalle(oferta.id)}
-                                        {this.recomendaciones(oferta)}
-									</tr>
-								)
-							})}
-						</tbody>
-					</table>           
-                </React.Fragment>
-            )
+			if(this.state.total !== 0){
+				return (
+					<React.Fragment>
+						<table className={styles.table}>
+							<thead>
+								<tr>
+									<th>Nombre </th>
+									<th>Descripción</th>
+									<th>Detalle</th>
+									<th>Recomendaciones</th>
+								</tr>
+							</thead>
+							<tbody>
+								{this.state.ofertasPage.ofertas.map(oferta => {
+									return (
+										<tr key={oferta.id}>
+											<td> {oferta.name} </td>
+											<td> {oferta.description} </td>
+											{this.detalle(oferta.id)}
+											{this.recomendaciones(oferta.id)}
+										</tr>
+									)
+								})}
+							</tbody>
+						</table>           
+					</React.Fragment>
+				)
+			}
+			else{
+				return (
+					<React.Fragment>
+						<Card.Title> Esta empresa aún no define ofertas </Card.Title>
+					</React.Fragment>
+				)
+			}
 		}
 	}
 
