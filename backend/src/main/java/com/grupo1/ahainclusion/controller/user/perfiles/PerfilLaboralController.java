@@ -84,7 +84,7 @@ public class PerfilLaboralController {
         PerfilLaboral pLaboral = pLaboralOptional.get();
 
         pLaboral.setActividadesAuditiva(pLaboralNew.getActividadesAuditiva());
-        pLaboral.setActividadesVisual(pLaboralNew.getActividadesAuditiva());
+        pLaboral.setActividadesVisual(pLaboralNew.getActividadesVisual());
         pLaboral.setAdecuaciones(pLaboralNew.getAdecuaciones());
         pLaboral.setAutoPropio(pLaboralNew.isAutoPropio());
         pLaboral.setAyudaFormulario(pLaboralNew.getAyudaFormulario());
@@ -98,9 +98,21 @@ public class PerfilLaboralController {
         pLaboral.setExpectativaSueldo(pLaboralNew.getExpectativaSueldo());
         pLaboral.setLeerEscribir(pLaboralNew.getLeerEscribir());
         pLaboral.setLicencia(pLaboralNew.getLicencia());
-        pLaboral.setName(pLaboralNew.getName());
         pLaboral.setNivelEducacional(pLaboralNew.getNivelEducacional());
         pLaboral.setObjetosPequenhos(pLaboralNew.getObjetosPequenhos());
+        pLaboral.setPermanecerPie(pLaboralNew.getPermanecerPie());
+        pLaboral.setPermanecerSentado(pLaboralNew.getPermanecerSentado());
+        pLaboral.setResolverProblemas(pLaboralNew.getResolverProblemas());
+        pLaboral.setSillaDeRuedas(pLaboralNew.isSillaDeRuedas());
+        pLaboral.setSituacionesConflicto(pLaboralNew.getSituacionesConflicto());
+        pLaboral.setSituacionesNuevas(pLaboralNew.getSituacionesNuevas());
+        pLaboral.setTareasEstresantes(pLaboralNew.getTareasEstresantes());
+        pLaboral.setTrabajoEquipo(pLaboralNew.getTrabajoEquipo());
+        pLaboral.setdAuditiva(pLaboralNew.getdAuditiva());
+        pLaboral.setdFisica(pLaboralNew.getdFisica());
+        pLaboral.setdIntelectual(pLaboralNew.getdIntelectual());
+        pLaboral.setdPsiquica(pLaboralNew.getdPsiquica());
+        pLaboral.setdVisual(pLaboralNew.getdVisual());
 
 
         if(pLaboralNew.getCursos()!=null) {
