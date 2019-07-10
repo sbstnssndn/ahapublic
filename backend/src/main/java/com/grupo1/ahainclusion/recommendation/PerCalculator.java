@@ -110,9 +110,9 @@ public class PerCalculator {
 
         double percentage = ((score*1.0)/maxScore)*100;
         Integer out = (int) (Math.round(percentage));
-        System.out.println("percentage: "+percentage);
-        System.out.println("maxScore: "+maxScore);
-        System.out.println("out: "+out);
+        // System.out.println("percentage: "+percentage);
+        // System.out.println("maxScore: "+maxScore);
+        // System.out.println("out: "+out);
         return out;
     }
 
@@ -158,9 +158,7 @@ public class PerCalculator {
 
         Boolean out = true;
         for(Boolean check : checks) {
-            // System.out.println(out);
             out = out & check;
-            // System.out.println(out);
         }
         return false;
     }
