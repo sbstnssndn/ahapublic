@@ -45,7 +45,7 @@ public class PerCalculator {
             score = score + 1;
         if(pLaboral.getNivelEducacional() >= oferta.getNivelEducacional())
             score = score + 1;
-        if(pLaboral.getObjetosPequeños() >= oferta.getObjetosPequeños())
+        if(pLaboral.getObjetosPequenhos() >= oferta.getObjetosPequenhos())
             score = score + 1;
         if(pLaboral.getPermanecerPie() >= oferta.getPermanecerPie())
             score = score + 1;

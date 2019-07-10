@@ -109,7 +109,7 @@ public class OfertaController {
         oferta.setLicencia(ofertaNew.getLicencia());
         oferta.setName(ofertaNew.getName());
         oferta.setNivelEducacional(ofertaNew.getNivelEducacional());
-        oferta.setObjetosPequeños(ofertaNew.getObjetosPequeños());
+        oferta.setObjetosPequenhos(ofertaNew.getObjetosPequenhos());
         oferta.setPermanecerPie(ofertaNew.getPermanecerPie());
         oferta.setPermanecerSentado(ofertaNew.getPermanecerSentado());
         oferta.setResolverProblemas(ofertaNew.getResolverProblemas());

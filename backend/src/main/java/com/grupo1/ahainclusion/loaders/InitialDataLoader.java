@@ -198,7 +198,7 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
     oferta1.setLeerEscribir(rand.nextInt(4));
     oferta1.setLicencia("Clase A");
     oferta1.setNivelEducacional(rand.nextInt(8));
-    oferta1.setObjetosPequeños(rand.nextInt(4));
+    oferta1.setObjetosPequenhos(rand.nextInt(4));
     oferta1.setPermanecerPie(rand.nextInt(4));
     oferta1.setPermanecerSentado(rand.nextInt(4));
     oferta1.setResolverProblemas(rand.nextInt(4));
@@ -224,7 +224,7 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
     oferta2.setLeerEscribir(rand.nextInt(4));
     oferta2.setLicencia("Clase B");
     oferta2.setNivelEducacional(rand.nextInt(8));
-    oferta2.setObjetosPequeños(rand.nextInt(4));
+    oferta2.setObjetosPequenhos(rand.nextInt(4));
     oferta2.setPermanecerPie(rand.nextInt(4));
     oferta2.setPermanecerSentado(rand.nextInt(4));
     oferta2.setResolverProblemas(rand.nextInt(4));
@@ -250,7 +250,7 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
     oferta3.setLeerEscribir(rand.nextInt(4));
     oferta3.setLicencia("Clase C");
     oferta3.setNivelEducacional(rand.nextInt(8));
-    oferta3.setObjetosPequeños(rand.nextInt(4));
+    oferta3.setObjetosPequenhos(rand.nextInt(4));
     oferta3.setPermanecerPie(rand.nextInt(4));
     oferta3.setPermanecerSentado(rand.nextInt(4));
     oferta3.setResolverProblemas(rand.nextInt(4));
@@ -401,7 +401,7 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
       pLaboral.setLeerEscribir(rand.nextInt(4));
       pLaboral.setLicencia("Clase A");
       pLaboral.setNivelEducacional(rand.nextInt(8));
-      pLaboral.setObjetosPequeños(rand.nextInt(4));
+      pLaboral.setObjetosPequenhos(rand.nextInt(4));
       pLaboral.setPermanecerPie(rand.nextInt(4));
       pLaboral.setPermanecerSentado(rand.nextInt(4));
       pLaboral.setResolverProblemas(rand.nextInt(4));
