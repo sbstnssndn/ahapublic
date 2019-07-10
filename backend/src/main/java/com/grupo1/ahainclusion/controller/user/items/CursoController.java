@@ -40,14 +40,19 @@ public class CursoController {
     @PostMapping("user/{userId}/curso")
     //SOLO USUARIOS CANDIDATO O AHA
     //@PreAuthorize("hasRole('ROLE_CANDIDATO') or hasRole('ROLE_AHA')")
-    public @ResponseBody String add (@PathVariable("userId") Integer userId, @RequestBody Curso curso) {
+    public @ResponseBody ResponseEntity<Object> add (@PathVariable("userId") Integer userId, @RequestBody Curso curso) {
 
 
-        User user = userRepository.findById(userId).get();
+
+        Optional<User> userOptional = userRepository.findById(userId);
+        if (!userOptional.isPresent())
+        return new ResponseEntity(new ApiResponse(false, "Usuario no encontrado"), HttpStatus.NOT_FOUND);
+
+        User user = userOptional.get();
         PerfilLaboral pLaboral = user.getPerfilCandidato().getPerfilLaboral();
         curso.setPerfilLaboral(pLaboral);
         cursoRepository.save(curso);
-        return "Curso Guardado en usuario: " + user.getPerfilCandidato().getFirstName();
+        return new ResponseEntity(new ApiResponse(true, "Curso Agregado"), HttpStatus.OK);
     }
 
     // Obtener Cursos del usuario
