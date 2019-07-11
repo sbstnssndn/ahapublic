@@ -9,7 +9,6 @@ import Perfiles from '../Perfiles/Perfiles.js';
 import ListarOfertas from '../ListarOfertas/ListarOfertas';
 import Ofertas from '../Ofertas/Ofertas';
 import DetalleOferta from '../Ofertas/DetalleOferta';
-import Postulante from '../Postulante/Postulante';
 import Empresa from '../Empresa/Empresa';
 import Tabs from '../Tabs/Tabs';
 
@@ -70,22 +69,13 @@ const Panel = ( props ) => {
 			break;
 		case USER_TYPE_EMPRESA:
 			routes = (
-				<>
-					{/* Por implementar
-					<Route
-						path={`${props.match.path}/ofertas`}
+				<>					
+					{/*<Route
+						path={`${props.match.path}/ofertas/${props.currentUser.id}`}
 						exact
 						render={(props) => (
-							<MasterForm
-								formConfig={formPostulanteLaboral} currentUser={props.currentUser} {...props} />
-						)} /> */}
-						
-					<Route
-						path={`${props.match.path}/recomendaciones`}
-						exact
-						render={(props) => (
-							<Recomendaciones />
-						)} />
+							<ListarOfertas {...props}/>
+						)} >*/}
 						
 					<Route
 						path={`${props.match.path}/nueva-oferta`}
@@ -154,13 +144,6 @@ const Panel = ( props ) => {
 						exact
 						render={(props) => (
 							<Ofertas {...props}/>
-						)} />
-					{/*Ver un postulante y detalle de perfil laboral */}
-					<Route
-						path={`${props.match.path}/postulante/:id`}
-						exact
-						render={(props) => (
-							<Postulante {...props}/>
 						)} />
 
 					{/*Ver una empresa */}
