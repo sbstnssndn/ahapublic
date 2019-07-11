@@ -1,11 +1,15 @@
 package com.grupo1.ahainclusion.controller.oferta;
 
+import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 
 import com.grupo1.ahainclusion.aux.payload.ApiResponse;
 import com.grupo1.ahainclusion.model.Oferta;
 import com.grupo1.ahainclusion.model.PerfilEmpresa;
 import com.grupo1.ahainclusion.model.User;
+import com.grupo1.ahainclusion.model.oferta.ExperienciaExigida;
+import com.grupo1.ahainclusion.repository.ExperienciaExigidaRepository;
 import com.grupo1.ahainclusion.repository.OfertaRepository;
 import com.grupo1.ahainclusion.repository.PerfilEmpresaRepository;
 import com.grupo1.ahainclusion.repository.UserRepository;
@@ -34,6 +38,9 @@ public class OfertaController {
 
     @Autowired
     private PerfilEmpresaRepository perfilEmpresaRepository;
+
+    @Autowired
+    private ExperienciaExigidaRepository experienciaExigidaRepository;
 
     // Obtener Ofertas de usuario
     @GetMapping(value = "user/{userId}/oferta")
@@ -90,6 +97,23 @@ public class OfertaController {
 
         PerfilEmpresa pEmpresa = pEmpresaOptional.get();
         oferta.setPerfilEmpresa(pEmpresa);
+        if(oferta.getExperiencias()!=null) {
+            Collection<ExperienciaExigida> expExigidas = oferta.getExperiencias();
+            oferta.setExperiencias(null);
+
+            ofertaRepository.save(oferta);
+            
+            for (ExperienciaExigida expExigida : expExigidas) {
+                expExigida.setOferta(oferta);
+            }
+
+            experienciaExigidaRepository.saveAll(expExigidas);
+
+            return new ResponseEntity(new ApiResponse(true, "Oferta Guardada"), HttpStatus.OK);
+
+        }
+        
+        
         ofertaRepository.save(oferta);
 
         return new ResponseEntity(new ApiResponse(true, "Oferta Guardada"), HttpStatus.OK);
