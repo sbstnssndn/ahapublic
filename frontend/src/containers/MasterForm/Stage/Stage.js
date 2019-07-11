@@ -75,7 +75,7 @@ const Stage = (props) => {
 						addSubForm={props.addSubForm}
 				/> 
 			}
-			else if (field.type === 'experienciasEmpresa') {
+			else if (field.type === "experienciasEmpresa") {
 				return <ExperienciaExigidaForm
 						key={field.id}
 						field={field.id}

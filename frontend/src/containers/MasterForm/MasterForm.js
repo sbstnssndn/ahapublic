@@ -237,7 +237,7 @@ class MasterForm extends Component {
 						this.addTitulosHandler(currentUser.id, elements)
 					} else if (fieldObj.type === "experienciasEmpresa") {
 						if (elements.length < 2 || elements.length % 2 !== 0) {
-							return;
+							continue;
 						}
 						console.log("experienciasEmpresa elements: ", elements);
 						/* Para cada elemento, crear una experiencia exigida */
@@ -305,11 +305,12 @@ class MasterForm extends Component {
 					});
 					break;
 				case FORM_NUEVA_OFERTA:
-					console.log("DATOS: ", datos)
-					datos["experiencias"] = datos["experiencias"].concat(experienciasEmpresa);
+					datos["experiencias"] = experienciasEmpresa;
+					console.log("DATOS FORM_NUEVA_OFERTA: ", datos)
 					createOferta(currentUser.id, datos)
 					.then(response => {
 						console.log("RESPONSE createOferta: ", response);
+						window.location.reload();
 					}).catch(error => {
 						console.log("ERROR createOferta: ", error);
 					});
