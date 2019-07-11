@@ -27,8 +27,8 @@ export const NEW_TITULO = [
 		elementConfig: {
 			type: 'text',
 			placeholder: '2019',
-			name: 'año',
-			id: 'año'
+			name: 'anho',
+			id: 'anho'
 		},
 		value: ''
 	}
@@ -41,8 +41,8 @@ export const NEW_CURSO = [
 		elementConfig: {
 			type: 'text',
 			placeholder: 'Administración pública',
-			name: 'curso',
-			id: 'curso'
+			name: 'name',
+			id: 'name'
 		},
 		value: ''
 	},
@@ -52,8 +52,8 @@ export const NEW_CURSO = [
 		elementConfig: {
 			type: 'text',
 			placeholder: 'Universidad de Santiago de Chile',
-			name: 'institucionCurso',
-			id: 'institucionCurso'
+			name: 'institucion',
+			id: 'institucion'
 		},
 		value: ''
 	},
@@ -63,8 +63,8 @@ export const NEW_CURSO = [
 		elementConfig: {
 			type: 'date',
 			placeholder: '20/04/2010',
-			name: 'fechaInicioCurso',
-			id: 'fechaInicioCurso'
+			name: 'fechaInicio',
+			id: 'fechaInicio'
 		},
 		value: new Date()
 	},
@@ -74,8 +74,8 @@ export const NEW_CURSO = [
 		elementConfig: {
 			type: 'date',
 			placeholder: '15/06/2010',
-			name: 'fechaTerminoCurso',
-			id: 'fechaTerminoCurso'
+			name: 'fechaFin',
+			id: 'fechaFin'
 		},
 		value: new Date()
 	}

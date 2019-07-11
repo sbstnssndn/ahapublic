@@ -21,6 +21,8 @@ import {
 	updatePerfilEmpresa,
 	createOferta,
 	addExperiencia,
+	addCurso,
+	addTitulo,
 } from '../../util/APIUtils';
 //import '../../custom.css'
 
@@ -134,24 +136,73 @@ class MasterForm extends Component {
     //console.log(this.state.form)
 	}
 	
-	experienciasPayload = (elements) => {
-		//console.log("experienciasPayload() ", elements)
-		let elementObj = null;
-		//let elementsArray = [];
+	addExperienciasHandler = (userId, elements) => {
+		if (elements.length < 5 || elements.length % 5 !== 0) {
+			return;
+		}
+		console.log("addExperienciasHandler elements: ", elements);
+		/* Para cada elemento, crear un objeto experiencia y enviarlo */
 		for (let element = 0; element < elements.length; element=element+5) {
-			elementObj = {
+			let elementObj = {
 				empresa: elements[element].value,
 				fechaInicio: elements[element+1].value,
 				fechaFin: elements[element+2].value,
 				cargo: elements[element+3].value,
 				area: elements[element+4].value
 			}
-			//elementsArray.push(elementObj)
+			addExperiencia(userId, elementObj)
+				.then(response => {
+					console.log("RESPONSE addExperiencia: ", response);
+				}).catch(error => {
+					console.log("ERROR addExperiencia: ", error);
+				});
 		}
-		return elementObj;
 	}
 
-  handleSubmit = (event, method) => {
+	addCursosHandler = (userId, elements) => {
+		if (elements.length < 4 || elements.length % 4 !== 0) {
+			return;
+		}
+		console.log("addCursosHandler elements: ", elements);
+		/* Para cada elemento, crear un objeto curso y enviarlo */
+		for (let element = 0; element < elements.length; element=element+4) {
+			let elementObj = {
+				name: elements[element].value,
+				institucion: elements[element+1].value,
+				fechaInicio: elements[element+2].value,
+				fechaFin: elements[element+3].value
+			}
+			addCurso(userId, elementObj)
+				.then(response => {
+					console.log("RESPONSE addCurso: ", response);
+				}).catch(error => {
+					console.log("ERROR addCurso: ", error);
+				});
+		}
+	}
+
+	addTitulosHandler = (userId, elements) => {
+		if (elements.length < 3 || elements.length % 3 !== 0) {
+			return;
+		}
+		console.log("addCursosHandler elements: ", elements);
+		/* Para cada elemento, crear un objeto curso y enviarlo */
+		for (let element = 0; element < elements.length; element=element+3) {
+			let elementObj = {
+				name: elements[element].value,
+				institucion: elements[element+1].value,
+				anho: elements[element+2].value,
+			}
+			addTitulo(userId, elementObj)
+				.then(response => {
+					console.log("RESPONSE addTitulo: ", response);
+				}).catch(error => {
+					console.log("ERROR addTitulo: ", error);
+				});
+		}
+	}
+
+  handleSubmit = (event) => {
 		event.preventDefault();   
     // Si el array missing esta vacio, significa que no hay campos incorrectos
     // En ese caso, "!this.state.missing.length" devuelve true
@@ -164,6 +215,7 @@ class MasterForm extends Component {
 			const updatedStages = {
 				...updatedForm.stages
 			}
+			let currentUser = {...this.props.currentUser}
 
 			let datos = {};
 			let direccion = {};
@@ -177,19 +229,11 @@ class MasterForm extends Component {
 					const elements = [...fieldObj.elements];
 					//console.log("ELEMS: ", elements)
 					if (fieldObj.type === "experiencias") {
-						if (elements.length >= 5) {
-							let elementObj = this.experienciasPayload(elements);
-							//elementObj["perfilLaboral"] = null;
-							console.log("updatedElementsArr: ", elementObj);
-							
-							addExperiencia(this.props.currentUser.id, elementObj)
-							.then(response => {
-								console.log("RESPONSE addExperiencia: ", response);
-							}).catch(error => {
-								console.log("ERROR addExperiencia: ", error);
-							});
-							continue;
-						}
+						this.addExperienciasHandler(currentUser.id, elements);
+					} else if (fieldObj.type === "cursos") {
+						this.addCursosHandler(currentUser.id, elements)
+					} else if (fieldObj.type === "titulos") {
+						this.addTitulosHandler(currentUser.id, elements)
 					}
 
 					for (let element in elements) {
@@ -212,7 +256,6 @@ class MasterForm extends Component {
 			
 
 			/* TODO: enviar los datos al endpoint correcto */
-			let currentUser = {...this.props.currentUser}
 			console.log("USER: ", currentUser)
 			switch (this.state.form.title) {
 				case FORM_CUENTA_USUARIO:
@@ -246,14 +289,13 @@ class MasterForm extends Component {
 					});
 					break;
 				case FORM_NUEVA_OFERTA:
-						
-						console.log("DATOS: ", datos)
-						createOferta(currentUser.id, datos)
-						.then(response => {
-							console.log("RESPONSE createOferta: ", response);
-						}).catch(error => {
-							console.log("ERROR createOferta: ", error);
-						});
+					console.log("DATOS: ", datos)
+					createOferta(currentUser.id, datos)
+					.then(response => {
+						console.log("RESPONSE createOferta: ", response);
+					}).catch(error => {
+						console.log("ERROR createOferta: ", error);
+					});
 					break;
 				default:
 					break;
