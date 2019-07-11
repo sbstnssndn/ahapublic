@@ -112,7 +112,7 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
 
     // SE AGREGAN USUARIOS CANDIDATOS RANDOM
     try {
-      getRandomUsers(candidatoRole, 40);
+      getRandomUsers(candidatoRole, 15);
     } catch (JSONException | UnirestException | IOException | ParseException e) {
       e.printStackTrace();
     }
@@ -348,7 +348,7 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
       usr.setPassword("hola123");
       usr.setPassword(passwordEncoder.encode(usr.getPassword()));
       usr.setRoles(Arrays.asList(role));
-      usr.setEnabled(rand.nextBoolean());
+      usr.setEnabled(true);
       userRepository.save(usr);
 
       PerfilCandidato pCandidato = new PerfilCandidato();
