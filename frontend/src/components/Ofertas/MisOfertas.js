@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import Card from 'react-bootstrap/Card';
-import Button from 'react-bootstrap/Button';
 import styles from '../Paginacion/App.module.css';
+import Button from 'react-bootstrap/Button';
 import { Link } from "react-router-dom";
 
 //Lista ofertas propias de empresa
@@ -86,16 +86,21 @@ class MisOfertas extends Component {
         });
     }
 
-    recomendaciones(id_oferta) {
-        return (
-            <td>
-                <Link to={`/empresa/oferta/${id_oferta}/recomendaciones`}>
-                    <Button variant="primary" type="submit">
-                        Rec.
-                    </Button>
-                </Link>
-            </td>
-        )
+    detalle(oferta){
+        let id_oferta = oferta.id;
+
+        if(oferta != null){
+            return(
+                <td>
+                    <Link to={`/empresa/oferta/${id_oferta}/detalle`}>
+                        <Button variant="success" type="primary" size="sm">
+					        Ver detalle
+                        </Button>
+                    </Link>
+                </td>
+            );
+        }
+
     }
 
 	printOfertas() {
@@ -108,7 +113,7 @@ class MisOfertas extends Component {
 								<tr>
 									<th>Nombre </th>
 									<th>Descripción</th>
-									<th>Recomendaciones</th>
+                                    <th>Detalle</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -117,7 +122,7 @@ class MisOfertas extends Component {
 										<tr key={oferta.id}>
 											<td> {oferta.name} </td>
 											<td> {oferta.description} </td>
-											{this.recomendaciones(oferta.id)}
+                                            {this.detalle(oferta)}
 										</tr>
 									)
 								})}
