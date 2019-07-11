@@ -6,6 +6,7 @@ import {
 import MasterForm from '../../containers/MasterForm/MasterForm';
 import Recomendaciones from '../Recomendaciones/Recomendaciones';
 import Perfiles from '../Perfiles/Perfiles.js';
+import MisOfertas from '../Ofertas/MisOfertas.js';
 import ListarOfertas from '../ListarOfertas/ListarOfertas';
 import Ofertas from '../Ofertas/Ofertas';
 import DetalleOferta from '../Ofertas/DetalleOferta';
@@ -69,13 +70,22 @@ const Panel = ( props ) => {
 			break;
 		case USER_TYPE_EMPRESA:
 			routes = (
-				<>					
-					{/*<Route
-						path={`${props.match.path}/ofertas/${props.currentUser.id}`}
+				<>	
+					{/* Ofertas propias */}
+					<Route
+						path={`${props.match.path}/ofertas`}
 						exact
 						render={(props) => (
-							<ListarOfertas {...props}/>
-						)} >*/}
+							<MisOfertas currentUser={currentUser} {...props}/>
+						)} />
+
+					{/*Recomendaciones de una oferta */}
+					<Route
+						path={`${props.match.path}/oferta/:id/recomendaciones`}
+						exact
+						render={(props) => (
+							<Recomendaciones currentUser={currentUser} {...props}/>
+						)} />
 						
 					<Route
 						path={`${props.match.path}/nueva-oferta`}
@@ -167,7 +177,7 @@ const Panel = ( props ) => {
 						path={`${props.match.path}/oferta/:id/recomendaciones`}
 						exact
 						render={(props) => (
-							<Recomendaciones {...props}/>
+							<Recomendaciones currentUser={currentUser} {...props}/>
 						)} />
 					
 				</>

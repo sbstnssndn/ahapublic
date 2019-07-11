@@ -44,19 +44,14 @@ const Navigation = ( props ) => {
 						Datos empresa
 					</NavigationItem>
 
-					{/* por implementar
-					<NavigationItem exact to='/empresa/ofertas-laborales'>
-						Ofertas laborales
+					{/*Ofertas */}
+					<NavigationItem exact to='/empresa/ofertas'>
+						Mis ofertas
 					</NavigationItem>
 
 					{/*formEmpresaLaboral */}
 					<NavigationItem exact to='/empresa/nueva-oferta'>
 						Nueva oferta
-					</NavigationItem>
-
-					{/*recomendaciones */}
-					<NavigationItem exact to='/empresa/recomendaciones'>
-						Recomendaciones
 					</NavigationItem>
 
 					{/*formCuentaUsuario */}

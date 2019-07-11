@@ -22,6 +22,7 @@ class Recomendaciones extends Component {
     componentDidMount () {
         
         let id = this.props.match.params.id;
+        console.log(this.props.currentUser);
         axios.get("http://localhost:8080/api/oferta/"+id+"/recommendations")
         	.then(response => {
 				this.setState({
@@ -110,6 +111,22 @@ class Recomendaciones extends Component {
         });
     }
     
+    ver_th(){
+        if(this.props.currentUser.role === "aha"){
+            return(
+                <th> Ver </th>
+            )
+        }
+    }
+
+    ver_td(user){
+        if(this.props.currentUser.role === "aha"){
+            return(
+                <td> {this.postulante(user)} </td> 
+            )
+        }
+    }
+
     printUsers(){
         if(this.state.charged){
             return (
@@ -119,8 +136,9 @@ class Recomendaciones extends Component {
                             <tr>
                                 <th>Postulante </th>
                                 <th>Correo </th>
+                                <th>Teléfono </th>
                                 <th>Compatibilidad </th>
-                                <th>Ver</th>
+                                {this.ver_th()}
                             </tr>
 						</thead>
 						<tbody>
@@ -129,8 +147,9 @@ class Recomendaciones extends Component {
                                     <tr key={user.userSummary.id}>
                                         <td> {user.userSummary.name} </td>
                                         <td> {user.userSummary.email}</td>
+                                        <td></td>
                                         <td> {user.percentage} </td>
-                                        <td> {this.postulante(user)} </td>
+                                        {this.ver_td(user)}
                                     </tr>
                                 )
                             })}
