@@ -33,8 +33,6 @@ public class PerfilLaboral {
     @JsonBackReference
     private PerfilCandidato perfilCandidato;
 
-    private String name;
-
     // ---------------------
     // DATOS DE INCLUSIVIDAD
     // ---------------------
@@ -141,10 +139,6 @@ public class PerfilLaboral {
     // 5: 800.001 a 1.000.000
     // 6: 1.000.000 o más
     private Integer expectativaSueldo;
-
-    public String getName() {
-        return name;
-    }
 
     public Integer getObjetosPequenhos() {
         return objetosPequenhos;
@@ -424,10 +418,6 @@ public class PerfilLaboral {
 
     public void setCredencial(boolean credencial) {
         this.credencial = credencial;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
 }
