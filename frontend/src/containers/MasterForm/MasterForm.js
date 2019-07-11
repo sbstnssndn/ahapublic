@@ -15,6 +15,7 @@ import  {
 	FORM_POSTULANTE,
 	FORM_POSTULANTE_LABORAL
 } from '../../constants';
+import { NEW_CURSO } from '../../constants/subforms';
 import {
 	updatePerfilCandidato,
 	updatePerfilLaboral,
@@ -33,7 +34,7 @@ class MasterForm extends Component {
     formData: null,
     missing: [],
 		show: false,
-		endpoint: '',
+		activeUserID: null,
 		alert: { show: false, message: null },
 		form: ''
 	}
@@ -215,7 +216,7 @@ class MasterForm extends Component {
 			const updatedStages = {
 				...updatedForm.stages
 			}
-			let currentUser = {...this.props.currentUser}
+			//let currentUser = {...this.props.currentUser}
 
 			let datos = {};
 			let direccion = {};
@@ -230,11 +231,11 @@ class MasterForm extends Component {
 					const elements = [...fieldObj.elements];
 					//console.log("ELEMS: ", elements)
 					if (fieldObj.type === "experiencias") {
-						this.addExperienciasHandler(currentUser.id, elements);
+						this.addExperienciasHandler(this.state.activeUserID, elements);
 					} else if (fieldObj.type === "cursos") {
-						this.addCursosHandler(currentUser.id, elements)
+						this.addCursosHandler(this.state.activeUserID, elements)
 					} else if (fieldObj.type === "titulos") {
-						this.addTitulosHandler(currentUser.id, elements)
+						this.addTitulosHandler(this.state.activeUserID, elements)
 					} else if (fieldObj.type === "experienciasEmpresa") {
 						if (elements.length < 2 || elements.length % 2 !== 0) {
 							continue;
@@ -272,14 +273,14 @@ class MasterForm extends Component {
 			
 
 			/* TODO: enviar los datos al endpoint correcto */
-			console.log("USER: ", currentUser)
+			//console.log("USER: ", currentUser)
 			switch (this.state.form.title) {
 				case FORM_CUENTA_USUARIO:
 					console.log("ENDPOINT CUENTA USUARIO");
 					console.log(this.props.match)
 					break;
 				case FORM_POSTULANTE:
-					updatePerfilCandidato(currentUser.id, datos)
+					updatePerfilCandidato(this.state.activeUserID, datos)
 					.then(response => {
 						console.log("RESPONSE updatePerfilCandidato: ", response);
 					}).catch(error => {
@@ -288,8 +289,8 @@ class MasterForm extends Component {
 					break;
 				case FORM_POSTULANTE_LABORAL:
 					console.log(datos)
-					console.log("ID: ", currentUser.id)
-					updatePerfilLaboral(currentUser.id, datos)
+					console.log("ID: ", this.state.activeUserID)
+					updatePerfilLaboral(this.state.activeUserID, datos)
 					.then(response => {
 						console.log("RESPONSE updatePerfilLaboral: ", response);
 					}).catch(error => {
@@ -297,7 +298,7 @@ class MasterForm extends Component {
 					});
 					break;
 				case FORM_EMPRESA:
-					updatePerfilEmpresa(currentUser.id, datos)
+					updatePerfilEmpresa(this.state.activeUserID, datos)
 					.then(response => {
 						console.log("RESPONSE updatePerfilEmpresa: ", response);
 					}).catch(error => {
@@ -307,7 +308,7 @@ class MasterForm extends Component {
 				case FORM_NUEVA_OFERTA:
 					datos["experiencias"] = experienciasEmpresa;
 					console.log("DATOS FORM_NUEVA_OFERTA: ", datos)
-					createOferta(currentUser.id, datos)
+					createOferta(this.state.activeUserID, datos)
 					.then(response => {
 						console.log("RESPONSE createOferta: ", response);
 						window.location.reload();
@@ -434,6 +435,18 @@ class MasterForm extends Component {
       ...formData['direccion']
     }
 
+    const formDataCursos = {
+      ...formData['cursos']
+    }
+
+    const formDataExp = {
+      ...formData['experiencias']
+    }
+
+    const formDataTitulos = {
+      ...formData['titulos']
+    }
+
     for (let field in updatedStageFields) {
       let currentField = {...updatedStageFields[field]};
       let currentFieldElements = {...currentField.elements}
@@ -452,6 +465,18 @@ class MasterForm extends Component {
 
           currentFieldElements[element].value = formDataDireccion[field];
         }
+
+        /*else if (formDataCursos) {
+          this.addSubForm('cursos', NEW_CURSO)
+        }
+
+        /*else if (formDataExp) {
+          asdas
+        }
+
+        else if (formDataTitulos) {
+          asdas
+        }*/
       }
     }
     this.setState({
@@ -460,12 +485,18 @@ class MasterForm extends Component {
   }
 
 	componentDidMount() {
+    let activeUserID = null
+    if (this.props.currentUser.authorities[0].authority === 'ROLE_AHA')
+      activeUserID = this.props.match.params.id
+    else
+      activeUserID = this.props.currentUser.id
+
 		this.setState({
 			form: this.props.formConfig
 		})
 
 		if(this.state.form != null) {
-			let currentEndpoint = this.props.formConfig.endpoint+('/')+this.props.currentUser.id+('/')//this.props.currentUser.id+('/')
+			let currentEndpoint = this.props.formConfig.endpoint+('/')+activeUserID+('/')//this.props.this.state.activeUserID+('/')
 			switch(this.props.formConfig.id) {
 				//case(0): //formCuentaUsuario, probablemente a futuro
 				//  break;
@@ -485,6 +516,10 @@ class MasterForm extends Component {
 			}
 
 			this.fetchData (currentEndpoint);
+
+      this.setState({
+        activeUserID: activeUserID
+      })
 		}
   }
 
