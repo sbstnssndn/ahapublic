@@ -206,18 +206,18 @@ class DetalleOferta extends Component {
                     <React.Fragment>
                         {this.state.oferta.experiencias.map( experiencia => {
                             return(
-															<Container fluid key={experiencia.duracion} className="pb-4">
-																<Row>
-																	<Card.Text>
-																			Área: {areas[experiencia.area]}
-																	</Card.Text>
-																</Row>
-																<Row>
-																	<Card.Text>
-																			Tiempo: {experiencia.duracion} años 
-																	</Card.Text>
-																</Row>
-															</Container>
+							    <Container fluid key={experiencia.duracion} className="pb-4">
+									<Row>
+										<Card.Text>
+										    Área: {areas[experiencia.area]}
+										</Card.Text>
+									</Row>
+									<Row>
+										<Card.Text>
+											Tiempo: {experiencia.duracion} años 
+										</Card.Text>
+									</Row>
+								</Container>
                             )
                         })}
                     </React.Fragment>

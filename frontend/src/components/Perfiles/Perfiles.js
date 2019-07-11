@@ -3,6 +3,7 @@ import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import axios from 'axios';
 import styles from '../Paginacion/App.module.css';
+
 import { Link } from "react-router-dom";
 
 class Perfiles extends Component {
@@ -146,9 +147,11 @@ class Perfiles extends Component {
 		if(this.props.typeUsers === "candidato"){
 			return (
 				<td>
-					<Button variant="primary" type="submit">
-						Ver Perfil
-					</Button>
+					<Link to={`/aha/candidato/${user.id}`}>
+						<Button variant="primary" type="submit">
+							Ver Perfil
+						</Button>
+					</Link>
 				</td>
 			);
 		}
