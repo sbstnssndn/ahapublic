@@ -1,24 +1,22 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import Card from 'react-bootstrap/Card';
-import Form from 'react-bootstrap/Form';
-import Col from 'react-bootstrap/Col';
-import Row from 'react-bootstrap/Row';
 import Button from 'react-bootstrap/Button';
-import Empresa from '../Empresa/Empresa';
 import styles from '../Paginacion/App.module.css';
-
-import {
-	Link,
-	Route
-} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 //Lista ofertas de una empresa
 class ListarOfertas extends Component {
 
 	state = {
-		ofertas: [],
-		error: false
+		ofertas : [],
+        ofertasPage: {},
+        total: 0,
+        ofertasByPage: 10,
+        pages: 0,
+        currentPage: 1,
+        pageNumbers: [],
+        charged: false
 	}
 
 	componentDidMount () {
@@ -28,95 +26,169 @@ class ListarOfertas extends Component {
 		axios.get('http://localhost:8080/api/user/'+id+'/oferta')
 		.then(response => {
 			this.setState({
-				ofertas: response.data
+				ofertas: response.data,
+				total: response.data.length
 			});
-		}).catch(error => {
+			this.paginar();
 			this.setState({
-				error: true
-			});
+				charged: true
+			})
+		}).catch(error => {
+			console.log(error);
 		});
-		
 	}
 
-	sinOfertas () {
-		if(this.state.error === true){
-			return (
-				<h2> Error al consultar ofertas </h2>
-			);
+	paginar() {
+
+        //Cuantas paginas hacer
+		if(this.state.total%10 === 0){
+			this.setState({
+				pages: Math.trunc(this.state.total  / this.state.ofertasByPage)
+			});
 		}
-		else if(this.state.ofertas.length === 0){
-			return (
-				<h2> Este usuario no posee ofertas </h2>
-			);
+		else{
+			this.setState({
+				pages: Math.trunc(this.state.total  / this.state.ofertasByPage) + 1
+			})
 		}
-	}
 
-	botones(oferta){
-		
-		if(oferta != null){
+        let ofertasAux = [];
 
-			let id = this.props.match.params.id;
+        for(let i = 0; i < this.state.pages ; i++){
+            
+            let page = {
+                id: i + 1,
+                ofertas: []
+            };
 
-            return (
-                <Row>
-					<Route
-						path={`/aha/empresas/:id`}
-						exact
-						render={(props) => (
-						<Empresa />
-					)} />
-
-					<Col>
-						<Link to={`/aha/empresas/${id}`} >
-							<Button variant="success" type="submit">
-								Ver empresa
-							</Button>
-						</Link>						
-					</Col>
-					
-					<Col>
-						<Link to={`/aha/oferta/${oferta.id}/detalle`} >
-							<Button variant="success" type="submit">
-								Ver detalle
-							</Button>
-						</Link>
-					</Col>
-                </Row>
-            );
+            for(let j = 0; j < this.state.ofertasByPage; j++){
+                if(this.state.ofertas[i*this.state.ofertasByPage + j] != null){
+                    page.ofertas.push(this.state.ofertas[i*this.state.ofertasByPage + j]);
+                }
+            }
+            this.state.pageNumbers.push(i + 1);
+            ofertasAux.push(page);
         }
+
+        this.setState({
+            ofertas: ofertasAux,
+            ofertasPage: ofertasAux[0]
+        });
 	}
+	
+	cambiaPagina(number){
+        
+        let aux = this.state.ofertas[number - 1];
+
+        this.setState({
+            currentPage: number,
+            ofertasPage: aux
+        });
+    }
+
+	empresa(){
+		
+		let id_empresa = this.props.match.params.id;
+
+        return (
+			<Link to={`/aha/empresas/${id_empresa}`} >
+				<Button variant="success" type="submit">
+						Ver empresa
+				</Button>
+			</Link>
+        );
+	}
+
+	detalle(id_oferta) {
+        return (
+            <td>
+                <Link to={`/aha/oferta/${id_oferta}/detalle`}>
+                    <Button variant="primary" type="submit">
+                        Detalle
+                    </Button>
+                </Link>
+            </td>
+        );
+    }
+
+    recomendaciones(id_oferta) {
+        return (
+            <td>
+                <Link to={`/aha/oferta/${id_oferta}/recomendaciones`}>
+                    <Button variant="primary" type="submit">
+                        Rec.
+                    </Button>
+                </Link>
+            </td>
+        )
+    }
 
 	printOfertas() {
-		if(this.state.ofertas.length !== 0){
-			return (
-				this.state.ofertas.map(oferta => {
-					return (
-						<Card.Body key={oferta.id}>
-							<Form.Group>
-								<Card.Title>{oferta.name}</Card.Title>
-								<Card.Body>Descripción: {oferta.description}</Card.Body>
-								{this.botones(oferta)}
-							</Form.Group>
-							<hr/>
-						</Card.Body>
-					)
-				})
-			)
+		if(this.state.charged){
+			if(this.state.total !== 0){
+				return (
+					<React.Fragment>
+						<table className={styles.table}>
+							<thead>
+								<tr>
+									<th>Nombre </th>
+									<th>Descripción</th>
+									<th>Detalle</th>
+									<th>Recomendaciones</th>
+								</tr>
+							</thead>
+							<tbody>
+								{this.state.ofertasPage.ofertas.map(oferta => {
+									return (
+										<tr key={oferta.id}>
+											<td> {oferta.name} </td>
+											<td> {oferta.description} </td>
+											{this.detalle(oferta.id)}
+											{this.recomendaciones(oferta.id)}
+										</tr>
+									)
+								})}
+							</tbody>
+						</table>           
+					</React.Fragment>
+				)
+			}
+			else{
+				return (
+					<React.Fragment>
+						<Card.Title> Esta empresa aún no define ofertas </Card.Title>
+					</React.Fragment>
+				)
+			}
 		}
 	}
 
 	render () {
-		return (
-			<React.Fragment>
-				<Card className="mb-4">
-					<Card.Header className="px-2">
-						Ofertas
-					</Card.Header>
-					{this.sinOfertas()}
-					{this.printOfertas()}
-				</Card>
-			</React.Fragment>
-		);
+		if(this.state.ofertas != null || this.state.ofertasPage.ofertas != null){
+			return (
+				<React.Fragment>
+					<Card className="mb-4">
+						<Card.Header className="px-2">
+							Ofertas
+						</Card.Header>
+					</Card>    
+					<div className={styles.app}>
+						{this.empresa()}
+						<div className={styles.pagination}>
+							{this.state.pageNumbers.map(number => {
+									
+								//Evalúa si el numero recorrido es la pagina actual para señalar como activa
+								let classes = this.state.currentPage === number ? styles.active : '';
+								return (
+									<span key={number} className={classes} onClick={() => this.cambiaPagina(number)}>{number+" "}</span>
+								)
+							})}
+						</div>
+						{this.printOfertas()}
+					</div>
+				</React.Fragment>
+			);
+		}
 	}
 }
 

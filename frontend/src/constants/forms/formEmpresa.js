@@ -1,10 +1,12 @@
+import { FORM_EMPRESA } from '../index';
+
 //Datos personales del usuario empresa
 export const formEmpresa = 
     {
       id: 1,
-      title: "Información empresa",
+      title: FORM_EMPRESA,
       belongsTo: "empresa",
-      endpoint: "",
+      endpoint: "http://localhost:8080/api/user",
       totalStages: 1,
       stages:
       [
@@ -12,34 +14,34 @@ export const formEmpresa =
           id: 0,
           name: "Datos empresa",
           fields: {
-            ubicacion: {
+            nameEmpresa: {
               type: "normal",
               elements: [
                 {
-                  label: "Nombre Empresa",
+                  label: "Nombre empresa",
                   elementType: "input",
                   elementConfig: {
                     type: "text",
                     placeholder: "Lider S.A",
-                    name: "nombre",
-                    id: "nombre"
+                    name: "nameEmpresa",
+                    id: "nameEmpresa"
                   },
                   subtext: '',
                   value: ""
                 }
               ]
             },
-            rut: {
+            rutEmpresa: {
               type: "normal",
               elements: [
                 {
-                  label: "Rut Empresa",
+                  label: "RUT empresa",
                   elementType: "input",
                   elementConfig: {
                     type: "text",
                     placeholder: "7546345-2",
-                    name: "rut",
-                    id: "rut"
+                    name: "rutEmpresa",
+                    id: "rutEmpresa"
                   },
                   subtext: '',
                   value: ""
@@ -50,7 +52,7 @@ export const formEmpresa =
               type: "normal",
               elements: [
                 {
-                  label: "Telefono",
+                  label: "Teléfono",
                   elementType: "input",
                   elementConfig: {
                     type: "text",
@@ -67,7 +69,7 @@ export const formEmpresa =
               type: "normal",
               elements: [
                 {
-                  label: "Telefono Alternativo",
+                  label: "Teléfono alternativo",
                   elementType: "input",
                   elementConfig: {
                     type: "text",
@@ -80,17 +82,17 @@ export const formEmpresa =
                 }
               ]
             },
-            correo2: {
+            email2: {
               type: "normal",
               elements: [
                 {
-                  label: "Correo Alternativo",
+                  label: "Correo alternativo",
                   elementType: "input",
                   elementConfig: {
                     type: "text",
                     placeholder: "contacto@lider.cl",
-                    name: "correo2",
-                    id: "correo2"
+                    name: "email2",
+                    id: "email2"
                   },
                   subtext: '',
                   value: ""

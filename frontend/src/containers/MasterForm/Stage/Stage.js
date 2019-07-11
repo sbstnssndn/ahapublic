@@ -38,7 +38,7 @@ const Stage = (props) => {
 					/>
 				))
 			}
-			else if (field.type === 'multi') {
+			else if (field.type === 'experiencias') {
 				return <ExperienciaLaboralForm
 						key={field.id}
 						field={field.id}

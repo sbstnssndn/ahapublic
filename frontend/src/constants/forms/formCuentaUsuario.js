@@ -1,8 +1,9 @@
+import { FORM_CUENTA_USUARIO } from '../index';
 //Para el cambio de email o password
 export const formCuentaUsuario =
   {
     id: 0,
-    title: "Información cuenta de usuario",
+    title: FORM_CUENTA_USUARIO,
     belongsTo: "user",
     endpoint: "http://localhost:8080/api/user",
     totalStages: 1,

@@ -8,6 +8,20 @@ import Alert from 'react-bootstrap/Alert';
 import { fieldFormValidation } from '../../util/ValidationUtils';
 //import { rutFormat } from '../../util/FormatUtils.js';
 import { generateSubForm, getComunas } from '../../util/common';
+import  {
+	FORM_CUENTA_USUARIO,
+	FORM_EMPRESA,
+	FORM_NUEVA_OFERTA,
+	FORM_POSTULANTE,
+	FORM_POSTULANTE_LABORAL
+} from '../../constants';
+import {
+	updatePerfilCandidato,
+	updatePerfilLaboral,
+	updatePerfilEmpresa,
+	createOferta,
+	addExperiencia,
+} from '../../util/APIUtils';
 //import '../../custom.css'
 
 class MasterForm extends Component {
@@ -17,12 +31,14 @@ class MasterForm extends Component {
     formData: null,
     missing: [],
 		show: false,
-    endpoint: '',
+		endpoint: '',
+		alert: { show: false, message: null },
+		form: ''
 	}
 	
 	cloneStateElementsArray = (inputIdentifier) => {
 		const updatedForm = {
-      ...this.props.formConfig
+      ...this.state.form
     }
     const updatedStages = {
       ...updatedForm.stages
@@ -57,7 +73,8 @@ class MasterForm extends Component {
 	}
 
   handleDismiss = () => {
-		this.setState({ show: false });
+		this.setState({ show: false, alert: { show: false } });
+		console.log("Alert.show: ", this.state.alert.show)
 	}
 
   handleValidation = (event, inputIdentifier, element) => {
@@ -68,7 +85,7 @@ class MasterForm extends Component {
     this.setState({ show: false })
 
     for (let elem in clone.elementsArray) {
-      console.log(clone.elementsArray[elem].elementConfig.id)
+      //console.log(clone.elementsArray[elem].elementConfig.id)
       if(clone.elementsArray[elem].elementConfig.id === element) {
 
         const resp = fieldFormValidation(missing, element, event.target.value)
@@ -80,7 +97,7 @@ class MasterForm extends Component {
       clone.updatedForm.stages[this.state.currentStage].fields[inputIdentifier].elements[elem] = clone.elementsArray[elem];
     } 
 
-    console.log('missing: {'+missing+'}')
+    //console.log('missing: {'+missing+'}')
 
     this.setState({
       form: clone.updatedForm,
@@ -113,66 +130,139 @@ class MasterForm extends Component {
       form: clone.updatedForm
     });
 
-    console.log('form:')
-    console.log(this.state.form)
-  }
+    //console.log('form:')
+    //console.log(this.state.form)
+	}
+	
+	experienciasPayload = (elements) => {
+		//console.log("experienciasPayload() ", elements)
+		let elementObj = null;
+		//let elementsArray = [];
+		for (let element = 0; element < elements.length; element=element+5) {
+			elementObj = {
+				empresa: elements[element].value,
+				fechaInicio: elements[element+1].value,
+				fechaFin: elements[element+2].value,
+				cargo: elements[element+3].value,
+				area: elements[element+4].value
+			}
+			//elementsArray.push(elementObj)
+		}
+		return elementObj;
+	}
 
   handleSubmit = (event, method) => {
-    event.preventDefault();
-    
+		event.preventDefault();   
     // Si el array missing esta vacio, significa que no hay campos incorrectos
     // En ese caso, "!this.state.missing.length" devuelve true
-    if (!this.state.missing.length) {
-      // extraer los datos de cada form, dentro de cada etapa
-      let payload = Object.create(null);
-        /*for (let index in this.props.formConfig.stages) {
-            for (let formElementIdentifier in this.props.formConfig.stages[index].fields) {
-          // poblar objeto con todos los datos del formulario
-          payload[formElementIdentifier] = this.props.formConfig.stages[index].fields[formElementIdentifier].value;
-            }
-      }*/
-      console.log(this.props.formConfig);
-      for (let index in this.props.formConfig.stages){
-        for (let formElementIdentifier in this.props.formConfig.stages[index].fields) {
-          for (let index2 in this.props.formConfig.stages[index].fields[formElementIdentifier].elements){
-            payload[formElementIdentifier] = this.props.formConfig.stages[index].fields[formElementIdentifier].elements[index2].value;
-          }
-        }
-      }
-      console.log(payload);
-      console.log('metodo: '+method);
-      //window.location.href = "http://localhost:3000/";
-      
-      switch( method.toLowerCase() ) {
-        case 'get':
-          axios.get(this.state.endpoint)
-            .then(response => {
-              console.log(response);
-              this.setState({formData: response.data});
-            })
-            .catch(function(error){
-              console.log(error);
-            })
-          break;
-        case 'post':
-          axios.post(this.state.endpoint, payload)
-            .then(response => {
-              console.log(response);
-            })
-            .catch(function(error){
-              console.log(error);
-            })
-          break;
-        default:
-          console.log("Debes introducir un método válido");
-          break;
-      }
-    }
+    if (this.state.missing.length === 0) {
 
-    else {
+			/* submit de todos los elementos del formulario */
+			const updatedForm = {
+				...this.state.form
+			}
+			const updatedStages = {
+				...updatedForm.stages
+			}
+
+			let datos = {};
+			let direccion = {};
+			
+			for (let stage in updatedStages) {
+				const updatedStageFields = {...updatedStages[stage].fields};
+				
+				for (let field in updatedStageFields) {
+					//console.log("FIELD: ", field)
+					const fieldObj = {...updatedStageFields[field]};
+					const elements = [...fieldObj.elements];
+					//console.log("ELEMS: ", elements)
+					if (fieldObj.type === "experiencias") {
+						if (elements.length >= 5) {
+							let elementObj = this.experienciasPayload(elements);
+							//elementObj["perfilLaboral"] = null;
+							console.log("updatedElementsArr: ", elementObj);
+							
+							addExperiencia(this.props.currentUser.id, elementObj)
+							.then(response => {
+								console.log("RESPONSE addExperiencia: ", response);
+							}).catch(error => {
+								console.log("ERROR addExperiencia: ", error);
+							});
+							continue;
+						}
+					}
+
+					for (let element in elements) {
+						//console.log(elements[element])
+						let id = elements[element].elementConfig.id;
+						let value = elements[element].value;
+						if (id === "calle" || id === "comuna" || id === "region") {
+							direccion[ `${[id]}` ] = value;
+							continue;
+						}
+						//console.log(id, typeof(elements[element].value))
+						datos[`${[id]}`] = value;
+					}
+				}
+			}
+			
+			if (Object.keys(direccion).length > 0) {
+				datos["direccion"] = {...direccion};
+			}
+			
+
+			/* TODO: enviar los datos al endpoint correcto */
+			let currentUser = {...this.props.currentUser}
+			console.log("USER: ", currentUser)
+			switch (this.state.form.title) {
+				case FORM_CUENTA_USUARIO:
+					console.log("ENDPOINT CUENTA USUARIO");
+					console.log(this.props.match)
+					break;
+				case FORM_POSTULANTE:
+					updatePerfilCandidato(currentUser.id, datos)
+					.then(response => {
+						console.log("RESPONSE updatePerfilCandidato: ", response);
+					}).catch(error => {
+						console.log("ERROR updatePerfilCandidato: ", error);
+					});
+					break;
+				case FORM_POSTULANTE_LABORAL:
+					console.log(datos)
+					console.log("ID: ", currentUser.id)
+					updatePerfilLaboral(currentUser.id, datos)
+					.then(response => {
+						console.log("RESPONSE updatePerfilLaboral: ", response);
+					}).catch(error => {
+						console.log("ERROR updatePerfilLaboral: ", error);
+					});
+					break;
+				case FORM_EMPRESA:
+					updatePerfilEmpresa(currentUser.id, datos)
+					.then(response => {
+						console.log("RESPONSE updatePerfilEmpresa: ", response);
+					}).catch(error => {
+						console.log("ERROR updatePerfilEmpresa: ", error);
+					});
+					break;
+				case FORM_NUEVA_OFERTA:
+						
+						console.log("DATOS: ", datos)
+						createOferta(currentUser.id, datos)
+						.then(response => {
+							console.log("RESPONSE createOferta: ", response);
+						}).catch(error => {
+							console.log("ERROR createOferta: ", error);
+						});
+					break;
+				default:
+					break;
+			}
+     
+    } else {
       console.log('Submit denegado');
       this.setState({ show: true })
-    }
+		}
   }
   
   _goto = (stage) => {
@@ -183,7 +273,7 @@ class MasterForm extends Component {
 
   _next = () => {
     let currentStage = this.state.currentStage;
-    let lastStage = this.props.formConfig.totalStages - 1;
+    let lastStage = this.state.form.totalStages - 1;
 
     currentStage = currentStage >= lastStage - 1 ? lastStage : currentStage + 1;
     this.setState({
@@ -200,51 +290,7 @@ class MasterForm extends Component {
 			currentStage: currentStage
 		});
   }
-  /*
-  addTitulo = (inputIdentifier) => {
-    const clone = {...this.cloneStateElementsArray(inputIdentifier)}
 
-    let idAppend = clone.updatedForm.stages[this.state.currentStage].fields[inputIdentifier].elements.length/3;
-    let newTitulo = getNewTitulo(idAppend);
-
-    const newElementsArray = clone.elementsArray.concat(newTitulo);
-
-    clone.updatedForm.stages[this.state.currentStage].fields[inputIdentifier].elements = newElementsArray;
-
-    this.setState({
-      form: clone.updatedForm
-    });
-  }
-
-  addCurso = (inputIdentifier) => {
-    const clone = {...this.cloneStateElementsArray(inputIdentifier)}
-
-    let idAppend = clone.updatedForm.stages[this.state.currentStage].fields[inputIdentifier].elements.length/4;
-    let newCurso = getNewCurso(idAppend);
-
-    const newElementsArray = clone.elementsArray.concat(newCurso);
-
-    clone.updatedForm.stages[this.state.currentStage].fields[inputIdentifier].elements = newElementsArray;
-
-    this.setState({
-      form: clone.updatedForm
-    });
-  }
-
-  addExperiencia = (inputIdentifier, NumberOfFieldsToAdd) => {
-    const clone = {...this.cloneStateElementsArray(inputIdentifier)}
-
-    let idAppend = clone.updatedForm.stages[this.state.currentStage].fields[inputIdentifier].elements.length/NumberOfFieldsToAdd;
-		let newExperiencia = getNewExperienciaLaboral(idAppend);
-		
-    const newElementsArray = clone.elementsArray.concat(newExperiencia);
-    clone.updatedForm.stages[this.state.currentStage].fields[inputIdentifier].elements = newElementsArray;
-
-    this.setState({
-      form: clone.updatedForm
-    });
-	}
-	*/
 	addSubForm = (inputIdentifier, subForm) => {
 		//console.log(subForm);
 		const clone = {...this.cloneStateElementsArray(inputIdentifier)}
@@ -306,61 +352,80 @@ class MasterForm extends Component {
         console.log(error);
       })
 
-    this.formatData(formData)
+    for (let i=0; i<this.state.form.totalStages; i++)
+      this.formatData(formData, i)
   }
 	
-	formatData = (formData) => {
-		const updatedForm = {
-      ...this.props.formConfig
+	formatData = (formData, currentStage) => {
+    const updatedForm = {
+      ...this.state.form
     }
     const updatedStages = {
       ...updatedForm.stages
     }
     const updatedCurrentStage = {
-      ...updatedStages[this.state.currentStage]
+      ...updatedStages[currentStage]
     }
     const updatedStageFields = {
       ...updatedCurrentStage.fields
-		}
-
-    console.log(updatedStageFields)
-
-    for (let field in updatedStageFields) {
-			let currentField = {...updatedStageFields[field]};
-			let currentFieldElements = {...currentField.elements}
-			for (let element in currentFieldElements) {
-				if (formData[field] != null) {
-					currentFieldElements[element].value = formData[field];
-					console.log(field, formData[field])
-				}
-			}
-		}
-		this.setState({
-			form: updatedForm
-		})
-	}
-
-	componentDidMount() {
-    let currentEndpoint = this.props.formConfig.endpoint+('/')+this.props.currentUser.id+('/')
-    switch(this.props.formConfig.id) {
-      //case(0): //formCuentaUsuario, probablemente a futuro
-      //  break;
-      case(1): //formEmpresa
-        currentEndpoint = currentEndpoint + 'perfilEmpresa'
-        break;
-      //case(2): //formNuevaOferta
-      //  break;
-      case(3): //formPostulante
-        currentEndpoint = currentEndpoint + 'perfilCandidato'
-        break;
-      case(4): //formPostulanteLaboral
-        currentEndpoint = currentEndpoint + 'perfilLaboral'
-        break;
-      default:
-        break;
     }
 
-    this.fetchData (currentEndpoint);
+    const formDataDireccion = {
+      ...formData['direccion']
+    }
+
+    for (let field in updatedStageFields) {
+      let currentField = {...updatedStageFields[field]};
+      let currentFieldElements = {...currentField.elements}
+      for (let element in currentFieldElements) {
+        if (formData[field]) {
+          if (field.substring(0,5) === 'fecha')
+            currentFieldElements[element].value = new Date(formData[field]);
+
+          else
+            currentFieldElements[element].value = formData[field];
+        }
+
+        else if (formDataDireccion[field]) {
+          if (field === 'comuna')
+            updatedForm.stages[currentStage].fields['comuna'] =  getComunas(formDataDireccion['region'].toString())
+
+          currentFieldElements[element].value = formDataDireccion[field];
+        }
+      }
+    }
+    this.setState({
+      form: updatedForm
+    })
+  }
+
+	componentDidMount() {
+		this.setState({
+			form: this.props.formConfig
+		})
+
+		if(this.state.form != null) {
+			let currentEndpoint = this.props.formConfig.endpoint+('/')+this.props.currentUser.id+('/')//this.props.currentUser.id+('/')
+			switch(this.props.formConfig.id) {
+				//case(0): //formCuentaUsuario, probablemente a futuro
+				//  break;
+				case(1): //formEmpresa
+					currentEndpoint = currentEndpoint + 'perfilEmpresa'
+					break;
+				//case(2): //formNuevaOferta
+				//  break;
+				case(3): //formPostulante
+					currentEndpoint = currentEndpoint + 'perfilCandidato'
+					break;
+				case(4): //formPostulanteLaboral
+					currentEndpoint = currentEndpoint + 'perfilLaboral'
+					break;
+				default:
+					break;
+			}
+
+			this.fetchData (currentEndpoint);
+		}
   }
 
   render () {

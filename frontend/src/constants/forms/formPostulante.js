@@ -1,8 +1,9 @@
+import { FORM_POSTULANTE} from '../index';
 //Datos personales del usuario postulante
 export const formPostulante = 
   {
     id: 3,
-    title: "Información postulante",
+    title: FORM_POSTULANTE,
     belongsTo: "postulante",
     endpoint: "http://localhost:8080/api/user",
     totalStages: 4,
@@ -116,6 +117,7 @@ export const formPostulante =
                   name: 'nacionalidad',
                   id: 'nacionalidad',
                   options: [
+										{ value: '', displayValue: 'Seleccione...', disabled: true },
                     { value: 'Chile', displayValue: 'Chile' },
                     { value: 'Argentina', displayValue: 'Argentina' },
                     { value: 'Venezuela', displayValue: 'Venezuela' },
@@ -218,7 +220,7 @@ export const formPostulante =
                   name: 'region',
                   id: 'region',
                   options: [
-                    { value: '', displayValue: ''},
+                    { value: '', displayValue: 'Seleccione...', disabled: true },
                     { value: 0, displayValue: 'Arica y Parinacota' },
                     { value: 1, displayValue: 'Tarapacá' },
                     { value: 2, displayValue: 'Antofagasta' },
@@ -251,7 +253,9 @@ export const formPostulante =
                 elementConfig: {
                   name: 'comuna',
                   id: 'comuna',
-                  options: [{ value: '', displayValue: ''}]
+                  options: [
+										{ value: '', displayValue: 'Seleccione...', disabled: true }
+									]
                 },
                 subtext: '',
                 value: '',

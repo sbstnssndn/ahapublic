@@ -3,7 +3,7 @@ import { API_BASE_URL, ACCESS_TOKEN } from '../constants';
 
 const request = (options) => {
 	const headers = new Headers({
-			'Content-Type': 'application/json',
+			'Content-Type': 'application/json'
 	})
 	
 	// primero debe settearse la propiedad accessToken en el localstorage, se hace en Login.js
@@ -31,7 +31,6 @@ const request = (options) => {
 		})
 		.then(json => {
 			if (!ok) {
-				console.log(json)
 				return Promise.reject(json);
 			}
 			return json;
@@ -108,5 +107,64 @@ export const signup = (signupRequest) => {
 			url: API_BASE_URL + "/user/add",
 			method: 'POST',
 			body: JSON.stringify(signupRequest)
+	});
+}
+
+/* */
+export const updateCuenta = (id, accountData) => {
+	return request({
+			url: API_BASE_URL + `/user/${id}/add`,
+			method: 'PUT',
+			body: JSON.stringify(accountData)
+	});
+}
+
+export const updatePerfilCandidato = (id, perfilCandidato) => {
+	return request({
+			url: API_BASE_URL + `/user/${id}/perfilCandidato`,
+			method: 'PUT',
+			body: JSON.stringify(perfilCandidato)
+	});
+}
+
+export const updatePerfilLaboral = (id, updatePerfilLaboral) => {
+	return request({
+			url: API_BASE_URL + `/user/${id}/perfilLaboral`,
+			method: 'PUT',
+			body: JSON.stringify(updatePerfilLaboral)
+	});
+}
+
+export const updatePerfilEmpresa = (id, perfilEmpresa) => {
+	return request({
+			url: API_BASE_URL + `/user/${id}/perfilEmpresa`,
+			method: 'PUT',
+			body: JSON.stringify(perfilEmpresa)
+	});
+}
+
+export const createOferta = (id, oferta) => {
+	let datos = JSON.stringify(oferta);
+	console.log("HOLA: ", datos)
+	return request({
+			url: API_BASE_URL + `/user/${id}/oferta`,
+			method: 'POST',
+			body: JSON.stringify(oferta)
+	});
+}
+
+export const getPerfilEmpresa = (id) => {
+	return request({
+			url: API_BASE_URL + `/user/${id}/perfilEmpresa`,
+			method: 'GET'
+	});
+}
+
+export const addExperiencia = (id, experiencia) => {
+	console.log(JSON.stringify(experiencia))
+	return request({
+			url: API_BASE_URL + `/user/${id}/experiencia`,
+			method: 'POST',
+			body: JSON.stringify(experiencia)
 	});
 }

@@ -5,11 +5,7 @@ import Row from 'react-bootstrap/Row';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import axios from 'axios';
-
-import {
-	Link,
-	Route
-} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 class DetalleOferta extends Component {
 
@@ -201,7 +197,7 @@ class DetalleOferta extends Component {
                     "Seguridad o Vigilancia",
                     "Tecnología, Informática, Sistemas",
                     "Textil y Confección",
-                    "Transport"
+                    "Transporte"
                 ];
                 
                 return(
