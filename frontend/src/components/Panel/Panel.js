@@ -109,8 +109,8 @@ const Panel = ( props ) => {
 				<Tabs routes={routes}>
 					<div label="Datos empresa" to={`${props.match.url}`} icon="fas fa-address-card"></div>
 					{/*<div label="Ofertas laborales" to={`${props.match.url}/ofertas`} icon="fas fa-briefcase"></div>*/}
-					<div label="Recomendados" to={`${props.match.url}/recomendaciones`} icon="fas fa-user"></div>
-					<div label="Nueva oferta" to={`${props.match.url}/nueva-oferta`} icon="fas fa-user"></div>
+					<div label="Mis ofertas" to={`${props.match.url}/ofertas`} icon="fas fa-building"></div>
+					<div label="Nueva oferta" to={`${props.match.url}/nueva-oferta`} icon="fas fa-briefcase"></div>
 				</Tabs>
 			);
 			break;
