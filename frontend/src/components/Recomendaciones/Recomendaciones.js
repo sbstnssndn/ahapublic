@@ -120,8 +120,6 @@ class Recomendaciones extends Component {
                             <tr>
                                 <th>Postulante </th>
                                 <th>Correo </th>
-                                <th>Teléfono 1</th>
-                                <th>Teléfono 2</th>
                                 <th>Compatibilidad </th>
                                 <th> Ver </th>
                             </tr>
@@ -132,8 +130,6 @@ class Recomendaciones extends Component {
                                     <tr key={user.userSummary.id}>
                                         <td> {user.userSummary.name} </td>
                                         <td> {user.userSummary.details.email2}</td>
-                                        <td> +{user.userSummary.details.telefono1}</td>
-                                        <td> +{user.userSummary.details.telefono2}</td>
                                         <td> {user.percentage} </td>
                                         <td> {this.postulante(user)} </td> 
                                     </tr>
