@@ -147,7 +147,7 @@ class Perfiles extends Component {
 		if(this.props.typeUsers === "candidato"){
 			return (
 				<td>
-					<Link to={`/aha/candidato/${user.id}`}>
+					<Link to={`/aha/postulante/${user.id}`}>
 						<Button variant="primary" type="submit">
 							Ver Perfil
 						</Button>
