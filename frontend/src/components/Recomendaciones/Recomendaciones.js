@@ -136,7 +136,8 @@ class Recomendaciones extends Component {
                             <tr>
                                 <th>Postulante </th>
                                 <th>Correo </th>
-                                <th>Teléfono </th>
+                                <th>Teléfono 1</th>
+                                <th>Teléfono 2</th>
                                 <th>Compatibilidad </th>
                                 {this.ver_th()}
                             </tr>
@@ -146,8 +147,9 @@ class Recomendaciones extends Component {
                                 return (
                                     <tr key={user.userSummary.id}>
                                         <td> {user.userSummary.name} </td>
-                                        <td> {user.userSummary.email}</td>
-                                        <td></td>
+                                        <td> {user.userSummary.details.email2}</td>
+                                        <td> +{user.userSummary.details.telefono1}</td>
+                                        <td> +{user.userSummary.details.telefono2}</td>
                                         <td> {user.percentage} </td>
                                         {this.ver_td(user)}
                                     </tr>

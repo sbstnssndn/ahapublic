@@ -11,13 +11,24 @@ public class UserSummary {
     private String email;
     private Collection<? extends GrantedAuthority> authorities;
     private String role;
+    private Details details;
 
-    public UserSummary(Integer id, String name, String email, Collection<? extends GrantedAuthority> authorities, String role) {
+    public UserSummary(Integer id, String name, String email, Collection<? extends GrantedAuthority> authorities,
+            String role, Details details) {
         this.setId(id);
         this.setName(name);
         this.setEmail(email);
         this.setAuthorities(authorities);
         this.setRole(role);
+        this.setDetails(details);
+    }
+
+    public Details getDetails() {
+        return details;
+    }
+
+    public void setDetails(Details details) {
+        this.details = details;
     }
 
     public String getRole() {
