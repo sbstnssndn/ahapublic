@@ -81,7 +81,6 @@ export const NEW_CURSO = [
 	}
 ]
 
-
 export const NEW_EXPERIENCIA_LABORAL = [
 	{
 		label: 'Empresa',
@@ -164,6 +163,60 @@ export const NEW_EXPERIENCIA_LABORAL = [
 				{ value: 26, displayValue: 'Textil y Confección' },
 				{ value: 27, displayValue: 'Transporte' }
 			]
+		},
+		value: ''
+	}
+]
+
+export const NEW_EXPERIENCIA_EXIGIDA = [
+	{
+		label: 'Área del cargo',
+		elementType: 'select',
+		elementConfig: {
+			name: 'area',
+			id: 'area',
+			options: [
+				{ value: '', displayValue: 'Seleccione...', disabled: true },
+				{ value: 0, displayValue: 'Administración, contabilidad o finanzas' },
+				{ value: 1, displayValue: 'Aduana y comercio exterior' },
+				{ value: 2, displayValue: 'Abastecimiento o Logística' },
+				{ value: 3, displayValue: 'Agrícola o Ganadero' },
+				{ value: 4, displayValue: 'Auxiliar de Aseo o Servicios de Alimentación' },
+				{ value: 5, displayValue: 'Atención al Cliente, Call Center o Telemarketing' },
+				{ value: 6, displayValue: 'Ingeniería Civil y Construcción' },
+				{ value: 7, displayValue: 'Comercial, Ventas o Negocios' },
+				{ value: 8, displayValue: 'Comunicación, Relaciones Públicas o Institucionales' },
+				{ value: 9, displayValue: 'Construcción' },
+				{ value: 10, displayValue: 'Diseño' },
+				{ value: 11, displayValue: 'Educación, Docencia o Investigación' },
+				{ value: 12, displayValue: 'Gastronomía y Turismo' },
+				{ value: 13, displayValue: 'Gerencia y Dirección General' },
+				{ value: 14, displayValue: 'Ingenierías' },
+				{ value: 15, displayValue: 'Legal' },
+				{ value: 16, displayValue: 'Mantención de áreas verdes o jardinería' },
+				{ value: 17, displayValue: 'Marketing y Publicidad' },
+				{ value: 18, displayValue: 'Minería, Petróleo o Gas' },
+				{ value: 19, displayValue: 'Operaciones' },
+				{ value: 20, displayValue: 'Producción y Manufactura' },
+				{ value: 21, displayValue: 'Recursos Humanos o Formación' },
+				{ value: 22, displayValue: 'Salud, Medicina y Farmacia' },
+				{ value: 23, displayValue: 'Secretaría y Recepción' },
+				{ value: 24, displayValue: 'Seguridad o Vigilancia' },
+				{ value: 25, displayValue: 'Tecnología, Informática, Sistemas' },
+				{ value: 26, displayValue: 'Textil y Confección' },
+				{ value: 27, displayValue: 'Transporte' }
+			]
+		},
+		value: ''
+	},
+	{
+		label: 'Mínimo de años de experiencia',
+		elementType: 'input',
+		elementConfig: {
+			type: 'text',
+			placeholder: '1',
+			name: 'duracion',
+			id: 'duracion'
 		},
 		value: ''
 	}

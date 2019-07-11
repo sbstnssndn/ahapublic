@@ -186,4 +186,13 @@ export const addTitulo = (id, titulo) => {
 			body: JSON.stringify(titulo)
 	});
 }
+/*
+export const addExperienciaExigida = (id, experienciaExigida) => {
+	//console.log(JSON.stringify(curso))
+	return request({
+			url: API_BASE_URL + `/user/${id}/titulo`,
+			method: 'POST',
+			body: JSON.stringify(titulo)
+	});
+}*/
 

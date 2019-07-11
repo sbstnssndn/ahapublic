@@ -1,6 +1,7 @@
 import React from 'react';
 import Input from './../Input/Input';
 import ExperienciaLaboralForm from '../../../components/ExperienciaLaboralForm/ExperienciaLaboralForm';
+import ExperienciaExigidaForm from '../../../components/ExperienciaExigidaForm/ExperienciaExigidaForm';
 import CursosForm from '../../../components/CursosForm/CursosForm';
 import TitulosForm from '../../../components/TitulosForm/TitulosForm';
 
@@ -73,6 +74,18 @@ const Stage = (props) => {
 						deleteForm={props.deleteForm}
 						addSubForm={props.addSubForm}
 				/> 
+			}
+			else if (field.type === "experienciasEmpresa") {
+				return <ExperienciaExigidaForm
+						key={field.id}
+						field={field.id}
+						type={field.type}
+						elements={field.elements}
+						handleChange={props.handleChange}
+						addExperiencia={props.addExperiencia}
+						deleteForm={props.deleteForm}
+						addSubForm={props.addSubForm}
+					/>
 			}
 			else {
 				return null;
