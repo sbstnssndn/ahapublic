@@ -140,9 +140,9 @@ const Panel = ( props ) => {
 								formConfig={formCuentaUsuario} currentUser={currentUser} {...props} />
 						)} />
 
-					{/*Editar un candidato */}
+					{/*Editar un postulante */}
 					<Route
-						path={`${props.match.path}/candidato/:id`}
+						path={`${props.match.path}/postulante/:id`}
 						exact
 						render={(props) => (
 							<MasterForm
