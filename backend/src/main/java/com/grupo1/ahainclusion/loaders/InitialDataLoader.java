@@ -163,13 +163,19 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
 
     PerfilEmpresa pEmpresa1 = new PerfilEmpresa();
     pEmpresa1.setNameEmpresa("Líder");
-    // pEmpresa1.setRutEmpresa("");
+    pEmpresa1.setRutEmpresa("7.461.223-3");
+    pEmpresa1.setTelefono1("56228949874");
+    pEmpresa1.setTelefono2("56229301323");
+    pEmpresa1.setEmail2("contacto2@lider.cl");
     pEmpresa1.setUser(empresa1);
     perfilEmpresaRepository.save(pEmpresa1);
 
     PerfilEmpresa pEmpresa2 = new PerfilEmpresa();
     pEmpresa2.setNameEmpresa("Ripley");
-    // pEmpresa2.setRutEmpresa("");
+    pEmpresa2.setRutEmpresa("5.236.112-9");
+    pEmpresa2.setTelefono1("56228391012");
+    pEmpresa2.setTelefono2("56229303251");
+    pEmpresa2.setEmail2("contacto2@lider.cl");
     pEmpresa2.setUser(empresa2);
     perfilEmpresaRepository.save(pEmpresa2);
 
