@@ -485,8 +485,10 @@ class MasterForm extends Component {
   }
 
 	componentDidMount() {
+    console.log('mach')
+    console.log(this.props.match)
     let activeUserID = null
-    if (this.props.currentUser.authorities[0].authority === 'ROLE_AHA')
+    if (this.props.currentUser.authorities[0].authority === 'ROLE_AHA' && this.props.match.path !== '/aha/cuenta')
       activeUserID = this.props.match.params.id
     else
       activeUserID = this.props.currentUser.id
