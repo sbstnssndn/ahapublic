@@ -55,7 +55,6 @@ public class RecGenerator {
             }
             else {
                 List<String> nullsInPerfilLaboral = nullChecker.check(u.getPerfilCandidato().getPerfilLaboral());
-                System.out.println(nullsInPerfilLaboral);
                 if(nullsInPerfilLaboral.size()!=0) {
                     // System.out.println("usuario: "+u.getId()+"no se agrega (nulos en pL)");
                     continue;
