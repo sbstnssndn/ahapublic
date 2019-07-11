@@ -112,7 +112,7 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
 
     // SE AGREGAN USUARIOS CANDIDATOS RANDOM
     try {
-      getRandomUsers(candidatoRole, 15);
+      getRandomUsers(candidatoRole, 40);
     } catch (JSONException | UnirestException | IOException | ParseException e) {
       e.printStackTrace();
     }
