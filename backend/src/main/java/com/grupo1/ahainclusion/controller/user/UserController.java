@@ -117,6 +117,12 @@ public class UserController {
 
         user.setRoles(Collections.singleton(userRole));
 
+        if(isCandidato)
+            user.setEnabled(true);
+        if(isAHA)
+            user.setEnabled(true);
+
+
         User result = userRepository.save(user);
 
         if (isCandidato) {

@@ -348,7 +348,7 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
       usr.setPassword("hola123");
       usr.setPassword(passwordEncoder.encode(usr.getPassword()));
       usr.setRoles(Arrays.asList(role));
-      usr.setEnabled(rand.nextBoolean());
+      usr.setEnabled(true);
       userRepository.save(usr);
 
       PerfilCandidato pCandidato = new PerfilCandidato();

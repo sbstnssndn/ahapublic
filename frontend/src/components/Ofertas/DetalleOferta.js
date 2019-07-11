@@ -197,7 +197,7 @@ class DetalleOferta extends Component {
                     "Seguridad o Vigilancia",
                     "Tecnología, Informática, Sistemas",
                     "Textil y Confección",
-                    "Transport"
+                    "Transporte"
                 ];
                 
                 return(
