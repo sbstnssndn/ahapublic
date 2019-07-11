@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Objects;
 
 import com.grupo1.ahainclusion.aux.NullChecker;
+import com.grupo1.ahainclusion.aux.payload.Details;
 import com.grupo1.ahainclusion.aux.payload.UserSummary;
 import com.grupo1.ahainclusion.model.Oferta;
 import com.grupo1.ahainclusion.model.Role;
@@ -73,9 +74,13 @@ public class RecGenerator {
         for(User u: users)
         {
             Recommendation rcm = new Recommendation();
+            Details details = new Details();
+            details.setEmail2(u.getPerfilCandidato().getEmail2());
+            details.setTelefono1(u.getPerfilCandidato().getTelefono1());
+            details.setTelefono2(u.getPerfilCandidato().getTelefono2());
             UserSummary userSummary = new UserSummary(u.getId(), u.getPerfilCandidato().getFirstName() +" "
                                                       + u.getPerfilCandidato().getLastName(), u.getEmail(), 
-                                                      null, "Candidato");
+                                                      null, "Candidato", details);
             rcm.setUserSummary(userSummary);
 
             PerCalculator perCalculator = new PerCalculator();
