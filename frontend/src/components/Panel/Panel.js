@@ -79,12 +79,12 @@ const Panel = ( props ) => {
 							<MisOfertas currentUser={currentUser} {...props}/>
 						)} />
 
-					{/*Recomendaciones de una oferta */}
+					{/* Detalle de oferta */}
 					<Route
-						path={`${props.match.path}/oferta/:id/recomendaciones`}
+						path={`${props.match.path}/oferta/:id/detalle`}
 						exact
 						render={(props) => (
-							<Recomendaciones currentUser={currentUser} {...props}/>
+							<DetalleOferta currentUser={currentUser} {...props}/>
 						)} />
 						
 					<Route
@@ -169,7 +169,7 @@ const Panel = ( props ) => {
 						path={`${props.match.path}/oferta/:id/detalle`}
 						exact
 						render={(props) => (
-							<DetalleOferta {...props}/>
+							<DetalleOferta currentUser={currentUser} {...props}/>
 						)} />
 
 					{/*Recomendaciones de oferta */}

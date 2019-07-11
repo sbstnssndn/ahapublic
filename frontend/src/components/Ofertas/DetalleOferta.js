@@ -27,7 +27,6 @@ class DetalleOferta extends Component {
                         this.setState({
                             empresa: response.data
                         });
-                        console.log(this.state.empresa);
                     });
             })
             .catch(function(error){
@@ -37,17 +36,19 @@ class DetalleOferta extends Component {
 
     botones () {
         if(this.state.oferta != null){
-            return (
-                <Row>
-					<Col>
-						<Link to={`/aha/empresas/${this.state.empresa.id}`} >
-							<Button variant="success" type="submit">
-								Ver empresa
-							</Button>
-						</Link>						
-					</Col>
-                </Row>
-            );
+            if(this.props.currentUser.role === "aha"){
+                return (
+                    <Row>
+                        <Col>
+                            <Link to={`/aha/empresas/${this.state.empresa.id}`} >
+                                <Button variant="success" type="submit">
+                                    Ver empresa
+                                </Button>
+                            </Link>						
+                        </Col>
+                    </Row>
+                );
+            }
         }
     }
 
