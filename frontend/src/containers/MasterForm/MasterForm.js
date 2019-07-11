@@ -219,6 +219,7 @@ class MasterForm extends Component {
 
 			let datos = {};
 			let direccion = {};
+			let experienciasEmpresa = [];
 			
 			for (let stage in updatedStages) {
 				const updatedStageFields = {...updatedStages[stage].fields};
@@ -234,6 +235,21 @@ class MasterForm extends Component {
 						this.addCursosHandler(currentUser.id, elements)
 					} else if (fieldObj.type === "titulos") {
 						this.addTitulosHandler(currentUser.id, elements)
+					} else if (fieldObj.type === "experienciasEmpresa") {
+						if (elements.length < 2 || elements.length % 2 !== 0) {
+							return;
+						}
+						console.log("experienciasEmpresa elements: ", elements);
+						/* Para cada elemento, crear una experiencia exigida */
+						for (let element = 0; element < elements.length; element=element+2) {
+							let elementObj = {
+								area: elements[element].value,
+								duracion: elements[element+1].value
+							}
+							experienciasEmpresa.push(elementObj);
+						}
+						continue;
+						//console.log("experienciasEmpresa: ", experienciasEmpresa)
 					}
 
 					for (let element in elements) {
@@ -290,6 +306,7 @@ class MasterForm extends Component {
 					break;
 				case FORM_NUEVA_OFERTA:
 					console.log("DATOS: ", datos)
+					datos["experiencias"] = datos["experiencias"].concat(experienciasEmpresa);
 					createOferta(currentUser.id, datos)
 					.then(response => {
 						console.log("RESPONSE createOferta: ", response);

@@ -553,7 +553,7 @@ export const formNuevaOferta =
 			name: "Experiencia laboral exigida",
 			fields: {
 				experiencias: {
-					type: 'multi',
+					type: 'experienciasEmpresa',
 					elements: []
 				}
 			}
