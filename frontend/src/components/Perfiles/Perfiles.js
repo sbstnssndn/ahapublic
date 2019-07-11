@@ -176,7 +176,7 @@ class Perfiles extends Component {
 						<thead>
 							<tr>
 								<th>Nombre </th>
-								<th>Email</th>
+								{/*<th>Email</th>*/}
 								<th>Ingresar</th>
 							</tr>
 						</thead>
@@ -185,7 +185,7 @@ class Perfiles extends Component {
 								return (
 									<tr key={user.id}>
 										{this.nombre(user)}
-										<td> {user.email} </td>
+										{/*<td> {user.email} </td>*/}
 										{this.boton(user)}
 									</tr>
 								)
