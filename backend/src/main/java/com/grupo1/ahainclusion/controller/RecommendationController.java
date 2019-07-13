@@ -9,6 +9,7 @@ import com.grupo1.ahainclusion.recommendation.Recommendation;
 import com.grupo1.ahainclusion.repository.OfertaRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -30,6 +31,7 @@ public class RecommendationController {
 
     // Obtener Recomendaciones
     @GetMapping(path = "oferta/{ofertaId}/recommendations")
+    @PreAuthorize("hasRole('ROLE_AHA')")
     public @ResponseBody Iterable<Recommendation> getRecommendations(@PathVariable("ofertaId") Integer ofertaId) {
         List<Recommendation> recommendations = new ArrayList<>();
 

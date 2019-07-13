@@ -13,6 +13,7 @@ import com.grupo1.ahainclusion.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -36,8 +37,12 @@ public class PerfilEmpresaController {
     // Agregar Perfil Empresa
     @PostMapping(path = "/{userId}/perfilEmpresa")
     //SOLO USUARIOS EMPRESA O AHA
-    //@PreAuthorize("hasRole('ROLE_EMPRESA') or hasRole('ROLE_AHA')")
-    public @ResponseBody String addNewPerfilEmpresa(@PathVariable("userId") Integer userId, @RequestBody PerfilEmpresa perfilEmpresa) {
+    @PreAuthorize("hasRole('ROLE_EMPRESA') or hasRole('ROLE_AHA')")
+    public @ResponseBody String addNewPerfilEmpresa(@CurrentUser UserPrincipal currentUser, @PathVariable("userId") Integer userId, @RequestBody PerfilEmpresa perfilEmpresa) {
+
+        if(!currentUser.getRole().equals("aha") && currentUser.getId()!=userId ) {
+            return null;
+        }
 
         User user = userRepository.findById(userId).get();
         perfilEmpresa.setUser(user);
@@ -49,8 +54,12 @@ public class PerfilEmpresaController {
     // Obtener Perfil Empresa
     @GetMapping(path = "/{userId}/perfilEmpresa")
     //SOLO USUARIOS EMPRESA O AHA
-    //@PreAuthorize("hasRole('ROLE_EMPRESA') or hasRole('ROLE_AHA')")
-    public @ResponseBody PerfilEmpresa getPerfilLaboral(@PathVariable("userId") Integer userId) {
+    @PreAuthorize("hasRole('ROLE_EMPRESA') or hasRole('ROLE_AHA')")
+    public @ResponseBody PerfilEmpresa getPerfilLaboral(@CurrentUser UserPrincipal currentUser, @PathVariable("userId") Integer userId) {
+
+        if(!currentUser.getRole().equals("aha") && currentUser.getId()!=userId ) {
+            return null;
+        }
 
         User user = userRepository.findById(userId).get();
         PerfilEmpresa pEmpresa = user.getPerfilEmpresa();
@@ -62,9 +71,12 @@ public class PerfilEmpresaController {
     // Actualizar Perfil Empresa
     @PutMapping(path = "/{userId}/perfilEmpresa")
     //SOLO USUARIOS Empresa o AHA
-    //@PreAuthorize("hasRole('ROLE_AHA') or hasRole('ROLE_EMPRESA')")
-    public @ResponseBody ResponseEntity<Object> update(@PathVariable("userId") Integer userId, @RequestBody PerfilEmpresa pEmpresaNew) {
+    @PreAuthorize("hasRole('ROLE_AHA') or hasRole('ROLE_EMPRESA')")
+    public @ResponseBody ResponseEntity<Object> update(@CurrentUser UserPrincipal currentUser, @PathVariable("userId") Integer userId, @RequestBody PerfilEmpresa pEmpresaNew) {
 
+        if(!currentUser.getRole().equals("aha") && currentUser.getId()!=userId ) {
+            return new ResponseEntity(new ApiResponse(false, "No autorizado para este perfil"), HttpStatus.UNAUTHORIZED);
+        }
         
         Optional<PerfilEmpresa> pEmpresaOptional = perfilEmpresaRepository.findById(userId);
 

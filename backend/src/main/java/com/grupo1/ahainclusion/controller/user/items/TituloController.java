@@ -13,6 +13,7 @@ import com.grupo1.ahainclusion.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,9 +38,13 @@ public class TituloController {
     // Agregar un titulo
     @PostMapping("user/{userId}/titulo")
     //SOLO USUARIOS CANDIDATO O AHA
-    //@PreAuthorize("hasRole('ROLE_CANDIDATO') or hasRole('ROLE_AHA')")
-    public @ResponseBody ResponseEntity<Object> addTituloToUser (@PathVariable("userId") Integer userId,
+    @PreAuthorize("hasRole('ROLE_CANDIDATO') or hasRole('ROLE_AHA')")
+    public @ResponseBody ResponseEntity<Object> addTituloToUser (@CurrentUser UserPrincipal currentUser, @PathVariable("userId") Integer userId,
                                                  @RequestBody Titulo titulo) {
+
+        if(!currentUser.getRole().equals("aha") && currentUser.getId()!=userId ) {
+            return new ResponseEntity(new ApiResponse(false, "No autorizado para agregar titulos a este usuario"), HttpStatus.UNAUTHORIZED);
+        }
 
         Optional<User> userOptional = userRepository.findById(userId);
         if (!userOptional.isPresent())
@@ -55,8 +60,12 @@ public class TituloController {
     // Obtener Titulos
     @GetMapping(path = "user/{userId}/titulo")
     //SOLO USUARIOS CANDIDATO O AHA
-    //@PreAuthorize("hasRole('ROLE_CANDIDATO') or hasRole('ROLE_AHA')")
-    public @ResponseBody Iterable<Titulo> getFromUser(@PathVariable("userId") Integer userId) {
+    @PreAuthorize("hasRole('ROLE_CANDIDATO') or hasRole('ROLE_AHA')")
+    public @ResponseBody Iterable<Titulo> getFromUser(@CurrentUser UserPrincipal currentUser, @PathVariable("userId") Integer userId) {
+
+        if(!currentUser.getRole().equals("aha") && currentUser.getId()!=userId ) {
+            return null;
+        }
 
         User user = userRepository.findById(userId).get();
         return user.getPerfilCandidato().getPerfilLaboral().getTitulos();
@@ -64,18 +73,38 @@ public class TituloController {
 
     //Obtener titulo por id
     @GetMapping(value = "titulo/{id}")
-    public @ResponseBody Titulo get(@PathVariable("id") Integer id) {
-        return tituloRepository.findById(id).get();
+    @PreAuthorize("hasRole('ROLE_CANDIDATO') or hasRole('ROLE_AHA')")
+    public @ResponseBody Titulo get(@CurrentUser UserPrincipal currentUser, @PathVariable("id") Integer id) {
+        Optional<Titulo> tituloOptional = tituloRepository.findById(id);
+
+        if (!tituloOptional.isPresent())
+            return null;
+
+        Titulo titulo = tituloOptional.get();
+
+        if(!currentUser.getRole().equals("aha") && currentUser.getId()!=titulo.getPerfilLaboral().getId() ) {
+            return null;
+        }
+
+        return titulo;
     }
 
     //Eliminar un curso por id
     @DeleteMapping(value = "titulo/{id}")
-    public @ResponseBody ResponseEntity<Object> delete(@PathVariable("id") Integer id) {
+    @PreAuthorize("hasRole('ROLE_CANDIDATO') or hasRole('ROLE_AHA')")
+    public @ResponseBody ResponseEntity<Object> delete(@CurrentUser UserPrincipal currentUser, @PathVariable("id") Integer id) {
         
         Optional<Titulo> tituloOptional = tituloRepository.findById(id);
 
         if (!tituloOptional.isPresent())
         return new ResponseEntity(new ApiResponse(false, "Título no encontrado"), HttpStatus.NOT_FOUND);
+
+        Titulo titulo = tituloOptional.get();
+
+        if(!currentUser.getRole().equals("aha") && currentUser.getId()!=titulo.getPerfilLaboral().getId() ) {
+            return new ResponseEntity(new ApiResponse(false, "No autorizado para este titulo"), HttpStatus.UNAUTHORIZED);
+        }
+
 
         tituloRepository.deleteById(id);
 

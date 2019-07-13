@@ -19,6 +19,7 @@ import com.grupo1.ahainclusion.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -46,8 +47,12 @@ public class PerfilLaboralController {
     // Agregar Perfil Laboral
     @PostMapping(path = "/{userId}/perfilLaboral")
     //SOLO USUARIOS CANDIDATO O AHA
-    //@PreAuthorize("hasRole('ROLE_CANDIDATO') or hasRole('ROLE_AHA')")
-    public @ResponseBody String addNewPerfilLaboral(@PathVariable("userId") Integer userId, @RequestBody PerfilLaboral perfilLaboral) {
+    @PreAuthorize("hasRole('ROLE_CANDIDATO') or hasRole('ROLE_AHA')")
+    public @ResponseBody String addNewPerfilLaboral(@CurrentUser UserPrincipal currentUser, @PathVariable("userId") Integer userId, @RequestBody PerfilLaboral perfilLaboral) {
+
+        if(!currentUser.getRole().equals("aha") && currentUser.getId()!=userId ) {
+            return null;
+        }
 
         User user = userRepository.findById(userId).get();
         perfilLaboral.setPerfilCandidato(user.getPerfilCandidato());
@@ -59,8 +64,12 @@ public class PerfilLaboralController {
     // Obtener Perfil Laboral
     @GetMapping(path = "/{userId}/perfilLaboral")
     //SOLO USUARIOS CANDIDATO O AHA
-    //@PreAuthorize("hasRole('ROLE_CANDIDATO') or hasRole('ROLE_AHA')")
-    public @ResponseBody PerfilLaboral getPerfilLaboral(@PathVariable("userId") Integer userId) {
+    @PreAuthorize("hasRole('ROLE_CANDIDATO') or hasRole('ROLE_AHA')")
+    public @ResponseBody PerfilLaboral getPerfilLaboral(@CurrentUser UserPrincipal currentUser, @PathVariable("userId") Integer userId) {
+
+        if(!currentUser.getRole().equals("aha") && currentUser.getId()!=userId ) {
+            return null;
+        }
 
         User user = userRepository.findById(userId).get();
         PerfilLaboral pLaboral = user.getPerfilCandidato().getPerfilLaboral();
@@ -72,9 +81,12 @@ public class PerfilLaboralController {
     // Actualizar Perfil Laboral
     @PutMapping(path = "/{userId}/perfilLaboral")
     //SOLO USUARIOS CANDIDATO O AHA
-    //@PreAuthorize("hasRole('ROLE_CANDIDATO') or hasRole('ROLE_AHA')")
-    public @ResponseBody ResponseEntity<Object> updatePerfilLaboral(@PathVariable("userId") Integer userId, @RequestBody PerfilLaboral pLaboralNew) {
+    @PreAuthorize("hasRole('ROLE_CANDIDATO') or hasRole('ROLE_AHA')")
+    public @ResponseBody ResponseEntity<Object> updatePerfilLaboral(@CurrentUser UserPrincipal currentUser, @PathVariable("userId") Integer userId, @RequestBody PerfilLaboral pLaboralNew) {
 
+        if(!currentUser.getRole().equals("aha") && currentUser.getId()!=userId ) {
+            return new ResponseEntity(new ApiResponse(false, "No autorizado para este perfil"), HttpStatus.UNAUTHORIZED);
+        }
         
         Optional<PerfilLaboral> pLaboralOptional = perfilLaboralRepository.findById(userId);
 
