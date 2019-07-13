@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Container from 'react-bootstrap/Container';
 import Card from 'react-bootstrap/Card';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
@@ -27,7 +28,6 @@ class DetalleOferta extends Component {
                         this.setState({
                             empresa: response.data
                         });
-                        console.log(this.state.empresa);
                     });
             })
             .catch(function(error){
@@ -37,17 +37,19 @@ class DetalleOferta extends Component {
 
     botones () {
         if(this.state.oferta != null){
-            return (
-                <Row>
-					<Col>
-						<Link to={`/aha/empresas/${this.state.empresa.id}`} >
-							<Button variant="success" type="submit">
-								Ver empresa
-							</Button>
-						</Link>						
-					</Col>
-                </Row>
-            );
+            if(this.props.currentUser.role === "aha"){
+                return (
+                    <Row>
+                        <Col>
+                            <Link to={`/aha/empresas/${this.state.empresa.id}`} >
+                                <Button variant="success" type="submit">
+                                    Ver empresa
+                                </Button>
+                            </Link>						
+                        </Col>
+                    </Row>
+                );
+            }
         }
     }
 
@@ -201,16 +203,24 @@ class DetalleOferta extends Component {
                 ];
                 
                 return(
-                    <Card.Text>
+                    <React.Fragment>
                         {this.state.oferta.experiencias.map( experiencia => {
                             return(
-                                <React.Fragment>
-                                    <Card.Text> Área: {areas[experiencia.area]} </Card.Text>
-                                    <Card.Text> Tiempo: {experiencia.duracion} años </Card.Text>
-                                </React.Fragment>
+							    <Container fluid key={experiencia.duracion} className="pb-4">
+									<Row>
+										<Card.Text>
+										    Área: {areas[experiencia.area]}
+										</Card.Text>
+									</Row>
+									<Row>
+										<Card.Text>
+											Tiempo: {experiencia.duracion} años 
+										</Card.Text>
+									</Row>
+								</Container>
                             )
                         })}
-                    </Card.Text>
+                    </React.Fragment>
                 );
             }
             else{

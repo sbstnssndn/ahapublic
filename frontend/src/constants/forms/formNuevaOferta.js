@@ -536,7 +536,7 @@ export const formNuevaOferta =
 									{ value: 1, displayValue: '301.0001 a 400.000' },
 									{ value: 2, displayValue: '400.001 a 550.000' },
 									{ value: 3, displayValue: '550.001 a 650.000' },
-									{ value: 3, displayValue: '650.001 a 800.000' },
+									{ value: 4, displayValue: '650.001 a 800.000' },
 									{ value: 5, displayValue: '800.001 a 1.000.000' },
 									{ value: 6, displayValue: '1.000.001 o más' }
 								]
@@ -553,7 +553,7 @@ export const formNuevaOferta =
 			name: "Experiencia laboral exigida",
 			fields: {
 				experiencias: {
-					type: 'multi',
+					type: 'experienciasEmpresa',
 					elements: []
 				}
 			}

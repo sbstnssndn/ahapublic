@@ -161,10 +161,38 @@ export const getPerfilEmpresa = (id) => {
 }
 
 export const addExperiencia = (id, experiencia) => {
-	console.log(JSON.stringify(experiencia))
+	//console.log(JSON.stringify(experiencia))
 	return request({
 			url: API_BASE_URL + `/user/${id}/experiencia`,
 			method: 'POST',
 			body: JSON.stringify(experiencia)
 	});
 }
+
+export const addCurso = (id, curso) => {
+	//console.log(JSON.stringify(curso))
+	return request({
+			url: API_BASE_URL + `/user/${id}/curso`,
+			method: 'POST',
+			body: JSON.stringify(curso)
+	});
+}
+
+export const addTitulo = (id, titulo) => {
+	//console.log(JSON.stringify(curso))
+	return request({
+			url: API_BASE_URL + `/user/${id}/titulo`,
+			method: 'POST',
+			body: JSON.stringify(titulo)
+	});
+}
+/*
+export const addExperienciaExigida = (id, experienciaExigida) => {
+	//console.log(JSON.stringify(curso))
+	return request({
+			url: API_BASE_URL + `/user/${id}/titulo`,
+			method: 'POST',
+			body: JSON.stringify(titulo)
+	});
+}*/
+

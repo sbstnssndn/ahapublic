@@ -22,6 +22,7 @@ class Recomendaciones extends Component {
     componentDidMount () {
         
         let id = this.props.match.params.id;
+        
         axios.get("http://localhost:8080/api/oferta/"+id+"/recommendations")
         	.then(response => {
 				this.setState({
@@ -109,7 +110,7 @@ class Recomendaciones extends Component {
             recsPage: aux
         });
     }
-    
+
     printUsers(){
         if(this.state.charged){
             return (
@@ -119,7 +120,7 @@ class Recomendaciones extends Component {
                             <tr>
                                 <th>Postulante </th>
                                 <th>Compatibilidad </th>
-                                <th>Ver</th>
+                                <th> Ver </th>
                             </tr>
 						</thead>
 						<tbody>
@@ -127,8 +128,8 @@ class Recomendaciones extends Component {
                                 return (
                                     <tr key={user.userSummary.id}>
                                         <td> {user.userSummary.name} </td>
-                                        <td> {user.percentage} </td>
-                                        <td> {this.postulante(user)} </td>
+                                        <td> {user.percentage}% </td>
+                                        <td> {this.postulante(user)} </td> 
                                     </tr>
                                 )
                             })}

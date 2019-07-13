@@ -6,10 +6,10 @@ import {
 import MasterForm from '../../containers/MasterForm/MasterForm';
 import Recomendaciones from '../Recomendaciones/Recomendaciones';
 import Perfiles from '../Perfiles/Perfiles.js';
+import MisOfertas from '../Ofertas/MisOfertas.js';
 import ListarOfertas from '../ListarOfertas/ListarOfertas';
 import Ofertas from '../Ofertas/Ofertas';
 import DetalleOferta from '../Ofertas/DetalleOferta';
-import Postulante from '../Postulante/Postulante';
 import Empresa from '../Empresa/Empresa';
 import Tabs from '../Tabs/Tabs';
 
@@ -70,21 +70,21 @@ const Panel = ( props ) => {
 			break;
 		case USER_TYPE_EMPRESA:
 			routes = (
-				<>
-					{/* Por implementar
+				<>	
+					{/* Ofertas propias */}
 					<Route
 						path={`${props.match.path}/ofertas`}
 						exact
 						render={(props) => (
-							<MasterForm
-								formConfig={formPostulanteLaboral} currentUser={props.currentUser} {...props} />
-						)} /> */}
-						
+							<MisOfertas currentUser={currentUser} {...props}/>
+						)} />
+
+					{/* Detalle de oferta */}
 					<Route
-						path={`${props.match.path}/recomendaciones`}
+						path={`${props.match.path}/oferta/:id/detalle`}
 						exact
 						render={(props) => (
-							<Recomendaciones />
+							<DetalleOferta currentUser={currentUser} {...props}/>
 						)} />
 						
 					<Route
@@ -109,8 +109,8 @@ const Panel = ( props ) => {
 				<Tabs routes={routes}>
 					<div label="Datos empresa" to={`${props.match.url}`} icon="fas fa-address-card"></div>
 					{/*<div label="Ofertas laborales" to={`${props.match.url}/ofertas`} icon="fas fa-briefcase"></div>*/}
-					<div label="Recomendados" to={`${props.match.url}/recomendaciones`} icon="fas fa-user"></div>
-					<div label="Nueva oferta" to={`${props.match.url}/nueva-oferta`} icon="fas fa-user"></div>
+					<div label="Mis ofertas" to={`${props.match.url}/ofertas`} icon="fas fa-building"></div>
+					<div label="Nueva oferta" to={`${props.match.url}/nueva-oferta`} icon="fas fa-briefcase"></div>
 				</Tabs>
 			);
 			break;
@@ -140,6 +140,15 @@ const Panel = ( props ) => {
 								formConfig={formCuentaUsuario} currentUser={currentUser} {...props} />
 						)} />
 
+					{/*Editar un postulante */}
+					<Route
+						path={`${props.match.path}/postulante/:id`}
+						exact
+						render={(props) => (
+							<MasterForm
+								formConfig={formPostulanteLaboral} currentUser={currentUser} {...props} />
+						)} />
+
 					{/*Ofertas de una empresa */}
 					<Route
 						path={`${props.match.path}/empresas/:id/ofertas`}
@@ -155,13 +164,6 @@ const Panel = ( props ) => {
 						render={(props) => (
 							<Ofertas {...props}/>
 						)} />
-					{/*Ver un postulante y detalle de perfil laboral */}
-					<Route
-						path={`${props.match.path}/postulante/:id`}
-						exact
-						render={(props) => (
-							<Postulante {...props}/>
-						)} />
 
 					{/*Ver una empresa */}
 					<Route
@@ -176,7 +178,7 @@ const Panel = ( props ) => {
 						path={`${props.match.path}/oferta/:id/detalle`}
 						exact
 						render={(props) => (
-							<DetalleOferta {...props}/>
+							<DetalleOferta currentUser={currentUser} {...props}/>
 						)} />
 
 					{/*Recomendaciones de oferta */}
@@ -184,7 +186,7 @@ const Panel = ( props ) => {
 						path={`${props.match.path}/oferta/:id/recomendaciones`}
 						exact
 						render={(props) => (
-							<Recomendaciones {...props}/>
+							<Recomendaciones currentUser={currentUser} {...props}/>
 						)} />
 					
 				</>
