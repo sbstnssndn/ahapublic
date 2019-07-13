@@ -17,6 +17,7 @@ import  {
 } from '../../constants';
 import { NEW_CURSO } from '../../constants/subforms';
 import {
+	get,
 	updatePerfilCandidato,
 	updatePerfilLaboral,
 	updatePerfilEmpresa,
@@ -403,15 +404,23 @@ class MasterForm extends Component {
   fetchData = async (endpoint) => {
     let formData = null;
 
-    await axios.get(endpoint)
-      .then(response => {
-        formData = response.data;
-        console.log('response: ')
-        console.log(response.data)
-      })
-      .catch(function(error){
-        console.log(error);
-      })
+    // await axios.get(endpoint)
+    //   .then(response => {
+    //     formData = response.data;
+    //     console.log('response: ')
+    //     console.log(response.data)
+    //   })
+    //   .catch(function(error){
+    //     console.log(error);
+	//   })
+	await get(endpoint)
+	.then(response => {
+		formData = response;
+		console.log("RESPONSE get: ", response);
+	}).catch(error => {
+		console.log("ERROR get: ", error);
+	});
+
 
     for (let i=0; i<this.state.form.totalStages; i++)
       this.formatData(formData, i)

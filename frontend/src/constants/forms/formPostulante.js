@@ -1,11 +1,11 @@
-import { FORM_POSTULANTE} from '../index';
+import { API_BASE_URL, FORM_POSTULANTE} from '../index';
 //Datos personales del usuario postulante
 export const formPostulante = 
   {
     id: 3,
     title: FORM_POSTULANTE,
     belongsTo: "postulante",
-    endpoint: "http://localhost:8080/api/user",
+    endpoint: API_BASE_URL+"/user",
     totalStages: 4,
     stages: [
       {

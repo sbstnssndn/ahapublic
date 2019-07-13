@@ -1,4 +1,4 @@
-import { FORM_EMPRESA } from '../index';
+import { API_BASE_URL, FORM_EMPRESA } from '../index';
 
 //Datos personales del usuario empresa
 export const formEmpresa = 
@@ -6,7 +6,7 @@ export const formEmpresa =
       id: 1,
       title: FORM_EMPRESA,
       belongsTo: "empresa",
-      endpoint: "http://localhost:8080/api/user",
+      endpoint: API_BASE_URL+"/user",
       totalStages: 1,
       stages:
       [
