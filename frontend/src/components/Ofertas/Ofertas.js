@@ -6,6 +6,7 @@ import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import { Link } from "react-router-dom";
 import styles from '../Paginacion/App.module.css';
+import { getAllOfertas } from '../../util/APIUtils';
 
 
 //Componente que lista todas las ofertas, con opción de dirigirse a la empresa
@@ -24,11 +25,11 @@ class Ofertas extends Component {
     }
 
     componentDidMount () {
-        axios.get("http://localhost:8080/api/oferta/all")
+        getAllOfertas()
             .then(response => {
                 this.setState({
-                    ofertas: response.data,
-                    total: response.data.length
+                    ofertas: response,
+                    total: response.length
                 });
                 this.paginar();
 				this.setState({

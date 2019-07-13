@@ -171,6 +171,41 @@ export const get = (endpoint) => {
 	});
 }
 
+export const getAllOfertas = () => {
+	return request({
+			url: API_BASE_URL + `/oferta/all`,
+			method: 'GET'
+	});
+}
+
+export const getOferta = (id) => {
+	return request({
+			url: API_BASE_URL + `/oferta/${id}`,
+			method: 'GET'
+	});
+}
+
+export const getUserFromOferta = (id) => {
+	return request({
+			url: API_BASE_URL + `/oferta/${id}/user`,
+			method: 'GET'
+	});
+}
+
+export const getOfertasFromUser = (id_user) => {
+	return request({
+			url: API_BASE_URL + `/user/${id_user}/oferta`,
+			method: 'GET'
+	});
+}
+
+export const getUser = (id) => {
+	return request({
+			url: API_BASE_URL + `/user/${id}`,
+			method: 'GET'
+	});
+}
+
 export const addCurso = (id, curso) => {
 	//console.log(JSON.stringify(curso))
 	return request({
