@@ -155,15 +155,24 @@ public class UserController {
     //Obtener usuario por id
     @GetMapping(value = "/{id}")
     @PreAuthorize("hasRole('ROLE_CANDIDATO') or hasRole('ROLE_EMPRESA') or hasRole('ROLE_AHA')")
-    public @ResponseBody User get(@PathVariable("id") Integer id) {
+    public @ResponseBody User get(@CurrentUser UserPrincipal currentUser, @PathVariable("id") Integer id) {
+
+        if(!currentUser.getRole().equals("aha") && currentUser.getId()!=id ) {
+            return null;
+        }
+
         return userRepository.findById(id).get();
     }
 
     //Eliminar un usuario por id
     @DeleteMapping(value = "/{id}")
     @PreAuthorize("hasRole('ROLE_AHA')")
-    public @ResponseBody ResponseEntity<Object> delete(@PathVariable("id") Integer id) {
+    public @ResponseBody ResponseEntity<Object> delete(@CurrentUser UserPrincipal currentUser, @PathVariable("id") Integer id) {
         
+        if(!currentUser.getRole().equals("aha") && currentUser.getId()!=id ) {
+            return new ResponseEntity(new ApiResponse(false, "No autorizado para ver a este usuario"), HttpStatus.NOT_FOUND);
+        }
+
         Optional<User> userOptional = userRepository.findById(id);
 
         if (!userOptional.isPresent())
@@ -176,7 +185,12 @@ public class UserController {
 
     @PutMapping(path="/{id}/changePassword")
     @PreAuthorize("hasRole('ROLE_CANDIDATO') or hasRole('ROLE_EMPRESA') or hasRole('ROLE_AHA')")
-    public ResponseEntity<?> changePassword(@PathVariable("id") Integer id, @Valid @RequestBody PasswordUpdate pUpdate) {
+    public ResponseEntity<?> changePassword(@CurrentUser UserPrincipal currentUser, @PathVariable("id") Integer id, @Valid @RequestBody PasswordUpdate pUpdate) {
+
+        if(!currentUser.getRole().equals("aha") && currentUser.getId()!=id ) {
+            return new ResponseEntity(new ApiResponse(false, "No autorizado para ver cambiar esta contraseña"), HttpStatus.NOT_FOUND);
+        }
+
         
         Optional<User> userOptional = userRepository.findById(id);
 
