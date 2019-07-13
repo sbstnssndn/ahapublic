@@ -202,10 +202,10 @@ export const formPostulanteLaboral =
                   options: [
                     { value: '', displayValue: 'Seleccione...', disabled: true },
                     { value: 0, displayValue: '0%' },
-                    { value: 25, displayValue: '25%' },
-                    { value: 50, displayValue: '50%' },
-                    { value: 75, displayValue: '75%' },
-                    { value: 100, displayValue: '100%' },
+                    { value: 1, displayValue: '25%' },
+                    { value: 2, displayValue: '50%' },
+                    { value: 3, displayValue: '75%' },
+                    { value: 4, displayValue: '100%' },
                   ]
                 },
                 subtext: '',
@@ -225,10 +225,10 @@ export const formPostulanteLaboral =
                   options: [
                     { value: '', displayValue: 'Seleccione...', disabled: true },
                     { value: 0, displayValue: '0%' },
-                    { value: 25, displayValue: '25%' },
-                    { value: 50, displayValue: '50%' },
-                    { value: 75, displayValue: '75%' },
-                    { value: 100, displayValue: '100%' },
+                    { value: 1, displayValue: '25%' },
+                    { value: 2, displayValue: '50%' },
+                    { value: 3, displayValue: '75%' },
+                    { value: 4, displayValue: '100%' },
                   ]
                 },
                 subtext: '',
@@ -248,10 +248,10 @@ export const formPostulanteLaboral =
                   options: [
                     { value: '', displayValue: 'Seleccione...', disabled: true },
                     { value: 0, displayValue: '0%' },
-                    { value: 25, displayValue: '25%' },
-                    { value: 50, displayValue: '50%' },
-                    { value: 75, displayValue: '75%' },
-                    { value: 100, displayValue: '100%' },
+                    { value: 1, displayValue: '25%' },
+                    { value: 2, displayValue: '50%' },
+                    { value: 3, displayValue: '75%' },
+                    { value: 4, displayValue: '100%' },
                   ]
                 },
                 subtext: '',
@@ -271,10 +271,10 @@ export const formPostulanteLaboral =
                   options: [
                     { value: '', displayValue: 'Seleccione...', disabled: true },
                     { value: 0, displayValue: '0%' },
-                    { value: 25, displayValue: '25%' },
-                    { value: 50, displayValue: '50%' },
-                    { value: 75, displayValue: '75%' },
-                    { value: 100, displayValue: '100%' },
+                    { value: 1, displayValue: '25%' },
+                    { value: 2, displayValue: '50%' },
+                    { value: 3, displayValue: '75%' },
+                    { value: 4, displayValue: '100%' },
                   ]
                 },
                 subtext: '',
@@ -294,10 +294,10 @@ export const formPostulanteLaboral =
                   options: [
                     { value: '', displayValue: 'Seleccione...', disabled: true },
                     { value: 0, displayValue: '0%' },
-                    { value: 25, displayValue: '25%' },
-                    { value: 50, displayValue: '50%' },
-                    { value: 75, displayValue: '75%' },
-                    { value: 100, displayValue: '100%' },
+                    { value: 1, displayValue: '25%' },
+                    { value: 2, displayValue: '50%' },
+                    { value: 3, displayValue: '75%' },
+                    { value: 4, displayValue: '100%' },
                   ]
                 },
                 subtext: '',
