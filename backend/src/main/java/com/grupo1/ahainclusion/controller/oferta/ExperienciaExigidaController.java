@@ -43,14 +43,18 @@ public class ExperienciaExigidaController {
     @PostMapping(path="/oferta/{ofertaId}/experienciaExigida")
     //SOLO USUARIOS EMPRESA O AHA
     @PreAuthorize("hasRole('ROLE_EMPRESA') or hasRole('ROLE_AHA')")
-    public @ResponseBody ResponseEntity<Object> add(@PathVariable("ofertaId") Integer ofertaId, @RequestBody ExperienciaExigida expExigida) {
-
+    public @ResponseBody ResponseEntity<Object> add(@CurrentUser UserPrincipal currentUser, @PathVariable("ofertaId") Integer ofertaId, @RequestBody ExperienciaExigida expExigida) {
 
         Optional<Oferta> ofertaOptional = ofertaRepository.findById(ofertaId);
         if (!ofertaOptional.isPresent())
         return new ResponseEntity(new ApiResponse(false, "Oferta no encontrada"), HttpStatus.NOT_FOUND);
 
         Oferta oferta = ofertaOptional.get();
+
+        if(!currentUser.getRole().equals("aha") && currentUser.getId()!=oferta.getPerfilEmpresa().getId()) {
+            return new ResponseEntity(new ApiResponse(false, "No autorizado para agregar experiencias exigidas a esta oferta"), HttpStatus.UNAUTHORIZED);
+        }
+
         expExigida.setOferta(oferta);
         experienciaExigidaRepository.save(expExigida);
 
@@ -61,9 +65,14 @@ public class ExperienciaExigidaController {
     @GetMapping(path = "/oferta/{ofertaId}/experienciaExigida")
     //SOLO USUARIOS CANDIDATO O AHA
     @PreAuthorize("hasRole('ROLE_EMPRESA') or hasRole('ROLE_AHA')")
-    public @ResponseBody Iterable<ExperienciaExigida> getFromOferta(@PathVariable("ofertaId") Integer ofertaId) {
+    public @ResponseBody Iterable<ExperienciaExigida> getFromOferta(@CurrentUser UserPrincipal currentUser, @PathVariable("ofertaId") Integer ofertaId) {
 
         Oferta oferta = ofertaRepository.findById(ofertaId).get();
+
+        if(!currentUser.getRole().equals("aha") && currentUser.getId()!=oferta.getPerfilEmpresa().getId()) {
+            return null;
+        }
+
         return experienciaExigidaRepository.findByOferta(oferta);
 
     }
@@ -71,19 +80,37 @@ public class ExperienciaExigidaController {
     //Obtener Experiencia Exigida por id
     @GetMapping(value = "experienciaExigida/{id}")
     @PreAuthorize("hasRole('ROLE_EMPRESA') or hasRole('ROLE_AHA')")
-    public @ResponseBody ExperienciaExigida get(@PathVariable("id") Integer id) {
-        return experienciaExigidaRepository.findById(id).get();
+    public @ResponseBody ExperienciaExigida get(@CurrentUser UserPrincipal currentUser, @PathVariable("id") Integer id) {
+
+        Optional<ExperienciaExigida> expExOptional = experienciaExigidaRepository.findById(id);
+
+        if (!expExOptional.isPresent())
+            return null;
+
+        ExperienciaExigida expEx = expExOptional.get();
+
+        if(!currentUser.getRole().equals("aha") && currentUser.getId()!=expEx.getOferta().getPerfilEmpresa().getId() ) {
+            return null;
+        }
+
+        return expEx;
     }
     
     //Eliminar una experiencia exigida por id
     @DeleteMapping(value = "experienciaExigida/{id}")
     @PreAuthorize("hasRole('ROLE_EMPRESA') or hasRole('ROLE_AHA')")
-    public @ResponseBody ResponseEntity<Object> delete(@PathVariable("id") Integer id) {
+    public @ResponseBody ResponseEntity<Object> delete(@CurrentUser UserPrincipal currentUser, @PathVariable("id") Integer id) {
         
         Optional<ExperienciaExigida> expExigidaOptional = experienciaExigidaRepository.findById(id);
 
         if (!expExigidaOptional.isPresent())
         return new ResponseEntity(new ApiResponse(false, "Experiencia exigida no encontrada"), HttpStatus.NOT_FOUND);
+
+        ExperienciaExigida expEx = expExigidaOptional.get();
+
+        if(!currentUser.getRole().equals("aha") && currentUser.getId()!=expEx.getOferta().getPerfilEmpresa().getId() ) {
+            return new ResponseEntity(new ApiResponse(false, "No autorizado a eliminar esta experiencia exigida"), HttpStatus.UNAUTHORIZED);
+        }
 
         experienciaExigidaRepository.deleteById(id);
 
