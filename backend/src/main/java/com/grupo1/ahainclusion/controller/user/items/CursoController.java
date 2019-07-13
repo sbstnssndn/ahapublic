@@ -41,9 +41,11 @@ public class CursoController {
     @PostMapping("user/{userId}/curso")
     //SOLO USUARIOS CANDIDATO O AHA
     @PreAuthorize("hasRole('ROLE_CANDIDATO') or hasRole('ROLE_AHA')")
-    public @ResponseBody ResponseEntity<Object> add (@PathVariable("userId") Integer userId, @RequestBody Curso curso) {
+    public @ResponseBody ResponseEntity<Object> add (@CurrentUser UserPrincipal currentUser, @PathVariable("userId") Integer userId, @RequestBody Curso curso) {
 
-
+        if(!currentUser.getRole().equals("aha") && currentUser.getId()!=userId ) {
+            return new ResponseEntity(new ApiResponse(false, "No autorizado para agregar cursos a este usuario"), HttpStatus.UNAUTHORIZED);
+        }
 
         Optional<User> userOptional = userRepository.findById(userId);
         if (!userOptional.isPresent())
@@ -60,7 +62,11 @@ public class CursoController {
     @GetMapping(value = "user/{userId}/curso")
     //SOLO USUARIOS CANDIDATO O AHA
     @PreAuthorize("hasRole('ROLE_CANDIDATO') or hasRole('ROLE_AHA')")
-    public @ResponseBody Iterable<Curso> getFromUser(@PathVariable("userId") Integer userId) {
+    public @ResponseBody Iterable<Curso> getFromUser(@CurrentUser UserPrincipal currentUser, @PathVariable("userId") Integer userId) {
+
+        if(!currentUser.getRole().equals("aha") && currentUser.getId()!=userId ) {
+            return null;
+        }
 
         User user = userRepository.findById(userId).get();
         return user.getPerfilCandidato().getPerfilLaboral().getCursos();
@@ -69,19 +75,37 @@ public class CursoController {
     //Obtener curso por id
     @GetMapping(value = "curso/{id}")
     @PreAuthorize("hasRole('ROLE_CANDIDATO') or hasRole('ROLE_AHA')")
-    public @ResponseBody Curso get(@PathVariable("id") Integer id) {
-        return cursoRepository.findById(id).get();
+    public @ResponseBody Curso get(@CurrentUser UserPrincipal currentUser, @PathVariable("id") Integer id) {
+
+        Optional<Curso> cursoOptional = cursoRepository.findById(id);
+
+        if (!cursoOptional.isPresent())
+            return null;
+
+        Curso curso = cursoOptional.get();
+
+        if(!currentUser.getRole().equals("aha") && currentUser.getId()!=curso.getPerfilLaboral().getId() ) {
+            return null;
+        }
+
+        return curso;
     }
 
     //Eliminar un curso por id
     @DeleteMapping(value = "curso/{id}")
     @PreAuthorize("hasRole('ROLE_CANDIDATO') or hasRole('ROLE_AHA')")
-    public @ResponseBody ResponseEntity<Object> delete(@PathVariable("id") Integer id) {
+    public @ResponseBody ResponseEntity<Object> delete(@CurrentUser UserPrincipal currentUser, @PathVariable("id") Integer id) {
         
         Optional<Curso> cursoOptional = cursoRepository.findById(id);
 
         if (!cursoOptional.isPresent())
         return new ResponseEntity(new ApiResponse(false, "Curso no encontrado"), HttpStatus.NOT_FOUND);
+
+        Curso curso = cursoOptional.get();
+
+        if(!currentUser.getRole().equals("aha") && currentUser.getId()!=curso.getPerfilLaboral().getId() ) {
+            return new ResponseEntity(new ApiResponse(false, "No autorizado para este curso"), HttpStatus.UNAUTHORIZED);
+        }
 
         cursoRepository.deleteById(id);
 
