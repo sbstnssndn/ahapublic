@@ -39,7 +39,11 @@ public class PerfilCandidatoController {
     @PostMapping(path = "/{userId}/perfilCandidato")
     //SOLO USUARIOS CANDIDATO O AHA
     @PreAuthorize("hasRole('ROLE_CANDIDATO') or hasRole('ROLE_AHA')")
-    public @ResponseBody String addNewPerfilCandidato(@PathVariable("userId") Integer userId, @RequestBody PerfilCandidato perfilCandidato) {
+    public @ResponseBody String addNewPerfilCandidato(@CurrentUser UserPrincipal currentUser, @PathVariable("userId") Integer userId, @RequestBody PerfilCandidato perfilCandidato) {
+
+        if(!currentUser.getRole().equals("aha") && currentUser.getId()!=userId ) {
+            return null;
+        }
 
         User user = userRepository.findById(userId).get();
         perfilCandidato.setEmail2(perfilCandidato.getEmail2().toLowerCase());
@@ -52,7 +56,11 @@ public class PerfilCandidatoController {
     @GetMapping(path = "/{userId}/perfilCandidato")
     //SOLO USUARIOS CANDIDATO O AHA
     @PreAuthorize("hasRole('ROLE_CANDIDATO') or hasRole('ROLE_AHA')")
-    public @ResponseBody PerfilCandidato getPerfilCandidato(@PathVariable("userId") Integer userId) {
+    public @ResponseBody PerfilCandidato getPerfilCandidato(@CurrentUser UserPrincipal currentUser, @PathVariable("userId") Integer userId) {
+
+        if(!currentUser.getRole().equals("aha") && currentUser.getId()!=userId ) {
+            return null;
+        }
 
         User user = userRepository.findById(userId).get();
         PerfilCandidato pCandidato = user.getPerfilCandidato();
@@ -65,8 +73,11 @@ public class PerfilCandidatoController {
     @PutMapping(path = "/{userId}/perfilCandidato")
     //SOLO USUARIOS CANDIDATO O AHA
     @PreAuthorize("hasRole('ROLE_CANDIDATO') or hasRole('ROLE_AHA')")
-    public @ResponseBody ResponseEntity<Object> update(@PathVariable("userId") Integer userId, @RequestBody PerfilCandidato pCandidatoNew) {
+    public @ResponseBody ResponseEntity<Object> update(@CurrentUser UserPrincipal currentUser, @PathVariable("userId") Integer userId, @RequestBody PerfilCandidato pCandidatoNew) {
 
+        if(!currentUser.getRole().equals("aha") && currentUser.getId()!=userId ) {
+            return new ResponseEntity(new ApiResponse(false, "No autorizado para este perfil"), HttpStatus.UNAUTHORIZED);
+        }
         
         Optional<PerfilCandidato> pCandidatoOptional = perfilCandidatoRepository.findById(userId);
 

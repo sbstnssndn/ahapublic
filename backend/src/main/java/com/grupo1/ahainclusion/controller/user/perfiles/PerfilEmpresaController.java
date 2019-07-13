@@ -38,7 +38,11 @@ public class PerfilEmpresaController {
     @PostMapping(path = "/{userId}/perfilEmpresa")
     //SOLO USUARIOS EMPRESA O AHA
     @PreAuthorize("hasRole('ROLE_EMPRESA') or hasRole('ROLE_AHA')")
-    public @ResponseBody String addNewPerfilEmpresa(@PathVariable("userId") Integer userId, @RequestBody PerfilEmpresa perfilEmpresa) {
+    public @ResponseBody String addNewPerfilEmpresa(@CurrentUser UserPrincipal currentUser, @PathVariable("userId") Integer userId, @RequestBody PerfilEmpresa perfilEmpresa) {
+
+        if(!currentUser.getRole().equals("aha") && currentUser.getId()!=userId ) {
+            return null;
+        }
 
         User user = userRepository.findById(userId).get();
         perfilEmpresa.setUser(user);
@@ -51,7 +55,11 @@ public class PerfilEmpresaController {
     @GetMapping(path = "/{userId}/perfilEmpresa")
     //SOLO USUARIOS EMPRESA O AHA
     @PreAuthorize("hasRole('ROLE_EMPRESA') or hasRole('ROLE_AHA')")
-    public @ResponseBody PerfilEmpresa getPerfilLaboral(@PathVariable("userId") Integer userId) {
+    public @ResponseBody PerfilEmpresa getPerfilLaboral(@CurrentUser UserPrincipal currentUser, @PathVariable("userId") Integer userId) {
+
+        if(!currentUser.getRole().equals("aha") && currentUser.getId()!=userId ) {
+            return null;
+        }
 
         User user = userRepository.findById(userId).get();
         PerfilEmpresa pEmpresa = user.getPerfilEmpresa();
@@ -64,8 +72,11 @@ public class PerfilEmpresaController {
     @PutMapping(path = "/{userId}/perfilEmpresa")
     //SOLO USUARIOS Empresa o AHA
     @PreAuthorize("hasRole('ROLE_AHA') or hasRole('ROLE_EMPRESA')")
-    public @ResponseBody ResponseEntity<Object> update(@PathVariable("userId") Integer userId, @RequestBody PerfilEmpresa pEmpresaNew) {
+    public @ResponseBody ResponseEntity<Object> update(@CurrentUser UserPrincipal currentUser, @PathVariable("userId") Integer userId, @RequestBody PerfilEmpresa pEmpresaNew) {
 
+        if(!currentUser.getRole().equals("aha") && currentUser.getId()!=userId ) {
+            return new ResponseEntity(new ApiResponse(false, "No autorizado para este perfil"), HttpStatus.UNAUTHORIZED);
+        }
         
         Optional<PerfilEmpresa> pEmpresaOptional = perfilEmpresaRepository.findById(userId);
 

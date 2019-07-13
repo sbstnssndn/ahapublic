@@ -48,7 +48,11 @@ public class PerfilLaboralController {
     @PostMapping(path = "/{userId}/perfilLaboral")
     //SOLO USUARIOS CANDIDATO O AHA
     @PreAuthorize("hasRole('ROLE_CANDIDATO') or hasRole('ROLE_AHA')")
-    public @ResponseBody String addNewPerfilLaboral(@PathVariable("userId") Integer userId, @RequestBody PerfilLaboral perfilLaboral) {
+    public @ResponseBody String addNewPerfilLaboral(@CurrentUser UserPrincipal currentUser, @PathVariable("userId") Integer userId, @RequestBody PerfilLaboral perfilLaboral) {
+
+        if(!currentUser.getRole().equals("aha") && currentUser.getId()!=userId ) {
+            return null;
+        }
 
         User user = userRepository.findById(userId).get();
         perfilLaboral.setPerfilCandidato(user.getPerfilCandidato());
@@ -61,7 +65,11 @@ public class PerfilLaboralController {
     @GetMapping(path = "/{userId}/perfilLaboral")
     //SOLO USUARIOS CANDIDATO O AHA
     @PreAuthorize("hasRole('ROLE_CANDIDATO') or hasRole('ROLE_AHA')")
-    public @ResponseBody PerfilLaboral getPerfilLaboral(@PathVariable("userId") Integer userId) {
+    public @ResponseBody PerfilLaboral getPerfilLaboral(@CurrentUser UserPrincipal currentUser, @PathVariable("userId") Integer userId) {
+
+        if(!currentUser.getRole().equals("aha") && currentUser.getId()!=userId ) {
+            return null;
+        }
 
         User user = userRepository.findById(userId).get();
         PerfilLaboral pLaboral = user.getPerfilCandidato().getPerfilLaboral();
@@ -74,8 +82,11 @@ public class PerfilLaboralController {
     @PutMapping(path = "/{userId}/perfilLaboral")
     //SOLO USUARIOS CANDIDATO O AHA
     @PreAuthorize("hasRole('ROLE_CANDIDATO') or hasRole('ROLE_AHA')")
-    public @ResponseBody ResponseEntity<Object> updatePerfilLaboral(@PathVariable("userId") Integer userId, @RequestBody PerfilLaboral pLaboralNew) {
+    public @ResponseBody ResponseEntity<Object> updatePerfilLaboral(@CurrentUser UserPrincipal currentUser, @PathVariable("userId") Integer userId, @RequestBody PerfilLaboral pLaboralNew) {
 
+        if(!currentUser.getRole().equals("aha") && currentUser.getId()!=userId ) {
+            return new ResponseEntity(new ApiResponse(false, "No autorizado para este perfil"), HttpStatus.UNAUTHORIZED);
+        }
         
         Optional<PerfilLaboral> pLaboralOptional = perfilLaboralRepository.findById(userId);
 
