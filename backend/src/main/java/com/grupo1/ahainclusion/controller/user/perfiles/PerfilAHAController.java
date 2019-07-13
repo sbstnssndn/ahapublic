@@ -13,6 +13,7 @@ import com.grupo1.ahainclusion.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -37,7 +38,7 @@ public class PerfilAHAController {
     // Agregar Perfil AHA
     @PostMapping(path = "/{userId}/perfilAHA")
     //SOLO USUARIOS AHA
-    //@PreAuthorize("hasRole('ROLE_AHA')")
+    @PreAuthorize("hasRole('ROLE_AHA')")
     public @ResponseBody String addNewPerfilAHA(@PathVariable("userId") Integer userId, @RequestBody PerfilAHA perfilAHA) {
 
         User user = userRepository.findById(userId).get();
@@ -49,7 +50,7 @@ public class PerfilAHAController {
     // Obtener Perfil AHA
     @GetMapping(path = "/{userId}/perfilAHA")
     //SOLO USUARIOS AHA
-    //@PreAuthorize("hasRole('ROLE_AHA')")
+    @PreAuthorize("hasRole('ROLE_AHA')")
     public @ResponseBody PerfilAHA getPerfilAHA(@PathVariable("userId") Integer userId) {
 
         User user = userRepository.findById(userId).get();
@@ -62,7 +63,7 @@ public class PerfilAHAController {
     // Actualizar Perfil AHA
     @PutMapping(path = "/{userId}/perfilAHA")
     //SOLO USUARIOS AHA
-    //@PreAuthorize("hasRole('ROLE_AHA')")
+    @PreAuthorize("hasRole('ROLE_AHA')")
     public @ResponseBody ResponseEntity<Object> update(@PathVariable("userId") Integer userId, @RequestBody PerfilAHA pAHANew) {
 
         

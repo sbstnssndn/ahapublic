@@ -17,6 +17,7 @@ import com.grupo1.ahainclusion.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -41,7 +42,7 @@ public class ExperienciaExigidaController {
     // Agregar una experiencia exigida
     @PostMapping(path="/oferta/{ofertaId}/experienciaExigida")
     //SOLO USUARIOS EMPRESA O AHA
-    //@PreAuthorize("hasRole('ROLE_EMPRESA') or hasRole('ROLE_AHA')")
+    @PreAuthorize("hasRole('ROLE_EMPRESA') or hasRole('ROLE_AHA')")
     public @ResponseBody ResponseEntity<Object> add(@PathVariable("ofertaId") Integer ofertaId, @RequestBody ExperienciaExigida expExigida) {
 
 
@@ -59,7 +60,7 @@ public class ExperienciaExigidaController {
     // Obtener Experiencias exigidas
     @GetMapping(path = "/oferta/{ofertaId}/experienciaExigida")
     //SOLO USUARIOS CANDIDATO O AHA
-    //@PreAuthorize("hasRole('ROLE_CANDIDATO') or hasRole('ROLE_AHA')")
+    @PreAuthorize("hasRole('ROLE_EMPRESA') or hasRole('ROLE_AHA')")
     public @ResponseBody Iterable<ExperienciaExigida> getFromOferta(@PathVariable("ofertaId") Integer ofertaId) {
 
         Oferta oferta = ofertaRepository.findById(ofertaId).get();
@@ -69,12 +70,14 @@ public class ExperienciaExigidaController {
 
     //Obtener Experiencia Exigida por id
     @GetMapping(value = "experienciaExigida/{id}")
+    @PreAuthorize("hasRole('ROLE_EMPRESA') or hasRole('ROLE_AHA')")
     public @ResponseBody ExperienciaExigida get(@PathVariable("id") Integer id) {
         return experienciaExigidaRepository.findById(id).get();
     }
     
     //Eliminar una experiencia exigida por id
     @DeleteMapping(value = "experienciaExigida/{id}")
+    @PreAuthorize("hasRole('ROLE_EMPRESA') or hasRole('ROLE_AHA')")
     public @ResponseBody ResponseEntity<Object> delete(@PathVariable("id") Integer id) {
         
         Optional<ExperienciaExigida> expExigidaOptional = experienciaExigidaRepository.findById(id);

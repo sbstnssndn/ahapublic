@@ -17,6 +17,7 @@ import com.grupo1.ahainclusion.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -44,6 +45,7 @@ public class OfertaController {
 
     // Obtener Ofertas de usuario
     @GetMapping(value = "user/{userId}/oferta")
+    @PreAuthorize("hasRole('ROLE_EMPRESA') or hasRole('ROLE_AHA')")
     public @ResponseBody Iterable<Oferta> getAllFromUser(@PathVariable("userId") Integer userId) {
 
         User user = userRepository.findById(userId).get();
@@ -53,12 +55,14 @@ public class OfertaController {
 
     // Obtener todas las ofertas
     @GetMapping(value = "/oferta/all")
+    @PreAuthorize("hasRole('ROLE_AHA')")
     public @ResponseBody Iterable<Oferta> getAll() {
         return ofertaRepository.findAll();
     }
 
     // Obtener usuario de una oferta
     @GetMapping(value = "oferta/{id}/user")
+    @PreAuthorize("hasRole('ROLE_AHA')")
     public @ResponseBody User getUserFromOferta(@PathVariable("id") Integer id) {
         
         Optional<Oferta> ofertaOptional = ofertaRepository.findById(id);
@@ -82,12 +86,14 @@ public class OfertaController {
 
     //Obtener una oferta por id
     @GetMapping(value = "oferta/{id}")
+    @PreAuthorize("hasRole('ROLE_EMPRESA') or hasRole('ROLE_AHA')")
     public @ResponseBody Oferta get(@PathVariable("id") Integer id) {
         return ofertaRepository.findById(id).get();
     }
 
     // Agregar Oferta
     @PostMapping(value = "user/{userId}/oferta")
+    @PreAuthorize("hasRole('ROLE_EMPRESA') or hasRole('ROLE_AHA')")
     public @ResponseBody ResponseEntity<Object> addNewOferta(@PathVariable("userId") Integer userId, @RequestBody Oferta oferta) {
 
         Optional<PerfilEmpresa> pEmpresaOptional = perfilEmpresaRepository.findById(userId);
@@ -122,7 +128,7 @@ public class OfertaController {
     // Actualizar oferta
     @PutMapping(path = "oferta/{id}")
     //SOLO USUARIOS Empresa o AHA
-    //@PreAuthorize("hasRole('ROLE_AHA') or hasRole('ROLE_EMPRESA')")
+    @PreAuthorize("hasRole('ROLE_EMPRESA') or hasRole('ROLE_AHA')")
     public @ResponseBody ResponseEntity<Object> update(@PathVariable("id") Integer id, @RequestBody Oferta ofertaNew) {
 
         

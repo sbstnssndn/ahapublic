@@ -13,6 +13,7 @@ import com.grupo1.ahainclusion.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,7 +38,7 @@ public class TituloController {
     // Agregar un titulo
     @PostMapping("user/{userId}/titulo")
     //SOLO USUARIOS CANDIDATO O AHA
-    //@PreAuthorize("hasRole('ROLE_CANDIDATO') or hasRole('ROLE_AHA')")
+    @PreAuthorize("hasRole('ROLE_CANDIDATO') or hasRole('ROLE_AHA')")
     public @ResponseBody ResponseEntity<Object> addTituloToUser (@PathVariable("userId") Integer userId,
                                                  @RequestBody Titulo titulo) {
 
@@ -55,7 +56,7 @@ public class TituloController {
     // Obtener Titulos
     @GetMapping(path = "user/{userId}/titulo")
     //SOLO USUARIOS CANDIDATO O AHA
-    //@PreAuthorize("hasRole('ROLE_CANDIDATO') or hasRole('ROLE_AHA')")
+    @PreAuthorize("hasRole('ROLE_CANDIDATO') or hasRole('ROLE_AHA')")
     public @ResponseBody Iterable<Titulo> getFromUser(@PathVariable("userId") Integer userId) {
 
         User user = userRepository.findById(userId).get();
@@ -64,12 +65,14 @@ public class TituloController {
 
     //Obtener titulo por id
     @GetMapping(value = "titulo/{id}")
+    @PreAuthorize("hasRole('ROLE_CANDIDATO') or hasRole('ROLE_AHA')")
     public @ResponseBody Titulo get(@PathVariable("id") Integer id) {
         return tituloRepository.findById(id).get();
     }
 
     //Eliminar un curso por id
     @DeleteMapping(value = "titulo/{id}")
+    @PreAuthorize("hasRole('ROLE_CANDIDATO') or hasRole('ROLE_AHA')")
     public @ResponseBody ResponseEntity<Object> delete(@PathVariable("id") Integer id) {
         
         Optional<Titulo> tituloOptional = tituloRepository.findById(id);

@@ -19,6 +19,7 @@ import com.grupo1.ahainclusion.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -46,7 +47,7 @@ public class PerfilLaboralController {
     // Agregar Perfil Laboral
     @PostMapping(path = "/{userId}/perfilLaboral")
     //SOLO USUARIOS CANDIDATO O AHA
-    //@PreAuthorize("hasRole('ROLE_CANDIDATO') or hasRole('ROLE_AHA')")
+    @PreAuthorize("hasRole('ROLE_CANDIDATO') or hasRole('ROLE_AHA')")
     public @ResponseBody String addNewPerfilLaboral(@PathVariable("userId") Integer userId, @RequestBody PerfilLaboral perfilLaboral) {
 
         User user = userRepository.findById(userId).get();
@@ -59,7 +60,7 @@ public class PerfilLaboralController {
     // Obtener Perfil Laboral
     @GetMapping(path = "/{userId}/perfilLaboral")
     //SOLO USUARIOS CANDIDATO O AHA
-    //@PreAuthorize("hasRole('ROLE_CANDIDATO') or hasRole('ROLE_AHA')")
+    @PreAuthorize("hasRole('ROLE_CANDIDATO') or hasRole('ROLE_AHA')")
     public @ResponseBody PerfilLaboral getPerfilLaboral(@PathVariable("userId") Integer userId) {
 
         User user = userRepository.findById(userId).get();
@@ -72,7 +73,7 @@ public class PerfilLaboralController {
     // Actualizar Perfil Laboral
     @PutMapping(path = "/{userId}/perfilLaboral")
     //SOLO USUARIOS CANDIDATO O AHA
-    //@PreAuthorize("hasRole('ROLE_CANDIDATO') or hasRole('ROLE_AHA')")
+    @PreAuthorize("hasRole('ROLE_CANDIDATO') or hasRole('ROLE_AHA')")
     public @ResponseBody ResponseEntity<Object> updatePerfilLaboral(@PathVariable("userId") Integer userId, @RequestBody PerfilLaboral pLaboralNew) {
 
         

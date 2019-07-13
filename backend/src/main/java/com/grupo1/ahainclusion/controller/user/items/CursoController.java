@@ -16,6 +16,7 @@ import com.grupo1.ahainclusion.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -39,7 +40,7 @@ public class CursoController {
     // Agregar un curso
     @PostMapping("user/{userId}/curso")
     //SOLO USUARIOS CANDIDATO O AHA
-    //@PreAuthorize("hasRole('ROLE_CANDIDATO') or hasRole('ROLE_AHA')")
+    @PreAuthorize("hasRole('ROLE_CANDIDATO') or hasRole('ROLE_AHA')")
     public @ResponseBody ResponseEntity<Object> add (@PathVariable("userId") Integer userId, @RequestBody Curso curso) {
 
 
@@ -58,7 +59,7 @@ public class CursoController {
     // Obtener Cursos del usuario
     @GetMapping(value = "user/{userId}/curso")
     //SOLO USUARIOS CANDIDATO O AHA
-    //@PreAuthorize("hasRole('ROLE_CANDIDATO') or hasRole('ROLE_AHA')")
+    @PreAuthorize("hasRole('ROLE_CANDIDATO') or hasRole('ROLE_AHA')")
     public @ResponseBody Iterable<Curso> getFromUser(@PathVariable("userId") Integer userId) {
 
         User user = userRepository.findById(userId).get();
@@ -67,12 +68,14 @@ public class CursoController {
 
     //Obtener curso por id
     @GetMapping(value = "curso/{id}")
+    @PreAuthorize("hasRole('ROLE_CANDIDATO') or hasRole('ROLE_AHA')")
     public @ResponseBody Curso get(@PathVariable("id") Integer id) {
         return cursoRepository.findById(id).get();
     }
 
     //Eliminar un curso por id
     @DeleteMapping(value = "curso/{id}")
+    @PreAuthorize("hasRole('ROLE_CANDIDATO') or hasRole('ROLE_AHA')")
     public @ResponseBody ResponseEntity<Object> delete(@PathVariable("id") Integer id) {
         
         Optional<Curso> cursoOptional = cursoRepository.findById(id);

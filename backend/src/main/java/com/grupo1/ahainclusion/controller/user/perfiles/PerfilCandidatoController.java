@@ -13,6 +13,7 @@ import com.grupo1.ahainclusion.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -37,7 +38,7 @@ public class PerfilCandidatoController {
     // Agregar Perfil Candidato
     @PostMapping(path = "/{userId}/perfilCandidato")
     //SOLO USUARIOS CANDIDATO O AHA
-    //@PreAuthorize("hasRole('ROLE_CANDIDATO') or hasRole('ROLE_AHA')")
+    @PreAuthorize("hasRole('ROLE_CANDIDATO') or hasRole('ROLE_AHA')")
     public @ResponseBody String addNewPerfilCandidato(@PathVariable("userId") Integer userId, @RequestBody PerfilCandidato perfilCandidato) {
 
         User user = userRepository.findById(userId).get();
@@ -50,7 +51,7 @@ public class PerfilCandidatoController {
     // Obtener Perfil Candidato
     @GetMapping(path = "/{userId}/perfilCandidato")
     //SOLO USUARIOS CANDIDATO O AHA
-    //@PreAuthorize("hasRole('ROLE_CANDIDATO') or hasRole('ROLE_AHA')")
+    @PreAuthorize("hasRole('ROLE_CANDIDATO') or hasRole('ROLE_AHA')")
     public @ResponseBody PerfilCandidato getPerfilCandidato(@PathVariable("userId") Integer userId) {
 
         User user = userRepository.findById(userId).get();
@@ -63,7 +64,7 @@ public class PerfilCandidatoController {
     // Actualizar Perfil Candidato
     @PutMapping(path = "/{userId}/perfilCandidato")
     //SOLO USUARIOS CANDIDATO O AHA
-    //@PreAuthorize("hasRole('ROLE_AHA') or hasRole('ROLE_CANDIDATO')")
+    @PreAuthorize("hasRole('ROLE_CANDIDATO') or hasRole('ROLE_AHA')")
     public @ResponseBody ResponseEntity<Object> update(@PathVariable("userId") Integer userId, @RequestBody PerfilCandidato pCandidatoNew) {
 
         
