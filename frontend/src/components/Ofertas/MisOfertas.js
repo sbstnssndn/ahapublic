@@ -4,6 +4,7 @@ import Card from 'react-bootstrap/Card';
 import styles from '../Paginacion/App.module.css';
 import Button from 'react-bootstrap/Button';
 import { Link } from "react-router-dom";
+import { getOfertasFromUser } from '../../util/APIUtils';
 
 //Lista ofertas propias de empresa
 class MisOfertas extends Component {
@@ -23,11 +24,11 @@ class MisOfertas extends Component {
 		
 		let id = this.props.currentUser.id;
 
-		axios.get('http://localhost:8080/api/user/'+id+'/oferta')
+		getOfertasFromUser(id)
 		.then(response => {
 			this.setState({
-				ofertas: response.data,
-				total: response.data.length
+				ofertas: response,
+				total: response.length
 			});
 			this.paginar();
 			this.setState({

@@ -153,12 +153,7 @@ export const createOferta = (id, oferta) => {
 	});
 }
 
-export const getPerfilEmpresa = (id) => {
-	return request({
-			url: API_BASE_URL + `/user/${id}/perfilEmpresa`,
-			method: 'GET'
-	});
-}
+
 
 export const addExperiencia = (id, experiencia) => {
 	//console.log(JSON.stringify(experiencia))
@@ -166,6 +161,63 @@ export const addExperiencia = (id, experiencia) => {
 			url: API_BASE_URL + `/user/${id}/experiencia`,
 			method: 'POST',
 			body: JSON.stringify(experiencia)
+	});
+}
+
+export const get = (endpoint) => {
+	return request({
+			url: endpoint,
+			method: 'GET'
+	});
+}
+
+export const getAllOfertas = () => {
+	return request({
+			url: API_BASE_URL + `/oferta/all`,
+			method: 'GET'
+	});
+}
+
+export const getOferta = (id) => {
+	return request({
+			url: API_BASE_URL + `/oferta/${id}`,
+			method: 'GET'
+	});
+}
+
+export const getUserFromOferta = (id) => {
+	return request({
+			url: API_BASE_URL + `/oferta/${id}/user`,
+			method: 'GET'
+	});
+}
+
+export const getRecommendationsByOferta = (id) => {
+	return request({
+			url: API_BASE_URL + `/oferta/${id}/recommendations`,
+			method: 'GET'
+	});
+}
+
+
+export const getOfertasFromUser = (id_user) => {
+	return request({
+			url: API_BASE_URL + `/user/${id_user}/oferta`,
+			method: 'GET'
+	});
+}
+
+export const getUser = (id) => {
+	return request({
+			url: API_BASE_URL + `/user/${id}`,
+			method: 'GET'
+	});
+}
+
+export const getUsersByRole = (role) => {
+	return request({
+			url: API_BASE_URL + `/user/${role}/all`,
+			method: 'GET'
 	});
 }
 

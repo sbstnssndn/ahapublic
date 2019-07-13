@@ -7,6 +7,7 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import axios from 'axios';
 import { Link } from "react-router-dom";
+import { getOferta, getUserFromOferta } from '../../util/APIUtils';
 
 class DetalleOferta extends Component {
 
@@ -18,15 +19,15 @@ class DetalleOferta extends Component {
 	componentDidMount () {
         
         let id_oferta = this.props.match.params.id;
-		axios.get('http://localhost:8080/api/oferta/'+id_oferta)
+		getOferta(id_oferta)
         	.then(response => {
 				this.setState({
-                    oferta: response.data
+                    oferta: response
                 });
-                axios.get('http://localhost:8080/api/oferta/'+id_oferta+'/user')
+                getUserFromOferta(id_oferta)
                     .then(response => {
                         this.setState({
-                            empresa: response.data
+                            empresa: response
                         });
                     });
             })

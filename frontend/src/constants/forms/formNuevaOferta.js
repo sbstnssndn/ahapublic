@@ -1,11 +1,11 @@
-import { FORM_NUEVA_OFERTA } from '../index';
+import { API_BASE_URL, FORM_NUEVA_OFERTA } from '../index';
 //Nueva oferta por parte de usuario empresa - datos de discapacidad a solicitar
 export const formNuevaOferta =
 	{
 		id: 2,
 		title: FORM_NUEVA_OFERTA,
 		belongsTo: "empresa",
-		endpoint: "http://localhost:8080/api/user",
+		endpoint: API_BASE_URL+"/user",
 		totalStages: 7,
 		stages: [ 
 		{

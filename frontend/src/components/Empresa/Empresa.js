@@ -6,6 +6,7 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import axios from 'axios';
 import ListarOfertas from '../ListarOfertas/ListarOfertas';
+import { getUser } from '../../util/APIUtils';
 
 import {
 	Link,
@@ -21,10 +22,10 @@ class Empresa extends Component {
 	componentDidMount () {
         
         let id_empresa = this.props.match.params.id;
-		axios.get('http://localhost:8080/api/user/'+id_empresa)
+		getUser(id_empresa)
         	.then(response => {
 				this.setState({
-					empresa: response.data
+					empresa: response
                 });
             })
             .catch(function(error){
