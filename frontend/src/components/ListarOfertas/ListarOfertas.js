@@ -6,6 +6,7 @@ import styles from '../Paginacion/App.module.css';
 import { Link } from "react-router-dom";
 import { getOfertasFromUser } from '../../util/APIUtils';
 
+
 //Lista ofertas de una empresa
 class ListarOfertas extends Component {
 
@@ -24,7 +25,7 @@ class ListarOfertas extends Component {
 		
 		let id = this.props.match.params.id;
 
-		axios.getOfertasFromUser(id)
+		getOfertasFromUser(id)
 		.then(response => {
 			this.setState({
 				ofertas: response,
