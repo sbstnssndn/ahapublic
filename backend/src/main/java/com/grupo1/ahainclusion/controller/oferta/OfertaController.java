@@ -4,6 +4,8 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
+import com.grupo1.ahainclusion.auth.CurrentUser;
+import com.grupo1.ahainclusion.auth.UserPrincipal;
 import com.grupo1.ahainclusion.aux.payload.ApiResponse;
 import com.grupo1.ahainclusion.model.Oferta;
 import com.grupo1.ahainclusion.model.PerfilEmpresa;
@@ -46,7 +48,9 @@ public class OfertaController {
     // Obtener Ofertas de usuario
     @GetMapping(value = "user/{userId}/oferta")
     @PreAuthorize("hasRole('ROLE_EMPRESA') or hasRole('ROLE_AHA')")
-    public @ResponseBody Iterable<Oferta> getAllFromUser(@PathVariable("userId") Integer userId) {
+    public @ResponseBody Iterable<Oferta> getAllFromUser(@CurrentUser UserPrincipal currentUser, @PathVariable("userId") Integer userId) {
+
+        
 
         User user = userRepository.findById(userId).get();
         if(user.getPerfilEmpresa()!=null) return user.getPerfilEmpresa().getOfertas();
@@ -63,7 +67,7 @@ public class OfertaController {
     // Obtener usuario de una oferta
     @GetMapping(value = "oferta/{id}/user")
     @PreAuthorize("hasRole('ROLE_AHA')")
-    public @ResponseBody User getUserFromOferta(@PathVariable("id") Integer id) {
+    public @ResponseBody User getUserFromOferta(@CurrentUser UserPrincipal currentUser, @PathVariable("id") Integer id) {
         
         Optional<Oferta> ofertaOptional = ofertaRepository.findById(id);
 
@@ -87,14 +91,30 @@ public class OfertaController {
     //Obtener una oferta por id
     @GetMapping(value = "oferta/{id}")
     @PreAuthorize("hasRole('ROLE_EMPRESA') or hasRole('ROLE_AHA')")
-    public @ResponseBody Oferta get(@PathVariable("id") Integer id) {
-        return ofertaRepository.findById(id).get();
+    public @ResponseBody Oferta get(@CurrentUser UserPrincipal currentUser, @PathVariable("id") Integer id) {
+
+        Optional<Oferta> ofertaOptional = ofertaRepository.findById(id);
+
+        if (!ofertaOptional.isPresent())
+            return null;
+
+        Oferta oferta = ofertaOptional.get();
+
+        if(!currentUser.getRole().equals("aha") && currentUser.getId()!=oferta.getPerfilEmpresa().getId() ) {
+            return null;
+        }
+
+        return oferta;
     }
 
     // Agregar Oferta
     @PostMapping(value = "user/{userId}/oferta")
     @PreAuthorize("hasRole('ROLE_EMPRESA') or hasRole('ROLE_AHA')")
-    public @ResponseBody ResponseEntity<Object> addNewOferta(@PathVariable("userId") Integer userId, @RequestBody Oferta oferta) {
+    public @ResponseBody ResponseEntity<Object> addNewOferta(@CurrentUser UserPrincipal currentUser, @PathVariable("userId") Integer userId, @RequestBody Oferta oferta) {
+
+        if(!currentUser.getRole().equals("aha") && currentUser.getId()!=userId ) {
+            return new ResponseEntity(new ApiResponse(false, "No autorizado para agregar ofertas a este usuario"), HttpStatus.UNAUTHORIZED);
+        }
 
         Optional<PerfilEmpresa> pEmpresaOptional = perfilEmpresaRepository.findById(userId);
 
@@ -129,7 +149,7 @@ public class OfertaController {
     @PutMapping(path = "oferta/{id}")
     //SOLO USUARIOS Empresa o AHA
     @PreAuthorize("hasRole('ROLE_EMPRESA') or hasRole('ROLE_AHA')")
-    public @ResponseBody ResponseEntity<Object> update(@PathVariable("id") Integer id, @RequestBody Oferta ofertaNew) {
+    public @ResponseBody ResponseEntity<Object> update(@CurrentUser UserPrincipal currentUser, @PathVariable("id") Integer id, @RequestBody Oferta ofertaNew) {
 
         
         Optional<Oferta> ofertaOptional = ofertaRepository.findById(id);
@@ -138,6 +158,10 @@ public class OfertaController {
         return new ResponseEntity(new ApiResponse(false, "Oferta no encontrada"), HttpStatus.NOT_FOUND);
 
         Oferta oferta = ofertaOptional.get();
+
+        if(!currentUser.getRole().equals("aha") && currentUser.getId()!=oferta.getPerfilEmpresa().getId() ) {
+            return new ResponseEntity(new ApiResponse(false, "No autorizado para actualizar esta oferta"), HttpStatus.UNAUTHORIZED);
+        }
 
         oferta.setActividadesAuditiva(ofertaNew.getActividadesAuditiva());
         oferta.setActividadesVisual(ofertaNew.getActividadesVisual());
@@ -161,8 +185,15 @@ public class OfertaController {
         oferta.setTareasEstresantes(ofertaNew.getTareasEstresantes());
         oferta.setTrabajoEquipo(ofertaNew.getTrabajoEquipo());
 
-        oferta.getExperiencias().clear();
-        oferta.getExperiencias().addAll(ofertaNew.getExperiencias());
+        if(ofertaNew.getExperiencias()!=null) {
+            oferta.getExperiencias().clear();
+
+            for(ExperienciaExigida expEx: ofertaNew.getExperiencias()) {
+                expEx.setOferta(oferta);
+            }
+
+            oferta.getExperiencias().addAll(ofertaNew.getExperiencias());
+        }
 
 
         ofertaRepository.save(oferta);
