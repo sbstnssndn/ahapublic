@@ -192,6 +192,14 @@ export const getUserFromOferta = (id) => {
 	});
 }
 
+export const getRecommendationsByOferta = (id) => {
+	return request({
+			url: API_BASE_URL + `/oferta/${id}/recommendations`,
+			method: 'GET'
+	});
+}
+
+
 export const getOfertasFromUser = (id_user) => {
 	return request({
 			url: API_BASE_URL + `/user/${id_user}/oferta`,
@@ -202,6 +210,13 @@ export const getOfertasFromUser = (id_user) => {
 export const getUser = (id) => {
 	return request({
 			url: API_BASE_URL + `/user/${id}`,
+			method: 'GET'
+	});
+}
+
+export const getUsersByRole = (role) => {
+	return request({
+			url: API_BASE_URL + `/user/${role}/all`,
 			method: 'GET'
 	});
 }

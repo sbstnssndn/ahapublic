@@ -4,6 +4,7 @@ import Button from 'react-bootstrap/Button';
 import axios from 'axios';
 import styles from '../Paginacion/App.module.css';
 import { Link } from "react-router-dom";
+import { getOferta, getRecommendationsByOferta } from '../../util/APIUtils';
 
 class Recomendaciones extends Component {
 
@@ -23,20 +24,20 @@ class Recomendaciones extends Component {
         
         let id = this.props.match.params.id;
         
-        axios.get("http://localhost:8080/api/oferta/"+id+"/recommendations")
+        getRecommendationsByOferta(id)
         	.then(response => {
 				this.setState({
-                    recs: response.data,
-                    total: response.data.length
+                    recs: response,
+                    total: response.length
                 });
                 this.paginar();
                 this.setState({
 					charged: true
 				});
-                axios.get("http://localhost:8080/api/oferta/"+id)
+                getOferta(id)
                     .then(response => {
                         this.setState({
-                            oferta: response.data
+                            oferta: response
                         })
                     })
                     .catch(function(error){

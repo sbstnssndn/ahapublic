@@ -3,6 +3,7 @@ import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import axios from 'axios';
 import styles from '../Paginacion/App.module.css';
+import { getUsersByRole } from '../../util/APIUtils';
 
 import { Link } from "react-router-dom";
 
@@ -21,11 +22,11 @@ class Perfiles extends Component {
 
 	componentDidMount () {
 		
-		axios.get("http://localhost:8080/api/user/"+this.props.typeUsers+"/all")
+		getUsersByRole(this.props.typeUsers)
         	.then(response => {
 				this.setState({
-					users: response.data,
-                	total: response.data.length
+					users: response,
+                	total: response.length
 				});
 				this.paginar();
 				this.setState({

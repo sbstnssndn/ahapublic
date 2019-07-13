@@ -6,6 +6,7 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import axios from 'axios';
 import { Link } from "react-router-dom";
+import { getUser } from '../../util/APIUtils';
 
 //No se utiliza
 class Postulante extends Component {
@@ -17,10 +18,10 @@ class Postulante extends Component {
 	componentDidMount () {
         
         let id = this.props.match.params.id;
-		axios.get('http://localhost:8080/api/user/'+id)
+		getUser(id)
         	.then(response => {
 				this.setState({
-					postulante: response.data
+					postulante: response
                 });
             })
             .catch(function(error){
