@@ -153,6 +153,15 @@ export const createOferta = (id, oferta) => {
 	});
 }
 
+/*TODO: generalizar las 4 funciones de arriba en esta:
+export const updatePerfil = (endpoint, data) => {
+	return request({
+			url: API_BASE_URL + endpoint,
+			method: 'PUT',
+			body: JSON.stringify(data)
+	});
+}*/
+
 
 
 export const addExperiencia = (id, experiencia) => {

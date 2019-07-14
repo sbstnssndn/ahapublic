@@ -341,7 +341,7 @@ class MasterForm extends Component {
      
     } else {
       console.log('Submit denegado');
-      this.handleAlert("Hay campos con errores", "danger")
+      this.handleAlert("Hay campos con errores, no se ha guardado", "danger")
 		}
   }
   
@@ -422,23 +422,13 @@ class MasterForm extends Component {
   fetchData = async (endpoint) => {
     let formData = null;
 
-    // await axios.get(endpoint)
-    //   .then(response => {
-    //     formData = response.data;
-    //     console.log('response: ')
-    //     console.log(response.data)
-    //   })
-    //   .catch(function(error){
-    //     console.log(error);
-	//   })
-	await get(endpoint)
-	.then(response => {
-		formData = response;
-		console.log("RESPONSE get: ", response);
-	}).catch(error => {
-		console.log("ERROR get: ", error);
-	});
-
+  	await get(endpoint)
+  	.then(response => {
+  		formData = response;
+  		console.log("RESPONSE get: ", response);
+  	}).catch(error => {
+  		console.log("ERROR get: ", error);
+  	});
 
     for (let i=0; i<this.state.form.totalStages; i++)
       this.formatData(formData, i)
@@ -493,7 +483,7 @@ class MasterForm extends Component {
           currentFieldElements[element].value = formDataDireccion[field];
         }
 
-        /*else if (formDataCursos) {
+        else if (formDataCursos) {
           this.addSubForm('cursos', NEW_CURSO)
         }
 
@@ -501,7 +491,7 @@ class MasterForm extends Component {
           asdas
         }
 
-        else if (formDataTitulos) {
+        /*else if (formDataTitulos) {
           asdas
         }*/
       }
@@ -512,8 +502,6 @@ class MasterForm extends Component {
   }
 
 	componentDidMount() {
-    console.log('mach')
-    console.log(this.props.match)
     let activeUserID = null
     if (this.props.currentUser.authorities[0].authority === 'ROLE_AHA' && this.props.match.path !== '/aha/cuenta')
       activeUserID = this.props.match.params.id
@@ -525,15 +513,16 @@ class MasterForm extends Component {
 		})
 
 		if(this.state.form != null) {
-			let currentEndpoint = this.props.formConfig.endpoint+('/')+activeUserID+('/')//this.props.this.state.activeUserID+('/')
+			let currentEndpoint = this.props.formConfig.endpoint+('/')+activeUserID+('/')
 			switch(this.props.formConfig.id) {
-				//case(0): //formCuentaUsuario, probablemente a futuro
+				//case(0): //formCuentaUsuario
 				//  break;
 				case(1): //formEmpresa
 					currentEndpoint = currentEndpoint + 'perfilEmpresa'
 					break;
-				//case(2): //formNuevaOferta
-				//  break;
+				case(2): //formNuevaOferta
+          currentEndpoint = currentEndpoint + 'oferta'
+				  break;
 				case(3): //formPostulante
 					currentEndpoint = currentEndpoint + 'perfilCandidato'
 					break;
@@ -544,7 +533,7 @@ class MasterForm extends Component {
 					break;
 			}
 
-			this.fetchData (currentEndpoint);
+			this.fetchData(currentEndpoint);
 
       this.setState({
         activeUserID: activeUserID
