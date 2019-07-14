@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Stage from './Stage/Stage';
-import axios from 'axios';
 import Stepper from './Stepper/Stepper';
 import StageControls from './StageControls/StageControls';
 import Card from 'react-bootstrap/Card';
@@ -26,7 +25,6 @@ import {
 	addCurso,
 	addTitulo,
 } from '../../util/APIUtils';
-import Popup from './Popup/Popup';
 //import '../../custom.css'
 
 class MasterForm extends Component {
@@ -35,11 +33,9 @@ class MasterForm extends Component {
     currentStage: 0,
     formData: null,
     missing: [],
-		show: false,
 		activeUserID: null,
-		alert: { show: false, message: null },
+		alert: { show: false, message: null, type: null },
 		form: '',
-		toast: { show: false, message: null}
 	}
 	
 	cloneStateElementsArray = (inputIdentifier) => {
@@ -79,16 +75,33 @@ class MasterForm extends Component {
 	}
 
   handleDismiss = () => {
-		this.setState({ show: false, alert: { show: false } });
-		console.log("Alert.show: ", this.state.alert.show)
+		this.setState({
+      alert: { show: false,
+               message: null,
+               type: null,
+               }
+    });
 	}
+
+  handleAlert = (msg, type) => {
+    this.setState({
+      alert: { show: true,
+               message: msg,
+               type: type,
+               }
+    });
+
+    setTimeout(() => {
+      this.handleDismiss()
+    }, 5000)
+  }
 
   handleValidation = (event, inputIdentifier, element) => {
     const clone = {...this.cloneStateElementsArray(inputIdentifier)}
 
     let missing = this.state.missing
 
-    this.setState({ show: false })
+    this.handleDismiss()
 
     for (let elem in clone.elementsArray) {
       //console.log(clone.elementsArray[elem].elementConfig.id)
@@ -206,14 +219,6 @@ class MasterForm extends Component {
 		}
 	}
 
-	showPopup = () => {
-		this.setState({ toast: { show: true, message: this.state.toast.message } });
-	}
-
-	closePopup = () => {
-		this.setState({ toast: { show: false, message: null } });
-	}
-
   handleSubmit = (event) => {
 		event.preventDefault();   
     // Si el array missing esta vacio, significa que no hay campos incorrectos
@@ -227,7 +232,6 @@ class MasterForm extends Component {
 			const updatedStages = {
 				...updatedForm.stages
 			}
-			//let currentUser = {...this.props.currentUser}
 
 			let datos = {};
 			let direccion = {};
@@ -294,7 +298,7 @@ class MasterForm extends Component {
 					updatePerfilCandidato(this.state.activeUserID, datos)
 					.then(response => {
 						console.log("RESPONSE updatePerfilCandidato: ", response);
-						this.setState({ toast: { show: true, message:'Datos personales guardados' } });
+            this.handleAlert('Datos personales guardados','success')
 					}).catch(error => {
 						console.log("ERROR updatePerfilCandidato: ", error);
 					});
@@ -305,7 +309,7 @@ class MasterForm extends Component {
 					updatePerfilLaboral(this.state.activeUserID, datos)
 					.then(response => {
 						console.log("RESPONSE updatePerfilLaboral: ", response);
-						this.setState({ toast: { show: true, message:'Datos laborales guardados' } });
+            this.handleAlert('Datos laborales guardados','success')
 					}).catch(error => {
 						console.log("ERROR updatePerfilLaboral: ", error);
 					});
@@ -314,7 +318,7 @@ class MasterForm extends Component {
 					updatePerfilEmpresa(this.state.activeUserID, datos)
 					.then(response => {
 						console.log("RESPONSE updatePerfilEmpresa: ", response);
-						this.setState({ toast: { show: true, message:'Datos de empresa guardados' } });
+            this.handleAlert('Datos de empresa guardados','success')
 					}).catch(error => {
 						console.log("ERROR updatePerfilEmpresa: ", error);
 					});
@@ -325,7 +329,7 @@ class MasterForm extends Component {
 					createOferta(this.state.activeUserID, datos)
 					.then(response => {
 						console.log("RESPONSE createOferta: ", response);
-						this.setState({ toast: { show: true, message:'Oferta guardada' } });
+            this.handleAlert('Oferta guardada','success')
 						window.location.reload();
 					}).catch(error => {
 						console.log("ERROR createOferta: ", error);
@@ -337,7 +341,7 @@ class MasterForm extends Component {
      
     } else {
       console.log('Submit denegado');
-      this.setState({ show: true })
+      this.handleAlert("Hay campos con errores", "danger")
 		}
   }
   
@@ -579,11 +583,11 @@ class MasterForm extends Component {
         <Card.Header className="px-2">
           <Alert
 						className="mb-0 mt-2"
-						variant="danger"
-						show={this.state.show}
+						variant={this.state.alert.type}
+						show={this.state.alert.show}
 						onClose={this.handleDismiss}
 						dismissible>
-						"Hay campos con errores."
+						{this.state.alert.message}
           </Alert>
           <Stepper
 						currentStage={this.state.currentStage}
@@ -601,11 +605,6 @@ class MasterForm extends Component {
               _prev={this._prev}
               _next={this._next}
             />
-			<Popup 
-				show={this.state.toast.show} 
-				message={this.state.toast.message} 
-				handleShow={this.showPopup} 
-				handleClose={this.closePopup}/>
           </form>
         </Card.Body>
       </Card>
