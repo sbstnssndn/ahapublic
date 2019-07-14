@@ -26,6 +26,7 @@ import {
 	addCurso,
 	addTitulo,
 } from '../../util/APIUtils';
+import Popup from './Popup/Popup';
 //import '../../custom.css'
 
 class MasterForm extends Component {
@@ -37,7 +38,8 @@ class MasterForm extends Component {
 		show: false,
 		activeUserID: null,
 		alert: { show: false, message: null },
-		form: ''
+		form: '',
+		toast: { show: false, message: null}
 	}
 	
 	cloneStateElementsArray = (inputIdentifier) => {
@@ -204,6 +206,14 @@ class MasterForm extends Component {
 		}
 	}
 
+	showPopup = () => {
+		this.setState({ toast: { show: true, message: this.state.toast.message } });
+	}
+
+	closePopup = () => {
+		this.setState({ toast: { show: false, message: null } });
+	}
+
   handleSubmit = (event) => {
 		event.preventDefault();   
     // Si el array missing esta vacio, significa que no hay campos incorrectos
@@ -284,6 +294,7 @@ class MasterForm extends Component {
 					updatePerfilCandidato(this.state.activeUserID, datos)
 					.then(response => {
 						console.log("RESPONSE updatePerfilCandidato: ", response);
+						this.setState({ toast: { show: true, message:'Datos personales guardados' } });
 					}).catch(error => {
 						console.log("ERROR updatePerfilCandidato: ", error);
 					});
@@ -294,6 +305,7 @@ class MasterForm extends Component {
 					updatePerfilLaboral(this.state.activeUserID, datos)
 					.then(response => {
 						console.log("RESPONSE updatePerfilLaboral: ", response);
+						this.setState({ toast: { show: true, message:'Datos laborales guardados' } });
 					}).catch(error => {
 						console.log("ERROR updatePerfilLaboral: ", error);
 					});
@@ -302,6 +314,7 @@ class MasterForm extends Component {
 					updatePerfilEmpresa(this.state.activeUserID, datos)
 					.then(response => {
 						console.log("RESPONSE updatePerfilEmpresa: ", response);
+						this.setState({ toast: { show: true, message:'Datos de empresa guardados' } });
 					}).catch(error => {
 						console.log("ERROR updatePerfilEmpresa: ", error);
 					});
@@ -312,6 +325,7 @@ class MasterForm extends Component {
 					createOferta(this.state.activeUserID, datos)
 					.then(response => {
 						console.log("RESPONSE createOferta: ", response);
+						this.setState({ toast: { show: true, message:'Oferta guardada' } });
 						window.location.reload();
 					}).catch(error => {
 						console.log("ERROR createOferta: ", error);
@@ -587,6 +601,11 @@ class MasterForm extends Component {
               _prev={this._prev}
               _next={this._next}
             />
+			<Popup 
+				show={this.state.toast.show} 
+				message={this.state.toast.message} 
+				handleShow={this.showPopup} 
+				handleClose={this.closePopup}/>
           </form>
         </Card.Body>
       </Card>
