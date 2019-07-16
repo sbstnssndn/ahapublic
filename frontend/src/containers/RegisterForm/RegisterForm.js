@@ -9,6 +9,7 @@ import {
   passwordLengthIsValid,
    } from '../../util/ValidationUtils';
 import { LinkContainer } from 'react-router-bootstrap';
+import swal from 'sweetalert';
 
 class LandingForm extends Component {
 
@@ -76,7 +77,16 @@ class LandingForm extends Component {
 
     signup(signupRequest)
       .then(response => {
-        this.props.history.push("/login");
+				swal({
+					title: "¡Registro exitoso!",
+					text: "Ahora puedes ingresar a tu cuenta.",
+					icon: "success",
+				})
+				.then(willDelete => {
+					if (willDelete) {
+						this.props.history.push("/login");
+					}
+				});
       }).catch(error => {
         console.log(error);
         this.handleAlert(error.message)

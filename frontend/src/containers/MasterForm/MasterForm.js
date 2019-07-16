@@ -455,15 +455,16 @@ class MasterForm extends Component {
     const formDataCursos = {
       ...formData['cursos']
     }
-
+/*
     const formDataExp = {
       ...formData['experiencias']
     }
-
+*/
+/*
     const formDataTitulos = {
       ...formData['titulos']
     }
-
+*/
     for (let field in updatedStageFields) {
       let currentField = {...updatedStageFields[field]};
       let currentFieldElements = {...currentField.elements}
@@ -571,7 +572,7 @@ class MasterForm extends Component {
       <Card className="mb-4">
         <Card.Header className="px-2">
           <Alert
-						className="mb-0 mt-2"
+						className="mb-2 mt-2"
 						variant={this.state.alert.type}
 						show={this.state.alert.show}
 						onClose={this.handleDismiss}
