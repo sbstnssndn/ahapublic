@@ -39,6 +39,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -47,9 +48,11 @@ import org.springframework.stereotype.Component;
 @Component
 public class InitialDataLoader implements ApplicationListener<ContextRefreshedEvent> {
 
-  boolean alreadySetup = false;
-  Random rand = new Random(5);
-  String userSeed = "foobar";
+  @Value("${app.initialSetup}")
+  private boolean initialSetup;
+
+  private Random rand = new Random(5);
+  private String userSeed = "foobar";
 
   @Autowired
   private UserRepository userRepository;
@@ -85,7 +88,7 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
   @Transactional
   public void onApplicationEvent(ContextRefreshedEvent event) {
 
-    if (alreadySetup)
+    if (!initialSetup)
       return;
 
     // Se crean los privilegios.
@@ -303,7 +306,7 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
     expExigida5.setOferta(oferta3);
     experienciaExigidaRepository.save(expExigida5);
 
-    alreadySetup = true;
+    initialSetup = false;
   }
 
   @Transactional
