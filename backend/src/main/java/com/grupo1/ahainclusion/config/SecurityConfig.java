@@ -72,6 +72,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                     .and()
                 .authorizeRequests()
+                    .antMatchers("/rest/**")
+                        .denyAll()
                     .antMatchers("/",
                         "/favicon.ico",
                         "/**/*.png",
@@ -91,8 +93,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .antMatchers(HttpMethod.PUT,  "/**")
                         .authenticated()
                     .antMatchers(HttpMethod.DELETE,  "/**")
-                        .authenticated()
-                    .anyRequest()
                         .authenticated();
 
         // Filtro JWT
