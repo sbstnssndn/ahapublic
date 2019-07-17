@@ -1,12 +1,15 @@
 package com.grupo1.ahainclusion.controller.user.items;
 
+import java.util.Collection;
 import java.util.Optional;
 
 import com.grupo1.ahainclusion.auth.CurrentUser;
 import com.grupo1.ahainclusion.auth.UserPrincipal;
 import com.grupo1.ahainclusion.aux.payload.ApiResponse;
+import com.grupo1.ahainclusion.model.PerfilLaboral;
 import com.grupo1.ahainclusion.model.User;
 import com.grupo1.ahainclusion.model.candidato.Titulo;
+import com.grupo1.ahainclusion.repository.PerfilLaboralRepository;
 import com.grupo1.ahainclusion.repository.TituloRepository;
 import com.grupo1.ahainclusion.repository.UserRepository;
 
@@ -19,6 +22,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -33,6 +37,9 @@ public class TituloController {
 
     @Autowired
     private TituloRepository tituloRepository;
+
+    @Autowired
+    private PerfilLaboralRepository perfilLaboralRepository;
 
 
     // Agregar un titulo
@@ -89,7 +96,7 @@ public class TituloController {
         return titulo;
     }
 
-    //Eliminar un curso por id
+    //Eliminar un titulo por id
     @DeleteMapping(value = "titulo/{id}")
     @PreAuthorize("hasRole('ROLE_CANDIDATO') or hasRole('ROLE_AHA')")
     public @ResponseBody ResponseEntity<Object> delete(@CurrentUser UserPrincipal currentUser, @PathVariable("id") Integer id) {
@@ -112,4 +119,32 @@ public class TituloController {
     }
 
 
+    // Actualizar lista de titulos de un usuario
+    @PutMapping("user/{userId}/titulo")
+    //SOLO USUARIOS CANDIDATO O AHA
+    @PreAuthorize("hasRole('ROLE_CANDIDATO') or hasRole('ROLE_AHA')")
+    public @ResponseBody ResponseEntity<Object> update(@CurrentUser UserPrincipal currentUser, @PathVariable("userId") Integer userId, @RequestBody Collection<Titulo> titulos) {
+
+        if(!currentUser.getRole().equals("aha") && currentUser.getId()!=userId ) {
+            return new ResponseEntity(new ApiResponse(false, "No autorizado para modificar titulos de este usuario"), HttpStatus.UNAUTHORIZED);
+        }
+
+        Optional<User> userOptional = userRepository.findById(userId);
+        if (!userOptional.isPresent())
+        return new ResponseEntity(new ApiResponse(false, "Usuario no encontrado"), HttpStatus.NOT_FOUND);
+
+        User user = userOptional.get();
+        PerfilLaboral pLaboral = user.getPerfilCandidato().getPerfilLaboral();
+        
+        pLaboral.getTitulos().clear();
+        for(Titulo t: titulos) {
+            t.setPerfilLaboral(pLaboral);
+        }
+
+        pLaboral.getTitulos().addAll(titulos);
+        perfilLaboralRepository.save(pLaboral);
+
+
+        return new ResponseEntity(new ApiResponse(true, "Titulos actualizados"), HttpStatus.OK);
+    }
 }
