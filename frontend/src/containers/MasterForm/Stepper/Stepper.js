@@ -47,7 +47,7 @@ const Stepper = (props) => {
 								{items}				
 							</Pagination>
 						</Row>
-						<Row className="justify-content-md-center">
+						<Row className="justify-content-center">
 							<p className="mb-0 pt-2">
 								{props.stageTitles[props.currentStage]}
 							</p>

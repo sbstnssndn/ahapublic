@@ -54,7 +54,7 @@ export const formPostulanteLaboral =
             type: 'normal',
             elements: [
               {
-                label: 'Pretención de renta (en pesos)',
+                label: 'Pretensión de renta (en pesos)',
                 elementType: 'select',
                 elementConfig: {
                   name: 'rentaEstimada',

@@ -7,23 +7,42 @@ import { signup } from '../../util/APIUtils';
 import { 
   emailIsValid,
   passwordLengthIsValid,
-	 } from '../../util/ValidationUtils';
+   } from '../../util/ValidationUtils';
 import { LinkContainer } from 'react-router-bootstrap';
+import swal from 'sweetalert';
 
 class LandingForm extends Component {
 
-	state = {
-		empresa: false,
-		email: '',
-		password: '',
-		confirmPassword: '',
-		errorMessage: null,
-		show: false
-	}
+  state = {
+    empresa: false,
+    email: '',
+    password: '',
+    confirmPassword: '',
+    alert: { show: false, message: null },
+    show: false
+  }
 
-	handleDismiss = () => this.setState({ show: false });
+  handleDismiss = () => {
+    this.setState({
+      alert: { show: false,
+               message: null,
+               }
+    });
+  }
 
-	validateForm = () => {
+  handleAlert = (msg) => {
+    this.setState({
+      alert: { show: true,
+               message: msg,
+               }
+    });
+
+    setTimeout(() => {
+      this.handleDismiss()
+    }, 5000)
+  }
+
+  validateForm = () => {
     return (
       emailIsValid(this.state.email) &&
       passwordLengthIsValid(this.state.password) &&
@@ -31,123 +50,127 @@ class LandingForm extends Component {
     );
   }
 
-	handleInputChange = (event) => {
-		this.setState({
-			[event.target.id]: event.target.value
-		});
-	}
+  handleInputChange = (event) => {
+    this.setState({
+      [event.target.id]: event.target.value
+    });
+  }
 
-	handleCheckboxChange = (event) => {
-		this.setState({
-			empresa: event.target.checked
-		});
-	}
-	
-	handleSubmit = (event) => {
-		event.preventDefault();
+  handleCheckboxChange = (event) => {
+    this.setState({
+      empresa: event.target.checked
+    });
+  }
+  
+  handleSubmit = (event) => {
+    event.preventDefault();
 
-		let rol = "candidato";
-		if (this.state.empresa)
-			rol = "empresa"
+    let rol = "candidato";
+    if (this.state.empresa)
+      rol = "empresa"
 
-		const signupRequest = {
-			email: this.state.email,
-			password: this.state.password,
-			role: rol
-		}
+    const signupRequest = {
+      email: this.state.email,
+      password: this.state.password,
+      role: rol
+    }
 
-		signup(signupRequest)
-			.then(response => {
-				this.props.history.push("/login");
-			}).catch(error => {
-				console.log(error);
-				this.setState({
-					errorMessage: error.message,
-					show: true
+    signup(signupRequest)
+      .then(response => {
+				swal({
+					title: "¡Registro exitoso!",
+					text: "Ahora puedes ingresar a tu cuenta.",
+					icon: "success",
 				})
-		});
-	}
+				.then(willDelete => {
+					if (willDelete) {
+						this.props.history.push("/login");
+					}
+				});
+      }).catch(error => {
+        console.log(error);
+        this.handleAlert(error.message)
+    });
+  }
 
-	render () {
+  render () {
 
-		let formHeader = (
-			<React.Fragment>
-				<h3 className="text-center">Postulantes</h3>
-				<p className="text-center">¿Buscas trabajo? ¡Regístrate!</p>
-			</React.Fragment>
-		)
+    let formHeader = (
+      <React.Fragment>
+        <h3 className="text-center">Postulantes</h3>
+        <p className="text-center">¿Buscas trabajo? ¡Regístrate!</p>
+      </React.Fragment>
+    )
 
-		if (this.state.empresa) {
-			formHeader = (
-				<React.Fragment>
-					<h3 className="text-center">Empresas</h3>
-					<p className="text-center">¿Ofreces trabajo? ¡Regístrate!</p>
-				</React.Fragment>
-			);
-		}
+    if (this.state.empresa) {
+      formHeader = (
+        <React.Fragment>
+          <h3 className="text-center">Empresas</h3>
+          <p className="text-center">¿Ofreces trabajo? ¡Regístrate!</p>
+        </React.Fragment>
+      );
+    }
 
-		return (
-			<Card className="card-form">
-				<Card.Body>
-					{ formHeader }
-					<Form onSubmit={this.handleSubmit}>
-						<Form.Group controlId="email">
-    					<Form.Control
-								type="email"
-								placeholder="Correo electrónico"
-								autoFocus
-								value={this.state.email}
-            		onChange={this.handleInputChange}
-							/>
-						</Form.Group>
-						<Form.Group controlId="password">
-    					<Form.Control
-								type="password"
-								placeholder="Contraseña"
-								value={this.state.password}
-            		onChange={this.handleInputChange}
-							/>
-						</Form.Group>
-						<Form.Group controlId="confirmPassword">
-    					<Form.Control
-								type="password"
-								placeholder="Confirmar contraseña"
-								value={this.state.confirmPassword}
-            		onChange={this.handleInputChange}
-							/>
-						</Form.Group>
-						<Form.Group controlId="empresa">
-							<Form.Check
-								type="checkbox"
-								label="Soy empresa"
-								checked={this.state.empresa}
-								onChange={this.handleCheckboxChange}
-							/>
-						</Form.Group>
-						<Button variant="outline-light" type="submit" block disabled={!this.validateForm()}>
-							Registrarse
-						</Button>
-						<LinkContainer to="/login">
-							<Button variant="outline-light" block>
-								Iniciar Sesión
-							</Button>
-						</LinkContainer>
+    return (
+      <Card className="card-form">
+        <Card.Body>
+          { formHeader }
+          <Form onSubmit={this.handleSubmit}>
+            <Form.Group controlId="email">
+              <Form.Control
+                type="email"
+                placeholder="Correo electrónico"
+                autoFocus
+                value={this.state.email}
+                onChange={this.handleInputChange}
+              />
+            </Form.Group>
+            <Form.Group controlId="password">
+              <Form.Control
+                type="password"
+                placeholder="Contraseña"
+                value={this.state.password}
+                onChange={this.handleInputChange}
+              />
+            </Form.Group>
+            <Form.Group controlId="confirmPassword">
+              <Form.Control
+                type="password"
+                placeholder="Confirmar contraseña"
+                value={this.state.confirmPassword}
+                onChange={this.handleInputChange}
+              />
+            </Form.Group>
+            <Form.Group controlId="empresa">
+              <Form.Check
+                type="checkbox"
+                label="Soy empresa"
+                checked={this.state.empresa}
+                onChange={this.handleCheckboxChange}
+              />
+            </Form.Group>
+            <Button variant="outline-light" type="submit" block disabled={!this.validateForm()}>
+              Registrarse
+            </Button>
+            <LinkContainer to="/login">
+              <Button variant="outline-light" block>
+                Iniciar Sesión
+              </Button>
+            </LinkContainer>
+            <Alert
+              className="mb-0 mt-2"
+              variant="secondary"
+              show={this.state.alert.show}
+              onClose={this.handleDismiss}
+              dismissible>
+              { this.state.alert.message }
+            </Alert>
 
-						{/* TODO: Cambiar esto por un toast */}
-						<Alert
-							className="mb-0 mt-2"
-							variant="secondary"
-							show={this.state.show}
-							onClose={this.handleDismiss}
-							dismissible>
-							{ this.state.errorMessage }
-						</Alert>
-
-					</Form>
-				</Card.Body>
-			</Card>
-		);
-	}
+          </Form>
+        </Card.Body>
+      </Card>
+    );
+  }
 
 }
 

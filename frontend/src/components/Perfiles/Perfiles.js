@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
-import axios from 'axios';
+//import axios from 'axios';
 import styles from '../Paginacion/App.module.css';
 import { getUsersByRole } from '../../util/APIUtils';
 
@@ -26,7 +26,7 @@ class Perfiles extends Component {
         	.then(response => {
 				this.setState({
 					users: response,
-                	total: response.length
+					total: response.length
 				});
 				this.paginar();
 				this.setState({
@@ -45,14 +45,14 @@ class Perfiles extends Component {
 		//Para 10 perfiles, requiere 1 sola hoja y no 2
 		if(this.state.total%10 === 0){
 			this.setState({
-				pages: Math.trunc(this.state.total  / this.state.usersByPage)
+				pages: Math.trunc(this.state.total / this.state.usersByPage)
 			});
 		}
 		//Para 19 perfiles, requiere ya 2 hojas
 		//Para 2, solo 1 hoja
 		else{
 			this.setState({
-				pages: Math.trunc(this.state.total  / this.state.usersByPage) + 1
+				pages: Math.trunc(this.state.total / this.state.usersByPage) + 1
 			})
 		}
 		
@@ -60,23 +60,23 @@ class Perfiles extends Component {
 
         for(let i = 0; i < this.state.pages ; i++){
             
-            let page = {
-                id: i + 1,
-                users: []
-            };
+					let page = {
+						id: i + 1,
+						users: []
+					};
 
-            for(let j = 0; j < this.state.usersByPage; j++){
-                if(this.state.users[i*this.state.usersByPage + j] != null){
-                    page.users.push(this.state.users[i*this.state.usersByPage + j]);
-                }
-            }
-            this.state.pageNumbers.push(i + 1);
-            usersAux.push(page);
+					for(let j = 0; j < this.state.usersByPage; j++){
+						if(this.state.users[i*this.state.usersByPage + j] != null){
+							page.users.push(this.state.users[i*this.state.usersByPage + j]);
+						}
+					}
+					this.state.pageNumbers.push(i + 1);
+					usersAux.push(page);
         }
 
         this.setState({
-            users: usersAux,
-            usersPage: usersAux[0]
+					users: usersAux,
+					usersPage: usersAux[0]
         });
     }
 
@@ -136,12 +136,12 @@ class Perfiles extends Component {
 
 	cambiaPagina(number){
         
-        let aux = this.state.users[number - 1];
+			let aux = this.state.users[number - 1];
 
-        this.setState({
-            currentPage: number,
-            usersPage: aux
-        });
+			this.setState({
+					currentPage: number,
+					usersPage: aux
+			});
     }
 
 	boton(user){
@@ -150,7 +150,7 @@ class Perfiles extends Component {
 				<td>
 					<Link to={`/aha/postulante/${user.id}`}>
 						<Button variant="primary" type="submit">
-							Ver Perfil
+							Datos personales
 						</Button>
 					</Link>
 				</td>
@@ -169,16 +169,30 @@ class Perfiles extends Component {
 		}
 	}
 
+	botonLaboral(user){
+		if(this.props.typeUsers === "candidato"){
+			return (
+				<td>
+					<Link to={`/aha/postulante/${user.id}/perfil-laboral`}>
+						<Button variant="primary" type="submit">
+							Perfil laboral
+						</Button>
+					</Link>
+				</td>
+			);
+		}
+	}
+
 	printUsers(){
 		if(this.state.charged){
-            return (
-                <React.Fragment>
+			return (
+				<React.Fragment>
 					<table className={styles.table}>
 						<thead>
 							<tr>
 								<th>Nombre </th>
 								{/*<th>Email</th>*/}
-								<th>Ingresar</th>
+								<th>Acciones</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -188,13 +202,14 @@ class Perfiles extends Component {
 										{this.nombre(user)}
 										{/*<td> {user.email} </td>*/}
 										{this.boton(user)}
+										{this.botonLaboral(user)}
 									</tr>
 								)
 							})}
 						</tbody>
 					</table>           
-                </React.Fragment>
-            )
+				</React.Fragment>
+				)
 		}
 	}
 
@@ -202,7 +217,7 @@ class Perfiles extends Component {
 		if(this.state.users != null || this.state.usersPage.users != null){
 			return (
 				<React.Fragment>
-					<Card className="mb-4">
+					<Card className="mb-2">
 						<Card.Header className="px-2">
 							{this.props.title}
 						</Card.Header>

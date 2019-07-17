@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Stage from './Stage/Stage';
-import axios from 'axios';
 import Stepper from './Stepper/Stepper';
 import StageControls from './StageControls/StageControls';
 import Card from 'react-bootstrap/Card';
@@ -13,7 +12,10 @@ import  {
 	FORM_EMPRESA,
 	FORM_NUEVA_OFERTA,
 	FORM_POSTULANTE,
-	FORM_POSTULANTE_LABORAL
+	FORM_POSTULANTE_LABORAL,
+	USER_TYPE_AHA,
+	USER_TYPE_POSTULANTE,
+	USER_TYPE_EMPRESA
 } from '../../constants';
 import { NEW_CURSO } from '../../constants/subforms';
 import {
@@ -25,7 +27,15 @@ import {
 	addExperiencia,
 	addCurso,
 	addTitulo,
+	getDatosPostulante,
+	getDatosEmpresa,
+	getCurrentUser,
 } from '../../util/APIUtils';
+import { formPostulante } from '../../constants/forms/formPostulante';
+import { formPostulanteLaboral } from '../../constants/forms/formPostulanteLaboral';
+import { formEmpresa } from '../../constants/forms/formEmpresa';
+import { formNuevaOferta} from '../../constants/forms/formNuevaOferta';
+import { formCuentaUsuario } from '../../constants/forms/formCuentaUsuario';
 //import '../../custom.css'
 
 class MasterForm extends Component {
@@ -34,13 +44,17 @@ class MasterForm extends Component {
     currentStage: 0,
     formData: null,
     missing: [],
-		show: false,
 		activeUserID: null,
-		alert: { show: false, message: null },
-		form: ''
+		alert: { show: false, message: null, type: null },
+		form: '',
+		loading: true,
+		datosFormulario: null
 	}
 	
 	cloneStateElementsArray = (inputIdentifier) => {
+		if (!inputIdentifier || this.state.loading) {
+			return false;
+		}
 		const updatedForm = {
       ...this.state.form
     }
@@ -52,8 +66,10 @@ class MasterForm extends Component {
     }
     const updatedStageFields = {
       ...updatedCurrentStage.fields
-    }
-    // updatedFieldElements es un objeto con keys numéricas para cada elemento del grupoFormulario
+		}
+		console.log("inputIdentifier: ", inputIdentifier)
+		// updatedFieldElements es un objeto con keys numéricas para cada elemento del grupoFormulario
+		
     const updatedFieldElements = {
       ...updatedStageFields[inputIdentifier].elements
     }
@@ -77,16 +93,35 @@ class MasterForm extends Component {
 	}
 
   handleDismiss = () => {
-		this.setState({ show: false, alert: { show: false } });
-		console.log("Alert.show: ", this.state.alert.show)
+		this.setState({
+      alert: { 
+				show: false,
+				message: null,
+				type: null,
+			}
+    });
 	}
+
+  handleAlert = (msg, type) => {
+    this.setState({
+      alert: {
+				show: true,
+				message: msg,
+				type: type,
+			}
+    });
+
+    setTimeout(() => {
+      this.handleDismiss()
+    }, 5000)
+  }
 
   handleValidation = (event, inputIdentifier, element) => {
     const clone = {...this.cloneStateElementsArray(inputIdentifier)}
 
     let missing = this.state.missing
 
-    this.setState({ show: false })
+    this.handleDismiss()
 
     for (let elem in clone.elementsArray) {
       //console.log(clone.elementsArray[elem].elementConfig.id)
@@ -116,8 +151,8 @@ class MasterForm extends Component {
     for (let elem in clone.elementsArray) {
       //console.log(elementsArray[elem].elementConfig.id)
       if(clone.elementsArray[elem].elementConfig.id === element) {
-        if (element === 'region'){
-          clone.updatedForm.stages[this.state.currentStage].fields['comuna'] =  getComunas(event.target.value)
+        if (element === 'region') {
+					clone.updatedForm.stages[this.state.currentStage].fields['comuna'] =  getComunas(event.target.value);
         }
 
         if (elementIndentifier === 'date'){
@@ -217,7 +252,6 @@ class MasterForm extends Component {
 			const updatedStages = {
 				...updatedForm.stages
 			}
-			//let currentUser = {...this.props.currentUser}
 
 			let datos = {};
 			let direccion = {};
@@ -232,11 +266,11 @@ class MasterForm extends Component {
 					const elements = [...fieldObj.elements];
 					//console.log("ELEMS: ", elements)
 					if (fieldObj.type === "experiencias") {
-						this.addExperienciasHandler(this.state.activeUserID, elements);
+						this.addExperienciasHandler(this.props.currentUser.id, elements);
 					} else if (fieldObj.type === "cursos") {
-						this.addCursosHandler(this.state.activeUserID, elements)
+						this.addCursosHandler(this.props.currentUser.id, elements)
 					} else if (fieldObj.type === "titulos") {
-						this.addTitulosHandler(this.state.activeUserID, elements)
+						this.addTitulosHandler(this.props.currentUser.id, elements)
 					} else if (fieldObj.type === "experienciasEmpresa") {
 						if (elements.length < 2 || elements.length % 2 !== 0) {
 							continue;
@@ -277,41 +311,48 @@ class MasterForm extends Component {
 			//console.log("USER: ", currentUser)
 			switch (this.state.form.title) {
 				case FORM_CUENTA_USUARIO:
-					console.log("ENDPOINT CUENTA USUARIO");
-					console.log(this.props.match)
+					//console.log("ENDPOINT CUENTA USUARIO");
+					//console.log(this.props.match)
 					break;
 				case FORM_POSTULANTE:
-					updatePerfilCandidato(this.state.activeUserID, datos)
+					updatePerfilCandidato(this.props.currentUser.id, datos)
 					.then(response => {
-						console.log("RESPONSE updatePerfilCandidato: ", response);
+						//console.log("RESPONSE updatePerfilCandidato: ", response);
+            this.handleAlert('Datos personales guardados.','success');
 					}).catch(error => {
-						console.log("ERROR updatePerfilCandidato: ", error);
+						this.handleAlert('Error al guardar los datos.','danger');
+						//console.log("ERROR updatePerfilCandidato: ", error);
 					});
 					break;
 				case FORM_POSTULANTE_LABORAL:
-					console.log(datos)
-					console.log("ID: ", this.state.activeUserID)
-					updatePerfilLaboral(this.state.activeUserID, datos)
+					//console.log(datos)
+					//console.log("ID: ", this.state.activeUserID)
+					updatePerfilLaboral(this.props.currentUser.id, datos)
 					.then(response => {
-						console.log("RESPONSE updatePerfilLaboral: ", response);
+						//console.log("RESPONSE updatePerfilLaboral: ", response);
+            this.handleAlert('Datos laborales guardados.','success');
 					}).catch(error => {
-						console.log("ERROR updatePerfilLaboral: ", error);
+						this.handleAlert('Error al guardar los datos.','danger');
+						//console.log("ERROR updatePerfilLaboral: ", error);
 					});
 					break;
 				case FORM_EMPRESA:
-					updatePerfilEmpresa(this.state.activeUserID, datos)
+					updatePerfilEmpresa(this.props.currentUser.id, datos)
 					.then(response => {
-						console.log("RESPONSE updatePerfilEmpresa: ", response);
+						//console.log("RESPONSE updatePerfilEmpresa: ", response);
+            this.handleAlert('Datos de empresa guardados.','success');
 					}).catch(error => {
-						console.log("ERROR updatePerfilEmpresa: ", error);
+						this.handleAlert('Error al guardar los datos.','danger')
+						//console.log("ERROR updatePerfilEmpresa: ", error);
 					});
 					break;
 				case FORM_NUEVA_OFERTA:
 					datos["experiencias"] = experienciasEmpresa;
 					console.log("DATOS FORM_NUEVA_OFERTA: ", datos)
-					createOferta(this.state.activeUserID, datos)
+					createOferta(this.props.currentUser.id, datos)
 					.then(response => {
 						console.log("RESPONSE createOferta: ", response);
+            this.handleAlert('Oferta guardada','success')
 						window.location.reload();
 					}).catch(error => {
 						console.log("ERROR createOferta: ", error);
@@ -323,7 +364,7 @@ class MasterForm extends Component {
      
     } else {
       console.log('Submit denegado');
-      this.setState({ show: true })
+      this.handleAlert("Hay campos con errores, no se ha guardado", "danger")
 		}
   }
   
@@ -404,23 +445,13 @@ class MasterForm extends Component {
   fetchData = async (endpoint) => {
     let formData = null;
 
-    // await axios.get(endpoint)
-    //   .then(response => {
-    //     formData = response.data;
-    //     console.log('response: ')
-    //     console.log(response.data)
-    //   })
-    //   .catch(function(error){
-    //     console.log(error);
-	//   })
-	await get(endpoint)
-	.then(response => {
-		formData = response;
-		console.log("RESPONSE get: ", response);
-	}).catch(error => {
-		console.log("ERROR get: ", error);
-	});
-
+  	await get(endpoint)
+  	.then(response => {
+  		formData = response;
+  		console.log("RESPONSE get: ", response);
+  	}).catch(error => {
+  		console.log("ERROR get: ", error);
+  	});
 
     for (let i=0; i<this.state.form.totalStages; i++)
       this.formatData(formData, i)
@@ -440,22 +471,29 @@ class MasterForm extends Component {
       ...updatedCurrentStage.fields
     }
 
-    const formDataDireccion = {
-      ...formData['direccion']
-    }
+		let formDataDireccion = undefined;
+		if (updatedForm.id === 3) {
+			formDataDireccion = {
+				...formData['direccion']
+			}
+		}
 
-    const formDataCursos = {
-      ...formData['cursos']
-    }
-
+		let formDataCursos = undefined;
+		if (updatedForm.id === 4) {
+			formDataCursos = {
+				...formData['cursos']
+			}
+		}
+/*
     const formDataExp = {
       ...formData['experiencias']
     }
-
+*/
+/*
     const formDataTitulos = {
       ...formData['titulos']
     }
-
+*/
     for (let field in updatedStageFields) {
       let currentField = {...updatedStageFields[field]};
       let currentFieldElements = {...currentField.elements}
@@ -475,7 +513,7 @@ class MasterForm extends Component {
           currentFieldElements[element].value = formDataDireccion[field];
         }
 
-        /*else if (formDataCursos) {
+        else if (formDataCursos) {
           this.addSubForm('cursos', NEW_CURSO)
         }
 
@@ -483,7 +521,7 @@ class MasterForm extends Component {
           asdas
         }
 
-        else if (formDataTitulos) {
+        /*else if (formDataTitulos) {
           asdas
         }*/
       }
@@ -491,105 +529,270 @@ class MasterForm extends Component {
     this.setState({
       form: updatedForm
     })
-  }
+	}
+	
+	fillFormData = (data, role) => {
+		console.log("llenando datos de formulario...")
+		console.log("this.state.datosFormulario: ", this.state.datosFormulario)
+		// data.perfilCandidato
+		// -> firstName, lastName, ... cada elementConfig.id
 
-	componentDidMount() {
-    console.log('mach')
-    console.log(this.props.match)
-    let activeUserID = null
-    if (this.props.currentUser.authorities[0].authority === 'ROLE_AHA' && this.props.match.path !== '/aha/cuenta')
-      activeUserID = this.props.match.params.id
-    else
-      activeUserID = this.props.currentUser.id
+		/* cargar lo que haya en datosFormulario a this.state.form */
+		// clonar this.state.form
+		// llenar sus campos dependiendo del tipo de usuario
+		// actualizar estado de form
+		const updatedForm = {
+      ...this.state.form
+    }
+    const updatedStages = [
+      ...updatedForm.stages
+		]
+
+		for (let stage in updatedStages) {
+			const updatedCurrentStage = {
+				...updatedStages[stage]
+			};
+			const updatedStageFields = {
+				...updatedCurrentStage.fields
+			};
+			console.log(data)
+			// para todos los fields, obtener todos sus elementos
+			for (let field in updatedStageFields) {
+				const updatedFieldElements = [ ...updatedStageFields[field].elements ]
+				//console.log("updatedFieldElements", updatedFieldElements)
+
+				for (let element in updatedFieldElements) {
+					//console.log("updatedFieldElements[element]", updatedFieldElements[element])
+					let elementId = updatedFieldElements[element].elementConfig.id;
+					let elementType = updatedFieldElements[element].elementType;
+					let newElementValue = null;
+
+					if ( role === USER_TYPE_POSTULANTE ) {
+
+						if(data.perfilCandidato === undefined) {
+							continue;
+						} else {
+							if (data.perfilCandidato.perfilLaboral[elementId] !== undefined) {
+								if (data.perfilCandidato.perfilLaboral[elementId] === null) {
+									newElementValue = '';
+								} else {
+									newElementValue = data.perfilCandidato.perfilLaboral[elementId];
+								}
+							} else {
+								if (data.perfilCandidato[elementId] === null) {
+									newElementValue = '';
+								} else {
+									newElementValue = data.perfilCandidato[elementId];
+								}
+							}
+	
+							if (elementType === 'date') {
+								newElementValue = new Date(data.perfilCandidato[elementId]);
+							}
+							if (elementId === 'calle' || elementId === 'comuna' || elementId === 'region') {
+								newElementValue = data.perfilCandidato.direccion[elementId];
+								//console.log(`newElementValue[${elementId}]: `, newElementValue)
+							}
+						}
+
+					} else if ( role === USER_TYPE_EMPRESA ) {
+						newElementValue = data[elementId];
+					} else {
+						newElementValue = data[elementId];
+					}
+				
+					if (newElementValue === undefined) {
+						console.log(`${elementId} is unset, value: ${newElementValue}`)
+						continue;
+					}
+					let elementsArray = [];
+					elementsArray.push({
+						...updatedFieldElements[element],
+						value: newElementValue
+					})
+					updatedForm.stages[stage].fields[field].elements = elementsArray;
+				}
+			}
+		}
 
 		this.setState({
-			form: this.props.formConfig
+			form: updatedForm
 		})
+		//updatedForm.stages[this.state.currentStage].fields.elements = elementsArray;
+		//console.log(updatedForm);
 
-		if(this.state.form != null) {
-			let currentEndpoint = this.props.formConfig.endpoint+('/')+activeUserID+('/')//this.props.this.state.activeUserID+('/')
-			switch(this.props.formConfig.id) {
-				//case(0): //formCuentaUsuario, probablemente a futuro
-				//  break;
-				case(1): //formEmpresa
-					currentEndpoint = currentEndpoint + 'perfilEmpresa'
-					break;
-				//case(2): //formNuevaOferta
-				//  break;
-				case(3): //formPostulante
-					currentEndpoint = currentEndpoint + 'perfilCandidato'
-					break;
-				case(4): //formPostulanteLaboral
-					currentEndpoint = currentEndpoint + 'perfilLaboral'
-					break;
-				default:
-					break;
+		
+	}
+
+	componentDidMount() {
+		switch (this.props.formTitle) {
+			case FORM_POSTULANTE_LABORAL:
+				getDatosPostulante(this.props.currentUser.id)
+				.then(response => {
+					this.setState({
+						form: formPostulanteLaboral,
+						datosFormulario: response,
+						loading: false
+					})
+					return response;
+				}).then(response => {
+					this.fillFormData(response, this.props.currentUser.role);
+					//console.log("ahora llenar datos", this.state.datosFormulario)
+					//console.log("this.state.datosFormulario: ", this.state.datosFormulario)
+				})
+				break;
+			case FORM_POSTULANTE:
+				getDatosPostulante(this.props.currentUser.id)
+					.then(response => {
+						this.setState({
+							form: formPostulante,
+							datosFormulario: response,
+							loading: false
+						})
+						return response;
+					}).then(response => {
+						this.fillFormData(response, this.props.currentUser.role);
+						//console.log("ahora llenar datos", this.state.datosFormulario)
+						//console.log("this.state.datosFormulario: ", this.state.datosFormulario)
+					})
+				break;
+			case FORM_CUENTA_USUARIO:
+				getCurrentUser()
+					.then(response => {
+						let datos = { email: response.email, password: '' };
+						this.setState({
+							form: formCuentaUsuario,
+							datosFormulario: datos,
+							loading: false
+						})
+						return datos;
+					}).then(datos => {
+						this.fillFormData(datos, this.props.currentUser.role);
+					})
+				break;
+			case FORM_EMPRESA:
+				getDatosEmpresa(this.props.currentUser.id)
+					.then(response => {
+						this.setState({
+							form: formEmpresa,
+							datosFormulario: response,
+							loading: false
+						})
+						return response;
+					}).then(response => {
+						this.fillFormData(response, this.props.currentUser.role);
+						//console.log("ahora llenar datos", this.state.datosFormulario)
+						//console.log("this.state.datosFormulario: ", this.state.datosFormulario)
+					})
+				break;
+			case FORM_NUEVA_OFERTA:
+				this.setState({
+					form: formNuevaOferta,
+					loading: false
+				})
+				break;
+			default:
+				console.log("props.formTitle: ", this.props.formTitle)
+		}
+		
+		if (!this.state.loading) {
+			console.log("this.state.loading: ", this.state.loading)
+			let activeUserID = null
+			if (this.props.currentUser.role === USER_TYPE_AHA && this.props.match.path !== '/aha/cuenta')
+				activeUserID = this.props.match.params.id
+			else
+				activeUserID = this.props.currentUser.id
+
+			if(this.state.form != null) {
+				let currentEndpoint = this.state.form.endpoint+('/')+activeUserID+('/');
+				console.log("currentEndpoint: ", currentEndpoint)
+				switch(this.state.form.id) {
+					//case(0): //formCuentaUsuario
+					//  break;
+					case(1): //formEmpresa
+						currentEndpoint = currentEndpoint + 'perfilEmpresa'
+						break;
+					case(2): //formNuevaOferta
+						currentEndpoint = currentEndpoint + 'oferta'
+						break;
+					case(3): //formPostulante
+						currentEndpoint = currentEndpoint + 'perfilCandidato'
+						break;
+					case(4): //formPostulanteLaboral
+						currentEndpoint = currentEndpoint + 'perfilLaboral'
+						break;
+					default:
+						break;
+				}
+
+				//this.fetchData(currentEndpoint);
+
+				this.setState({
+					activeUserID: activeUserID
+				})
 			}
-
-			this.fetchData (currentEndpoint);
-
-      this.setState({
-        activeUserID: activeUserID
-      })
 		}
   }
 
   render () {
-		//console.log("MasterForm props: ", this.props)
-    let stages = (
-      this.props.formConfig.stages.map(stage => {
-        return <Stage
-          key={stage.id}
-          title={stage.name}
-          id={stage.id}
-          // stageFields = { apellidos: {elementConfig: {}, elementType: '', ...}, nombres: {}, ... }
-          stageFields={stage.fields}
-          currentStage={this.state.currentStage}
-          totalStages={this.props.formConfig.totalStages}
-          handleValidation={this.handleValidation}
-          handleChange={this.handleChange}
-					addSubForm={this.addSubForm}
-          deleteForm={this.deleteForm}
-          />
-        })
-    );
+		let stages = "Cargando...";
+		let stageTitlesArray = [];
+		if (!this.state.loading) {
+			console.log(this.state.form)
+			//console.log("MasterForm props: ", this.props)
+			stages = (
+				this.state.form.stages.map(stage => {
+					return <Stage
+						key={stage.id}
+						title={stage.name}
+						id={stage.id}
+						// stageFields = { apellidos: {elementConfig: {}, elementType: '', ...}, nombres: {}, ... }
+						stageFields={stage.fields}
+						currentStage={this.state.currentStage}
+						totalStages={this.state.form.totalStages}
+						handleValidation={this.handleValidation}
+						handleChange={this.handleChange}
+						addSubForm={this.addSubForm}
+						deleteForm={this.deleteForm}
+						/>
+					})
+			);
 
-    let stageTitlesArray = [];
-    for (let stage in this.props.formConfig.stages) {
-      stageTitlesArray.push(this.props.formConfig.stages[stage].name);
-    }
-
+			for (let stage in this.state.form.stages) {
+				stageTitlesArray.push(this.state.form.stages[stage].name);
+			}
+		}
+	
     return (
-
       <Card className="mb-4">
-        <Card.Header className="px-2">
-          <Alert
-						className="mb-0 mt-2"
-						variant="danger"
-						show={this.state.show}
+				<Card.Header className="px-2">
+					<Alert
+						className="mb-2 mt-2"
+						variant={this.state.alert.type}
+						show={this.state.alert.show}
 						onClose={this.handleDismiss}
 						dismissible>
-						"Hay campos con errores."
-          </Alert>
-          <Stepper
+						{this.state.alert.message}
+					</Alert>
+					<Stepper
 						currentStage={this.state.currentStage}
-						totalStages={this.props.formConfig.totalStages}
+						totalStages={this.state.form.totalStages}
 						stageTitles={stageTitlesArray}
 						goto={this._goto}
 					/>
-        </Card.Header>
-        <Card.Body>
-          <form onSubmit={(event) => this.handleSubmit(event, "POST")}>
-            { stages }
-            <StageControls
-              totalStages={this.props.formConfig.totalStages}
-              currentStage={this.state.currentStage}
-              _prev={this._prev}
-              _next={this._next}
-            />
-          </form>
-        </Card.Body>
-      </Card>
+				</Card.Header>
+				<Card.Body>
+					<form onSubmit={(event) => this.handleSubmit(event, "POST")}>
+						{ stages }
+						<StageControls
+							totalStages={this.state.form.totalStages}
+							currentStage={this.state.currentStage}
+							_prev={this._prev}
+							_next={this._next}
+						/>
+					</form>
+				</Card.Body>
+			</Card>
     );
   }
 }

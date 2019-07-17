@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+//import axios from 'axios';
 import Card from 'react-bootstrap/Card';
 //import Row from 'react-bootstrap/Row';
 //import Col from 'react-bootstrap/Col';
@@ -106,7 +106,7 @@ class Ofertas extends Component {
             <td>
                 <Link to={`/aha/oferta/${id_oferta}/recomendaciones`}>
                     <Button variant="primary" type="submit">
-                        Rec.
+                        Recomendados
                     </Button>
                 </Link>
             </td>
@@ -123,8 +123,8 @@ class Ofertas extends Component {
 							<tr>
 								<th>Nombre </th>
 								<th>Descripción</th>
-                                <th>Detalle</th>
-                                <th>Recomendaciones</th>
+								<th>Detalle</th>
+								<th>Postulantes</th>
 							</tr>
 						</thead>
                         <tbody>

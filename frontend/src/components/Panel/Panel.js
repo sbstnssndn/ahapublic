@@ -13,15 +13,15 @@ import DetalleOferta from '../Ofertas/DetalleOferta';
 import Empresa from '../Empresa/Empresa';
 import Tabs from '../Tabs/Tabs';
 
-import { formPostulante } from '../../constants/forms/formPostulante';
-import { formPostulanteLaboral } from '../../constants/forms/formPostulanteLaboral';
-import { formEmpresa } from '../../constants/forms/formEmpresa';
-import { formNuevaOferta} from '../../constants/forms/formNuevaOferta';
-import { formCuentaUsuario } from '../../constants/forms/formCuentaUsuario';
 import {
 	USER_TYPE_POSTULANTE,
 	USER_TYPE_EMPRESA,
-	USER_TYPE_AHA
+	USER_TYPE_AHA,
+	FORM_POSTULANTE_LABORAL,
+	FORM_CUENTA_USUARIO,
+	FORM_POSTULANTE,
+	FORM_NUEVA_OFERTA,
+	FORM_EMPRESA,
 } from '../../constants';
 
 
@@ -41,23 +41,22 @@ const Panel = ( props ) => {
 						exact
 						render={(props) => (
 							<MasterForm
-								formConfig={formPostulanteLaboral} currentUser={currentUser} {...props} />
-						)} />
+								formTitle={FORM_POSTULANTE_LABORAL} currentUser={currentUser} {...props} />
+					)} />
 					<Route
 						path={`${props.match.path}/cuenta`}
 						exact
 						render={(props) => (
 							<MasterForm
-								formConfig={formCuentaUsuario} currentUser={currentUser} {...props} />
-						)} />
+							formTitle={FORM_CUENTA_USUARIO} currentUser={currentUser} {...props} />
+					)} />
 					<Route
 						path={`${props.match.path}`}
 						exact
 						render={(props) => (
 							<MasterForm
-								formConfig={formPostulante} currentUser={currentUser} {...props} />
-						)} />
-					
+							formTitle={FORM_POSTULANTE} currentUser={currentUser} {...props} />
+					)} />
 				</>
 			);
 			tabs = (
@@ -92,7 +91,7 @@ const Panel = ( props ) => {
 						exact
 						render={(props) => (
 							<MasterForm
-								formConfig={formNuevaOferta} currentUser={currentUser} {...props} />	
+								formTitle={FORM_NUEVA_OFERTA} currentUser={currentUser} {...props} />	
 						)} />
 						
 					{/* /empresa */}
@@ -101,7 +100,7 @@ const Panel = ( props ) => {
 						exact
 						render={(props) => (
 							<MasterForm
-								formConfig={formEmpresa} currentUser={currentUser} {...props} />
+								formTitle={FORM_EMPRESA} currentUser={currentUser} {...props} />
 						)} />
 				</>
 			);
@@ -137,7 +136,7 @@ const Panel = ( props ) => {
 						exact
 						render={(props) => (
 							<MasterForm
-								formConfig={formCuentaUsuario} currentUser={currentUser} {...props} />
+								formTitle={FORM_CUENTA_USUARIO} currentUser={currentUser} {...props} />
 						)} />
 
 					{/*Editar un postulante */}
@@ -146,7 +145,14 @@ const Panel = ( props ) => {
 						exact
 						render={(props) => (
 							<MasterForm
-								formConfig={formPostulanteLaboral} currentUser={currentUser} {...props} />
+								formTitle={FORM_POSTULANTE} currentUser={currentUser} {...props} />
+						)} />
+					<Route
+						path={`${props.match.path}/postulante/:id/perfil-laboral`}
+						exact
+						render={(props) => (
+							<MasterForm
+								formTitle={FORM_POSTULANTE_LABORAL} currentUser={currentUser} {...props} />
 						)} />
 
 					{/*Ofertas de una empresa */}

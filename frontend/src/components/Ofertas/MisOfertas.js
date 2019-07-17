@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+//import axios from 'axios';
 import Card from 'react-bootstrap/Card';
 import styles from '../Paginacion/App.module.css';
 import Button from 'react-bootstrap/Button';
