@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import moment from 'moment';
 import Stage from './Stage/Stage';
 import Stepper from './Stepper/Stepper';
 import StageControls from './StageControls/StageControls';
@@ -6,7 +7,7 @@ import Card from 'react-bootstrap/Card';
 import Alert from 'react-bootstrap/Alert';
 import { fieldFormValidation } from '../../util/ValidationUtils';
 //import { rutFormat } from '../../util/FormatUtils.js';
-import { generateSubForm, getComunas } from '../../util/common';
+import { generateSubForm, getComunas, copy } from '../../util/common';
 import  {
 	FORM_CUENTA_USUARIO,
 	FORM_EMPRESA,
@@ -210,6 +211,7 @@ class MasterForm extends Component {
 				fechaInicio: elements[element+2].value,
 				fechaFin: elements[element+3].value
 			}
+			console.log("Agregando curso:", elementObj)
 			addCurso(userId, elementObj)
 				.then(response => {
 					console.log("RESPONSE addCurso: ", response);
@@ -533,13 +535,16 @@ class MasterForm extends Component {
       form: updatedForm
     })
 	}
+
+	toDate = (dateStr) => {
+		const [day, month, year] = dateStr.split("-")
+		return new Date(day, month - 1, year)
+	}
 	
 	fillFormData = (data, role) => {
-		console.log("llenando datos de formulario...")
-		console.log("this.state.datosFormulario: ", this.state.datosFormulario)
-		// data.perfilCandidato
-		// -> firstName, lastName, ... cada elementConfig.id
-
+		console.log("llenando datos de formulario...");
+		console.log("GET data: ", data);
+		//console.log("this.state.datosFormulario: ", this.state.datosFormulario)
 		/* cargar lo que haya en datosFormulario a this.state.form */
 		// clonar this.state.form
 		// llenar sus campos dependiendo del tipo de usuario
@@ -558,11 +563,58 @@ class MasterForm extends Component {
 			const updatedStageFields = {
 				...updatedCurrentStage.fields
 			};
-			console.log(data)
 			// para todos los fields, obtener todos sus elementos
 			for (let field in updatedStageFields) {
 				const updatedFieldElements = [ ...updatedStageFields[field].elements ]
 				//console.log("updatedFieldElements", updatedFieldElements)
+
+
+
+
+
+				let fieldType = updatedStageFields[field].type;
+				if (fieldType === 'cursos') {
+					// el elemento updatedFieldElements[element] es UN curso
+					// se debe recorrer los atributos del elemento (name, institucion, fechaInicio, fechaFin)
+					// y crear el objeto newCurso
+					// agregarlo a un array de newCursosArray
+					// hacer updatedForm.stages[stage].fields[field].elements = newCursosArray;
+					let cursosArray = [];
+					let getCursos = data.perfilCandidato.perfilLaboral.cursos;
+
+					
+
+					
+					// addSubForm("cursos", NEW_CURSO_MODIF)
+
+					for (let curso in getCursos) {
+						let newCursoClone = copy(NEW_CURSO);
+						newCursoClone[0].value = getCursos[curso].name;
+						newCursoClone[1].value = getCursos[curso].institucion;
+						newCursoClone[2].value = this.toDate(getCursos[curso].fechaInicio);
+						newCursoClone[3].value = this.toDate(getCursos[curso].fechaFin);
+						cursosArray = cursosArray.concat(newCursoClone);
+						console.log("FECHA MOMENT", moment(getCursos[curso].fechaInicio).toISOString())
+						console.log("cursosArray", cursosArray, "fecha", getCursos[curso].fechaInicio)
+
+						/*cursosArray.push({
+							id: getCursos[curso].id,
+							name: getCursos[curso].name,
+							institucion: getCursos[curso].institucion,
+							fechaInicio: getCursos[curso].fechaInicio,
+							fechaFin: getCursos[curso].fechaFin,
+						});*/
+					}
+					updatedForm.stages[stage].fields[field].elements = cursosArray;
+					this.setState({
+						form: updatedForm
+					})
+					//updatedForm.stages[stage].fields[field].elements = cursosArray;
+					return;
+				}
+
+
+
 
 				for (let element in updatedFieldElements) {
 					//console.log("updatedFieldElements[element]", updatedFieldElements[element])
@@ -576,6 +628,7 @@ class MasterForm extends Component {
 							continue;
 						} else {
 							if (data.perfilCandidato.perfilLaboral[elementId] !== undefined) {
+
 								if (data.perfilCandidato.perfilLaboral[elementId] === null) {
 									newElementValue = '';
 								} else {
@@ -593,7 +646,13 @@ class MasterForm extends Component {
 								newElementValue = new Date(data.perfilCandidato[elementId]);
 							}
 							if (elementId === 'calle' || elementId === 'comuna' || elementId === 'region') {
-								newElementValue = data.perfilCandidato.direccion[elementId];
+								if (data.perfilCandidato.direccion != null) {
+									if (data.perfilCandidato.direccion[elementId] === null) {
+										newElementValue = '';
+									} else {
+										newElementValue = data.perfilCandidato.direccion[elementId];
+									}
+								}
 								//console.log(`newElementValue[${elementId}]: `, newElementValue)
 							}
 						}
@@ -605,7 +664,7 @@ class MasterForm extends Component {
 					}
 				
 					if (newElementValue === undefined) {
-						console.log(`${elementId} is unset, value: ${newElementValue}`)
+						//console.log(`${elementId} is unset, value: ${newElementValue}`)
 						continue;
 					}
 					let elementsArray = [];
@@ -621,10 +680,6 @@ class MasterForm extends Component {
 		this.setState({
 			form: updatedForm
 		})
-		//updatedForm.stages[this.state.currentStage].fields.elements = elementsArray;
-		//console.log(updatedForm);
-
-		
 	}
 
 	loadForm = (user) => {
@@ -649,18 +704,18 @@ class MasterForm extends Component {
 		switch (this.props.formTitle) {
 			case FORM_POSTULANTE_LABORAL:
 				getDatosPostulante(user.id)
-				.then(response => {
-					this.setState({
-						form: formPostulanteLaboral,
-						datosFormulario: response,
-						loading: false
+					.then(response => {
+						this.setState({
+							form: formPostulanteLaboral,
+							datosFormulario: response,
+							loading: false
+						})
+						return response;
+					}).then(response => {
+						this.fillFormData(response, userRole);
+						//console.log("ahora llenar datos", this.state.datosFormulario)
+						//console.log("this.state.datosFormulario: ", this.state.datosFormulario)
 					})
-					return response;
-				}).then(response => {
-					this.fillFormData(response, userRole);
-					//console.log("ahora llenar datos", this.state.datosFormulario)
-					//console.log("this.state.datosFormulario: ", this.state.datosFormulario)
-				})
 				break;
 			case FORM_POSTULANTE:
 				getDatosPostulante(user.id)
@@ -672,6 +727,7 @@ class MasterForm extends Component {
 						})
 						return response;
 					}).then(response => {
+						console.log("FORM_POSTULANTE getDatosPostulante: ", response);
 						this.fillFormData(response, userRole);
 						//console.log("ahora llenar datos", this.state.datosFormulario)
 						//console.log("this.state.datosFormulario: ", this.state.datosFormulario)
@@ -738,9 +794,7 @@ class MasterForm extends Component {
 			})
 			this.loadForm(this.props.currentUser);
 		}
-
-		
-		
+		/*
 		if (!this.state.loading) {
 			console.log("this.state.loading: ", this.state.loading)
 			let activeUserID = null
@@ -777,7 +831,7 @@ class MasterForm extends Component {
 					activeUserID: activeUserID
 				})
 			}
-		}
+		}*/
   }
 
   render () {
@@ -788,6 +842,7 @@ class MasterForm extends Component {
 			//console.log("MasterForm props: ", this.props)
 			stages = (
 				this.state.form.stages.map(stage => {
+					console.log("STAGE:",stage.name, " FIELDS:", stage.fields);
 					return <Stage
 						key={stage.id}
 						title={stage.name}

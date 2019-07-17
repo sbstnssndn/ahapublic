@@ -21,7 +21,7 @@ const request = (options) => {
 	*/
 	options = Object.assign({}, defaults, options);
 
-	console.log("Estoy en APIUtils/request(), response:");
+	//console.log("Estoy en APIUtils/request(), response:");
 
 	let ok = null;
 	return fetch(options.url, options)

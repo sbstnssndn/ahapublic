@@ -434,8 +434,8 @@ export const formPostulanteLaboral =
                 label: '¿Puedes usar herramientas u objetos pequeños?',
                 elementType: 'select',
                 elementConfig: {
-                  name: 'objetosPequeños',
-                  id: 'objetosPequeños',
+                  name: 'objetosPequenhos',
+                  id: 'objetosPequenhos',
                   options: [
                     { value: '', displayValue: 'Seleccione...', disabled: true },
                     { value: 0, displayValue: 'No, o muy poco tiempo' },
