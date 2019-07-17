@@ -29,7 +29,7 @@ import {
 	addTitulo,
 	getDatosPostulante,
 	getDatosEmpresa,
-	getCurrentUser,
+	getUser,
 } from '../../util/APIUtils';
 import { formPostulante } from '../../constants/forms/formPostulante';
 import { formPostulanteLaboral } from '../../constants/forms/formPostulanteLaboral';
@@ -624,10 +624,28 @@ class MasterForm extends Component {
 		
 	}
 
-	componentDidMount() {
+	loadForm = (user) => {
+		let userRole = null;
+		if (user.role === undefined) {
+			for (let role in user.roles) {
+				let rol = user.roles[role].name;
+				if (rol === "ROLE_CANDIDATO") {
+					userRole = "candidato"
+				}
+				if (rol === "ROLE_EMPRESA") {
+					userRole = "empresa"
+				}
+				if (rol === "ROLE_AHA") {
+					userRole = "aha"
+				}
+			}
+		} else {
+			userRole = user.role;
+		}
+
 		switch (this.props.formTitle) {
 			case FORM_POSTULANTE_LABORAL:
-				getDatosPostulante(this.props.currentUser.id)
+				getDatosPostulante(user.id)
 				.then(response => {
 					this.setState({
 						form: formPostulanteLaboral,
@@ -636,13 +654,13 @@ class MasterForm extends Component {
 					})
 					return response;
 				}).then(response => {
-					this.fillFormData(response, this.props.currentUser.role);
+					this.fillFormData(response, userRole);
 					//console.log("ahora llenar datos", this.state.datosFormulario)
 					//console.log("this.state.datosFormulario: ", this.state.datosFormulario)
 				})
 				break;
 			case FORM_POSTULANTE:
-				getDatosPostulante(this.props.currentUser.id)
+				getDatosPostulante(user.id)
 					.then(response => {
 						this.setState({
 							form: formPostulante,
@@ -651,13 +669,13 @@ class MasterForm extends Component {
 						})
 						return response;
 					}).then(response => {
-						this.fillFormData(response, this.props.currentUser.role);
+						this.fillFormData(response, userRole);
 						//console.log("ahora llenar datos", this.state.datosFormulario)
 						//console.log("this.state.datosFormulario: ", this.state.datosFormulario)
 					})
 				break;
 			case FORM_CUENTA_USUARIO:
-				getCurrentUser()
+				getUser(user.id)
 					.then(response => {
 						let datos = { email: response.email, password: '' };
 						this.setState({
@@ -665,13 +683,13 @@ class MasterForm extends Component {
 							datosFormulario: datos,
 							loading: false
 						})
-						return datos;
-					}).then(datos => {
-						this.fillFormData(datos, this.props.currentUser.role);
+						return response;
+					}).then(response => {
+						this.fillFormData(response, userRole);
 					})
 				break;
 			case FORM_EMPRESA:
-				getDatosEmpresa(this.props.currentUser.id)
+				getDatosEmpresa(user.id)
 					.then(response => {
 						this.setState({
 							form: formEmpresa,
@@ -680,7 +698,7 @@ class MasterForm extends Component {
 						})
 						return response;
 					}).then(response => {
-						this.fillFormData(response, this.props.currentUser.role);
+						this.fillFormData(response, userRole);
 						//console.log("ahora llenar datos", this.state.datosFormulario)
 						//console.log("this.state.datosFormulario: ", this.state.datosFormulario)
 					})
@@ -694,6 +712,26 @@ class MasterForm extends Component {
 			default:
 				console.log("props.formTitle: ", this.props.formTitle)
 		}
+	}
+
+	componentDidMount() {
+		let currentUserRole = this.props.currentUser.role;
+		let isAHA = currentUserRole === USER_TYPE_AHA ? true : false;
+
+		if (isAHA && this.props.match.path !== '/aha/cuenta') {
+			getUser(this.props.match.params.id)
+				.then(response => {
+					let user = response;
+					console.log("USER AHA: ", user);
+					this.loadForm(user)
+				}).catch(error => {
+					console.log(error);
+				})
+		} else {
+			this.loadForm(this.props.currentUser);
+		}
+
+		
 		
 		if (!this.state.loading) {
 			console.log("this.state.loading: ", this.state.loading)
