@@ -33,8 +33,6 @@ public class PerfilLaboral {
     @JsonBackReference
     private PerfilCandidato perfilCandidato;
 
-    private String name;
-
     // ---------------------
     // DATOS DE INCLUSIVIDAD
     // ---------------------
@@ -45,7 +43,7 @@ public class PerfilLaboral {
     // Usas silla de ruedas (y por tanto Requieres rampa acceso)
     private boolean sillaDeRuedas;
     // Requieres baño adaptado
-    private boolean bañoAdaptado;
+    private boolean banhoAdaptado;
     // Indica si requieres otras adecuaciones
     private String adecuaciones;
 
@@ -68,7 +66,7 @@ public class PerfilLaboral {
     // Puedes alcanzar o coger objetos en diferentes alturas?
     private Integer diferentesAlturas;
     // Puedes usar herramientas u objetos pequeños?
-    private Integer objetosPequeños;
+    private Integer objetosPequenhos;
     // Puedes realizar actividades que requieren agudeza visual corta y larga
     // distancia?
     private Integer actividadesVisual;
@@ -93,9 +91,10 @@ public class PerfilLaboral {
     // DATOS LABORALES
     // --------------------------
 
-    // LICENCIA DE CONDUCIR
+    // CONDUCCIÓN
     // --------------------
     private String licencia;
+    private boolean autoPropio;
 
     // AYUDA PARA LLENAR FORMULARIO
     // ----------------------------
@@ -107,19 +106,19 @@ public class PerfilLaboral {
     private Integer nivelEducacional; // 0: Ed. Especial ..... 9:Postgrado
 
     // Titulos/carreras terminadas
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "perfil_laboral_perfil_candidato_user_id")
     @JsonManagedReference
     private Collection<Titulo> titulos;
 
     // Cursos realizados
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "perfil_laboral_perfil_candidato_user_id")
     @JsonManagedReference
     private Collection<Curso> cursos;
 
     // Experiencias laborales
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "perfil_laboral_perfil_candidato_user_id")
     @JsonManagedReference
     private Collection<Experiencia> experiencias;
@@ -141,8 +140,28 @@ public class PerfilLaboral {
     // 6: 1.000.000 o más
     private Integer expectativaSueldo;
 
-    public String getName() {
-        return name;
+    public Integer getObjetosPequenhos() {
+        return objetosPequenhos;
+    }
+
+    public void setObjetosPequenhos(Integer objetosPequenhos) {
+        this.objetosPequenhos = objetosPequenhos;
+    }
+
+    public boolean isBanhoAdaptado() {
+        return banhoAdaptado;
+    }
+
+    public void setBanhoAdaptado(boolean banhoAdaptado) {
+        this.banhoAdaptado = banhoAdaptado;
+    }
+
+    public boolean isAutoPropio() {
+        return autoPropio;
+    }
+
+    public void setAutoPropio(boolean autoPropio) {
+        this.autoPropio = autoPropio;
     }
 
     public PerfilCandidato getPerfilCandidato() {
@@ -225,14 +244,6 @@ public class PerfilLaboral {
         this.adecuaciones = adecuaciones;
     }
 
-    public boolean isBañoAdaptado() {
-        return bañoAdaptado;
-    }
-
-    public void setBañoAdaptado(boolean bañoAdaptado) {
-        this.bañoAdaptado = bañoAdaptado;
-    }
-
     public Integer getTareasEstresantes() {
         return tareasEstresantes;
     }
@@ -303,14 +314,6 @@ public class PerfilLaboral {
 
     public void setActividadesVisual(Integer actividadesVisual) {
         this.actividadesVisual = actividadesVisual;
-    }
-
-    public Integer getObjetosPequeños() {
-        return objetosPequeños;
-    }
-
-    public void setObjetosPequeños(Integer objetosPequeños) {
-        this.objetosPequeños = objetosPequeños;
     }
 
     public Integer getDiferentesAlturas() {
@@ -415,10 +418,6 @@ public class PerfilLaboral {
 
     public void setCredencial(boolean credencial) {
         this.credencial = credencial;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
 }

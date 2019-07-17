@@ -1,14 +1,18 @@
 package com.grupo1.ahainclusion.model.candidato;
 
-import java.sql.Date;
+import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.grupo1.ahainclusion.model.PerfilLaboral;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 public class Experiencia {
@@ -16,14 +20,19 @@ public class Experiencia {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
     private Integer id;
 
-    // Tipo: Tipo de experiencia
-    private String tipo;
     // Cargo: nombre del cargo
+    @NotNull(message = "Debe ingresar nombre del cargo")
     private String cargo;
+    // Tipo: Tipo de experiencia
+    @NotNull(message = "Debe ingresar area de experiencia")
+    private Integer area;
     // Empresa: Nombre de la empresa
+    @NotNull(message = "Debe ingresar nombre de la empresa")
     private String empresa;
     // Fechas: fecha inicio y fin de la experiencia
+    @NotNull(message = "Debe ingresar una fecha de inicio")
     private Date fechaInicio;
+    @NotNull(message = "Debe ingresar una fecha de fin")
     private Date fechaFin;
 
     // Perfil Laboral padre
@@ -31,8 +40,20 @@ public class Experiencia {
     @JsonBackReference
     private PerfilLaboral perfilLaboral;
 
-    public String getTipo() {
-        return tipo;
+    public Integer getId() {
+        return id;
+    }
+
+    public Integer getArea() {
+        return area;
+    }
+
+    public void setArea(Integer area) {
+        this.area = area;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getCargo() {
@@ -73,10 +94,6 @@ public class Experiencia {
 
     public void setEmpresa(String empresa) {
         this.empresa = empresa;
-    }
-
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
     }
 
 

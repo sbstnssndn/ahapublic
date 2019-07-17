@@ -5,6 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.grupo1.ahainclusion.model.Oferta;
@@ -16,9 +17,11 @@ public class ExperienciaExigida {
     private Integer id;
 
     // Tipo: Tipo de experiencia
-    private String tipo;
+    @NotNull(message="Debe ingresar el area de la experiencia exigida")
+    private Integer area;
 
     // Duración: años de experiencia requeridos
+    @NotNull(message = "Debe ingresar los años de duración exigidos")
     private Integer duracion;
 
     // Oferta padre
@@ -26,12 +29,16 @@ public class ExperienciaExigida {
     @JsonBackReference
     private Oferta oferta;
 
-    public String getTipo() {
-        return tipo;
-    }
-
     public Oferta getOferta() {
         return oferta;
+    }
+
+    public Integer getArea() {
+        return area;
+    }
+
+    public void setArea(Integer area) {
+        this.area = area;
     }
 
     public void setOferta(Oferta oferta) {
@@ -46,9 +53,6 @@ public class ExperienciaExigida {
         this.duracion = duracion;
     }
     
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
-    }
 
 
 

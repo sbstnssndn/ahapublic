@@ -72,6 +72,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                     .and()
                 .authorizeRequests()
+                    .antMatchers("/rest/**")
+                        .denyAll()
                     .antMatchers("/",
                         "/favicon.ico",
                         "/**/*.png",
@@ -82,21 +84,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/**/*.css",
                         "/**/*.js")
                         .permitAll()
-                    .antMatchers("/auth/**")
+                    .antMatchers("/auth/**", "/user/add")
                         .permitAll()
-                    // .antMatchers("/user/checkUsernameAvailability", "/user/checkEmailAvailability")
-                        // .permitAll()
-                    // .antMatchers(HttpMethod.GET,  "/rest/**")
-                    //     .permitAll()
-                    // .antMatchers(HttpMethod.GET,  "/user/**")
-                    //     .permitAll()
-                    // .antMatchers(HttpMethod.POST,  "/user/**")
-                    //     .permitAll()
-                    .antMatchers(HttpMethod.GET,  "/**/**")
-                        .permitAll()
-                    .antMatchers(HttpMethod.POST,  "/**/**")
-                        .permitAll()
-                    .anyRequest()
+                    .antMatchers(HttpMethod.GET,  "/**")
+                        .authenticated()
+                    .antMatchers(HttpMethod.POST,  "/**")
+                        .authenticated()
+                    .antMatchers(HttpMethod.PUT,  "/**")
+                        .authenticated()
+                    .antMatchers(HttpMethod.DELETE,  "/**")
                         .authenticated();
 
         // Filtro JWT
