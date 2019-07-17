@@ -198,11 +198,12 @@ class MasterForm extends Component {
 	}
 
 	addCursosHandler = (userId, elements) => {
-		if (elements.length < 4 || elements.length % 4 !== 0) {
+		if (elements.length % 4 !== 0) {
 			return;
 		}
 		console.log("addCursosHandler elements: ", elements);
 		/* Para cada elemento, crear un objeto curso y enviarlo */
+		let cursosArray = [];
 		for (let element = 0; element < elements.length; element=element+4) {
 			let elementObj = {
 				name: elements[element].value,
@@ -210,14 +211,15 @@ class MasterForm extends Component {
 				fechaInicio: elements[element+2].value,
 				fechaFin: elements[element+3].value
 			}
+			cursosArray.push(elementObj);
 			console.log("Agregando curso:", elementObj)
-			addCurso(userId, elementObj)
-				.then(response => {
-					console.log("RESPONSE addCurso: ", response);
-				}).catch(error => {
-					console.log("ERROR addCurso: ", error);
-				});
 		}
+		addCurso(userId, cursosArray)
+			.then(response => {
+				console.log("RESPONSE addCurso: ", response);
+			}).catch(error => {
+				console.log("ERROR addCurso: ", error);
+			});
 	}
 
 	addTitulosHandler = (userId, elements) => {
@@ -272,6 +274,7 @@ class MasterForm extends Component {
 					if (fieldObj.type === "experiencias") {
 						this.addExperienciasHandler(loadedUser.id, elements);
 					} else if (fieldObj.type === "cursos") {
+						console.log("cursos elements: ", elements);
 						this.addCursosHandler(loadedUser.id, elements)
 					} else if (fieldObj.type === "titulos") {
 						this.addTitulosHandler(loadedUser.id, elements)

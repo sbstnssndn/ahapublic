@@ -188,7 +188,7 @@ export const addCurso = (id, curso) => {
 	//console.log(JSON.stringify(curso))
 	return request({
 		url: API_BASE_URL + `/user/${id}/curso`,
-		method: 'POST',
+		method: 'PUT',
 		body: JSON.stringify(curso)
 	});
 }
