@@ -122,7 +122,7 @@ export const addExperiencia = (id, experiencia) => {
 	//console.log(JSON.stringify(experiencia))
 	return request({
 			url: API_BASE_URL + `/user/${id}/experiencia`,
-			method: 'POST',
+			method: 'PUT',
 			body: JSON.stringify(experiencia)
 	});
 }
@@ -197,7 +197,7 @@ export const addTitulo = (id, titulo) => {
 	//console.log(JSON.stringify(curso))
 	return request({
 		url: API_BASE_URL + `/user/${id}/titulo`,
-		method: 'POST',
+		method: 'PUT',
 		body: JSON.stringify(titulo)
 	});
 }

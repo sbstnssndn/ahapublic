@@ -175,11 +175,12 @@ class MasterForm extends Component {
 	}
 	
 	addExperienciasHandler = (userId, elements) => {
-		if (elements.length < 5 || elements.length % 5 !== 0) {
+		if (elements.length % 5 !== 0) {
 			return;
 		}
 		console.log("addExperienciasHandler elements: ", elements);
 		/* Para cada elemento, crear un objeto experiencia y enviarlo */
+		let experienciasArray = [];
 		for (let element = 0; element < elements.length; element=element+5) {
 			let elementObj = {
 				empresa: elements[element].value,
@@ -188,13 +189,14 @@ class MasterForm extends Component {
 				cargo: elements[element+3].value,
 				area: elements[element+4].value
 			}
-			addExperiencia(userId, elementObj)
-				.then(response => {
-					console.log("RESPONSE addExperiencia: ", response);
-				}).catch(error => {
-					console.log("ERROR addExperiencia: ", error);
-				});
+			experienciasArray.push(elementObj);
 		}
+		addExperiencia(userId, experienciasArray)
+			.then(response => {
+				console.log("RESPONSE addExperiencia: ", response);
+			}).catch(error => {
+				console.log("ERROR addExperiencia: ", error);
+			});
 	}
 
 	addCursosHandler = (userId, elements) => {
@@ -223,24 +225,26 @@ class MasterForm extends Component {
 	}
 
 	addTitulosHandler = (userId, elements) => {
-		if (elements.length < 3 || elements.length % 3 !== 0) {
+		if (elements.length % 3 !== 0) {
 			return;
 		}
 		console.log("addCursosHandler elements: ", elements);
 		/* Para cada elemento, crear un objeto curso y enviarlo */
+		let titulosArray = [];
 		for (let element = 0; element < elements.length; element=element+3) {
 			let elementObj = {
 				name: elements[element].value,
 				institucion: elements[element+1].value,
 				anho: elements[element+2].value,
 			}
-			addTitulo(userId, elementObj)
-				.then(response => {
-					console.log("RESPONSE addTitulo: ", response);
-				}).catch(error => {
-					console.log("ERROR addTitulo: ", error);
-				});
+			titulosArray.push(elementObj);
 		}
+		addTitulo(userId, titulosArray)
+			.then(response => {
+				console.log("RESPONSE addTitulo: ", response);
+			}).catch(error => {
+				console.log("ERROR addTitulo: ", error);
+			});
 	}
 
   handleSubmit = (event) => {
