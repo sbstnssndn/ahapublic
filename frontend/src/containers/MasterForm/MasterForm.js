@@ -48,7 +48,8 @@ class MasterForm extends Component {
 		alert: { show: false, message: null, type: null },
 		form: '',
 		loading: true,
-		datosFormulario: null
+		datosFormulario: null,
+		loadedUser: null
 	}
 	
 	cloneStateElementsArray = (inputIdentifier) => {
@@ -240,7 +241,9 @@ class MasterForm extends Component {
 	}
 
   handleSubmit = (event) => {
-		event.preventDefault();   
+		event.preventDefault();
+		console.log("loadedUser desde handleSubmit: ", this.state.loadedUser)
+		let loadedUser = this.state.loadedUser;
     // Si el array missing esta vacio, significa que no hay campos incorrectos
     // En ese caso, "!this.state.missing.length" devuelve true
     if (this.state.missing.length === 0) {
@@ -266,11 +269,11 @@ class MasterForm extends Component {
 					const elements = [...fieldObj.elements];
 					//console.log("ELEMS: ", elements)
 					if (fieldObj.type === "experiencias") {
-						this.addExperienciasHandler(this.props.currentUser.id, elements);
+						this.addExperienciasHandler(loadedUser.id, elements);
 					} else if (fieldObj.type === "cursos") {
-						this.addCursosHandler(this.props.currentUser.id, elements)
+						this.addCursosHandler(loadedUser.id, elements)
 					} else if (fieldObj.type === "titulos") {
-						this.addTitulosHandler(this.props.currentUser.id, elements)
+						this.addTitulosHandler(loadedUser.id, elements)
 					} else if (fieldObj.type === "experienciasEmpresa") {
 						if (elements.length < 2 || elements.length % 2 !== 0) {
 							continue;
@@ -315,7 +318,7 @@ class MasterForm extends Component {
 					//console.log(this.props.match)
 					break;
 				case FORM_POSTULANTE:
-					updatePerfilCandidato(this.props.currentUser.id, datos)
+					updatePerfilCandidato(loadedUser.id, datos)
 					.then(response => {
 						//console.log("RESPONSE updatePerfilCandidato: ", response);
             this.handleAlert('Datos personales guardados.','success');
@@ -327,7 +330,7 @@ class MasterForm extends Component {
 				case FORM_POSTULANTE_LABORAL:
 					//console.log(datos)
 					//console.log("ID: ", this.state.activeUserID)
-					updatePerfilLaboral(this.props.currentUser.id, datos)
+					updatePerfilLaboral(loadedUser.id, datos)
 					.then(response => {
 						//console.log("RESPONSE updatePerfilLaboral: ", response);
             this.handleAlert('Datos laborales guardados.','success');
@@ -337,7 +340,7 @@ class MasterForm extends Component {
 					});
 					break;
 				case FORM_EMPRESA:
-					updatePerfilEmpresa(this.props.currentUser.id, datos)
+					updatePerfilEmpresa(loadedUser.id, datos)
 					.then(response => {
 						//console.log("RESPONSE updatePerfilEmpresa: ", response);
             this.handleAlert('Datos de empresa guardados.','success');
@@ -349,7 +352,7 @@ class MasterForm extends Component {
 				case FORM_NUEVA_OFERTA:
 					datos["experiencias"] = experienciasEmpresa;
 					console.log("DATOS FORM_NUEVA_OFERTA: ", datos)
-					createOferta(this.props.currentUser.id, datos)
+					createOferta(loadedUser.id, datos)
 					.then(response => {
 						console.log("RESPONSE createOferta: ", response);
             this.handleAlert('Oferta guardada','success')
@@ -722,12 +725,17 @@ class MasterForm extends Component {
 			getUser(this.props.match.params.id)
 				.then(response => {
 					let user = response;
-					console.log("USER AHA: ", user);
+					this.setState({
+						loadedUser: user
+					})
 					this.loadForm(user)
 				}).catch(error => {
 					console.log(error);
 				})
 		} else {
+			this.setState({
+				loadedUser: this.props.currentUser
+			})
 			this.loadForm(this.props.currentUser);
 		}
 
@@ -820,7 +828,7 @@ class MasterForm extends Component {
 					/>
 				</Card.Header>
 				<Card.Body>
-					<form onSubmit={(event) => this.handleSubmit(event, "POST")}>
+					<form onSubmit={(event) => this.handleSubmit(event)}>
 						{ stages }
 						<StageControls
 							totalStages={this.state.form.totalStages}
