@@ -76,7 +76,7 @@ class App extends Component {
 	}
 
 	render () {
-		console.log("App.js currentUser: ", this.state.currentUser)
+		//console.log("App.js currentUser: ", this.state.currentUser)
 		let tipoPanel = "/postulante"
 		if (this.state.currentUser !== null) {
 			if(this.state.currentUser.role === USER_TYPE_POSTULANTE) {

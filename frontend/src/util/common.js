@@ -27,7 +27,7 @@ export const generateSubForm = (newElementId, newElements) => {
 	
 		let value = newElementsClone[element].value;
 		if (elementConfig.type === 'date' && Object.keys(value).length === 0 && value.constructor === Object) {
-			console.log("VALUE ANTES: ", value)
+			//console.log("VALUE ANTES: ", value)
 			newElementsClone[element].value = new Date();
 		}
     //console.log(newElementsClone[element].elementConfig.name);

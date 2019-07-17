@@ -23,18 +23,18 @@ class Login extends Component {
   handleDismiss = () => {
     this.setState({
       alert: { show: false,
-               message: null,
-               type: null,
-               }
+				message: null,
+				type: null,
+				}
     });
   }
 
   handleAlert = (msg, type) => {
     this.setState({
       alert: { show: true,
-               message: msg,
-               type: type,
-               }
+				message: msg,
+				type: type,
+				}
     });
 
     setTimeout(() => {
@@ -77,17 +77,17 @@ class Login extends Component {
 
     const stateCopy = { ...this.state }
     const loginRequest = { email: stateCopy.email, password: stateCopy.password };
-    console.log("Ingresando");
+    //console.log("Ingresando");
     login(loginRequest)
       .then(response => {
         localStorage.setItem(ACCESS_TOKEN, response.accessToken);
         this.props.onLogin();
       }).catch(error => {
         if(error.status === 401) {
-          console.log('Usuario o contraseña incorrectos.');
+          //console.log('Usuario o contraseña incorrectos.');
           this.handleAlert('Usuario o contraseña incorrectos.', 'danger');
         } else {
-          console.log('Algo salió mal, intenta nuevamente.');
+          //console.log('Algo salió mal, intenta nuevamente.');
           this.handleAlert('Algo salió mal, intenta nuevamente.', 'warning');
         }
       });

@@ -57,8 +57,8 @@ export const formPostulanteLaboral =
                 label: 'Pretensión de renta (en pesos)',
                 elementType: 'select',
                 elementConfig: {
-                  name: 'rentaEstimada',
-                  id: 'rentaEstimada',
+                  name: 'expectativaSueldo',
+                  id: 'expectativaSueldo',
                   options: [
                     { value: '', displayValue: 'Seleccione...', disabled: true },
                     { value: 0, displayValue: 'Hasta 301.000' },
