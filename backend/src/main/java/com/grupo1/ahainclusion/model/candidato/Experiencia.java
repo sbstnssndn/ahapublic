@@ -30,12 +30,8 @@ public class Experiencia {
     @NotNull(message = "Debe ingresar nombre de la empresa")
     private String empresa;
     // Fechas: fecha inicio y fin de la experiencia
-    @JsonFormat(pattern = "dd-MM-yyyy")
-    @DateTimeFormat(pattern = "dd-MM-yyyy")
     @NotNull(message = "Debe ingresar una fecha de inicio")
     private Date fechaInicio;
-    @JsonFormat(pattern = "dd-MM-yyyy")
-    @DateTimeFormat(pattern = "dd-MM-yyyy")
     @NotNull(message = "Debe ingresar una fecha de fin")
     private Date fechaFin;
 

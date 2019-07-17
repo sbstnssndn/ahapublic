@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import moment from 'moment';
 import Stage from './Stage/Stage';
 import Stepper from './Stepper/Stepper';
 import StageControls from './StageControls/StageControls';
@@ -535,11 +534,6 @@ class MasterForm extends Component {
       form: updatedForm
     })
 	}
-
-	toDate = (dateStr) => {
-		const [day, month, year] = dateStr.split("-")
-		return new Date(day, month - 1, year)
-	}
 	
 	fillFormData = (data, role) => {
 		console.log("llenando datos de formulario...");
@@ -591,11 +585,10 @@ class MasterForm extends Component {
 						let newCursoClone = copy(NEW_CURSO);
 						newCursoClone[0].value = getCursos[curso].name;
 						newCursoClone[1].value = getCursos[curso].institucion;
-						newCursoClone[2].value = this.toDate(getCursos[curso].fechaInicio);
-						newCursoClone[3].value = this.toDate(getCursos[curso].fechaFin);
+						newCursoClone[2].value = new Date(getCursos[curso].fechaInicio);
+						newCursoClone[3].value = new Date(getCursos[curso].fechaFin);
 						cursosArray = cursosArray.concat(newCursoClone);
-						console.log("FECHA MOMENT", moment(getCursos[curso].fechaInicio).toISOString())
-						console.log("cursosArray", cursosArray, "fecha", getCursos[curso].fechaInicio)
+						console.log("cursosArray", cursosArray)
 
 						/*cursosArray.push({
 							id: getCursos[curso].id,

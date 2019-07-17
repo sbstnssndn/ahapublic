@@ -25,13 +25,11 @@ public class Curso {
     // Institución: nombre de la institución donde se realizo el curso.
     @NotNull(message = "Debe ingresar nombre de institución")
     private String institucion;
+
     // Fechas: de inicio y termino del curso.
-    @JsonFormat(pattern = "dd-MM-yyyy")
-    @DateTimeFormat(pattern = "dd-MM-yyyy")
     @NotNull(message = "Debe ingresar una fecha de inicio")
     private Date fechaInicio;
-    @JsonFormat(pattern = "dd-MM-yyyy")
-    @DateTimeFormat(pattern = "dd-MM-yyyy")
+
     @NotNull(message = "Debe ingresar una fecha de fin")
     private Date fechaFin;
 
