@@ -38,7 +38,6 @@ public class RecGenerator {
 
     public List<Recommendation> generate(Oferta oferta, int n) {
         
-        // System.out.println("----------------------------");
         Role role = roleRepository.findByName("ROLE_CANDIDATO");
         Iterable<User> usersAux = userRepository.findByRolesAndEnabled(role, true);
         List<Recommendation> recommendations = new ArrayList<>();
@@ -51,17 +50,14 @@ public class RecGenerator {
             List<String> nullsInPerfilCandidato = nullChecker.check(u.getPerfilCandidato());
             if(nullsInPerfilCandidato.size()!=0)
             {
-                // System.out.println("usuario: "+u.getId()+"no se agrega (nulos en pC)");
                 continue;
             }
             else {
                 List<String> nullsInPerfilLaboral = nullChecker.check(u.getPerfilCandidato().getPerfilLaboral());
                 if(nullsInPerfilLaboral.size()!=0) {
-                    // System.out.println("usuario: "+u.getId()+"no se agrega (nulos en pL)");
                     continue;
                 }
                 //No hay nulos
-                // System.out.println("usuario: "+u.getId()+"se agrega");
                 users.add(u);
             }
         }
