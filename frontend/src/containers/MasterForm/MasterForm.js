@@ -17,7 +17,7 @@ import  {
 	USER_TYPE_POSTULANTE,
 	USER_TYPE_EMPRESA
 } from '../../constants';
-import { NEW_CURSO } from '../../constants/subforms';
+import { NEW_CURSO, NEW_EXPERIENCIA_LABORAL, NEW_TITULO } from '../../constants/subforms';
 import {
 	get,
 	updatePerfilCandidato,
@@ -562,10 +562,6 @@ class MasterForm extends Component {
 				const updatedFieldElements = [ ...updatedStageFields[field].elements ]
 				//console.log("updatedFieldElements", updatedFieldElements)
 
-
-
-
-
 				let fieldType = updatedStageFields[field].type;
 				if (fieldType === 'cursos') {
 					// el elemento updatedFieldElements[element] es UN curso
@@ -575,12 +571,7 @@ class MasterForm extends Component {
 					// hacer updatedForm.stages[stage].fields[field].elements = newCursosArray;
 					let cursosArray = [];
 					let getCursos = data.perfilCandidato.perfilLaboral.cursos;
-
 					
-
-					
-					// addSubForm("cursos", NEW_CURSO_MODIF)
-
 					for (let curso in getCursos) {
 						let newCursoClone = copy(NEW_CURSO);
 						newCursoClone[0].value = getCursos[curso].name;
@@ -589,24 +580,50 @@ class MasterForm extends Component {
 						newCursoClone[3].value = new Date(getCursos[curso].fechaFin);
 						cursosArray = cursosArray.concat(newCursoClone);
 						console.log("cursosArray", cursosArray)
-
-						/*cursosArray.push({
-							id: getCursos[curso].id,
-							name: getCursos[curso].name,
-							institucion: getCursos[curso].institucion,
-							fechaInicio: getCursos[curso].fechaInicio,
-							fechaFin: getCursos[curso].fechaFin,
-						});*/
 					}
 					updatedForm.stages[stage].fields[field].elements = cursosArray;
 					this.setState({
 						form: updatedForm
 					})
 					//updatedForm.stages[stage].fields[field].elements = cursosArray;
-					return;
+					break;
+				} else if (fieldType === 'experiencias') {
+					let experienciasArray = [];
+					let getExperiencias = data.perfilCandidato.perfilLaboral.experiencias;
+					
+					for (let experiencia in getExperiencias) {
+						let newExperienciaClone = copy(NEW_EXPERIENCIA_LABORAL);
+						newExperienciaClone[0].value = getExperiencias[experiencia].empresa;
+						newExperienciaClone[1].value = new Date(getExperiencias[experiencia].fechaInicio);
+						newExperienciaClone[2].value = new Date(getExperiencias[experiencia].fechaFin);
+						newExperienciaClone[3].value = getExperiencias[experiencia].cargo;
+						newExperienciaClone[4].value = getExperiencias[experiencia].area;
+						experienciasArray = experienciasArray.concat(newExperienciaClone);
+						console.log("experienciasArray", experienciasArray)
+					}
+					updatedForm.stages[stage].fields[field].elements = experienciasArray;
+					this.setState({
+						form: updatedForm
+					})
+					break;
+				} else if (fieldType === 'titulos') {
+					let titulosArray = [];
+					let getTitulos = data.perfilCandidato.perfilLaboral.titulos;
+					
+					for (let titulo in getTitulos) {
+						let newTituloClone = copy(NEW_TITULO);
+						newTituloClone[0].value = getTitulos[titulo].name;
+						newTituloClone[1].value = getTitulos[titulo].institucion;
+						newTituloClone[2].value = getTitulos[titulo].anho;
+						titulosArray = titulosArray.concat(newTituloClone);
+						console.log("titulosArray", titulosArray)
+					}
+					updatedForm.stages[stage].fields[field].elements = titulosArray;
+					this.setState({
+						form: updatedForm
+					})
+					break;
 				}
-
-
 
 
 				for (let element in updatedFieldElements) {
@@ -835,7 +852,7 @@ class MasterForm extends Component {
 			//console.log("MasterForm props: ", this.props)
 			stages = (
 				this.state.form.stages.map(stage => {
-					console.log("STAGE:",stage.name, " FIELDS:", stage.fields);
+					//console.log("STAGE:",stage.name, " FIELDS:", stage.fields);
 					return <Stage
 						key={stage.id}
 						title={stage.name}
