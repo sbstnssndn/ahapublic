@@ -75,6 +75,27 @@ export const formPostulanteLaboral =
               }
             ]
           },
+          disponibilidad: {
+            type: 'normal',
+            elements: [
+              {
+                label: 'Disponibilidad',
+                elementType: 'select',
+                elementConfig: {
+                  name: 'disponibilidad',
+                  id: 'disponibilidad',
+                  options: [
+                    { value: '', displayValue: 'Seleccione...', disabled: true },
+                    { value: 0, displayValue: 'Part-time (algunas horas a la semana)' },
+                    { value: 1, displayValue: 'Media Jornada (Mañanas, tardes o noches completas' },
+                    { value: 2, displayValue: 'Completa' }
+                  ]
+                },
+                subtext: '',
+                value: ''
+              }
+            ]
+          },
           licencia: {
             type: 'normal',
             elements: [

@@ -387,7 +387,7 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
       Experiencia experiencia1 = new Experiencia();
       experiencia1.setArea(rand.nextInt(26));
       experiencia1.setCargo("Nombre del cargo");
-      experiencia1.setEmpresa("empreas random");
+      experiencia1.setEmpresa("Random S.A");
       experiencia1.setFechaInicio(sdf.parse("15/06/2001"));
       experiencia1.setFechaFin(sdf.parse("15/07/2002"));
 
