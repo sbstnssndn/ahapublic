@@ -21,8 +21,6 @@ const request = (options) => {
 	*/
 	options = Object.assign({}, defaults, options);
 
-	console.log("Estoy en APIUtils/request(), response:");
-
 	let ok = null;
 	return fetch(options.url, options)
 		.then(response => {
@@ -47,9 +45,7 @@ export const login = (loginRequest) => {
 }
 
 export const getCurrentUser = () => {
-	//console.log("Estoy en APIUtils/getCurrentUser()")
 	if(!localStorage.getItem(ACCESS_TOKEN)) {
-		//console.log("getCurrentUser(): no está setteado el token")
 		return Promise.reject("No está disponible el token de acceso.");
 	}
 
@@ -107,22 +103,10 @@ export const createOferta = (id, oferta) => {
 	});
 }
 
-/*TODO: generalizar las 4 funciones de arriba en esta:
-export const updatePerfil = (endpoint, data) => {
-	return request({
-			url: API_BASE_URL + endpoint,
-			method: 'PUT',
-			body: JSON.stringify(data)
-	});
-}*/
-
-
-
 export const addExperiencia = (id, experiencia) => {
-	//console.log(JSON.stringify(experiencia))
 	return request({
 			url: API_BASE_URL + `/user/${id}/experiencia`,
-			method: 'POST',
+			method: 'PUT',
 			body: JSON.stringify(experiencia)
 	});
 }
@@ -185,25 +169,22 @@ export const getUsersByRole = (role) => {
 }
 
 export const addCurso = (id, curso) => {
-	//console.log(JSON.stringify(curso))
 	return request({
 		url: API_BASE_URL + `/user/${id}/curso`,
-		method: 'POST',
+		method: 'PUT',
 		body: JSON.stringify(curso)
 	});
 }
 
 export const addTitulo = (id, titulo) => {
-	//console.log(JSON.stringify(curso))
 	return request({
 		url: API_BASE_URL + `/user/${id}/titulo`,
-		method: 'POST',
+		method: 'PUT',
 		body: JSON.stringify(titulo)
 	});
 }
 
 export const getCursos = (userId) => {
-	//console.log(JSON.stringify(curso))
 	return request({
 		url: API_BASE_URL + `/user/${userId}/curso`,
 		method: 'GET'
@@ -223,14 +204,3 @@ export const getDatosEmpresa = (userId) => {
 		method: 'GET'
 	});
 }
-
-/*
-export const addExperienciaExigida = (id, experienciaExigida) => {
-	//console.log(JSON.stringify(curso))
-	return request({
-			url: API_BASE_URL + `/user/${id}/titulo`,
-			method: 'POST',
-			body: JSON.stringify(titulo)
-	});
-}*/
-

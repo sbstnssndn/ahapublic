@@ -7,8 +7,7 @@ import { NEW_CURSO } from '../../constants/subforms';
 import "react-datepicker/dist/react-datepicker.css";
 
 const CursosForm = (props) => {
-
-	let formqty = 0;
+	
 	let cursos = [];
 	for(let i=0; i<props.elements.length; i=i+4) {
 
@@ -19,7 +18,6 @@ const CursosForm = (props) => {
 			field3: props.elements[i+2],
 			field4: props.elements[i+3]
 		})
-		formqty++;
 	
 	}
 
@@ -35,8 +33,6 @@ const CursosForm = (props) => {
 			{ mensaje }
 			{ cursos.map(curso => ( 
 				<React.Fragment key={curso.id}>
-
-					{console.log(formqty)}
 
 					<Form.Group controlId={curso.field1.elementConfig.id}>
 						<Form.Label>{curso.field1.label}</Form.Label>

@@ -88,7 +88,7 @@ class LandingForm extends Component {
 					}
 				});
       }).catch(error => {
-        console.log(error);
+        //console.log(error);
         this.handleAlert(error.message)
     });
   }

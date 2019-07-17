@@ -24,7 +24,10 @@ export const generateSubForm = (newElementId, newElements) => {
     // asignar un id dinámico para cada id y name
     newElementsClone[element].elementConfig.id = elementConfig.id + newElementId;
 		newElementsClone[element].elementConfig.name = elementConfig.name + newElementId;
-		if (elementConfig.type === 'date') {
+	
+		let value = newElementsClone[element].value;
+		if (elementConfig.type === 'date' && Object.keys(value).length === 0 && value.constructor === Object) {
+			//console.log("VALUE ANTES: ", value)
 			newElementsClone[element].value = new Date();
 		}
     //console.log(newElementsClone[element].elementConfig.name);

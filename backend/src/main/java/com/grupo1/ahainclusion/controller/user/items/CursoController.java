@@ -1,5 +1,6 @@
 package com.grupo1.ahainclusion.controller.user.items;
 
+import java.util.Collection;
 import java.util.Optional;
 
 import com.grupo1.ahainclusion.auth.CurrentUser;
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -36,6 +38,9 @@ public class CursoController {
 
     @Autowired
     private CursoRepository cursoRepository;
+
+    @Autowired
+    private PerfilLaboralRepository perfilLaboralRepository;
 
     // Agregar un curso
     @PostMapping("user/{userId}/curso")
@@ -110,5 +115,34 @@ public class CursoController {
         cursoRepository.deleteById(id);
 
         return new ResponseEntity(new ApiResponse(true, "Curso Eliminado"), HttpStatus.OK);
+    }
+
+    // Actualizar lista de cursos de un usuario
+    @PutMapping("user/{userId}/curso")
+    //SOLO USUARIOS CANDIDATO O AHA
+    @PreAuthorize("hasRole('ROLE_CANDIDATO') or hasRole('ROLE_AHA')")
+    public @ResponseBody ResponseEntity<Object> update(@CurrentUser UserPrincipal currentUser, @PathVariable("userId") Integer userId, @RequestBody Collection<Curso> cursos) {
+
+        if(!currentUser.getRole().equals("aha") && currentUser.getId()!=userId ) {
+            return new ResponseEntity(new ApiResponse(false, "No autorizado para modificar cursos de este usuario"), HttpStatus.UNAUTHORIZED);
+        }
+
+        Optional<User> userOptional = userRepository.findById(userId);
+        if (!userOptional.isPresent())
+        return new ResponseEntity(new ApiResponse(false, "Usuario no encontrado"), HttpStatus.NOT_FOUND);
+
+        User user = userOptional.get();
+        PerfilLaboral pLaboral = user.getPerfilCandidato().getPerfilLaboral();
+        
+        pLaboral.getCursos().clear();
+        for(Curso c: cursos) {
+            c.setPerfilLaboral(pLaboral);
+        }
+
+        pLaboral.getCursos().addAll(cursos);
+        perfilLaboralRepository.save(pLaboral);
+
+
+        return new ResponseEntity(new ApiResponse(true, "Cursos actualizados"), HttpStatus.OK);
     }
 }

@@ -57,8 +57,8 @@ export const formPostulanteLaboral =
                 label: 'Pretensión de renta (en pesos)',
                 elementType: 'select',
                 elementConfig: {
-                  name: 'rentaEstimada',
-                  id: 'rentaEstimada',
+                  name: 'expectativaSueldo',
+                  id: 'expectativaSueldo',
                   options: [
                     { value: '', displayValue: 'Seleccione...', disabled: true },
                     { value: 0, displayValue: 'Hasta 301.000' },
@@ -68,6 +68,27 @@ export const formPostulanteLaboral =
                     { value: 4, displayValue: '650.001 a 800.000' },
                     { value: 5, displayValue: '800.001 a 1.000.000' },
                     { value: 6, displayValue: '1.000.001 o más' }
+                  ]
+                },
+                subtext: '',
+                value: ''
+              }
+            ]
+          },
+          disponibilidad: {
+            type: 'normal',
+            elements: [
+              {
+                label: 'Disponibilidad',
+                elementType: 'select',
+                elementConfig: {
+                  name: 'disponibilidad',
+                  id: 'disponibilidad',
+                  options: [
+                    { value: '', displayValue: 'Seleccione...', disabled: true },
+                    { value: 0, displayValue: 'Part-time (algunas horas a la semana)' },
+                    { value: 1, displayValue: 'Media Jornada (Mañanas, tardes o noches completas' },
+                    { value: 2, displayValue: 'Completa' }
                   ]
                 },
                 subtext: '',
@@ -434,8 +455,8 @@ export const formPostulanteLaboral =
                 label: '¿Puedes usar herramientas u objetos pequeños?',
                 elementType: 'select',
                 elementConfig: {
-                  name: 'objetosPequeños',
-                  id: 'objetosPequeños',
+                  name: 'objetosPequenhos',
+                  id: 'objetosPequenhos',
                   options: [
                     { value: '', displayValue: 'Seleccione...', disabled: true },
                     { value: 0, displayValue: 'No, o muy poco tiempo' },

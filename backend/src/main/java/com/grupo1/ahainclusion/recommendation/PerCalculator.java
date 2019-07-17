@@ -115,9 +115,6 @@ public class PerCalculator {
 
         double percentage = ((score*1.0)/maxScore)*100;
         Integer out = (int) (Math.round(percentage));
-        // System.out.println("percentage: "+percentage);
-        // System.out.println("maxScore: "+maxScore);
-        // System.out.println("out: "+out);
         return out;
     }
 
@@ -132,9 +129,6 @@ public class PerCalculator {
         Integer days = Days.daysBetween(dateTime1, dateTime2).getDays();
 
         Integer years = days/360;
-        // System.out.println("---------------------");
-        // System.out.println(days);
-        // System.out.println(years);
 
         return years;
     }
