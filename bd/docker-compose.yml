@@ -1,0 +1,21 @@
+version: '2'
+
+services:
+  aha_mysql:
+    image: mysql:5.7
+    restart: always
+    environment:
+      MYSQL_DATABASE: 'db_ahainclusion'
+      MYSQL_USER: 'ahabackend'
+      MYSQL_PASSWORD: 'grupo1aha'
+      MYSQL_ROOT_PASSWORD: 'root'
+    ports:
+      # <Port exposed> : < MySQL Port running inside container>
+      - '4406:3306'
+    expose:
+      # Opens port 3356 on the container
+      - '3306'
+    volumes:
+      - ahainclusion-db:/var/lib/mysql3
+volumes:
+  ahainclusion-db:
