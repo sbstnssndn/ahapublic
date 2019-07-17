@@ -37,63 +37,20 @@ const request = (options) => {
 		});
 }
 
-//const axiosRequest = (config) => {
-	// {url: REQUIRED, method:, data:}
-	// headers: {'X-Requested-With': 'XMLHttpRequest'}
-	/*
-	*	config = {
-			url: API_BASE_URL + '/auth/signin',
-			method: 'post',
-			data: {
-				email: 'cuenta@mail.com',
-				password: '123456'
-			},
-			headers: {
-				'Content-Type': 'application/json',
-				'Authorization': 'Bearer ' + localStorage.getItem(ACCESS_TOKEN)
-			}
-		}
-	*/
-	// `withCredentials` indicates whether or not cross-site Access-Control requests
-  // should be made using credentials
-	//withCredentials: false, // default
-	/*let headers = {
-		'Content-Type': 'application/json',
-	}
-
-	if(localStorage.getItem(ACCESS_TOKEN)) {
-		headers = {
-			'Content-Type': 'application/json',
-			'Authorization': 'Bearer ' + localStorage.getItem(ACCESS_TOKEN)
-		}
-	}
-
-	config = Object.assign({}, { headers: headers }, config)
-
-	return axios(config)
-		.then(response => {
-			//console.log(response);
-		})
-		.catch(error => {
-			console.log(error);
-		});
-}*/
-
 // loginRequest = { email: 'asdf', password: 'asdf' }
 export const login = (loginRequest) => {
 	return request({
-			url: API_BASE_URL + "/auth/signin",
-			method: 'POST',
-			//data: loginRequest
-			body: JSON.stringify(loginRequest)
+		url: API_BASE_URL + "/auth/signin",
+		method: 'POST',
+		body: JSON.stringify(loginRequest)
 	});
 }
 
 export const getCurrentUser = () => {
-	console.log("Estoy en APIUtils/getCurrentUser()")
+	//console.log("Estoy en APIUtils/getCurrentUser()")
 	if(!localStorage.getItem(ACCESS_TOKEN)) {
-		console.log("getCurrentUser(): no está setteado el token")
-		return Promise.reject("No access token set.");
+		//console.log("getCurrentUser(): no está setteado el token")
+		return Promise.reject("No está disponible el token de acceso.");
 	}
 
 	return request({
@@ -110,7 +67,6 @@ export const signup = (signupRequest) => {
 	});
 }
 
-/* */
 export const updateCuenta = (id, accountData) => {
 	return request({
 			url: API_BASE_URL + `/user/${id}/add`,
@@ -144,8 +100,6 @@ export const updatePerfilEmpresa = (id, perfilEmpresa) => {
 }
 
 export const createOferta = (id, oferta) => {
-	let datos = JSON.stringify(oferta);
-	console.log("HOLA: ", datos)
 	return request({
 			url: API_BASE_URL + `/user/${id}/oferta`,
 			method: 'POST',
@@ -233,20 +187,43 @@ export const getUsersByRole = (role) => {
 export const addCurso = (id, curso) => {
 	//console.log(JSON.stringify(curso))
 	return request({
-			url: API_BASE_URL + `/user/${id}/curso`,
-			method: 'POST',
-			body: JSON.stringify(curso)
+		url: API_BASE_URL + `/user/${id}/curso`,
+		method: 'POST',
+		body: JSON.stringify(curso)
 	});
 }
 
 export const addTitulo = (id, titulo) => {
 	//console.log(JSON.stringify(curso))
 	return request({
-			url: API_BASE_URL + `/user/${id}/titulo`,
-			method: 'POST',
-			body: JSON.stringify(titulo)
+		url: API_BASE_URL + `/user/${id}/titulo`,
+		method: 'POST',
+		body: JSON.stringify(titulo)
 	});
 }
+
+export const getCursos = (userId) => {
+	//console.log(JSON.stringify(curso))
+	return request({
+		url: API_BASE_URL + `/user/${userId}/curso`,
+		method: 'GET'
+	});
+}
+
+export const getDatosPostulante = (userId) => {
+	return request({
+		url: API_BASE_URL + `/user/${userId}`,
+		method: 'GET'
+	});
+}
+
+export const getDatosEmpresa = (userId) => {
+	return request({
+		url: API_BASE_URL + `/user/${userId}/perfilEmpresa`,
+		method: 'GET'
+	});
+}
+
 /*
 export const addExperienciaExigida = (id, experienciaExigida) => {
 	//console.log(JSON.stringify(curso))
